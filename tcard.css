@@ -1,246 +1,250 @@
 /* Surcharge */
-	hr {
-		height: 0;
-		border: solid #299aee 0;
-		border-top-width: 1px;
-	}
+hr {
+	height: 0;
+	border: solid #299aee 0;
+	border-top-width: 1px;
+}
 
-	a {
-		color: #B183F2;
-		text-decoration: none;
-	}
+a {
+	color: #B183F2;
+	text-decoration: none;
+}
 
-	a:hover {
-		color: #692DBD;
-	}
+a:hover {
+	color: #692DBD;
+}
 
-	/* Générique */
-	.center {
-		text-align: center;
-	}
+/* Générique */
+.center {
+	text-align: center;
+}
 
-	.right {
-		text-align: right;
-	}
+.right {
+	text-align: right;
+}
 
-	.col-1 > * {
-		flex-basis: 100%;
-	}
+.col-1 > * {
+	flex-basis: 100%;
+}
 
-	.col-2 > * {
-		flex-basis: 50%;
-	}
+.col-2 > * {
+	flex-basis: 50%;
+}
 
-	.col-3 > * {
-		flex-basis: 33%;
-	}
+.col-3 > * {
+	flex-basis: 33%;
+}
 
-	.col-4 > * {
-		flex-basis: 25%;
-	}
+.col-4 > * {
+	flex-basis: 25%;
+}
 
-	.col-6 > * {
-		flex-basis: 16.6%;
-	}
+.col-6 > * {
+	flex-basis: 16.6%;
+}
 
-	.help {
-		font-size: 10px;
-	}
+.help {
+	font-size: 10px;
+}
 
-	.scroll {
-		max-height: 150px;
-		overflow: auto;
-	}
+.scroll {
+	max-height: 150px;
+	overflow: auto;
+}
 
-	.scroll p {
-		margin: 0;
-	}
+.scroll p {
+	margin: 0;
+}
 
-	/* Général */
-	.card {
-		width: 580px;
-		background: #fafcff;
-		border-radius: 75px 0 0;
-		padding-bottom: 10px;
-		border: 2px #cedff2 solid;
-		margin: auto;
-	}
+/* Général */
+.card {
+	width: 580px;
+	background: #fafcff;
+	border-radius: 75px 0 0;
+	padding-bottom: 10px;
+	border: 2px #cedff2 solid;
+	margin: auto;
+}
 
-	.card li {
-		list-style-image: url(https://nsm09.casimages.com/img/2023/07/04//23070403501017129218208172.png);
-	}
+.card li {
+	list-style-image: url(https://nsm09.casimages.com/img/2023/07/04//23070403501017129218208172.png);
+}
 
-	.title img {
-		width: 100px;
-		border: 10px solid #cedff2;
-		border-radius: 100%;
-		float: left;
-		background: #fff;
-	}
+.title img {
+	width: 100px;
+	border: 10px solid #cedff2;
+	border-radius: 100%;
+	float: left;
+	background: #fff;
+}
 
-	.title div {
-		font-size: 35px;
-		border-bottom: 10px solid #cedff2;
-		padding-top: 60px;
-		margin-left: 35px;
-		color: #299aee;
-		font-family: "Dancing Script", "sans-serif";
-	}
+.title div {
+	font-size: 35px;
+	border-bottom: 10px solid #cedff2;
+	padding-top: 60px;
+	margin-left: 35px;
+	color: #299aee;
+	font-family: "Dancing Script", "sans-serif";
+}
 
-	.title span {
-		margin-left: 20px;
-	}
+.title span {
+	margin-left: 20px;
+}
 
-	.descriptions {
-		display: flex;
-		flex-direction: row;
-		flex-wrap: wrap;
-	}
+.descriptions {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
 
-	.description {
-		margin: 5px 0;
-	}
+.description {
+	margin: 5px 0;
+}
 
-	.description span:first-child {
-		font-size: 15px;
-	}
+.description span:first-child {
+	font-size: 15px;
+}
 
-	.category {
-		font-size: 20px;
-		margin-top: 10px;
-		margin-left: -20px;
-		margin-right: -20px;
-	}
+.category {
+	font-size: 20px;
+	margin-top: 10px;
+	margin-left: -20px;
+	margin-right: -20px;
+}
 
-	.category span, .content {
-		margin-left: 20px;
-	}
+.category span, .content {
+	margin-left: 20px;
+}
 
-	.category, .description span:first-child {
-		color: #299aee;
-		background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 50%, rgb(206, 223, 242) 50%, rgb(206, 223, 242) 80%, rgba(208,225,243,0) 80%, rgba(255,255,255,0) 100%);
-		font-family: "Pacifico", "sans-serif";
-	}
+.category, .description span:first-child {
+	color: #299aee;
+	background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 50%, rgb(206, 223, 242) 50%, rgb(206, 223, 242) 80%, rgba(208,225,243,0) 80%, rgba(255,255,255,0) 100%);
+	font-family: "Pacifico", "sans-serif";
+}
 
-	.content {
-		margin-right: 20px;
-		margin-top: 20px;
-	}
+.content {
+	margin-right: 20px;
+	margin-top: 20px;
+}
 
-	/* Inventaire */
-	.in {
-		color: green;
-	}
+/* Inventaire */
+.in {
+	color: green;
+}
 
-	.out {
-		color: red;
-	}
+.out {
+	color: red;
+}
 
-	/* Pokémon */
-	.attacks .scroll {
-		max-height: 216px;
-	}
+#inventaire .scroll {
+	padding-left: 10px;
+}
 
-	.sprite {
-		float: left;
-	}
+/* Pokémon */
+.attacks .scroll {
+	max-height: 216px;
+}
 
-	.type img {
-		max-width: 60px;
-	}
+.sprite {
+	float: left;
+}
 
-	.attaque {
-		margin-top: 2px;
-	}
+.type img {
+	max-width: 60px;
+}
 
-	.ct {
-		background-color: #a463c5;
-	}
+.attaque {
+	margin-top: 2px;
+}
 
-	.cs {
-		background-color: #7ccee3;
-	}
+.ct {
+	background-color: #a463c5;
+}
 
-	.ct, .cs {
-		border-radius: 100%;
-		padding: 3px;
-		font-size: 10px;
-		color: white;
-	}
+.cs {
+	background-color: #7ccee3;
+}
 
-	.statistiques {
-		flex-basis: 40%;
-	}
+.ct, .cs {
+	border-radius: 100%;
+	padding: 3px;
+	font-size: 10px;
+	color: white;
+}
 
-	.attacks {
-		flex-basis: 60%;
-	}
+.statistiques {
+	flex-basis: 40%;
+}
 
-	.flinch::after {
-		background-image: url("https://nsm09.casimages.com/img/2023/08/26//23082602344017129218235972.png");
-	}
+.attacks {
+	flex-basis: 60%;
+}
 
-	.burn::after {
-		background-image: url("https://nsm09.casimages.com/img/2023/08/25//23082507045317129218235721.png");
-	}
+.flinch::after {
+	background-image: url("https://nsm09.casimages.com/img/2023/08/26//23082602344017129218235972.png");
+}
 
-	.paralyze::after{
-		background-image: url("https://nsm09.casimages.com/img/2023/08/25//23082507045317129218235722.png");
-	}
+.burn::after {
+	background-image: url("https://nsm09.casimages.com/img/2023/08/25//23082507045317129218235721.png");
+}
 
-	.sleep::after {
-		background-image: url("https://nsm09.casimages.com/img/2023/08/25//23082507045217129218235719.png");
-	}
+.paralyze::after{
+	background-image: url("https://nsm09.casimages.com/img/2023/08/25//23082507045317129218235722.png");
+}
 
-	.poison::after {
-		background-image: url("https://nsm09.casimages.com/img/2023/08/25//23082507045217129218235718.png");
-	}
+.sleep::after {
+	background-image: url("https://nsm09.casimages.com/img/2023/08/25//23082507045217129218235719.png");
+}
 
-	.attack::after {
-		background-image: url("https://nsm09.casimages.com/img/2023/08/25//23082507045217129218235720.png");
-	}
+.poison::after {
+	background-image: url("https://nsm09.casimages.com/img/2023/08/25//23082507045217129218235718.png");
+}
 
-	.freeze::after {
-		background-image: url("https://nsm09.casimages.com/img/2023/08/25//23082507045317129218235723.png");
-	}
+.attack::after {
+	background-image: url("https://nsm09.casimages.com/img/2023/08/25//23082507045217129218235720.png");
+}
 
-	.flinch::after, .burn::after, .paralyze::after, .sleep::after, .poison::after, .attack::after, .freeze::after {
-		content: '';
-		display: inline-block;
-		width: 16px;
-		height: 16px;
-		background-repeat: no-repeat;
-	}
+.freeze::after {
+	background-image: url("https://nsm09.casimages.com/img/2023/08/25//23082507045317129218235723.png");
+}
 
-	/* Social */
-	.social {
-		width: 175px;
-		color: #299aee;
-		float: left;
-	}
+.flinch::after, .burn::after, .paralyze::after, .sleep::after, .poison::after, .attack::after, .freeze::after {
+	content: '';
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	background-repeat: no-repeat;
+}
 
-	.social img {
-		width: 150px;
-	}
+/* Social */
+.social {
+	width: 175px;
+	color: #299aee;
+	float: left;
+}
 
-	/* Pokédex */
-	.pokedex img {
-		max-width: 32px;
-	}
+.social img {
+	width: 150px;
+}
 
-	.seen {
-		filter: grayscale(100%);
-	}
+/* Pokédex */
+.pokedex img {
+	max-width: 32px;
+}
 
-	.released {
-		filter: sepia(100%);
-	}
+.seen {
+	filter: grayscale(100%);
+}
 
-	/* Histoire */
-	.ongoing {
-		color: #ff9933
-	}
+.released {
+	filter: sepia(100%);
+}
 
-	.finished {
-		color: limegreen;
-	}
+/* Histoire */
+.ongoing {
+	color: #ff9933
+}
+
+.finished {
+	color: limegreen;
+}
