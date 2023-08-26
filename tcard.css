@@ -1,7 +1,246 @@
-p {
-  background: green
-}
+/* Surcharge */
+	hr {
+		height: 0;
+		border: solid #299aee 0;
+		border-top-width: 1px;
+	}
 
-span {
-  color: blue
-}
+	a {
+		color: #B183F2;
+		text-decoration: none;
+	}
+
+	a:hover {
+		color: #692DBD;
+	}
+
+	/* Générique */
+	.center {
+		text-align: center;
+	}
+
+	.right {
+		text-align: right;
+	}
+
+	.col-1 > * {
+		flex-basis: 100%;
+	}
+
+	.col-2 > * {
+		flex-basis: 50%;
+	}
+
+	.col-3 > * {
+		flex-basis: 33%;
+	}
+
+	.col-4 > * {
+		flex-basis: 25%;
+	}
+
+	.col-6 > * {
+		flex-basis: 16.6%;
+	}
+
+	.help {
+		font-size: 10px;
+	}
+
+	.scroll {
+		max-height: 150px;
+		overflow: auto;
+	}
+
+	.scroll p {
+		margin: 0;
+	}
+
+	/* Général */
+	.card {
+		width: 580px;
+		background: #fafcff;
+		border-radius: 75px 0 0;
+		padding-bottom: 10px;
+		border: 2px #cedff2 solid;
+		margin: auto;
+	}
+
+	.card li {
+		list-style-image: url(https://nsm09.casimages.com/img/2023/07/04//23070403501017129218208172.png);
+	}
+
+	.title img {
+		width: 100px;
+		border: 10px solid #cedff2;
+		border-radius: 100%;
+		float: left;
+		background: #fff;
+	}
+
+	.title div {
+		font-size: 35px;
+		border-bottom: 10px solid #cedff2;
+		padding-top: 60px;
+		margin-left: 35px;
+		color: #299aee;
+		font-family: "Dancing Script", "sans-serif";
+	}
+
+	.title span {
+		margin-left: 20px;
+	}
+
+	.descriptions {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+	}
+
+	.description {
+		margin: 5px 0;
+	}
+
+	.description span:first-child {
+		font-size: 15px;
+	}
+
+	.category {
+		font-size: 20px;
+		margin-top: 10px;
+		margin-left: -20px;
+		margin-right: -20px;
+	}
+
+	.category span, .content {
+		margin-left: 20px;
+	}
+
+	.category, .description span:first-child {
+		color: #299aee;
+		background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 50%, rgb(206, 223, 242) 50%, rgb(206, 223, 242) 80%, rgba(208,225,243,0) 80%, rgba(255,255,255,0) 100%);
+		font-family: "Pacifico", "sans-serif";
+	}
+
+	.content {
+		margin-right: 20px;
+		margin-top: 20px;
+	}
+
+	/* Inventaire */
+	.in {
+		color: green;
+	}
+
+	.out {
+		color: red;
+	}
+
+	/* Pokémon */
+	.attacks .scroll {
+		max-height: 216px;
+	}
+
+	.sprite {
+		float: left;
+	}
+
+	.type img {
+		max-width: 60px;
+	}
+
+	.attaque {
+		margin-top: 2px;
+	}
+
+	.ct {
+		background-color: #a463c5;
+	}
+
+	.cs {
+		background-color: #7ccee3;
+	}
+
+	.ct, .cs {
+		border-radius: 100%;
+		padding: 3px;
+		font-size: 10px;
+		color: white;
+	}
+
+	.statistiques {
+		flex-basis: 40%;
+	}
+
+	.attacks {
+		flex-basis: 60%;
+	}
+
+	.flinch::after {
+		background-image: url("https://nsm09.casimages.com/img/2023/08/26//23082602344017129218235972.png");
+	}
+
+	.burn::after {
+		background-image: url("https://nsm09.casimages.com/img/2023/08/25//23082507045317129218235721.png");
+	}
+
+	.paralyze::after{
+		background-image: url("https://nsm09.casimages.com/img/2023/08/25//23082507045317129218235722.png");
+	}
+
+	.sleep::after {
+		background-image: url("https://nsm09.casimages.com/img/2023/08/25//23082507045217129218235719.png");
+	}
+
+	.poison::after {
+		background-image: url("https://nsm09.casimages.com/img/2023/08/25//23082507045217129218235718.png");
+	}
+
+	.attack::after {
+		background-image: url("https://nsm09.casimages.com/img/2023/08/25//23082507045217129218235720.png");
+	}
+
+	.freeze::after {
+		background-image: url("https://nsm09.casimages.com/img/2023/08/25//23082507045317129218235723.png");
+	}
+
+	.flinch::after, .burn::after, .paralyze::after, .sleep::after, .poison::after, .attack::after, .freeze::after {
+		content: '';
+		display: inline-block;
+		width: 16px;
+		height: 16px;
+		background-repeat: no-repeat;
+	}
+
+	/* Social */
+	.social {
+		width: 175px;
+		color: #299aee;
+		float: left;
+	}
+
+	.social img {
+		width: 150px;
+	}
+
+	/* Pokédex */
+	.pokedex img {
+		max-width: 32px;
+	}
+
+	.seen {
+		filter: grayscale(100%);
+	}
+
+	.released {
+		filter: sepia(100%);
+	}
+
+	/* Histoire */
+	.ongoing {
+		color: #ff9933
+	}
+
+	.finished {
+		color: limegreen;
+	}
