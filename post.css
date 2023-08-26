@@ -19,7 +19,6 @@ hr {
 .luna-header {
     border-bottom: 4px dotted #299aee;
     font-size: 25px;
-    font-family: "Dancing Script", "sans-serif";
 }
 
 .luna-title {
@@ -28,6 +27,10 @@ hr {
 
 .luna-feat, .luna-words {
     text-align: right;
+}
+
+.luna-title, .luna-feat {
+    font-family: "Dancing Script", "sans-serif";
 }
 
 .luna-words {
