@@ -10,7 +10,8 @@ hr {
 
 .luna-hrp {
     font-variant: small-caps;
-    font-size: 15px;
+    font-size: 12px;
+    font-weight: bold;
 }
 
 .luna-header {
