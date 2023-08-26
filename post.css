@@ -1,0 +1,44 @@
+hr {
+    height: 0;
+    border: solid #299aee 0;
+    border-top-width: 1px;
+}
+
+.luna, .luna-hrp, .luna-title {
+    color: #299aee;
+}
+
+.luna-hrp {
+    font-variant: small-caps;
+}
+
+.luna-hrp {
+    font-size: 12px;
+}
+
+.luna-header {
+    border-bottom: 4px dotted #299aee;
+    font-size: 25px;
+    font-family: "Dancing Script", "sans-serif";
+}
+
+.luna-title {
+    text-align: center;
+}
+
+.luna-feat, .luna-words {
+    text-align: right;
+}
+
+.luna-words {
+    font-size: 10px;
+    color: grey;
+}
+
+.luna-rp {
+    text-align: justify;
+}
+
+.kero {
+    color: #ff9441;
+}
