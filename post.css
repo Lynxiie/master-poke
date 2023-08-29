@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Dancing Script');
 
-.luna, .luna-hrp, .luna-title {
+.luna-rp .luna, .luna-hrp, .luna-title {
     color: #299aee;
 }
 
@@ -12,7 +12,6 @@
 
 .luna-header {
     border-bottom: 4px dotted #299aee;
-    font-size: 30px;
 }
 
 .luna-title {
@@ -28,6 +27,14 @@
     margin: 15px 0px;
 }
 
+.luna-title {
+    font-size: 25px;
+}
+
+.luna-feat {
+    font-size: 20px;
+}
+
 .luna-words {
     font-size: 10px;
     color: grey;
@@ -37,6 +44,6 @@
     text-align: justify;
 }
 
-.kero {
+.luna-rp .kero {
     color: #ff9441;
 }
