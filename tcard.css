@@ -260,3 +260,7 @@ a:hover {
 .ressources .signature img{
 	max-width: 250px;
 }
+
+.ressources .various img {
+	max-width: 100px;
+}
