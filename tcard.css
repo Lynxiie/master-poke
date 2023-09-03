@@ -251,3 +251,12 @@ a:hover {
 .finished {
 	color: limegreen;
 }
+
+/* Ressources */
+.ressources .avatar img{
+	max-width: 170px;
+}
+
+.ressources .signature img{
+	max-width: 250px;
+}
