@@ -53,6 +53,8 @@ a:hover {
 .scroll {
 	max-height: 150px;
 	overflow: auto;
+	scrollbar-color: #299aee #cedff2;
+  	scrollbar-width: thin;
 }
 
 .scroll p {
