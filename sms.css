@@ -20,7 +20,7 @@
 .sms-block .content {
     padding: 5px 10px;
     background: white;
-    font-size: 15px;
+    font-size: 12px;
     text-align: left;
 }
 
@@ -29,7 +29,7 @@
 }
 
 .sms-block .date {
-    font-size: 12px;
+    font-size: 10px;
     padding: 5px 0;
 }
 
