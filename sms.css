@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+/* Globale */
+.sms-block {
+    width: 450px;
+    padding: 10px 0;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+}
+
+.sms-block img {
+    border-radius: 100%;
+    max-height: 40px;
+}
+
+.sms-block p {
+    margin: 5px 0 0 0;
+}
+
+.sms-block .content {
+    padding: 5px 10px;
+    background: white;
+    font-size: 15px;
+}
+
+.sms-block span {
+    font-weight: 700;
+}
+
+.sms-block .date {
+    font-size: 12px;
+    padding: 5px 0;
+}
+
+/* Reçu */
+.received .content {
+    margin-left: 10px;
+    border-radius: 0 10px 10px 10px;
+}
+
+.received .date {
+    text-align: right;
+}
+
+/* Envoyé */
+.send {
+    flex-direction: row-reverse;
+}
+
+.send .content {
+    margin-right: 10px;
+    border-radius: 10px 0 10px 10px;
+}
+
+.send .date {
+    text-align: left;
+}
+
+.send .content div:first-of-type{
+    text-align: right;
+}
