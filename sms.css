@@ -21,6 +21,7 @@
     padding: 5px 10px;
     background: white;
     font-size: 15px;
+    text-align: left;
 }
 
 .sms-block span {
@@ -50,10 +51,6 @@
 .send .content {
     margin-right: 10px;
     border-radius: 10px 0 10px 10px;
-}
-
-.send .date {
-    text-align: left;
 }
 
 .send .content div:first-of-type{
