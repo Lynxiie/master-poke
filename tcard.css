@@ -1,5 +1,5 @@
 /* Font */
-@import url('https://fonts.googleapis.com/css?family=Dancing Script|Pacifico');
+@import url('https://fonts.googleapis.com/css?family=Dancing Script|Pacifico|Quicksand');
 
 /* Surcharge */
 hr {
@@ -69,6 +69,7 @@ a:hover {
 	padding-bottom: 10px;
 	border: 2px #cedff2 solid;
 	margin: auto;
+	font-family: 'Quicksand', 'sans-serif';
 }
 
 .card li {
