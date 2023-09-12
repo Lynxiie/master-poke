@@ -263,13 +263,13 @@ a:hover {
 
 /* Ressources */
 .ressources .avatar img{
-	max-width: 170px;
+	max-width: 100px;
 }
 
 .ressources .signature img{
-	max-width: 250px;
+	max-width: 150px;
 }
 
 .ressources .various img {
-	max-width: 100px;
+	max-width: 75px;
 }
