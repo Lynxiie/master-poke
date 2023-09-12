@@ -232,6 +232,10 @@ a:hover {
 	width: 150px;
 }
 
+.relations .scroll {
+	max-height: 400px
+}
+
 /* Pokédex */
 .pokedex img {
 	max-width: 32px;
