@@ -147,6 +147,12 @@ a:hover {
 	padding-left: 10px;
 }
 
+.descriptions img {
+	width: 24px;	
+	height: 24px;
+	object-fit: none;
+}
+
 /* Pokémon */
 .attacks .scroll {
 	max-height: 216px;
