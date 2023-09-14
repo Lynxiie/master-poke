@@ -178,7 +178,15 @@ a:hover {
 	background-color: #7ccee3;
 }
 
-.ct, .cs {
+.cm {
+	background-color: #e37c7c;
+}
+
+.cr {
+	background-color: #86e37c;
+}
+
+.ct, .cs, .cm, .cr {
 	border-radius: 100%;
 	padding: 3px;
 	font-size: 10px;
