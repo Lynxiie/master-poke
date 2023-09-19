@@ -197,13 +197,13 @@ a:hover {
 }
 
 .statistiques {
-	flex-basis: 35%;
+	flex-basis: 40%;
 	border-right: 2px #299aee dotted;
-	margin-right: 2%;
+	margin-right: 3%;
 }
 
 .attacks {
-	flex-basis: 60%;
+	flex-basis: 56%;
 }
 
 .flinch::after {
