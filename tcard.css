@@ -242,6 +242,94 @@ a:hover {
 	background-repeat: no-repeat;
 }
 
+.pokeballs {
+	display: flex;
+	justify-content: center;
+	margin-top: 10px;
+	flex-flow: wrap;
+}
+
+.pokeballs label {
+	padding: 5px;
+	background-color: #cedff2;
+	border-radius: 100%;
+	cursor: pointer;
+	border: solid #299aee 1px;
+	margin: 5px 10px;
+}
+
+.pokemons {
+	margin: 10px 0;
+}
+
+.banner {
+	position: relative;
+	margin-bottom: 10px;
+}
+
+.banner img{
+	width: 100%;
+	height: 100px;
+	object-fit: none;
+	border: solid #299aee 1px;
+}
+
+.banner span {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 45px;
+	color: white;
+	font-weight: 700;
+}
+
+input[type=radio],
+#content-t1p1, #content-t1p2, #content-t1p3, #content-t1p4, #content-t1p5, #content-t1p6,
+#content-t2p1, #content-t2p2, #content-t2p3, #content-t2p4, #content-t2p5, #content-t2p6,
+#content-t2p7, #content-t2p8, #content-t2p9, #content-t2p10, #content-t2p11, #content-t2p12 {
+	display: none;
+}
+
+#t1p1:checked ~ #content-t1p1,
+#t1p2:checked ~ #content-t1p2,
+#t1p3:checked ~ #content-t1p3,
+#t1p4:checked ~ #content-t1p4,
+#t1p5:checked ~ #content-t1p5,
+#t1p6:checked ~ #content-t1p6,
+#t2p1:checked ~ #content-t2p1,
+#t2p2:checked ~ #content-t2p2,
+#t2p3:checked ~ #content-t2p3,
+#t2p4:checked ~ #content-t2p4,
+#t2p5:checked ~ #content-t2p5,
+#t2p6:checked ~ #content-t2p6,
+#t2p7:checked ~ #content-t2p7,
+#t2p8:checked ~ #content-t2p8,
+#t2p9:checked ~ #content-t2p9,
+#t2p10:checked ~ #content-t2p10,
+#t2p11:checked ~ #content-t2p11,
+#t2p12:checked ~ #content-t2p12 {
+	display: block;
+}
+
+#content-t1p1 .banner img {
+	object-position: 0 -398px;
+}
+
+#content-t1p1 .sprite {
+	background: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/0fa48fa2-f9ce-4d6e-819a-b7dfb6a7c54e/ddfcwq4-c014dc82-fd8e-4446-bbbf-1d6238b43df9.png/v1/fit/w_768,h_576,q_70,strp/some_battle_backgrounds_by_princess_phoenix_ddfcwq4-414w-2x.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NTc2IiwicGF0aCI6IlwvZlwvMGZhNDhmYTItZjljZS00ZDZlLTgxOWEtYjdkZmI2YTdjNTRlXC9kZGZjd3E0LWMwMTRkYzgyLWZkOGUtNDQ0Ni1iYmJmLTFkNjIzOGI0M2RmOS5wbmciLCJ3aWR0aCI6Ijw9NzY4In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.f7Gt-vNoiQ_0htrn59lwCSwlM7aA2gZo6DV1K4e8TNw');
+	background-position: 716px 1150px;
+}
+
+#content-t1p2 .banner img {
+	object-position: -90px -89px;
+}
+
+#content-t1p2 .sprite {
+	background: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/0fa48fa2-f9ce-4d6e-819a-b7dfb6a7c54e/ddin9tc-ac99421e-505e-4dbf-9dcc-f2f093cd6aba.png/v1/fit/w_768,h_192,q_70,strp/endless_plains_background_by_princess_phoenix_ddin9tc-414w-2x.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTkyIiwicGF0aCI6IlwvZlwvMGZhNDhmYTItZjljZS00ZDZlLTgxOWEtYjdkZmI2YTdjNTRlXC9kZGluOXRjLWFjOTk0MjFlLTUwNWUtNGRiZi05ZGNjLWYyZjA5M2NkNmFiYS5wbmciLCJ3aWR0aCI6Ijw9NzY4In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.eOOUB9ofChj6BbkzM6As9koU8zcX3hFDoToNWinBse0');
+	background-position: 635px 1119px;
+}
+
 /* Social */
 .social {
 	width: 175px;
