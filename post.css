@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Dancing Script');
 
+.luna-rp hr {
+    border-color: #299aee;
+}
+
 .luna-rp .luna, .luna-hrp, .luna-title {
     color: #299aee;
 }
@@ -47,6 +51,7 @@
 .luna-rp .kero {
     color: #ff9441;
 }
+
 .luna-rp .midas {
     color: #A55294;
 }
