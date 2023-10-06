@@ -284,6 +284,13 @@ a:hover {
 	font-weight: 700;
 }
 
+.banner .banner-credit {
+	font-weight: 400;
+	font-size: 8px;
+	top: 90%;
+	left: 6%;
+}
+
 input[type=radio],
 #content-t1p1, #content-t1p2, #content-t1p3, #content-t1p4, #content-t1p5, #content-t1p6,
 #content-t2p1, #content-t2p2, #content-t2p3, #content-t2p4, #content-t2p5, #content-t2p6,
@@ -328,6 +335,16 @@ input[type=radio],
 #content-t1p2 .sprite {
 	background: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/0fa48fa2-f9ce-4d6e-819a-b7dfb6a7c54e/ddin9tc-ac99421e-505e-4dbf-9dcc-f2f093cd6aba.png/v1/fit/w_768,h_192,q_70,strp/endless_plains_background_by_princess_phoenix_ddin9tc-414w-2x.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTkyIiwicGF0aCI6IlwvZlwvMGZhNDhmYTItZjljZS00ZDZlLTgxOWEtYjdkZmI2YTdjNTRlXC9kZGluOXRjLWFjOTk0MjFlLTUwNWUtNGRiZi05ZGNjLWYyZjA5M2NkNmFiYS5wbmciLCJ3aWR0aCI6Ijw9NzY4In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.eOOUB9ofChj6BbkzM6As9koU8zcX3hFDoToNWinBse0');
 	background-position: 635px 1119px;
+}
+
+
+#content-t2p1 .banner img {
+	object-position: -81px -519px;
+}
+
+#content-t2p1 .sprite {
+	background: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/0fa48fa2-f9ce-4d6e-819a-b7dfb6a7c54e/ddin9tc-ac99421e-505e-4dbf-9dcc-f2f093cd6aba.png/v1/fit/w_768,h_192,q_70,strp/endless_plains_background_by_princess_phoenix_ddin9tc-414w-2x.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTkyIiwicGF0aCI6IlwvZlwvMGZhNDhmYTItZjljZS00ZDZlLTgxOWEtYjdkZmI2YTdjNTRlXC9kZGluOXRjLWFjOTk0MjFlLTUwNWUtNGRiZi05ZGNjLWYyZjA5M2NkNmFiYS5wbmciLCJ3aWR0aCI6Ijw9NzY4In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.eOOUB9ofChj6BbkzM6As9koU8zcX3hFDoToNWinBse0');
+	background-position: 742px 1344px;
 }
 
 /* Social */
