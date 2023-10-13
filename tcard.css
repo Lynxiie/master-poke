@@ -165,6 +165,12 @@ a:hover {
         border: 1px #299aee solid;
 }
 
+.sprite img {
+	height: 96px;
+	width: 96px;
+	object-fit: none;
+}
+
 .type img {
 	max-width: 60px;
 }
