@@ -369,6 +369,11 @@ input[type=radio],
 	overflow-x: hidden;
 }
 
+.social .scroll {
+	max-height: 400px;
+	overflow-x: hidden;
+}
+
 /* Pokédex */
 .pokedex img {
 	max-width: 32px;
