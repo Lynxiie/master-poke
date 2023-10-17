@@ -364,13 +364,8 @@ input[type=radio],
 	width: 100px;
 }
 
-.relations .scroll {
+.relations > .scroll {
 	max-height: 400px;
-	overflow-x: hidden;
-}
-
-.social .scroll {
-	max-height: 125px;
 	overflow-x: hidden;
 }
 
