@@ -361,7 +361,7 @@ input[type=radio],
 }
 
 .social img {
-	width: 150px;
+	width: 100px;
 }
 
 .relations .scroll {
@@ -370,7 +370,7 @@ input[type=radio],
 }
 
 .social .scroll {
-	max-height: 400px;
+	max-height: 125px;
 	overflow-x: hidden;
 }
 
