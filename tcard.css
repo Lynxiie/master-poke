@@ -240,7 +240,15 @@ a:hover {
 	background-image: url("https://nsm09.casimages.com/img/2023/08/25//23082507045317129218235723.png");
 }
 
-.flinch::after, .burn::after, .paralyze::after, .sleep::after, .poison::after, .attack::after, .freeze::after {
+.recoil::after {
+	background-image: url("https://nsm09.casimages.com/img/2023/11/01//23110108443917129218292558.png");
+}
+
+.rest::after {
+	background-image: url("https://nsm09.casimages.com/img/2023/11/01//23110108443917129218292559.png");
+}
+
+.flinch::after, .burn::after, .paralyze::after, .sleep::after, .poison::after, .attack::after, .freeze::after, .recoil::after, .rest::after {
 	content: '';
 	display: inline-block;
 	width: 16px;
