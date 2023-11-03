@@ -418,7 +418,7 @@ input[type=radio],
 }
 
 /* Ressources */
-.ressources .scroll {
+.ressources.scroll {
 	max-height: 500px;
 }
 
