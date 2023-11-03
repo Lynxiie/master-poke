@@ -53,6 +53,7 @@ a:hover {
 .scroll {
 	max-height: 150px;
 	overflow: auto;
+	overflow-x: hidden;
 	scrollbar-color: #299aee #cedff2;
   	scrollbar-width: thin;
 }
@@ -417,6 +418,10 @@ input[type=radio],
 }
 
 /* Ressources */
+.ressources .scroll {
+	max-height: 500px;
+}
+
 .ressources .avatar img{
 	max-width: 100px;
 }
