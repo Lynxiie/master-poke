@@ -204,13 +204,13 @@ a:hover {
 }
 
 .statistiques {
-	flex-basis: 40%;
+	flex-basis: 35%;
 	border-right: 2px #299aee dotted;
 	margin-right: 3%;
 }
 
 .attacks {
-	flex-basis: 56%;
+	flex-basis: 61%;
 }
 
 .attacks span[title]::before {
@@ -374,6 +374,16 @@ input[type=radio],
 #content-t1p4 .sprite {
 	background: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/0fa48fa2-f9ce-4d6e-819a-b7dfb6a7c54e/ddh7uzp-1e1b5ec7-60f3-4bb5-a326-57e17ea97f21.png/v1/fit/w_768,h_192,q_70,strp/woodland_wall_background_by_princess_phoenix_ddh7uzp-414w-2x.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTkyIiwicGF0aCI6IlwvZlwvMGZhNDhmYTItZjljZS00ZDZlLTgxOWEtYjdkZmI2YTdjNTRlXC9kZGg3dXpwLTFlMWI1ZWM3LTYwZjMtNGJiNS1hMzI2LTU3ZTE3ZWE5N2YyMS5wbmciLCJ3aWR0aCI6Ijw9NzY4In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.GVgqzVgTtMD0x-PYdH6HnBmuhmPjFwo0LGnZkWFAntU');
 	background-position: 122px 169px;
+}
+
+
+#content-t1p5 .banner img {
+	object-position: -38px -266px;
+}
+
+#content-t1p5 .sprite {
+	background: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/0fa48fa2-f9ce-4d6e-819a-b7dfb6a7c54e/ddh7uzp-1e1b5ec7-60f3-4bb5-a326-57e17ea97f21.png/v1/fit/w_768,h_192,q_70,strp/woodland_wall_background_by_princess_phoenix_ddh7uzp-414w-2x.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTkyIiwicGF0aCI6IlwvZlwvMGZhNDhmYTItZjljZS00ZDZlLTgxOWEtYjdkZmI2YTdjNTRlXC9kZGg3dXpwLTFlMWI1ZWM3LTYwZjMtNGJiNS1hMzI2LTU3ZTE3ZWE5N2YyMS5wbmciLCJ3aWR0aCI6Ijw9NzY4In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.GVgqzVgTtMD0x-PYdH6HnBmuhmPjFwo0LGnZkWFAntU');
+	background-position: -58px 112px;
 }
 
 #content-t2p1 .banner img {
