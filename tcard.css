@@ -62,6 +62,10 @@ a:hover {
 	margin: 0;
 }
 
+.hidden {
+	display: none;
+}
+
 /* Général */
 .card {
 	width: 580px;
