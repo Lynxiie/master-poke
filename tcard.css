@@ -380,7 +380,6 @@ input[type=radio],
 	background-position: 122px 169px;
 }
 
-
 #content-t1p5 .banner img {
 	object-position: -38px -266px;
 }
@@ -388,6 +387,17 @@ input[type=radio],
 #content-t1p5 .sprite {
 	background: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/0fa48fa2-f9ce-4d6e-819a-b7dfb6a7c54e/ddh7uzp-1e1b5ec7-60f3-4bb5-a326-57e17ea97f21.png/v1/fit/w_768,h_192,q_70,strp/woodland_wall_background_by_princess_phoenix_ddh7uzp-414w-2x.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTkyIiwicGF0aCI6IlwvZlwvMGZhNDhmYTItZjljZS00ZDZlLTgxOWEtYjdkZmI2YTdjNTRlXC9kZGg3dXpwLTFlMWI1ZWM3LTYwZjMtNGJiNS1hMzI2LTU3ZTE3ZWE5N2YyMS5wbmciLCJ3aWR0aCI6Ijw9NzY4In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.GVgqzVgTtMD0x-PYdH6HnBmuhmPjFwo0LGnZkWFAntU');
 	background-position: -58px 112px;
+}
+
+
+#content-t1p6 .banner img {
+	object-position: 0px -96px;
+	object-fit: cover;
+}
+
+#content-t1p6 .sprite {
+	background: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/0fa48fa2-f9ce-4d6e-819a-b7dfb6a7c54e/ddin9tc-ac99421e-505e-4dbf-9dcc-f2f093cd6aba.png/v1/fit/w_768,h_192,q_70,strp/endless_plains_background_by_princess_phoenix_ddin9tc-414w-2x.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTkyIiwicGF0aCI6IlwvZlwvMGZhNDhmYTItZjljZS00ZDZlLTgxOWEtYjdkZmI2YTdjNTRlXC9kZGluOXRjLWFjOTk0MjFlLTUwNWUtNGRiZi05ZGNjLWYyZjA5M2NkNmFiYS5wbmciLCJ3aWR0aCI6Ijw9NzY4In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.eOOUB9ofChj6BbkzM6As9koU8zcX3hFDoToNWinBse0');
+	background-position: 371px 180px;
 }
 
 #content-t2p1 .banner img {
@@ -423,12 +433,20 @@ input[type=radio],
 }
 
 /* Histoire */
+.history {
+  max-height: 355px;
+}
+
 .ongoing {
 	color: #ff9933
 }
 
 .finished {
 	color: limegreen;
+}
+
+.abandonned {
+	color: gray;
 }
 
 /* Ressources */
