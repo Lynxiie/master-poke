@@ -48,6 +48,10 @@
     text-align: justify;
 }
 
+.luna-rp span{
+    font-weight: bold
+}
+
 .luna-rp .kero {
     color: #ff9441;
 }
