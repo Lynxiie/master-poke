@@ -79,7 +79,7 @@ a:hover {
 }
 
 .card li {
-	list-style-image: url(https://nsm09.casimages.com/img/2023/07/04//23070403501017129218208172.png);
+	list-style-image: url('https://i.ibb.co/XxTYJvV/Pokeball-liste.png');
 }
 
 .title img {
@@ -223,39 +223,39 @@ a:hover {
 }
 
 .flinch::after {
-	background-image: url("https://nsm09.casimages.com/img/2023/08/26//23082602344017129218235972.png");
+	background-image: url("https://i.ibb.co/rwKDyp7/peur.png");
 }
 
 .burn::after {
-	background-image: url("https://nsm09.casimages.com/img/2023/08/25//23082507045317129218235721.png");
+	background-image: url("https://i.ibb.co/RN80WWh/feu.png");
 }
 
 .paralyze::after{
-	background-image: url("https://nsm09.casimages.com/img/2023/08/25//23082507045317129218235722.png");
+	background-image: url("https://i.ibb.co/0YhDQTd/foudre.png");
 }
 
 .sleep::after {
-	background-image: url("https://nsm09.casimages.com/img/2023/08/25//23082507045217129218235719.png");
+	background-image: url("https://ibb.co/fDng4Wf");
 }
 
 .poison::after {
-	background-image: url("https://nsm09.casimages.com/img/2023/08/25//23082507045217129218235718.png");
+	background-image: url("https://i.ibb.co/bzq7qDz/poison.png");
 }
 
 .attack::after {
-	background-image: url("https://nsm09.casimages.com/img/2023/08/25//23082507045217129218235720.png");
+	background-image: url("https://i.ibb.co/xszYStJ/epee.png");
 }
 
 .freeze::after {
-	background-image: url("https://nsm09.casimages.com/img/2023/08/25//23082507045317129218235723.png");
+	background-image: url("https://i.ibb.co/86nM25g/gele.png");
 }
 
 .recoil::after {
-	background-image: url("https://nsm09.casimages.com/img/2023/11/01//23110108443917129218292558.png");
+	background-image: url("https://i.ibb.co/RcH3jqv/revenir.png");
 }
 
 .rest::after {
-	background-image: url("https://nsm09.casimages.com/img/2023/11/01//23110108443917129218292559.png");
+	background-image: url("https://i.ibb.co/4j1qhgH/du-repos.png");
 }
 
 .flinch::after, .burn::after, .paralyze::after, .sleep::after, .poison::after, .attack::after, .freeze::after, .recoil::after, .rest::after {
@@ -348,7 +348,7 @@ input[type=radio],
 }
 
 #content-t1p1 .sprite {
-	background: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/0fa48fa2-f9ce-4d6e-819a-b7dfb6a7c54e/ddfcwq4-c014dc82-fd8e-4446-bbbf-1d6238b43df9.png/v1/fit/w_768,h_576,q_70,strp/some_battle_backgrounds_by_princess_phoenix_ddfcwq4-414w-2x.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NTc2IiwicGF0aCI6IlwvZlwvMGZhNDhmYTItZjljZS00ZDZlLTgxOWEtYjdkZmI2YTdjNTRlXC9kZGZjd3E0LWMwMTRkYzgyLWZkOGUtNDQ0Ni1iYmJmLTFkNjIzOGI0M2RmOS5wbmciLCJ3aWR0aCI6Ijw9NzY4In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.f7Gt-vNoiQ_0htrn59lwCSwlM7aA2gZo6DV1K4e8TNw');
+	background: url('https://i.ibb.co/t2Yf0MY/some-battle-backgrounds-by-princess-phoenix-ddfcwq4-414w-2x.jpg');
 	background-position: 716px 1150px;
 }
 
@@ -357,7 +357,7 @@ input[type=radio],
 }
 
 #content-t1p2 .sprite {
-	background: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/0fa48fa2-f9ce-4d6e-819a-b7dfb6a7c54e/ddin9tc-ac99421e-505e-4dbf-9dcc-f2f093cd6aba.png/v1/fit/w_768,h_192,q_70,strp/endless_plains_background_by_princess_phoenix_ddin9tc-414w-2x.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTkyIiwicGF0aCI6IlwvZlwvMGZhNDhmYTItZjljZS00ZDZlLTgxOWEtYjdkZmI2YTdjNTRlXC9kZGluOXRjLWFjOTk0MjFlLTUwNWUtNGRiZi05ZGNjLWYyZjA5M2NkNmFiYS5wbmciLCJ3aWR0aCI6Ijw9NzY4In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.eOOUB9ofChj6BbkzM6As9koU8zcX3hFDoToNWinBse0');
+	background: url('https://i.ibb.co/PZzzG09/endless-plains-background-by-princess-phoenix-ddin9tc-414w-2x.jpg');
 	background-position: 635px 1119px;
 }
 
@@ -366,7 +366,7 @@ input[type=radio],
 }
 
 #content-t1p3 .sprite {
-	background: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/0fa48fa2-f9ce-4d6e-819a-b7dfb6a7c54e/ddfcwq4-c014dc82-fd8e-4446-bbbf-1d6238b43df9.png/v1/fit/w_768,h_576,q_70,strp/some_battle_backgrounds_by_princess_phoenix_ddfcwq4-414w-2x.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NTc2IiwicGF0aCI6IlwvZlwvMGZhNDhmYTItZjljZS00ZDZlLTgxOWEtYjdkZmI2YTdjNTRlXC9kZGZjd3E0LWMwMTRkYzgyLWZkOGUtNDQ0Ni1iYmJmLTFkNjIzOGI0M2RmOS5wbmciLCJ3aWR0aCI6Ijw9NzY4In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.f7Gt-vNoiQ_0htrn59lwCSwlM7aA2gZo6DV1K4e8TNw');
+	background: url('https://i.ibb.co/t2Yf0MY/some-battle-backgrounds-by-princess-phoenix-ddfcwq4-414w-2x.jpg');
 	background-position: -134px 196px;
 }
 
@@ -376,7 +376,7 @@ input[type=radio],
 }
 
 #content-t1p4 .sprite {
-	background: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/0fa48fa2-f9ce-4d6e-819a-b7dfb6a7c54e/ddh7uzp-1e1b5ec7-60f3-4bb5-a326-57e17ea97f21.png/v1/fit/w_768,h_192,q_70,strp/woodland_wall_background_by_princess_phoenix_ddh7uzp-414w-2x.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTkyIiwicGF0aCI6IlwvZlwvMGZhNDhmYTItZjljZS00ZDZlLTgxOWEtYjdkZmI2YTdjNTRlXC9kZGg3dXpwLTFlMWI1ZWM3LTYwZjMtNGJiNS1hMzI2LTU3ZTE3ZWE5N2YyMS5wbmciLCJ3aWR0aCI6Ijw9NzY4In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.GVgqzVgTtMD0x-PYdH6HnBmuhmPjFwo0LGnZkWFAntU');
+	background: url('https://i.ibb.co/jbkr8RY/woodland-wall-background-by-princess-phoenix-ddh7uzp-414w-2x.jpg');
 	background-position: 122px 169px;
 }
 
@@ -385,7 +385,7 @@ input[type=radio],
 }
 
 #content-t1p5 .sprite {
-	background: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/0fa48fa2-f9ce-4d6e-819a-b7dfb6a7c54e/ddh7uzp-1e1b5ec7-60f3-4bb5-a326-57e17ea97f21.png/v1/fit/w_768,h_192,q_70,strp/woodland_wall_background_by_princess_phoenix_ddh7uzp-414w-2x.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTkyIiwicGF0aCI6IlwvZlwvMGZhNDhmYTItZjljZS00ZDZlLTgxOWEtYjdkZmI2YTdjNTRlXC9kZGg3dXpwLTFlMWI1ZWM3LTYwZjMtNGJiNS1hMzI2LTU3ZTE3ZWE5N2YyMS5wbmciLCJ3aWR0aCI6Ijw9NzY4In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.GVgqzVgTtMD0x-PYdH6HnBmuhmPjFwo0LGnZkWFAntU');
+	background: url('https://i.ibb.co/jbkr8RY/woodland-wall-background-by-princess-phoenix-ddh7uzp-414w-2x.jpg');
 	background-position: -58px 112px;
 }
 
@@ -396,7 +396,7 @@ input[type=radio],
 }
 
 #content-t1p6 .sprite {
-	background: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/0fa48fa2-f9ce-4d6e-819a-b7dfb6a7c54e/ddin9tc-ac99421e-505e-4dbf-9dcc-f2f093cd6aba.png/v1/fit/w_768,h_192,q_70,strp/endless_plains_background_by_princess_phoenix_ddin9tc-414w-2x.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTkyIiwicGF0aCI6IlwvZlwvMGZhNDhmYTItZjljZS00ZDZlLTgxOWEtYjdkZmI2YTdjNTRlXC9kZGluOXRjLWFjOTk0MjFlLTUwNWUtNGRiZi05ZGNjLWYyZjA5M2NkNmFiYS5wbmciLCJ3aWR0aCI6Ijw9NzY4In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.eOOUB9ofChj6BbkzM6As9koU8zcX3hFDoToNWinBse0');
+	background: url('https://i.ibb.co/PZzzG09/endless-plains-background-by-princess-phoenix-ddin9tc-414w-2x.jpg');
 	background-position: 371px 180px;
 }
 
@@ -405,7 +405,7 @@ input[type=radio],
 }
 
 #content-t2p1 .sprite {
-	background: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/0fa48fa2-f9ce-4d6e-819a-b7dfb6a7c54e/ddin9tc-ac99421e-505e-4dbf-9dcc-f2f093cd6aba.png/v1/fit/w_768,h_192,q_70,strp/endless_plains_background_by_princess_phoenix_ddin9tc-414w-2x.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTkyIiwicGF0aCI6IlwvZlwvMGZhNDhmYTItZjljZS00ZDZlLTgxOWEtYjdkZmI2YTdjNTRlXC9kZGluOXRjLWFjOTk0MjFlLTUwNWUtNGRiZi05ZGNjLWYyZjA5M2NkNmFiYS5wbmciLCJ3aWR0aCI6Ijw9NzY4In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.eOOUB9ofChj6BbkzM6As9koU8zcX3hFDoToNWinBse0');
+	background: url('https://i.ibb.co/PZzzG09/endless-plains-background-by-princess-phoenix-ddin9tc-414w-2x.jpg');
 	background-position: 742px 1344px;
 }
 
@@ -414,7 +414,7 @@ input[type=radio],
 }
 
 #content-t2p2 .sprite {
-	/* background: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/0fa48fa2-f9ce-4d6e-819a-b7dfb6a7c54e/ddin9tc-ac99421e-505e-4dbf-9dcc-f2f093cd6aba.png/v1/fit/w_768,h_192,q_70,strp/endless_plains_background_by_princess_phoenix_ddin9tc-414w-2x.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTkyIiwicGF0aCI6IlwvZlwvMGZhNDhmYTItZjljZS00ZDZlLTgxOWEtYjdkZmI2YTdjNTRlXC9kZGluOXRjLWFjOTk0MjFlLTUwNWUtNGRiZi05ZGNjLWYyZjA5M2NkNmFiYS5wbmciLCJ3aWR0aCI6Ijw9NzY4In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.eOOUB9ofChj6BbkzM6As9koU8zcX3hFDoToNWinBse0');
+	/* background: url('https://i.ibb.co/PZzzG09/endless-plains-background-by-princess-phoenix-ddin9tc-414w-2x.jpg');
 	background-position: 742px 1344px; */
 }
 
@@ -423,7 +423,7 @@ input[type=radio],
 }
 
 #content-t2p3 .sprite {
-	background: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/0fa48fa2-f9ce-4d6e-819a-b7dfb6a7c54e/ddfcwq4-c014dc82-fd8e-4446-bbbf-1d6238b43df9.png/v1/fit/w_768,h_576,q_70,strp/some_battle_backgrounds_by_princess_phoenix_ddfcwq4-414w-2x.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NTc2IiwicGF0aCI6IlwvZlwvMGZhNDhmYTItZjljZS00ZDZlLTgxOWEtYjdkZmI2YTdjNTRlXC9kZGZjd3E0LWMwMTRkYzgyLWZkOGUtNDQ0Ni1iYmJmLTFkNjIzOGI0M2RmOS5wbmciLCJ3aWR0aCI6Ijw9NzY4In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.f7Gt-vNoiQ_0htrn59lwCSwlM7aA2gZo6DV1K4e8TNw');
+	background: url('https://i.ibb.co/t2Yf0MY/some-battle-backgrounds-by-princess-phoenix-ddfcwq4-414w-2x.jpg');
 	background-position: -73px 334px;
 }
 
@@ -432,7 +432,7 @@ input[type=radio],
 }
 
 #content-t2p4 .sprite {
-	background: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/0fa48fa2-f9ce-4d6e-819a-b7dfb6a7c54e/ddhvyoe-4236ddd0-714b-45b4-b1e7-c9f779e0972a.png/v1/fill/w_256,h_192,q_80,strp/lab_battle_background_by_princess_phoenix_ddhvyoe-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTkyIiwicGF0aCI6IlwvZlwvMGZhNDhmYTItZjljZS00ZDZlLTgxOWEtYjdkZmI2YTdjNTRlXC9kZGh2eW9lLTQyMzZkZGQwLTcxNGItNDViNC1iMWU3LWM5Zjc3OWUwOTcyYS5wbmciLCJ3aWR0aCI6Ijw9MjU2In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.KiB_ycaz9wlZ7p8hf7khU9pULhpIPsFbS3BWOcx-4y8');
+	background: url('https://i.ibb.co/LSRRqkZ/lab-battle-background-by-princess-phoenix-ddhvyoe-fullview.jpg');
 	background-position: 0px -38px;
 }
 
@@ -442,7 +442,7 @@ input[type=radio],
 }
 
 #content-t2p5 .sprite {
-	background: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/0fa48fa2-f9ce-4d6e-819a-b7dfb6a7c54e/ddin9tc-ac99421e-505e-4dbf-9dcc-f2f093cd6aba.png/v1/fit/w_768,h_192,q_70,strp/endless_plains_background_by_princess_phoenix_ddin9tc-414w-2x.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTkyIiwicGF0aCI6IlwvZlwvMGZhNDhmYTItZjljZS00ZDZlLTgxOWEtYjdkZmI2YTdjNTRlXC9kZGluOXRjLWFjOTk0MjFlLTUwNWUtNGRiZi05ZGNjLWYyZjA5M2NkNmFiYS5wbmciLCJ3aWR0aCI6Ijw9NzY4In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.eOOUB9ofChj6BbkzM6As9koU8zcX3hFDoToNWinBse0');
+	background: url('https://i.ibb.co/PZzzG09/endless-plains-background-by-princess-phoenix-ddin9tc-414w-2x.jpg');
 	background-position: 230px -10px;
 }
 
