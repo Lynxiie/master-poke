@@ -239,7 +239,7 @@ a:hover {
 }
 
 .sleep::after {
-	background-image: url("https://ibb.co/fDng4Wf");
+	background-image: url("https://i.ibb.co/hYZ6DNb/dodo.png");
 }
 
 .poison::after {
@@ -451,12 +451,13 @@ input[type=radio],
 }
 
 #content-t2p6 .banner img {
-	/* object-position: -50px -524px; */
+	object-position: 0px -434px;
+	object-fit: cover;
 }
 
 #content-t2p6 .sprite {
-	/* background: url('');
-	background-position: 742px 1344px; */
+	background: url('https://i.ibb.co/PZzzG09/endless-plains-background-by-princess-phoenix-ddin9tc-414w-2x.jpg');
+	background-position: 119px 379px;
 }
 
 #content-t2p7 .banner img {
