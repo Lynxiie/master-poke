@@ -222,6 +222,10 @@ a:hover {
   content: '⚠︎ ';
 }
 
+.attacks span[title="Inutile"] {
+  color: #d5d5d5;
+}
+
 .flinch::after {
 	background-image: url("https://i.ibb.co/rwKDyp7/peur.png");
 }
