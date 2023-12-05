@@ -148,6 +148,10 @@ a:hover {
 	color: red;
 }
 
+.inventaire {
+	font-size: 14px;
+}
+
 .inventaire .scroll {
 	padding-left: 3px;
 }
