@@ -558,6 +558,10 @@ input[type=radio],
 	color: gray;
 }
 
+.upcoming {
+	color: #dcebfc;
+}
+
 /* Ressources */
 .ressources.scroll {
 	max-height: 500px;
