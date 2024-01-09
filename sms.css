@@ -37,7 +37,7 @@
 /* Reçu */
 .received .content {
     margin-left: 10px;
-    border-radius: 0 10px 10px 10px;
+    border-radius: 0 9px 9px 9px;
 }
 
 .received .date {
@@ -51,7 +51,7 @@
 
 .send .content {
     margin-right: 10px;
-    border-radius: 10px 0 10px 10px;
+    border-radius: 9px 0 9px 9px;
 }
 
 .send .content div:first-of-type{
