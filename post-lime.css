@@ -1,23 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Whisper&display=swap');
 
-.lime-div .illu {
+.lime-header {
+    font-family: Whisper, cursive;
+    margin: 15px;
+    display: flex;
+}
+
+.lime-header div {
+    flex-basis: 50%;
+
+}
+
+.lime-header p {
+    margin: -10px;
+}
+
+.lime-header img {
     transform: rotate(-5deg);
     width: 200px;
     height: 100px;
     object-fit: cover;
     padding: 5px;
     border: 2px dotted #7b22d7;
-    float: left;
+    /*float: left;*/
     margin: 0 15px 0 0;
-}
-
-.lime-header{
-    font-family: Whisper, cursive;
-    margin: 15px;
-}
-
-.lime-header p {
-    margin: -10px;
 }
 
 .lime-title {
