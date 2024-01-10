@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Whisper&display=swap');
+
+.lime-div .hidden {
+    display: none;
+}
+
+.lime-div .illu {
+    transform: rotate(-5deg);
+    width: 200px;
+    height: 100px;
+    object-fit: cover;
+    padding: 5px;
+    border: 2px dotted #7b22d7;
+    float: left;
+    margin: 0 15px 0 0;
+}
+
+.lime-header{
+    font-family: Whisper, cursive;
+    color: #7b22d7;
+    margin: 15px;
+}
+
+.lime-header p {
+    margin: -10px;
+}
+
+/*.lime-header img {*/
+/*	border-radius: 100%;*/
+/*	border: 1px solid #7b22d7;*/
+/*}*/
+
+/*.lime-poke {*/
+/*	display: flex;*/
+/*	flex-direction: row;*/
+/*	align-items: center;*/
+/*	position: relative;*/
+/*}*/
+
+/*.lime-poke div {*/
+/*	position: absolute;*/
+/*	top: 50%;*/
+/*	left: 50%;*/
+/*	transform: translate(-50%, -50%);*/
+/*}*/
+
+/*.lime-poke img {*/
+/*	border: 2px dotted #7b22d7;*/
+/*	border-radius: 100%;*/
+/*	margin: 0 5px;*/
+/*	background-color: #eaeaea;*/
+/*}*/
+
+/*.lime-poke hr {*/
+/*	border-bottom: 1px solid #7b22d7;*/
+/*	width: 100%;*/
+/*}*/
+
+/*.lime-div hr {*/
+
+/*}*/
+
+.lime-rp {
+    margin: 15px;
+}
+
+.lime-rp span {
+    color: #6c0277;
+    font-weight: bold;
+}
+
+.lime-rp hr {
+    color: #7b22d7;
+    width: 75%;
+    margin: 10px auto;
+    border: none;
+    border-bottom: 2px dotted #7b22d7;
+}
+
+.lime-title {
+    font-size: 40px;
+}
+
+.lime-feat {
+    font-size: 30px;
+    text-align: right;
+}
+
+.lime-word {
+    color: white;
+    text-align: right;
+    margin: 0;
+}
+.lime-word span {
+    padding: 2px 10px;
+    border-radius: 25px;
+    border: 2px dotted #7b22d7;
+    color: #7b22d7;
+    font-family: initial;
+}
+
+.lime-hrp {
+    color: #7b22d7;
+}
