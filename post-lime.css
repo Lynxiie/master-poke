@@ -13,7 +13,7 @@
 
 .lime-header{
     font-family: Whisper, cursive;
-    color: #7b22d7;
+    color: #7b22d7 !important;
     margin: 15px;
 }
 
