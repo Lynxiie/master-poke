@@ -36,10 +36,6 @@
     margin: 10px;
 }
 
-.lime-rp {
-    margin: 15px;
-}
-
 .lime-rp span {
     color: #6c0277;
     font-weight: bold;
@@ -47,7 +43,7 @@
 
 .lime-rp hr {
     color: #7b22d7;
-    width: 75%;
+    width: 450px;
     margin: 10px auto;
     border: none;
     border-bottom: 2px solid #7b22d7;
@@ -55,7 +51,6 @@
 
 .lime-word {
     color: #7b22d7;
-    background: white;
     width: 450px;
     text-align: center;
     margin: 0 auto;
