@@ -8,7 +8,6 @@
 
 .lime-header div {
     flex-basis: 50%;
-
 }
 
 .lime-header p {
@@ -22,7 +21,6 @@
     object-fit: cover;
     padding: 5px;
     border: 2px dotted #7b22d7;
-    /*float: left;*/
     margin: 0 15px 0 0;
 }
 
@@ -32,7 +30,6 @@
 
 .lime-feat {
     font-size: 30px;
-    text-align: right;
 }
 
 .lime-title, .lime-feat {
