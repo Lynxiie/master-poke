@@ -1,0 +1,580 @@
+/* Font */
+@import url('https://fonts.googleapis.com/css?family=Dancing Script|Pacifico|Quicksand');
+
+/* Surcharge */
+hr {
+	height: 0;
+	border: solid #299aee 0;
+	border-top-width: 1px;
+}
+
+a {
+	color: #B183F2;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #692DBD;
+}
+
+/* Générique */
+.center {
+	text-align: center;
+}
+
+.right {
+	text-align: right;
+}
+
+.col-1 > * {
+	flex-basis: 100%;
+}
+
+.col-2 > * {
+	flex-basis: 50%;
+}
+
+.col-3 > * {
+	flex-basis: 33%;
+}
+
+.col-4 > * {
+	flex-basis: 25%;
+}
+
+.col-6 > * {
+	flex-basis: 16.6%;
+}
+
+.help {
+	font-size: 10px;
+}
+
+.scroll {
+	max-height: 150px;
+	overflow: auto;
+	overflow-x: hidden;
+	scrollbar-color: #299aee #cedff2;
+  	scrollbar-width: thin;
+}
+
+.scroll p {
+	margin: 0;
+}
+
+.hidden {
+	display: none;
+}
+
+/* Général */
+.card {
+	width: 580px;
+	background: #fafcff;
+	border-radius: 75px 0 0;
+	padding-bottom: 10px;
+	border: 2px #cedff2 solid;
+	margin: auto;
+	font-family: 'Quicksand', 'sans-serif';
+	font-size: 15px;
+}
+
+.card li {
+	list-style-image: url('https://i.ibb.co/XxTYJvV/Pokeball-liste.png');
+}
+
+.title img {
+	width: 100px;
+	border: 10px solid #cedff2;
+	border-radius: 100%;
+	float: left;
+	background: #fff;
+}
+
+.title div {
+	font-size: 35px;
+	border-bottom: 10px solid #cedff2;
+	padding-top: 60px;
+	margin-left: 35px;
+	color: #299aee;
+	font-family: "Dancing Script", "sans-serif";
+}
+
+.title span {
+	margin-left: 20px;
+}
+
+.descriptions {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.description {
+	margin: 5px 0;
+}
+
+.description span:first-child {
+	font-size: 15px;
+}
+
+.category {
+	font-size: 20px;
+	margin-top: 10px;
+	margin-left: -20px;
+	margin-right: -20px;
+}
+
+.category span, .content {
+	margin-left: 20px;
+}
+
+.category, .description span:first-child {
+	color: #299aee;
+	background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 50%, rgb(206, 223, 242) 50%, rgb(206, 223, 242) 80%, rgba(208,225,243,0) 80%, rgba(255,255,255,0) 100%);
+	font-family: "Pacifico", "sans-serif";
+}
+
+.content {
+	margin-right: 20px;
+	margin-top: 20px;
+}
+
+/* Inventaire */
+.in {
+	color: green;
+}
+
+.out {
+	color: red;
+}
+
+.inventaire {
+	font-size: 14px;
+}
+
+.inventaire .scroll {
+	padding-left: 3px;
+}
+
+.inventaire img {
+	width: 24px;	
+	height: 24px;
+	object-fit: none;
+}
+
+/* Pokémon */
+.attacks .scroll {
+	max-height: 216px;
+}
+
+.sprite {
+	float: left;
+	border-radius: 100%;
+        margin-right: 20px;
+        border: 1px #299aee solid;
+}
+
+.sprite img {
+	height: 96px;
+	width: 96px;
+	object-fit: none;
+}
+
+.type img {
+	max-width: 60px;
+}
+
+.attaque {
+	margin-top: 2px;
+}
+
+.ct {
+	background-color: #a463c5;
+}
+
+.cs {
+	background-color: #7ccee3;
+}
+
+.cm {
+	background-color: #e37c7c;
+}
+
+.cr {
+	background-color: #86e37c;
+}
+
+.ct, .cs, .cm, .cr {
+	border-radius: 100%;
+	padding: 3px;
+	font-size: 10px;
+	color: white;
+}
+
+.statistiques {
+	flex-basis: 35%;
+	border-right: 2px #299aee dotted;
+	margin-right: 3%;
+}
+
+.attacks {
+	flex-basis: 61%;
+}
+
+.attacks span[title]::before {
+  color: red;
+  content: '⚠︎ ';
+}
+
+.attacks span[title="Inutile"] {
+  color: #d5d5d5;
+}
+
+.flinch::after {
+	background-image: url("https://i.ibb.co/rwKDyp7/peur.png");
+}
+
+.burn::after {
+	background-image: url("https://i.ibb.co/RN80WWh/feu.png");
+}
+
+.paralyze::after{
+	background-image: url("https://i.ibb.co/0YhDQTd/foudre.png");
+}
+
+.sleep::after {
+	background-image: url("https://i.ibb.co/hYZ6DNb/dodo.png");
+}
+
+.poison::after {
+	background-image: url("https://i.ibb.co/bzq7qDz/poison.png");
+}
+
+.attack::after {
+	background-image: url("https://i.ibb.co/xszYStJ/epee.png");
+}
+
+.freeze::after {
+	background-image: url("https://i.ibb.co/86nM25g/gele.png");
+}
+
+.recoil::after {
+	background-image: url("https://i.ibb.co/RcH3jqv/revenir.png");
+}
+
+.rest::after {
+	background-image: url("https://i.ibb.co/4j1qhgH/du-repos.png");
+}
+
+.flinch::after, .burn::after, .paralyze::after, .sleep::after, .poison::after, .attack::after, .freeze::after, .recoil::after, .rest::after {
+	content: '';
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	background-repeat: no-repeat;
+}
+
+.pokeballs {
+	display: flex;
+	justify-content: center;
+	margin-top: 10px;
+	flex-flow: wrap;
+}
+
+.pokeballs label {
+	padding: 5px;
+	background-color: #cedff2;
+	border-radius: 100%;
+	cursor: pointer;
+	border: solid #299aee 1px;
+	margin: 5px 10px;
+}
+
+.pokemons {
+	margin: 10px 0;
+}
+
+.banner {
+	position: relative;
+	margin-bottom: 10px;
+}
+
+.banner img{
+	width: 100%;
+	height: 100px;
+	object-fit: none;
+	border: solid #299aee 1px;
+}
+
+.banner span {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 45px;
+	color: white;
+	font-weight: 700;
+}
+
+.banner .banner-credit {
+	font-weight: 400;
+	font-size: 8px;
+	top: 90%;
+	left: 6%;
+}
+
+input[type=radio],
+#content-t1p1, #content-t1p2, #content-t1p3, #content-t1p4, #content-t1p5, #content-t1p6,
+#content-t2p1, #content-t2p2, #content-t2p3, #content-t2p4, #content-t2p5, #content-t2p6,
+#content-t2p7, #content-t2p8, #content-t2p9, #content-t2p10, #content-t2p11, #content-t2p12 {
+	display: none;
+}
+
+#t1p1:checked ~ #content-t1p1,
+#t1p2:checked ~ #content-t1p2,
+#t1p3:checked ~ #content-t1p3,
+#t1p4:checked ~ #content-t1p4,
+#t1p5:checked ~ #content-t1p5,
+#t1p6:checked ~ #content-t1p6,
+#t2p1:checked ~ #content-t2p1,
+#t2p2:checked ~ #content-t2p2,
+#t2p3:checked ~ #content-t2p3,
+#t2p4:checked ~ #content-t2p4,
+#t2p5:checked ~ #content-t2p5,
+#t2p6:checked ~ #content-t2p6,
+#t2p7:checked ~ #content-t2p7,
+#t2p8:checked ~ #content-t2p8,
+#t2p9:checked ~ #content-t2p9,
+#t2p10:checked ~ #content-t2p10,
+#t2p11:checked ~ #content-t2p11,
+#t2p12:checked ~ #content-t2p12 {
+	display: block;
+}
+
+#content-t1p1 .banner img {
+	object-position: 0 -398px;
+}
+
+#content-t1p1 .sprite {
+	background: url('https://i.ibb.co/t2Yf0MY/some-battle-backgrounds-by-princess-phoenix-ddfcwq4-414w-2x.jpg');
+	background-position: 716px 1150px;
+}
+
+#content-t1p2 .banner img {
+	object-position: -90px -89px;
+}
+
+#content-t1p2 .sprite {
+	background: url('https://i.ibb.co/PZzzG09/endless-plains-background-by-princess-phoenix-ddin9tc-414w-2x.jpg');
+	background-position: 635px 1119px;
+}
+
+#content-t1p3 .banner img {
+	object-position: -196px -252px;
+}
+
+#content-t1p3 .sprite {
+	background: url('https://i.ibb.co/t2Yf0MY/some-battle-backgrounds-by-princess-phoenix-ddfcwq4-414w-2x.jpg');
+	background-position: -134px 196px;
+}
+
+#content-t1p4 .banner img {
+	object-position: 0px -206px;
+	object-fit: cover;
+}
+
+#content-t1p4 .sprite {
+	background: url('https://i.ibb.co/jbkr8RY/woodland-wall-background-by-princess-phoenix-ddh7uzp-414w-2x.jpg');
+	background-position: 122px 169px;
+}
+
+#content-t1p5 .banner img {
+	object-position: -38px -266px;
+}
+
+#content-t1p5 .sprite {
+	background: url('https://i.ibb.co/jbkr8RY/woodland-wall-background-by-princess-phoenix-ddh7uzp-414w-2x.jpg');
+	background-position: -58px 112px;
+}
+
+
+#content-t1p6 .banner img {
+	object-position: 0px -96px;
+	object-fit: cover;
+}
+
+#content-t1p6 .sprite {
+	background: url('https://i.ibb.co/PZzzG09/endless-plains-background-by-princess-phoenix-ddin9tc-414w-2x.jpg');
+	background-position: 371px 180px;
+}
+
+#content-t2p1 .banner img {
+	object-position: -50px -524px;
+}
+
+#content-t2p1 .sprite {
+	background: url('https://i.ibb.co/PZzzG09/endless-plains-background-by-princess-phoenix-ddin9tc-414w-2x.jpg');
+	background-position: 742px 1344px;
+}
+
+#content-t2p2 .banner img {
+	/* object-position: -50px -524px; */
+}
+
+#content-t2p2 .sprite {
+	/* background: url('https://i.ibb.co/PZzzG09/endless-plains-background-by-princess-phoenix-ddin9tc-414w-2x.jpg');
+	background-position: 742px 1344px; */
+}
+
+#content-t2p3 .banner img {
+	object-position: -30px -109px;
+}
+
+#content-t2p3 .sprite {
+	background: url('https://i.ibb.co/t2Yf0MY/some-battle-backgrounds-by-princess-phoenix-ddfcwq4-414w-2x.jpg');
+	background-position: -73px 334px;
+}
+
+#content-t2p4 .banner img {
+	object-position: -120px -174px;
+}
+
+#content-t2p4 .sprite {
+	background: url('https://i.ibb.co/PMqPqYv/pier-or-edge-of-water-background-by-princess-phoenix-ddgqyfo-414w-2x.png');
+	background-position: -609px -8px;
+}
+
+#content-t2p5 .banner img {
+	object-position: 0px -59px;
+	object-fit: cover;
+}
+
+#content-t2p5 .sprite {
+	background: url('https://i.ibb.co/PZzzG09/endless-plains-background-by-princess-phoenix-ddin9tc-414w-2x.jpg');
+	background-position: 230px -10px;
+}
+
+#content-t2p6 .banner img {
+	object-position: 0px -434px;
+	object-fit: cover;
+}
+
+#content-t2p6 .sprite {
+	background: url('https://i.ibb.co/PZzzG09/endless-plains-background-by-princess-phoenix-ddin9tc-414w-2x.jpg');
+	background-position: 119px 379px;
+}
+
+#content-t2p7 .banner img {
+	/* object-position: -50px -524px; */
+}
+
+#content-t2p7 .sprite {
+	/* background: url('');
+	background-position: 742px 1344px; */
+}
+
+#content-t2p8 .banner img {
+	/* object-position: -50px -524px; */
+}
+
+#content-t2p8 .sprite {
+	/* background: url('');
+	background-position: 742px 1344px; */
+}
+
+#content-t2p9 .banner img {
+	/* object-position: -50px -524px; */
+}
+
+#content-t2p9 .sprite {
+	/* background: url('');
+	background-position: 742px 1344px; */
+}
+
+#content-t2p10 .banner img {
+	/* object-position: -50px -524px; */
+}
+
+#content-t2p10 .sprite {
+	/* background: url('');
+	background-position: 742px 1344px; */
+}
+
+#content-t2p11 .banner img {
+	/* object-position: -50px -524px; */
+}
+
+#content-t2p11 .sprite {
+	/* background: url('');
+	background-position: 742px 1344px; */
+}
+
+#content-t2p12 .banner img {
+	/* object-position: -50px -524px; */
+}
+
+#content-t2p12 .sprite {
+	/* background: url('');
+	background-position: 742px 1344px; */
+}
+
+/* Social */
+.social img {
+	width: 150px;
+}
+
+.relations > .scroll {
+	max-height: 400px;
+	overflow-x: hidden;
+}
+
+/* Pokédex */
+.pokedex img {
+	max-width: 32px;
+}
+
+.seen {
+	filter: grayscale(100%);
+}
+
+.released {
+	filter: sepia(100%);
+}
+
+/* Histoire */
+.history {
+  max-height: 355px;
+}
+
+.ongoing {
+	color: #ff9933
+}
+
+.finished {
+	color: limegreen;
+}
+
+.abandonned {
+	color: gray;
+}
+
+.upcoming {
+	color: #a6b1e1;
+}
+
+/* Ressources */
+.ressources.scroll {
+	max-height: 500px;
+}
+
+.ressources .avatar img{
+	max-width: 100px;
+}
+
+.ressources .signature img{
+	max-width: 150px;
+}
+
+.ressources .various img {
+	max-width: 75px;
+}
