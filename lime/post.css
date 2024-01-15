@@ -19,7 +19,7 @@
     height: 150px;
     object-fit: cover;
     padding: 5px;
-    border: 2px dotted #7b22d7;
+    border: 1px solid #7b22d7;
     margin: 0;
 }
 
@@ -54,7 +54,7 @@
     width: 450px;
     text-align: center;
     margin: 0 auto;
-    border: 2px dotted #7b22d7;
+    border: 1px solid #7b22d7;
     border-radius: 15px;
     padding: 2px 0;
 }
