@@ -465,12 +465,12 @@ input[type=radio],
 }
 
 #content-t2p7 .banner img {
-	/* object-position: -50px -524px; */
+	object-position: 0 -210px;
 }
 
 #content-t2p7 .sprite {
-	/* background: url('');
-	background-position: 742px 1344px; */
+	background: url('https://i.ibb.co/fM0RRW7/the-mountain-field-abandoned-by-princess-phoenix-ddfqg4r-fullview.jpg');
+	background-position: -20px -90px;
 }
 
 #content-t2p8 .banner img {
