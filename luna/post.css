@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Dancing Script');
+@import url('https://fonts.googleapis.com/css?family=Dancing Script&family=Piazzolla:ital,opsz@1,8..30&display=swap');
 
 .luna-rp hr {
     border-color: #299aee;
@@ -62,4 +62,11 @@
 
 .luna-rp .florent {
     color: #5f8159;
+}
+
+.luna-rp .phone {
+    font-family: "Piazzolla", serif;
+	font-optical-sizing: auto;
+	font-weight: 400;
+	font-style: italic;
 }
