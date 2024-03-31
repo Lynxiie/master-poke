@@ -474,12 +474,13 @@ input[type=radio],
 }
 
 #content-t2p8 .banner img {
-	/* object-position: -50px -524px; */
+	object-position: 0px -344px;
+	object-fit: cover;
 }
 
 #content-t2p8 .sprite {
-	/* background: url('');
-	background-position: 742px 1344px; */
+	background: url('https://i.ibb.co/jbkr8RY/woodland-wall-background-by-princess-phoenix-ddh7uzp-414w-2x.jpg');
+	background-position: 0px -19px;
 }
 
 #content-t2p9 .banner img {
