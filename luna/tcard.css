@@ -290,6 +290,12 @@ a:hover {
 	margin: 5px 10px;
 }
 
+.pokeballs label img {
+	height: 32px;
+	width: 32px;
+	object-fit: cover;
+}
+
 .pokemons {
 	margin: 10px 0;
 }
@@ -484,39 +490,42 @@ input[type=radio],
 }
 
 #content-t2p9 .banner img {
-	/* object-position: -50px -524px; */
+	object-position: 0px -70px;
+	object-fit: cover;
 }
 
 #content-t2p9 .sprite {
-	/* background: url('');
-	background-position: 742px 1344px; */
+	background: url('https://i.ibb.co/PZzzG09/endless-plains-background-by-princess-phoenix-ddin9tc-414w-2x.jpg');
+	background-position: -145px 170px;
 }
 
 #content-t2p10 .banner img {
-	/* object-position: -50px -524px; */
+	object-position: 0 -90px;
+	object-fit: cover;
 }
 
 #content-t2p10 .sprite {
-	/* background: url('');
-	background-position: 742px 1344px; */
+	background: url('https://i.ibb.co/t2Yf0MY/some-battle-backgrounds-by-princess-phoenix-ddfcwq4-414w-2x.jpg');
+	background-position: -70px 330px;
 }
 
 #content-t2p11 .banner img {
-	/* object-position: -50px -524px; */
+	 object-position: -830px -290px;
 }
 
 #content-t2p11 .sprite {
-	/* background: url('');
-	background-position: 742px 1344px; */
+	background: url('https://i.ibb.co/jbkr8RY/woodland-wall-background-by-princess-phoenix-ddh7uzp-414w-2x.jpg');
+	background-position: -389px -20px;
 }
 
 #content-t2p12 .banner img {
-	/* object-position: -50px -524px; */
+	object-position: 0 -175px;
+	object-fit: cover;
 }
 
 #content-t2p12 .sprite {
-	/* background: url('');
-	background-position: 742px 1344px; */
+	background: url('https://i.ibb.co/t2Yf0MY/some-battle-backgrounds-by-princess-phoenix-ddfcwq4-414w-2x.jpg');
+	background-position: -110px -380px;
 }
 
 /* Social */
