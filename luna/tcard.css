@@ -332,7 +332,8 @@ a:hover {
 input[type=radio],
 #content-t1p1, #content-t1p2, #content-t1p3, #content-t1p4, #content-t1p5, #content-t1p6,
 #content-t2p1, #content-t2p2, #content-t2p3, #content-t2p4, #content-t2p5, #content-t2p6,
-#content-t2p7, #content-t2p8, #content-t2p9, #content-t2p10, #content-t2p11, #content-t2p12 {
+#content-t2p7, #content-t2p8, #content-t2p9, #content-t2p10, #content-t2p11, #content-t2p12,
+#content-t2p13, #content-t2p14, #content-t2p15, #content-t2p16 {
 	display: none;
 }
 
@@ -353,7 +354,11 @@ input[type=radio],
 #t2p9:checked ~ #content-t2p9,
 #t2p10:checked ~ #content-t2p10,
 #t2p11:checked ~ #content-t2p11,
-#t2p12:checked ~ #content-t2p12 {
+#t2p12:checked ~ #content-t2p12,
+#t2p13:checked ~ #content-t2p13,
+#t2p14:checked ~ #content-t2p14,
+#t2p15:checked ~ #content-t2p15,
+#t2p16:checked ~ #content-t2p16 {
 	display: block;
 }
 
@@ -526,6 +531,42 @@ input[type=radio],
 #content-t2p12 .sprite {
 	background: url('https://i.ibb.co/t2Yf0MY/some-battle-backgrounds-by-princess-phoenix-ddfcwq4-414w-2x.jpg');
 	background-position: -110px -380px;
+}
+
+#content-t2p13 .banner img {
+	 object-position: -230px -325px;
+}
+
+#content-t2p13 .sprite {
+	background: url('https://i.ibb.co/PZzzG09/endless-plains-background-by-princess-phoenix-ddin9tc-414w-2x.jpg');
+	background-position: -269px -1px;
+}
+
+#content-t2p14 .banner img {
+	/* object-position: -50px -524px; */
+}
+
+#content-t2p14 .sprite {
+	/* background: url('https://i.ibb.co/PZzzG09/endless-plains-background-by-princess-phoenix-ddin9tc-414w-2x.jpg');
+	background-position: 742px 1344px; */
+}
+
+#content-t2p15 .banner img {
+	/* object-position: -50px -524px; */
+}
+
+#content-t2p15 .sprite {
+	/* background: url('https://i.ibb.co/PZzzG09/endless-plains-background-by-princess-phoenix-ddin9tc-414w-2x.jpg');
+	background-position: 742px 1344px; */
+}
+
+#content-t2p16 .banner img {
+	/* object-position: -50px -524px; */
+}
+
+#content-t2p16 .sprite {
+	/* background: url('https://i.ibb.co/PZzzG09/endless-plains-background-by-princess-phoenix-ddin9tc-414w-2x.jpg');
+	background-position: 742px 1344px; */
 }
 
 /* Social */
