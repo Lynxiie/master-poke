@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Dancing Script&family=Vollkorn:ital,wght@1,600@1&display=swap');
 
 .luna-rp hr {
-    border-color: #299aee;
+    background-color: #299aee;
 }
 
 .luna-rp .luna, .luna-hrp, .luna-title {
