@@ -42,21 +42,12 @@
 }
 
 .lime-rp hr {
-    color: #7b22d7;
-    width: 450px;
-    margin: 10px auto;
-    border: none;
-    border-bottom: 2px solid #7b22d7;
+    background-color: 2px solid #7b22d7;
 }
 
 .lime-word {
     color: #7b22d7;
-    width: 450px;
-    text-align: center;
-    margin: 0 auto;
-    border: 1px solid #7b22d7;
-    border-radius: 15px;
-    padding: 2px 0;
+    text-align: right;
 }
 
 .lime-word span {
