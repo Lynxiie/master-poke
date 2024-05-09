@@ -1,0 +1,1 @@
+All badges by [VictorV111](https://www.deviantart.com/victorv111/art/Pokemon-HG-SS-Style-Badge-Sprites-838245608)

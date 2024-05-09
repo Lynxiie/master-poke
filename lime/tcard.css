@@ -1,0 +1,722 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600&Josefin+Sans:wght@100&display=swap');
+
+/* Couleurs */
+:root {
+    --main-color: #7b22d7;
+    --secondary-color: #c48bff;
+    --ter-color: #f1e4ff;
+    --border-color: #4b009a;
+    --main-text-color: #4b009a;
+    --secondary-text-color: #f1e4ff;
+    --link-color: #20124d;
+    --link-hover-color: #4c0e4b;
+    --img-border-color: #4b009a;
+    --scroll-bar-color: #4b009a;
+    --scroll-back-color: #ddbdff;
+}
+
+/* Surcharge */
+a {
+    color: var(--link-color);
+    text-decoration: none;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 100;
+}
+
+a:hover {
+    color: var(--link-hover-color);
+}
+
+/* Général */
+.tcard {
+    max-width: 550px;
+    margin: 0 auto;
+    background-color: var(--main-color);
+    font-family: 'Quicksand', sans-serif;
+    border: 1px solid var(--border-color);
+}
+
+.hidden {
+    display: none !important;
+}
+
+.fa-circle-xmark {
+    color: gray;
+}
+
+.fa-circle-check {
+    color: green;
+}
+
+.fa-circle-minus {
+    color: orange;
+}
+
+.fa-arrow-right-long {
+    color: green;
+}
+
+.fa-arrow-left-long {
+    color: red;
+}
+
+.fa-arrow-right-arrow-left {
+    color: cyan;
+}
+
+.fa-xmark {
+    color: red;
+}
+
+.fa-check {
+    color: limegreen;
+}
+
+.notown {
+    filter: brightness(0%);
+}
+
+.scroll {
+    scrollbar-color: var(--scroll-bar-color) var(--scroll-back-color);
+    scrollbar-width: thin;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.type {
+    width: 20px;
+}
+
+input[type="radio"],
+#info-bloc, #inventory-bloc, #poke-bloc, #goals-bloc, #journey-bloc,
+#sbire-bloc, #sbire-team-bloc, #mission-bloc, #people-bloc, #gallery-bloc,
+#ball-bloc, #care-bloc, #evol-bloc, #ct-bloc, #berries-bloc, #other-bloc, #rare-bloc,
+#history-bloc, #hm-uses-bloc, #money-bloc,
+#dark1-bloc, #dark2-bloc, #dark3-bloc, #dark4-bloc, #dark5-bloc, #dark6-bloc,
+#dragon1-bloc, #dragon2-bloc, #dragon3-bloc, #dragon4-bloc, #dragon5-bloc, #dragon6-bloc,
+#other1-bloc, #other2-bloc, #other3-bloc, #other4-bloc, #other5-bloc, #other6-bloc,
+#sbire1-bloc, #sbire2-bloc, #sbire3-bloc, #sbire4-bloc, #sbire5-bloc, #sbire6-bloc,
+#dex1-bloc, #dex2-bloc, #dex3-bloc, #dex4-bloc {
+    display: none;
+}
+
+#info:checked ~ .header div label[for="info"] i,
+#inventory:checked ~ .header div label[for="inventory"] i,
+#pokemon:checked ~ .header div label[for="pokemon"] i,
+#goals:checked ~ .header div label[for="goals"] i,
+#journey:checked ~ .header div label[for="journey"] i,
+#sbire:checked ~ .header div label[for="sbire"] i,
+#sbire-team:checked ~ .header div label[for="sbire-team"] i,
+#mission:checked ~ .header div label[for="mission"] i,
+#people:checked ~ .header div label[for="people"] i,
+#gallery:checked ~ .header div label[for="gallery"] i,
+#balls:checked ~ div label[for="balls"],
+#care:checked ~ div label[for="care"],
+#evol:checked ~ div label[for="evol"],
+#ct:checked ~ div label[for="ct"],
+#berries:checked ~ div label[for="berries"],
+#other:checked ~ div label[for="other"],
+#rare:checked ~ div label[for="rare"],
+#history:checked ~ div label[for="history"],
+#hm-uses:checked ~ div label[for="hm-uses"],
+#money:checked ~ div label[for="money"],
+#dex1:checked ~ div label[for="dex1"],
+#dex2:checked ~ div label[for="dex2"],
+#dex3:checked ~ div label[for="dex3"],
+#dex4:checked ~ div label[for="dex4"] {
+    color: var(--main-text-color);
+}
+
+#dark1:checked ~ div label[for="dark1"] img,
+#dark2:checked ~ div label[for="dark2"] img,
+#dark3:checked ~ div label[for="dark3"] img,
+#dark4:checked ~ div label[for="dark4"] img,
+#dark5:checked ~ div label[for="dark5"] img,
+#dark6:checked ~ div label[for="dark6"] img,
+#dragon1:checked ~ div label[for="dragon1"] img,
+#dragon2:checked ~ div label[for="dragon2"] img,
+#dragon3:checked ~ div label[for="dragon3"] img,
+#dragon4:checked ~ div label[for="dragon4"] img,
+#dragon5:checked ~ div label[for="dragon5"] img,
+#dragon6:checked ~ div label[for="dragon6"] img,
+#other1:checked ~ div label[for="other1"] img,
+#other2:checked ~ div label[for="other2"] img,
+#other3:checked ~ div label[for="other3"] img,
+#other4:checked ~ div label[for="other4"] img,
+#other5:checked ~ div label[for="other5"] img,
+#other6:checked ~ div label[for="other6"] img,
+#sbire1:checked ~ div label[for="sbire1"] img,
+#sbire2:checked ~ div label[for="sbire2"] img,
+#sbire3:checked ~ div label[for="sbire3"] img,
+#sbire4:checked ~ div label[for="sbire4"] img,
+#sbire5:checked ~ div label[for="sbire5"] img,
+#sbire6:checked ~ div label[for="sbire6"] img {
+    background-color: var(--main-text-color);
+}
+
+#info:checked ~ #info-bloc,
+#goals:checked ~ #goals-bloc,
+#journey:checked ~ #journey-bloc,
+#mission:checked ~ #mission-bloc,
+#people:checked ~ #people-bloc,
+#gallery:checked ~ #gallery-bloc,
+#history:checked ~ #history-bloc,
+#hm-uses:checked ~ #hm-uses-bloc,
+#money:checked ~ #money-bloc,
+#dark1:checked ~ #dark1-bloc,
+#dark2:checked ~ #dark2-bloc,
+#dark3:checked ~ #dark3-bloc,
+#dark4:checked ~ #dark4-bloc,
+#dark5:checked ~ #dark5-bloc,
+#dark6:checked ~ #dark6-bloc,
+#dragon1:checked ~ #dragon1-bloc,
+#dragon2:checked ~ #dragon2-bloc,
+#dragon3:checked ~ #dragon3-bloc,
+#dragon4:checked ~ #dragon4-bloc,
+#dragon5:checked ~ #dragon5-bloc,
+#dragon6:checked ~ #dragon6-bloc,
+#other1:checked ~ #other1-bloc,
+#other2:checked ~ #other2-bloc,
+#other3:checked ~ #other3-bloc,
+#other4:checked ~ #other4-bloc,
+#other5:checked ~ #other5-bloc,
+#other6:checked ~ #other6-bloc,
+#sbire1:checked ~ #sbire1-bloc,
+#sbire2:checked ~ #sbire2-bloc,
+#sbire3:checked ~ #sbire3-bloc,
+#sbire4:checked ~ #sbire4-bloc,
+#sbire5:checked ~ #sbire5-bloc,
+#sbire6:checked ~ #sbire6-bloc,
+#dex1:checked ~ #dex1-bloc,
+#dex2:checked ~ #dex2-bloc,
+#dex3:checked ~ #dex3-bloc,
+#dex4:checked ~ #dex4-bloc {
+    display: block;
+}
+
+#inventory:checked ~ #inventory-bloc,
+#balls:checked ~ #ball-bloc,
+#care:checked ~ #care-bloc,
+#berries:checked ~ #berries-bloc,
+#evol:checked ~ #evol-bloc,
+#ct:checked ~ #ct-bloc,
+#other:checked ~ #other-bloc,
+#rare:checked ~ #rare-bloc,
+#sbire:checked ~ #sbire-bloc,
+#sbire-team:checked ~ #sbire-team-bloc,
+#pokemon:checked ~ #poke-bloc	{
+    display: flex;
+}
+
+/* Header */
+.header {
+    height: 150px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    position: relative;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.header img {
+    height: 100px;
+    border-radius: 50%;
+    border: var(--img-border-color) 30px solid;
+    padding: 15px;
+    margin-left: -20px;
+}
+
+.header-right {
+    margin-left: 5px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+}
+
+.nav {
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.nav.top {
+    top: -15px;
+}
+
+.nav.top div span {
+    top: 45px;
+}
+
+.nav.bottom {
+    bottom: -20px;
+}
+
+.nav.bottom div span {
+    top: -18px;
+}
+
+.nav div {
+    position: relative;
+}
+
+.nav div span {
+    display: none;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background: var(--secondary-color);
+    border: var(--border-color) solid 1px;
+    z-index: 2;
+    color: var(--ter-color);
+    padding: 2px 5px;
+}
+
+.nav div:hover > span {
+    display: inline;
+}
+
+.nav div i {
+    padding: 5px 10px;
+    cursor: pointer;
+    border: var(--border-color) solid 1px;
+    border-radius: 5px;
+    color: var(--ter-color);
+    background: var(--secondary-color);
+}
+
+.name {
+    z-index: 1;
+}
+
+.name span {
+    font-weight: 500;
+    color: var(--main-text-color);
+}
+
+.name span:first-child {
+    font-size: 30px;
+}
+
+/* Badges */
+.badges div {
+    display: flex;
+    justify-content: space-around;
+    margin: 10px;
+}
+
+.badges p {
+    text-align: right;
+    margin: 5px 20px 5px 0;
+    font-size: 8px;
+}
+
+/* Général blocs du bas */
+.bloc {
+    margin: 0 10px 10px 10px;
+    max-height: 530px;
+}
+
+.listing p {
+    border-bottom: 1px var(--border-color) solid;
+    margin: 0;
+    font-weight: 300;
+    font-size: 20px;
+    font-variant: small-caps;
+    color: var(--secondary-text-color);
+}
+
+.listing div {
+    margin-bottom: 10px;
+}
+
+.listing span{
+    display: inline-block;
+    padding: 2px 10px;
+    background: var(--secondary-color);
+    color: var(--main-text-color);
+    border-radius: 5px 0;
+    margin: 5px 0;
+    border: 1px solid var(--border-color);
+}
+
+/* Informations */
+.mp-tcard {
+    text-align: center;
+}
+
+.mp-tcard img {
+    border: 1px solid var(--border-color);
+}
+
+/* Inventaire */
+#inventory-bloc {
+    flex-direction: column;
+}
+
+#inventory-bloc > div {
+    display: flex;
+}
+
+.inv-nav {
+    width: 100px;
+}
+
+.inv-bloc {
+    width: 408px;
+    flex-wrap: wrap;
+    max-height: 170px;
+    overflow-y: scroll;
+    background: var(--secondary-color);
+    margin: 5px;
+    padding: 5px;
+    border: 1px var(--border-color) solid;
+}
+
+.inv-bloc .item {
+    width: 190px;
+    background: var(--ter-color);
+    margin: 3px 3px;
+    display: flex;
+    font-size: 12px;
+    height: 30px;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid var(--border-color);
+    color: var(--main-text-color);
+}
+
+.inv-bloc .item span:nth-child(odd) {
+    width: 30px;
+    background: var(--border-color);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ter-color);
+}
+
+.history div, #hm-uses-bloc div, .dex-bloc div {
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+#hm-uses-bloc div, .dex-bloc div {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
+.dex-bloc div:first-child {
+    justify-content: center;
+    font-weight: bold;
+    color: var(--ter-color);
+}
+
+/* Navigations */
+#inventory-bloc label, .poke-nav {
+    color: var(--ter-color);
+    display: block;
+    background: var(--secondary-color);
+    text-align: center;
+    margin: 5px;
+    border: 1px solid var(--border-color);
+}
+
+#inventory-bloc label, .poke-nav img {
+    cursor: pointer;
+}
+
+/* Sbire */
+#sbire-bloc {
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+#cookies-bloc {
+    max-height: 110px;
+    width: 229px;
+    margin: 0 10px;
+}
+
+#sbire-object-bloc{
+    width: 230px;
+}
+
+#sbire-object-bloc .item {
+    width: 215px;
+}
+
+#sbire-object-bloc .item span:nth-child(odd) {
+    width: 32px;
+}
+
+#history-sbire-bloc {
+    width: 210px;
+}
+
+#sbire-bloc img:first-child,
+#sbire-object-bloc,
+#history-sbire-bloc,
+#cookies-bloc {
+    margin: 5px 0;
+}
+
+#sbire-team-bloc .poke-nav {
+    height: fit-content;
+    padding: 10px 0;
+}
+
+/* Social */
+#people-bloc div {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 5px;
+    justify-content: space-around;
+    position: relative;
+}
+
+.social {
+    background-color: var(--secondary-color);
+    height: 200px;
+    width: 125px;
+    border: 1px var(--border-color) solid;
+}
+
+.social img:first-child {
+    height: 200px;
+    width: 125px;
+    position: absolute;
+    opacity: 1;
+    object-fit: cover;
+}
+
+.social .description {
+    font-size: 10px;
+    display: block !important;
+    width: 125px;
+    height: 190px;
+    opacity: 0;
+    padding: 5px;
+    margin: 0 !important;
+}
+
+.description p {
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+.social:hover .description {
+    opacity: 1;
+}
+
+.social .name {
+    background: var(--ter-color);
+    border-left: none;
+    border-right: none;
+    border-top: 1px var(--border-color) solid;
+    border-bottom: 1px var(--border-color) solid;
+    border-radius: 0;
+    position: absolute;
+    bottom: 5px;
+    font-size: 10px;
+    width: 104px;
+    opacity: 1;
+}
+
+.social .name, .social img:first-child, .social .description {
+    transition: opacity 0.5s linear;
+}
+
+.social:hover .name, .social:hover img:first-child {
+    opacity: 0;
+}
+
+/* Gallery */
+#gallery-bloc .avatar img {
+    max-width: 100px;
+}
+
+#gallery-bloc .signature img {
+    max-width: 150px;
+}
+
+#gallery-bloc .various img {
+    max-width: 75px;
+}
+
+/* Pokémon */
+.poke-nav {
+    width: 100px;
+    max-height: 488px;
+}
+
+.poke-nav .cat {
+    background-color: var(--ter-color);
+    border-color: var(--border-color);
+    border-style: solid;
+    border-width: 1px 0;
+    margin: 10px 0;
+    padding: 5px;
+    color: var(--main-text-color);
+    font-size: 14px;
+}
+
+.poke-nav img {
+    background: var(--ter-color);
+    border: 1px var(--border-color) solid;
+    border-radius: 50%;
+}
+
+.poke-bloc {
+    width: 415px;
+    margin-top: 5px;
+}
+
+.poke-bloc .info-bloc {
+    border: var(--border-color) 1px solid;
+    margin-bottom: 10px;
+}
+
+.poke-bloc .sea {
+    background: url("https://i.ibb.co/Qv1Lsw0/sea-background-by-carchagui-dc8dn0b.png");
+    background-size: cover;
+}
+
+.top-info {
+    display: flex;
+    height: 145px;
+}
+
+.top-info div {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.top-info div:first-child {
+    height: 100px;
+    width: 100px;
+    align-items: center;
+}
+
+.top-info img {
+    object-fit: contain;
+}
+
+.top-info .info {
+    font-size: 11px;
+    display: flex;
+    width: 140px;
+    background: var(--ter-color);
+    justify-content: space-between;
+    align-items: center;
+    height: 30px;
+    color: var(--main-text-color);
+    border: var(--border-color) 1px solid;
+}
+
+.top-info .info span:nth-child(odd) {
+    background: var(--border-color);
+    color: var(--ter-color);
+    width: 55px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-left: 5px;
+}
+
+.top-info .info span:nth-child(even) {
+    padding-right: 5px;
+}
+
+.stat-info, .attack-info {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 5px;
+    justify-content: space-between;
+    background-color: var(--secondary-color);
+}
+
+.stats {
+    font-size: 12px;
+    background: var(--ter-color);
+    border: var(--border-color) 1px solid;
+    color: var(--main-text-color);
+    width: 195px;
+    margin: 5px 0;
+    display: flex;
+    justify-content: space-between;
+    height: 20px;
+}
+
+.stats span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+}
+
+.stats span:nth-child(odd) {
+    background: var(--border-color);
+    color: var(--ter-color);
+    width: 52px;
+    height: 100%;
+    font-weight: 700;
+}
+
+.poke-name p:first-child {
+    font-size: 25px;
+}
+
+.poke-name p:nth-child(even) {
+    font-size: 10px;
+}
+
+.attack {
+    font-size: 11px;
+    margin: 3px 0;
+    background-color: var(--ter-color);
+    border: 1px var(--border-color) solid;
+    color: var(--main-text-color);
+    display: flex;
+    height: 25px;
+    justify-content: space-between;
+    width: 190px;
+}
+
+.attack-info {
+    max-height: 192px;
+    margin-bottom: 0;
+}
+
+.attack-info p {
+    margin: 0;
+    text-align: center;
+    width: 100%;
+}
+
+.attack span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.attack > span:nth-child(odd) {
+    background: var(--border-color);
+    color: var(--ter-color);
+}
+
+.attack span.type {
+    width: 30px;
+}
+
+.attack span.power {
+    width: 55px;
+}
