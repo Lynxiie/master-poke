@@ -587,6 +587,11 @@ input[type="radio"],
     background-size: cover;
 }
 
+.poke-bloc .autumn {
+    background: url("https://i.ibb.co/Rj4M8dY/db9pixf-b139565e-5cd4-437c-98fa-f5bf8e61cb6e.png");
+    background-size: cover;
+}
+
 .top-info {
     display: flex;
     height: 145px;
@@ -607,6 +612,12 @@ input[type="radio"],
 
 .top-info img {
     object-fit: contain;
+}
+
+.top-info div img:first-of-type {
+	height: 96px;
+	width: 96px;
+	object-fit: none;
 }
 
 .top-info .info {
