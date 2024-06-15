@@ -162,6 +162,10 @@ a:hover {
 	object-fit: none;
 }
 
+.notown {
+	filter: brightness(0%);
+}
+
 /* Pokémon */
 .attacks .scroll {
 	max-height: 216px;
