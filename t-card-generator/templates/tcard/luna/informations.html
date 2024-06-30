@@ -1,0 +1,48 @@
+<link href="https://lynxiie.github.io/master-poke/luna/tcard.css" rel="stylesheet" />
+<meta charset="UTF-8"/>
+
+<div class="card">
+	<div class="title">
+		<img src="../images/luna/tcard.jpg" alt="luna" />
+		<div><span>{{ firstname }} {{ lastname }}<span class="help"> (feat {{ original_char_name }} de {{ original_game }})</span></span></div>
+	</div>
+
+	<div class="content">
+		<div class="category">
+			<span>Généralités</span>
+		</div>
+		<div class="descriptions col-3">
+			<div class="description"><span>Âge</span><br/>{{ age }} ans</div>
+			<div class="description"><span>Statut</span><br/>{{ status }}</div>
+			<div class="description"><span>Sexe</span><br/>{{ sex }}</div>
+			<div class="description"><span>Région</span><br/>{{ region }}</div>
+			<div class="description"><span>Starter</span><br/>{{ starter }}</div>
+			<div class="description"><span>Numéro ID</span><br/>{{ id_number }}</div>
+		</div>
+
+		<div>
+			<div class="category">
+				<span>Physique</span>
+			</div>
+			<ul>
+{{#physical}}
+				<li>{{.}}</li>
+{{/physical}}
+			</ul>
+
+			<div class="category">
+				<span>Psychologie</span>
+			</div>
+			<ul>
+{{#mental}}
+				<li>{{.}}</li>
+{{/mental}}
+			</ul>
+		</div>
+
+		<div class="center">
+			<img src="../images/tcard/luna.png" alt="tcard" /><br/>
+			<span class="help">Sprite par © <a href="https://master-poke.forumactif.fr/u46" target="_blank">Stegan Striker</a> ♥</span>
+		</div>
+	</div>
+</div>

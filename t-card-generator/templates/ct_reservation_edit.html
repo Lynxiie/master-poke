@@ -1,0 +1,38 @@
+{% include 'templates_part/header.html' %}
+{% from "templates_part/form_template.html" import render_field %}
+
+<h1>
+    {{ character.get_full_name() }} - Réservation des CT
+</h1>
+
+{% if not cts %}
+    <div>
+        Pas de CT
+    </div>
+{% else %}
+    <form method="POST">
+        {% for ct in form.ct_reservations %}
+            <div class="row">
+                <div class="col-md-2">
+                    {{ render_field(ct.form.name, readonly=true) }}
+                </div>
+
+                <div class="col-md-6 full">
+                    {{ render_field(ct.reserved) }}
+                </div>
+            </div>
+        {% endfor %}
+
+        <div class="row">
+            <div class="col-md-12">
+                <input type="submit" class="btn" value="Sauvegarder">
+            </div>
+        </div>
+    </form>
+{% endif %}
+
+<div class="float-end">
+    <a href="{{ url_for('inventory', character_id=character.id) }}" class="btn">Retour</a>
+</div>
+
+{% include 'templates_part/footer.html' %}

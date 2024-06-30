@@ -1,0 +1,46 @@
+@import url("style.css");
+
+table {
+    border-spacing: 0;
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+thead tr:nth-child(1) {
+    text-align: center;
+}
+
+th, tbody tr td:first-child  {
+    font-weight: bold;
+    border: 1px solid var(--secondary-color);
+    padding: 8px;
+}
+
+td {
+    border: 1px solid var(--secondary-color);
+    padding: 8px;
+}
+
+tr:nth-child(odd) {
+    background: rgba(38, 196, 133, 0.10);
+}
+
+#remove-pvplus, #remove-prot, #remove-fer, #remove-calcium, #remove-zinc, #remove-carbone {
+    display: none;
+}
+
+.disabled {
+    width: 50px;
+    background-color: inherit;
+}
+
+label {
+    display: none;
+}
+
+input:read-only {
+    background-color: inherit;
+}

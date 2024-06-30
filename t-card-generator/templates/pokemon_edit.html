@@ -1,0 +1,64 @@
+{% include 'templates_part/header.html' %}
+{% from "templates_part/form_template.html" import render_field %}
+
+<h1>
+  {{ character.get_full_name() }} - Edition {{ pokemon.name }}
+</h1>
+
+<form method="POST">
+  <div class="row">
+    <div class="col-md-2">
+      {{ render_field(form.name)}}
+    </div>
+
+    <div class="col-md-2">
+      {{ render_field(form.category_id)}}
+    </div>
+
+    <div class="col-md-1">
+      {{ render_field(form.sex)}}
+    </div>
+
+    <div class="col-md-1">
+      {{ render_field(form.nature)}}
+    </div>
+
+    <div class="col-md-1">
+      {{ render_field(form.shiny)}}
+    </div>
+
+    <div class="col-md-3">
+      {{ render_field(form.background)}}
+    </div>
+
+    <div class="col-md-6 full">
+      {{ render_field(form.obtention_link)}}
+    </div>
+
+    <div class="col-md-6 full">
+      {{ render_field(form.obtention_name)}}
+    </div>
+
+    <div class="col-md-6 full">
+      {{ render_field(form.sprite_credits)}}
+    </div>
+
+    <div class="col-md-6 full">
+      {{ render_field(form.banner_credit)}}
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <input type="submit" class="btn" value="Sauvegarder">
+    </div>
+  </div>
+</form>
+
+<div class="float-end">
+  <a href="{{ url_for('pokemon', character_id=character.id) }}" class="btn">Retour</a>
+</div>
+
+
+
+{% include 'templates_part/footer.html' %}

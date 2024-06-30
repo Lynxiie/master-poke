@@ -1,0 +1,55 @@
+{% include 'templates_part/header.html' %}
+{% from "templates_part/form_template.html" import render_field %}
+
+<h1>
+  {{ character.get_full_name() }} - Objectifs
+</h1>
+
+<form method="POST">
+  <div class="row">
+
+    <div class="col-md-12">
+      <h2 data-bs-toggle="collapse" data-bs-target="#globalGoals" class="collapseToggle">
+        Global
+        {{ form.add_globals }}
+      </h2>
+    </div>
+    <div class="collapse show" id="globalGoals">
+      {% for global in form.globals_goals %}
+        <div class="row">
+          <div class="col-md-5">
+            {{ render_field(global.form.description) }}
+          </div>
+          <div class="col-md-5">
+            {{ render_field(global.done) }}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    <div class="col-md-12">
+      <h2 data-bs-toggle="collapse" data-bs-target="#pokemonGoals" class="collapseToggle">
+        Pokemon
+        {{ form.add_pokemon }}
+      </h2>
+    </div>
+    <div class="collapse show" id="pokemonGoals">
+      {% for pokemon in form.pokemon_goals %}
+        <div class="row">
+          <div class="col-md-5">
+            {{ render_field(pokemon.form.description) }}
+          </div>
+          <div class="col-md-5">
+            {{ render_field(pokemon.done) }}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    <div class="col-md-12">
+      <input type="submit" class="btn" value="Sauvegarder">
+    </div>
+  </div>
+</form>
+
+{% include 'templates_part/footer.html' %}

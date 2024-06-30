@@ -1,0 +1,217 @@
+:root {
+  --primary-color: #26C485;
+  --secondary-color: #67C49F;
+  --third-color: #7DFA69;
+}
+
+nav {
+    background-color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.navbar-brand {
+    color: white !important;
+}
+
+.btn {
+    color: white !important;
+    background: var(--secondary-color) !important;
+    border-color: var(--third-color);
+    margin: 0 5px;
+}
+
+.btn:hover {
+    background: var(--secondary-color) !important;
+    color: white! important;
+}
+
+.btn.active {
+    border-color: var(--secondary-color) !important;
+}
+
+.nav-tabs, .nav-link:hover {
+    border-color: var(--primary-color) !important;
+}
+
+.nav-link.active {
+    border-color: var(--primary-color) !important;
+    border-bottom-color: transparent !important;
+}
+
+.nav-link {
+    color: var(--primary-color) !important;
+}
+
+img {
+    max-width: 50px;
+}
+
+.feather-check-circle {
+    color: green;
+}
+
+.feather-edit {
+    color: green;
+}
+
+.feather-trash-2 {
+    color: red;
+}
+
+.feather-check-circle, .feather-edit, .feather-trash-2 {
+    cursor: pointer;
+}
+
+caption {
+    color: var(--primary-color) !important;
+    text-align: center !important;
+    background: var(--third-color) !important;
+    margin-top: 15px !important;
+}
+
+th[onclick] {
+    cursor: pointer;
+}
+
+.flag {
+    width: 13px;
+    border: 1px solid black;
+}
+
+input#name {
+    width: 90%;
+}
+
+input#sens_critique_autofill {
+    width: 70%;
+}
+
+input[type=text], select, input[type=url] {
+    border: 2px solid var(--secondary-color);
+    border-radius: 4px;
+}
+
+input[type=url] {
+    width: 600px !important;
+}
+
+select {
+    background: var(--secondary-color);
+    color: white;
+}
+
+.alert {
+    padding-left: 30px !important;
+}
+
+.home {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.card {
+    border-color: var(--primary-color) !important;
+    max-width: 35%;
+    width: 28%;
+    padding: 0 40px 15px 40px;
+    margin-bottom: 15px;
+}
+
+h1, h2 {
+    color: var(--primary-color) !important;
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 30px !important;
+}
+
+h2 {
+    font-size: 20px !important;
+}
+
+a, label {
+    color: var(--secondary-color) !important;
+}
+
+input:read-only,
+textarea:read-only {
+  border: 0;
+  box-shadow: none;
+  background-color: white;
+}
+
+input#link {
+    width: 100%;
+}
+
+input {
+    max-width: 100%;
+}
+
+.errors {
+    color: red;
+}
+
+.mentals input:first-child {
+    width: 300px;
+    margin: 2px;
+}
+
+input[type='submit'] {
+    margin-top: 20px;
+}
+
+.cs div:nth-child(3n) input {
+    width: 100%;
+}
+
+ul {
+    list-style-type: '• ';
+}
+
+li:nth-child(even)::marker {
+    color: var(--primary-color);
+}
+li:nth-child(odd)::marker {
+    color: var(--third-color);
+}
+
+.full input[type='text'] {
+    width: 100%;
+}
+
+.collapseToggle {
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
+.feather-x {
+    color: red;
+    cursor: pointer;
+}
+
+.feather-star {
+    color: gold;
+}
+
+.table {
+    --bs-table-border-color: var(--primary-color) !important;
+    --bs-table-hover-bg: rgba(38, 196, 133, 0.20) !important;
+    --bs-table-striped-bg: rgba(38, 196, 133, 0.10) !important;
+}
+
+input[type="submit"].plus-btn {
+    margin: 0;
+    background: none;
+    color: green;
+    font-weight: bold;
+}
+
+select[multiple] option {
+    background-color: var(--secondary-color);
+}

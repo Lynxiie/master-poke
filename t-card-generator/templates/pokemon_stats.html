@@ -1,0 +1,153 @@
+{% include 'templates_part/header.html' %}
+{% from "templates_part/form_template.html" import render_field %}
+
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static', filename='style/stats.css') }}">
+
+<h1>
+    {{ character.get_full_name() }} - Edition des stats
+</h1>
+
+<form method="POST">
+    <div class="row">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th colspan="4">
+                        <span id="pokemonName">{{ pokemon.name }}</span> ♦
+                        Niveau <input type="text" id="lvl" name="lvl" value="{{ pokemon.level }}" disabled class="disabled"> ♦
+                        Shiney ? <input type="checkbox" id="cbShiney" name="shiney" {% if pokemon.shiny %}checked{% endif %} disabled>
+                    </th>
+
+                <tr>
+                    <th></th>
+                    <th>Base</th>
+                    <th>Leveling</th>
+                    <th>Vitamines</th>
+                    <th>Totaux</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>PV</td>
+                    <td><span id="pvBase">{{ pokemon.species.pv }}</span></td>
+                    <td>
+                        {{ render_field(form.pv) }}
+                    </td>
+                    <td>
+                        {{ render_field(form.hp_up) }}
+                        Total : <span id="pvPlusReal"></span>
+{#                        <button id="remove-pvplus">-</button>#}
+{#                        <span id="pvPlusSpend">{{ pokemon.hp_up }}</span> (<span id="pvPlusReal"></span>)#}
+{#                        <button id="add-pvplus">+</button>#}
+                    </td>
+                    <td><span id="pvTot"></span></td>
+                </tr>
+                <tr>
+                    <td>Attaque</td>
+                    <td><span id="atkBase">{{ pokemon.species.atk }}</span></td>
+                    <td>
+                        {{ render_field(form.atk) }}
+                    </td>
+                    <td>
+                        {{ render_field(form.protein) }}
+                        Total : <span id="protReal"></span>
+{#                        <button id="remove-prot">-</button>#}
+{#                        <span id="protSpend">{{ pokemon.protein }}</span> (<span id="protReal"></span>)#}
+{#                        <button id="add-prot">+</button>#}
+                    </td>
+                    <td><span id="atkTot"></span></td>
+                </tr>
+                <tr>
+                    <td>Défense</td>
+                    <td><span id="defBase">{{ pokemon.species.defense }}</span></td>
+                    <td>
+                        {{ render_field(form.defense) }}
+                    </td>
+                    <td>
+                        {{ render_field(form.iron) }}
+                        Total : <span id="ferReal"></span>
+{#                        <button id="remove-fer">-</button>#}
+{#                        <span id="ferSpend">{{ pokemon.iron }}</span> (<span id="ferReal"></span>)#}
+{#                        <button id="add-fer">+</button>#}
+                    </td>
+                    <td><span id="defTot"></span></td>
+                </tr>
+                <tr>
+                    <td>Attaque Spé</td>
+                    <td><span id="atkSpeBase">{{ pokemon.species.atk_special }}</span></td>
+                    <td>
+                        {{ render_field(form.atk_spe) }}
+                    </td>
+                    <td>
+                        {{ render_field(form.calcium) }}
+                        Total : <span id="calciumReal"></span>
+{#                        <button id="remove-calcium">-</button>#}
+{#                        <span id="calciumSpend">{{ pokemon.calcium }}</span> (<span id="calciumReal"></span>)#}
+{#                        <button id="add-calcium">+</button>#}
+                    </td>
+                    <td><span id="atkSpeTot"></span></td>
+                </tr>
+                <tr>
+                    <td>Défense Spé</td>
+                    <td><span id="defSpeBase">{{ pokemon.species.defense_special }}</span></td>
+                    <td>
+                        {{ render_field(form.defense_spe) }}
+                    </td>
+                    <td>
+                        {{ render_field(form.zinc) }}
+                        Total : <span id="zincReal"></span>
+{#                        <button id="remove-zinc">-</button>#}
+{#                        <span id="zincSpend">{{ pokemon.zinc }}</span> (<span id="zincReal"></span>)#}
+{#                        <button id="add-zinc">+</button>#}
+                    </td>
+                    <td><span id="defSpeTot"></span></td>
+                </tr>
+                <tr>
+                    <td>Vitesse</td>
+                    <td><span id="vitBase">{{ pokemon.species.speed }}</span></td>
+                    <td>
+                        {{ render_field(form.speed) }}
+                    </td>
+                    <td>
+                        {{ render_field(form.carbos) }}
+                        Total : <span id="carboneReal"></span>
+{#                        <button id="remove-carbone">-</button>#}
+{#                        <span id="carboneSpend">{{ pokemon.carbos }}</span> (<span id="carboneReal"></span>)#}
+{#                        <button id="add-carbone">+</button>#}
+                    </td>
+                    <td><span id="vitTot"></span></td>
+                </tr>
+            </tbody>
+
+            <tfoot>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th colspan="">
+                        <span id="spent"></span> / <span id="pointTot"></span>
+                        (Reste : <span id="remaining"></span>)
+                    </th>
+                    <th>
+                        <span id="vitaTot"></span> / 10
+                    </th>
+                    <th></th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <input type="submit" class="btn" value="Sauvegarder" id="saveBtn">
+        </div>
+    </div>
+</form>
+
+<div class="float-end">
+    <a href="{{ url_for('pokemon', character_id=character.id) }}" class="btn">Retour</a>
+</div>
+
+<script type="text/javascript" src="{{ url_for('static', filename='script/stats.js') }}"></script>
+{% include 'templates_part/footer.html' %}

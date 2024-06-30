@@ -1,0 +1,70 @@
+{% include 'templates_part/header.html' %}
+{% from "templates_part/form_template.html" import render_field %}
+
+<h1>
+  {% if social %}
+    {{ character.get_full_name() }} - Edition {{ social.full_name }}
+  {% else %}
+    {{ character.get_full_name() }} - Nouvelle connaissance
+  {% endif %}
+</h1>
+
+<form method="POST">
+  <div class="row">
+
+    <div class="col-md-4">
+      {{ render_field(form.full_name, readonly=true if social else false) }}
+    </div>
+
+    <div class="col-md-4">
+      {{ render_field(form.bond) }}
+    </div>
+
+    <div class="col-md-4">
+      {{ form.description(cols="35", rows="220") }}
+    </div>
+
+    <div class="col-md-4">
+      {{ render_field(form.pj) }}
+    </div>
+
+    <div class="col-md-4">
+      {{ render_field(form.hexa_text) }}
+    </div>
+  </div>
+
+  <h2>Sujet {{ form.add_subject }}</h2>
+  <div class="row mentals">
+
+    {% for subject in form.subjects %}
+      <div class="col-md-6">
+        {{ subject['link'] }}
+      </div>
+    {% endfor %}
+  </div>
+
+  <h2>Pokémon {{ form.add_pokemon }}</h2>
+  <div class="row">
+
+    {% for pkmn in form.pokemon %}
+      <div class="col-md-3">
+        {{ render_field(pkmn.pokemon) }}
+      </div>
+      <div class="col-md-3">
+        {{ render_field(pkmn.pokemon_name) }}
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <input type="submit" class="btn" value="Sauvegarder">
+    </div>
+  </div>
+</form>
+
+<div class="float-end">
+  <a href="{{ url_for('social_relation', character_id=character.id) }}" class="btn">Retour</a>
+</div>
+
+{% include 'templates_part/footer.html' %}

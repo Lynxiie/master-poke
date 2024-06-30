@@ -1,0 +1,39 @@
+{% include 'templates_part/header.html' %}
+{% from "templates_part/form_template.html" import render_field %}
+
+<h1>
+  {{ character.get_full_name() }} - Gestion des catégories
+</h1>
+
+<ul>
+  {% for category in categories %}
+    <li>
+      {{ category.name }}
+      {% if not category.used %}
+        <i data-feather="x" onclick="deleteCategory({{ character.id }}, {{ category.id }})"></i>
+      {% endif %}
+    </li>
+  {% endfor %}
+</ul>
+
+<form method="POST">
+  <div class="row">
+    <div class="col-md-3">
+      {{ render_field(category_form.name) }}
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <input type="submit" class="btn" value="Sauvegarder">
+    </div>
+  </div>
+</form>
+
+<div class="float-end">
+  <a href="{{ url_for('pokemon', character_id=character.id) }}" class="btn">Retour</a>
+</div>
+
+
+
+{% include 'templates_part/footer.html' %}

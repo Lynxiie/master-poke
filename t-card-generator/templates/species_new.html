@@ -1,0 +1,73 @@
+{% include 'templates_part/header.html' %}
+{% from "templates_part/form_template.html" import render_field %}
+
+<h1>
+  Nouvelle espèce
+</h1>
+
+<form method="POST">
+  <div class="row">
+
+    <div class="col-md-2">
+      {{ render_field(form.species) }}
+    </div>
+
+    <div class="col-md-1">
+      {{ render_field(form.type_1_id) }}
+    </div>
+
+    <div class="col-md-1">
+      {{ render_field(form.type_2_id) }}
+    </div>
+
+    <div class="col-md-2">
+      {{ render_field(form.evolution_id) }}
+    </div>
+
+    <div class="col-md-3">
+      {{ render_field(form.evolution_way) }}
+    </div>
+
+    <div class="col-md-3">
+      {{ render_field(form.evolution_level) }}
+    </div>
+
+    <div class="col-md-2">
+      {{ render_field(form.pv) }}
+    </div>
+
+    <div class="col-md-2">
+      {{ render_field(form.atk) }}
+    </div>
+
+    <div class="col-md-2">
+      {{ render_field(form.atk_special) }}
+    </div>
+
+    <div class="col-md-2">
+      {{ render_field(form.defense) }}
+    </div>
+
+    <div class="col-md-2">
+      {{ render_field(form.defense_special) }}
+    </div>
+
+    <div class="col-md-2">
+      {{ render_field(form.speed) }}
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <input type="submit" class="btn" value="Sauvegarder">
+    </div>
+  </div>
+</form>
+
+<div class="float-end">
+  <a href="{{ url_for('pokemon', character_id=character.id) }}" class="btn">Retour</a>
+</div>
+
+
+
+{% include 'templates_part/footer.html' %}

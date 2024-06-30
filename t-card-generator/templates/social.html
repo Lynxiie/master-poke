@@ -1,0 +1,23 @@
+{% include 'templates_part/header.html' %}
+{% from "templates_part/form_template.html" import render_field %}
+
+<h1>
+  {{ character.get_full_name() }} - Social
+</h1>
+
+<div class="float-end">
+  <a href="{{ url_for('new_social_relation', character_id=character.id) }}" class="btn">Nouveau</a>
+</div>
+
+<div class="row">
+  {% for social in socials %}
+    <p class="col-md-2">
+      {{ social.full_name }} - {{ 'PJ' if social.pj else 'PNJ' }}
+      <a href="{{ url_for('edit_social_relation', character_id=character.id, social_id=social.id) }}"><i data-feather="edit"></i></a>
+    </p>
+  {% endfor %}
+</div>
+
+
+
+{% include 'templates_part/footer.html' %}

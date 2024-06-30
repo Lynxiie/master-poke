@@ -1,0 +1,59 @@
+{% include 'templates_part/header.html' %}
+{% from "templates_part/form_template.html" import render_field %}
+
+<h1>
+  {{ character.get_full_name() }} - Edition argent et utilisation des CS / Flûtes
+</h1>
+
+<form method="POST">
+  <h2>Argent</h2>
+  <div class="row">
+
+    <div class="col-md-3">
+      {{ render_field(money_form.amount) }}
+    </div>
+    <div class="col-md-3">
+      {{ render_field(money_form.statement_date) }}
+    </div>
+  </div>
+
+  <h2>Utilisation des CS et Pokéflûtes</h2>
+  <div class="row cs">
+
+    {% for description in cs_history_form.cs_history %}
+      <div class="col-md-2">
+        {{ description.object.data.name }}
+      </div>
+      <div class="col-md-3">
+          {{ render_field(description.last_used) }}
+      </div>
+      <div class="col-md-7">
+         {{ render_field(description.link) }}
+      </div>
+    {% endfor %}
+
+    {% for description in flute_history_form.flute_history %}
+      <div class="col-md-2">
+        {{ description.object.data.name }}
+      </div>
+      <div class="col-md-3">
+          {{ render_field(description.last_used) }}
+      </div>
+      <div class="col-md-7">
+         {{ render_field(description.link) }}
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <input type="submit" class="btn" value="Sauvegarder">
+    </div>
+  </div>
+</form>
+
+<div class="float-end">
+  <a href="{{ url_for('inventory', character_id=character.id) }}" class="btn">Retour</a>
+</div>
+
+{% include 'templates_part/footer.html' %}

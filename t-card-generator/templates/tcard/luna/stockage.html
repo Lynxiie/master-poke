@@ -1,0 +1,26 @@
+<link href="https://lynxiie.github.io/master-poke/luna/tcard.css" rel="stylesheet" />
+<meta charset="UTF-8"/><div class="card">
+	<div class="title">
+		<img src="../images/luna/stockage.png" alt="box"/>
+		<div><span>Stockage</span>
+		</div>
+	</div>
+
+	<div class="content">
+		<div class="category">
+			<span>À échanger</span>
+		</div>
+		<div>
+            {{^pokemon.stockage}}
+                Aucun
+            {{/pokemon.stockage}}
+            {{#pokemon.stockage}}
+                <img src="{{ icon }}"
+                     title="Obtention : {{ obtention_name }} / {{ species.species }} lvl {{ level }} ({{ exp_point }}/{{ exp_point_per_level }}){{#attacks.specials_attacks_name}}{{ attacks.specials_attacks_name }}{{/attacks.specials_attacks_name}}"
+                     alt="{{ species.species }}"/>
+            {{/pokemon.stockage}}
+		</div>
+	</div>
+</div>
+
+{{ pokemon.Stockage }}

@@ -1,0 +1,40 @@
+{% include 'templates_part/header.html' %}
+{% from "templates_part/form_template.html" import render_field %}
+
+<h1>
+  {{ character.get_full_name() }} - Parcours
+</h1>
+
+<div class="float-end">
+  <a href="{{ url_for('new_journey_chapter', character_id=character.id) }}" class="btn">Nouveau chapitre</a>
+</div>
+
+<div class="row">
+  <ul>
+    {% for journey_chapter in journey_chapters %}
+      <li>
+        {{ journey_chapter.name }}
+        <a href="{{ url_for('new_journey', character_id=character.id, chapter_id=journey_chapter.id) }}">
+          <i data-feather="plus"></i>
+        </a>
+        <a href="{{ url_for('edit_journey_chapter', character_id=character.id, chapter_id=journey_chapter.id) }}">
+          <i data-feather="edit"></i>
+        </a>
+        <ul>
+          {% for journey in journey_chapter.journeys %}
+            <li>
+              {{ journey.name }} -
+              {{ journey.status }} -
+              {{ journey.feat if journey.feat else 'Solo' }} -
+              <a href="{{ url_for('edit_journey', character_id=character.id, chapter_id=journey_chapter.id, journey_id=journey.id) }}">
+                <i data-feather="edit"></i>
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+
+{% include 'templates_part/footer.html' %}

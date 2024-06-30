@@ -1,0 +1,18 @@
+{% include 'templates_part/header.html' %}
+{% from "templates_part/form_template.html" import render_field %}
+
+<h1>
+  {{ character.get_full_name() }} - Inventaire
+</h1>
+
+<div class="row">
+  <ul>
+    <li><a href="{{ url_for('edit_inventory', character_id=character.id) }}">Inventaire</a></li>
+    <li><a href="{{ url_for('edit_money_hm_flute', character_id=character.id) }}">Argent / CS / Flûte</a></li>
+    <li><a href="{{ url_for('edit_ct_reservation', character_id=character.id) }}">Gestion des réservation des CT</a></li>
+    <li><a href="{{ url_for('edit_pass_almia', character_id=character.id) }}">Utilisation d'un Pass Almia</a></li>
+    <li><a href="{{ url_for('object_exchange', character_id=character.id) }}">Echange objets</a></li>
+  </ul>
+</div>
+
+{% include 'templates_part/footer.html' %}

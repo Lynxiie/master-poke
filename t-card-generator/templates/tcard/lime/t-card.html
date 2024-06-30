@@ -1,0 +1,1528 @@
+<link href="./tcard.css" rel="stylesheet" />
+
+<div class="tcard">
+    <!--	input-->
+    <input id="info" type="radio" name="nav" checked="">
+    <input id="inventory" type="radio" name="nav">
+    <input id="pokemon" type="radio" name="nav">
+    <input id="goals" type="radio" name="nav">
+    <input id="journey" type="radio" name="nav">
+    <input id="sbire" type="radio" name="nav">
+    <input id="sbire-team" type="radio" name="nav">
+    <input id="mission" type="radio" name="nav">
+    <input id="people" type="radio" name="nav">
+    <input id="gallery" type="radio" name="nav">
+
+    <!--	header-->
+    <div class="header">
+        <img src="../images/lime/tcard.gif">
+        <div class="header-right">
+            <p class="name">
+                <span>{{ firstname }} {{ lastname }}</span><br>
+                feat <span>{{ original_char_name }}</span> de <span>{{ original_game }}</span>
+            </p>
+            <div class="nav top">
+                <div>
+                    <label for="info"><i class="fa-solid fa-user"></i></label>
+                    <span>Informations</span>
+                </div>
+                <div>
+                    <label for="inventory"><i class="fa-solid fa-suitcase"></i></label>
+                    <span>Inventaire</span>
+                </div>
+                <div>
+                    <label for="pokemon"><i class="fa-solid fa-dragon"></i></label>
+                    <span>Pokémon</span>
+                </div>
+                <div>
+                    <label for="goals"><i class="fa-solid fa-list-check"></i></label>
+                    <span>Objectifs</span>
+                </div>
+                <div>
+                    <label for="journey"><i class="fa-solid fa-signs-post"></i></label>
+                    <span>Parcours</span>
+                </div>
+            </div>
+            <div class="nav bottom">
+                <div>
+                    <label for="sbire"><i class="fa-solid fa-registered"></i></label>
+                    <span>Sbire</span>
+                </div>
+                <div>
+                    <label for="sbire-team"><i class="fa-brands fa-d-and-d"></i></label>
+                    <span>Team&nbsp;sbire</span>
+                </div>
+                <div>
+                    <label for="mission"><i class="fa-solid fa-circle-question"></i></label>
+                    <span>Missions</span>
+                </div>
+                <div>
+                    <label for="people"><i class="fa-solid fa-users"></i></label>
+                    <span>Connaissances</span>
+                </div>
+                <div>
+                    <label for="gallery"><i class="fa-solid fa-images"></i></label>
+                    <span>Galerie</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--	Badges-->
+    <div class="badges">
+        <p>
+            All badges by <a href="https://www.deviantart.com/victorv111/art/Pokemon-HG-SS-Style-Badge-Sprites-838245608">VictorV111</a>
+        </p>
+        <div>
+            <img class="notown" src="../images/badges/coleoptere.png">
+            <img class="notown" src="../images/badges/mur.png">
+            <img class="notown" src="../images/badges/lutte.png">
+            <img class="notown" src="../images/badges/vegetal.png">
+            <img class="notown" src="../images/badges/tension.png">
+            <img class="notown" src="../images/badges/nymphe.png">
+            <img class="notown" src="../images/badges/psychisme.png">
+            <img class="notown" src="../images/badges/iceberg.png">
+        </div>
+    </div>
+
+    <!--	informations -->
+    <div id="info-bloc" class="bloc listing">
+        <div>
+            <p>Généralités</p>
+
+            <span>{{ age }} ans</span>
+            <span>{{ status }}</span>
+            <span>{{ sex }}</span>
+            <span>{{ region }}</span>
+        </div>
+
+        <div>
+            <p>Physique</p>
+
+            {{#physical}}
+            <span>{{.}}</span>
+            {{/physical}}
+
+        </div>
+
+
+        <div>
+            <p>Mental</p>
+
+            {{#mental}}
+            <span>{{.}}</span>
+            {{/mental}}
+        </div>
+
+        <div class="mp-tcard">
+            <img src="../images/tcard/lime.png"><br>
+            Sprite par © <a href="https://master-poke.forumactif.fr/u46">Stegan Striker</a> ♥
+        </div>
+
+    </div>
+
+    <!--	inventaire -->
+    <div id="inventory-bloc" class="bloc">
+
+        <!--partie haute-->
+        <div>
+            <!--	input-->
+            <input id="balls" type="radio" name="inventory-1" checked="">
+            <input id="care" type="radio" name="inventory-1">
+            <input id="evol" type="radio" name="inventory-1">
+            <input id="ct" type="radio" name="inventory-1">
+            <input id="berries" type="radio" name="inventory-1">
+            <input id="other" type="radio" name="inventory-1">
+            <input id="rare" type="radio" name="inventory-1">
+
+            <!--		navigation-->
+            <div class="inv-nav">
+                <label for="balls">Balls</label>
+                <label for="care">Soins</label>
+                <label for="evol">Évolutions</label>
+                <label for="ct">CT</label>
+                <label for="berries">Baies</label>
+                <label for="other">Autres</label>
+                <label for="rare">Rares</label>
+            </div>
+
+            <!--		ball-->
+            <div id="ball-bloc" class="inv-bloc scroll">
+{{#ballsCat}}
+				<span class="item">
+                    <span><img src="../images/objets/{{ slug_name }}.png" alt="{{ object.name }}" class="{{^quantity}}notown{{/quantity}}" /></span>
+					<span>{{ object.name }}</span>
+					<span>x{{ quantity_string }}</span>
+				</span>
+{{/ballsCat}}
+            </div>
+
+            <!--		soins-->
+            <div id="care-bloc" class="inv-bloc scroll">
+{{#healsCat}}
+				<span class="item">
+					<span><img src="../images/objets/{{ slug_name }}.png" alt="{{ object.name }}" class="{{^quantity}}notown{{/quantity}}" /></span>
+					<span>{{ object.name }}</span>
+					<span>x{{ quantity_string }}</span>
+				</span>
+{{/healsCat}}
+            </div>
+
+
+            <!--		evolution-->
+            <div id="evol-bloc" class="inv-bloc scroll">
+                {{#evolCat}}
+                <span class="item">
+					<span><img src="../images/objets/{{ slug_name }}.png" alt="{{ object.name }}" class="{{^quantity}}notown{{/quantity}}" /></span>
+					<span>{{ object.name }}</span>
+					<span>x{{ quantity_string }}</span>
+				</span>
+                {{/evolCat}}
+            </div>
+
+            <!--		ct-->
+            <div id="ct-bloc" class="inv-bloc scroll">
+                {{^ct}}
+                Aucune
+                {{/ct}}
+                {{#ct}}
+                    {{#quantity}}
+                        <span class="item">
+                            <span><img src="../images/objets/{{ type }}.png" alt="{{ object.name }}" title="{{ reserved }}"/></span>
+                            <span>{{ name }}</span>
+                            <span>x{{ quantity_string }}</span>
+                        </span>
+                    {{/quantity}}
+                {{/ct}}
+            </div>
+
+            <!--		baies-->
+            <div id="berries-bloc" class="inv-bloc scroll">
+{{#berriesCat}}
+				<span class="item">
+					<span><img src="../images/objets/{{ slug_name }}.png" alt="{{ object.name }}" class="{{^quantity}}notown{{/quantity}}" /></span>
+					<span>{{ object.name }}</span>
+					<span>x{{ quantity_string }}</span>
+				</span>
+                {{/berriesCat}}
+            </div>
+
+            <!--		autres-->
+            <div id="other-bloc" class="inv-bloc scroll">
+                {{#otherCat}}
+                <span class="item">
+					<span><img src="../images/objets/{{ slug_name }}.png" alt="{{ object.name }}" class="{{^quantity}}notown{{/quantity}}" /></span>
+					<span>{{ object.name }}</span>
+					<span>x{{ quantity_string }}</span>
+				</span>
+                {{/otherCat}}
+            </div>
+
+            <!--		rare-->
+            <div id="rare-bloc" class="inv-bloc scroll">
+                {{#raresCat}}
+                <span class="item">
+					<span><img src="../images/objets/{{ slug_name }}.png" alt="{{ object.name }}" class="{{^quantity}}notown{{/quantity}}" /></span>
+					<span>
+                        {{ object.name }}
+                        {{#links}}
+                            <a href="{{ link }}" target="_blank">♦</a>
+                        {{/links}}
+                    </span>
+					<span>x{{ quantity_string }}</span>
+				</span>
+                {{/raresCat}}
+            </div>
+        </div>
+
+        <!--		partie basse-->
+        <div>
+            <!--	input-->
+            <input id="history" type="radio" name="inventory-2" checked="">
+            <input id="hm-uses" type="radio" name="inventory-2">
+            <input id="money" type="radio" name="inventory-2">
+            <input id="dex1" type="radio" name="inventory-2">
+            <input id="dex2" type="radio" name="inventory-2">
+            <input id="dex3" type="radio" name="inventory-2">
+            <input id="dex4" type="radio" name="inventory-2">
+
+            <!--		navigation -->
+            <div class="inv-nav">
+                <label for="history">Historique</label>
+                <label for="hm-uses">Utilisation CS</label>
+                <label for="money">Argent</label>
+                <label for="dex1" class="hidden">Dex 1</label>
+                <label for="dex2" class="hidden">Dex 2</label>
+                <label for="dex3" class="hidden">Dex 3</label>
+                <label for="dex4" class="hidden">Dex 4</label>
+            </div>
+
+            <!-- historique -->
+            <div id="history-bloc" class="inv-bloc history scroll">
+                {{#histories}}
+                <div>
+                    {{ date }}<br>
+                    {{#history.objects_in_exchange}}
+                    <i class="fa-solid {{ history.icon }}"></i>
+                    <span class="out">{{{ history.objects_out_exchange }}}</span> vs <span class="in">{{{ history.objects_in_exchange }}}</span>
+                    {{/history.objects_in_exchange}}
+                    {{^history.objects_in_exchange}}
+                    <i class="fa-solid {{ history.icon }}"></i> {{{ history.objects }}}
+                    {{/history.objects_in_exchange}}
+                    ✭ <a href="{{ history.link }}" target="_blank">{{ history.link_title }}</a>
+                </div>
+                {{/histories}}
+            </div>
+
+            <!-- CS utilisation -->
+            <div id="hm-uses-bloc" class="inv-bloc scroll">
+{{#csHistory}}
+                <div>
+                    <span>{{ object.name }} ✭ {{ frequency }}</span>
+                    {{#last_used}}
+                    <span><a href="{{ link }}" target="_blank">{{ last_used }}</a></span>
+                    {{/last_used}}
+                    {{^last_used}}
+                    <span>Non utilisée</span>
+                    {{/last_used}}
+                </div>
+{{/csHistory}}
+            </div>
+
+            <!-- argent -->
+            <div id="money-bloc" class="inv-bloc scroll">
+                {{ money.amount }} <img src="../images/objets/or.png" title="p$" alt="p$"/> le {{ money.statement_date }}
+            </div>
+
+            <!-- Dex 1 -->
+            <div id="dex1-bloc" class="inv-bloc scroll dex-bloc">
+                <div>
+                    <span>Abonnement de XX 2024 à XX 2023</span>
+                </div>
+                <div>
+                    <span>XX 2024</span>
+                    <span>...</span>
+                </div>
+                <div>
+                    <span>XX 2024</span>
+                    <span>...</span>
+                </div>
+                <div>
+                    <span>XX 2024</span>
+                    <span>...</span>
+                </div>
+                <div>
+                    <span>XX 2024</span>
+                    <span>...</span>
+                </div>
+                <div>
+                    <span>XX 2024</span>
+                    <span>...</span>
+                </div>
+                <div>
+                    <span>XX 2024</span>
+                    <span>...</span>
+                </div>
+                <div>
+                    <span>XX 2024</span>
+                    <span>...</span>
+                </div>
+                <div>
+                    <span>XX 2024</span>
+                    <span>...</span>
+                </div>
+                <div>
+                    <span>XX 2024</span>
+                    <span>...</span>
+                </div>
+                <div>
+                    <span>XX 2024</span>
+                    <span>...</span>
+                </div>
+                <div>
+                    <span>XX 2024</span>
+                    <span>...</span>
+                </div>
+                <div>
+                    <span>XX 2024</span>
+                    <span>...</span>
+                </div>
+            </div>
+
+            <!-- Dex 2 -->
+            <div id="dex2-bloc" class="inv-bloc scroll dex-bloc">
+                <div>
+                    <span>Abonnement de XX 2024 à XX 2023 (2)</span>
+                </div>
+                <div>
+                    <span>XX 2024</span>
+                    <span>...</span>
+                </div>
+                <div>
+                    <span>XX 2024</span>
+                    <span>...</span>
+                </div>
+                <div>
+                    <span>XX 2024</span>
+                    <span>...</span>
+                </div>
+                <div>
+                    <span>XX 2024</span>
+                    <span>...</span>
+                </div>
+                <div>
+                    <span>XX 2024</span>
+                    <span>...</span>
+                </div>
+                <div>
+                    <span>XX 2024</span>
+                    <span>...</span>
+                </div>
+                <div>
+                    <span>XX 2024</span>
+                    <span>...</span>
+                </div>
+                <div>
+                    <span>XX 2024</span>
+                    <span>...</span>
+                </div>
+                <div>
+                    <span>XX 2024</span>
+                    <span>...</span>
+                </div>
+                <div>
+                    <span>XX 2024</span>
+                    <span>...</span>
+                </div>
+                <div>
+                    <span>XX 2024</span>
+                    <span>...</span>
+                </div>
+                <div>
+                    <span>XX 2024</span>
+                    <span>...</span>
+                </div>
+            </div>
+
+            <!-- Dex 3 -->
+            <div id="dex3-bloc" class="inv-bloc scroll dex-bloc">
+                <div>
+                    <span>Abonnement de XX 2024 à XX 2023(3)</span>
+                </div>
+                <div>
+                    <span>XX 2024</span>
+                    <span>...</span>
+                </div>
+                <div>
+                    <span>XX 2024</span>
+                    <span>...</span>
+                </div>
+                <div>
+                    <span>XX 2024</span>
+                    <span>...</span>
+                </div>
+                <div>
+                    <span>XX 2024</span>
+                    <span>...</span>
+                </div>
+                <div>
+                    <span>XX 2024</span>
+                    <span>...</span>
+                </div>
+                <div>
+                    <span>XX 2024</span>
+                    <span>...</span>
+                </div>
+                <div>
+                    <span>XX 2024</span>
+                    <span>...</span>
+                </div>
+                <div>
+                    <span>XX 2024</span>
+                    <span>...</span>
+                </div>
+                <div>
+                    <span>XX 2024</span>
+                    <span>...</span>
+                </div>
+                <div>
+                    <span>XX 2024</span>
+                    <span>...</span>
+                </div>
+                <div>
+                    <span>XX 2024</span>
+                    <span>...</span>
+                </div>
+                <div>
+                    <span>XX 2024</span>
+                    <span>...</span>
+                </div>
+            </div>
+
+            <!-- Dex 4 -->
+            <div id="dex4-bloc" class="inv-bloc scroll dex-bloc">
+                <div>
+                    <span>Abonnement de XX 2024 à XX 2023 (4)</span>
+                </div>
+                <div>
+                    <span>XX 2024</span>
+                    <span>...</span>
+                </div>
+                <div>
+                    <span>XX 2024</span>
+                    <span>...</span>
+                </div>
+                <div>
+                    <span>XX 2024</span>
+                    <span>...</span>
+                </div>
+                <div>
+                    <span>XX 2024</span>
+                    <span>...</span>
+                </div>
+                <div>
+                    <span>XX 2024</span>
+                    <span>...</span>
+                </div>
+                <div>
+                    <span>XX 2024</span>
+                    <span>...</span>
+                </div>
+                <div>
+                    <span>XX 2024</span>
+                    <span>...</span>
+                </div>
+                <div>
+                    <span>XX 2024</span>
+                    <span>...</span>
+                </div>
+                <div>
+                    <span>XX 2024</span>
+                    <span>...</span>
+                </div>
+                <div>
+                    <span>XX 2024</span>
+                    <span>...</span>
+                </div>
+                <div>
+                    <span>XX 2024</span>
+                    <span>...</span>
+                </div>
+                <div>
+                    <span>XX 2024</span>
+                    <span>...</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!--	Pokémon -->
+    <div id="poke-bloc" class="bloc">
+        <!--		navigation-->
+        <div class="poke-nav scroll">
+
+            {{#all_pokemon}}
+                <div class="cat">{{ category }}</div>
+                {{#pokemon}}
+                    <input id="p{{ id }}" type="radio" name="team">
+                    <label for="p{{ id }}">
+                        <img src="{{ icon }}" alt="{{ name }}">
+                    </label>
+                {{/pokemon}}
+            {{/all_pokemon}}
+        </div>
+
+        {{#all_pokemon}}
+            {{#pokemon}}
+                <div id="p{{ id }}-bloc" class="poke-bloc">
+
+                    <!--			top-info-->
+                    <div class="top-info info-bloc {{ background }}">
+                        <div>
+                            <span>{{ name }}</span>
+                            <img src="{{ sprite }}" alt="{{ species }}">
+                            {{#types_icon}}
+                                <img class="type" src="{{ . }}" alt=""/>
+                            {{/types_icon}}
+                        </div>
+                        <div>
+                            <span class="info">
+                                <span>Espèce</span>
+                                <span>{{ species.species }}</span>
+                            </span>
+                            <span class="info">
+                                <span>Niveau</span>
+                                <span>{{ level }} ({{ exp_point }}/{{ exp_point_per_level }})</span>
+                            </span>
+                            <span class="info">
+                                <span>Obtention</span>
+                                <span><a href="{{ obtention_link }}" target="_blank">{{ obtention_name }}</a></span>
+                            </span>
+                            <span class="info">
+                                <span>Nature</span>
+                                <span>{{ nature }}</span>
+                            </span>
+                            {{#sprite_credits}}
+                            <div class="info">
+                                <span>sprite</span>
+                                <span>{{ sprite_credits }}</span>
+                            </div>
+                            {{/sprite_credits}}
+                            <span class="info">
+                                <span>Fond</span>
+                                <span>
+                                    <a href="https://www.deviantart.com/carchagui" target="_blank">Carchagui</a>
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <!--			stats-->
+                    <div class="stat-info info-bloc">
+                        <span class="stats">
+                            <span>PV</span>
+                            <span>{{ species.pv }} + {{ pv }} + {{ hp_up }}</span>
+                            <span>{{ sum_hp }}</span>
+                        </span>
+                        <span class="stats">
+                            <span>ATQ</span>
+                            <span>{{ species.atk }} + {{ atk }} + {{ protein }}</span>
+                            <span>{{ sum_atk }}</span>
+                        </span>
+                        <span class="stats">
+                            <span>Déf</span>
+                            <span>{{ species.defense }} + {{ defense }} + {{ iron }}</span>
+                            <span>{{ sum_def }}</span>
+                        </span>
+                        <span class="stats">
+                            <span>ATQ Spé</span>
+                            <span>{{ species.atk_special }} + {{ atk_special }} + {{ calcium }}</span>
+                            <span>{{ sum_atk_spe }}</span>
+                        </span>
+                        <span class="stats">
+                            <span>Déf Spé</span>
+                            <span>{{ species.defense_special }} + {{ def_special }} + {{ zinc }}</span>
+                            <span>{{ sum_def_spe }}</span>
+                        </span>
+                        <span class="stats">
+                            <span>Vit</span>
+                            <span>{{ species.speed }} + {{ speed }} + {{ carbos }}</span>
+                            <span>{{ sum_speed }}</span>
+                        </span>
+                        <span class="stats">
+                            <span>Total</span>
+                            <span>{{ point_per_level }} * {{ level_point }}</span>
+                            <span>{{ point_to_spend }}</span>
+                        </span>
+                        <span class="stats">
+                            <span>Boost</span>
+                            <span>{{ boosts_used }}</span>
+                            <span>{{ boosts_total }}</span>
+                        </span>
+                    </div>
+
+                    <!--			attaques-->
+                    <div class="attack-info info-bloc scroll">
+                        <p>-- Niveaux --</p>
+                        {{#attacks.level}}
+                        <span class="attack" title="{{#global_detail.title }}{{ global_detail.title }}{{/global_detail.title }}">
+                            <span class="type">
+                                <img src="{{ global_detail.type_icon }}" class="type" alt="">
+                            </span>
+                            <span class="name">{{ global_detail.name }}</span>
+                            <span class="power">
+                                {{^global_detail.power }}—{{/global_detail.power }}{{#global_detail.power }}{{ global_detail.power }}{{/global_detail.power }},
+                                {{^global_detail.precision }}—{{/global_detail.precision }}{{#global_detail.precision }}{{ global_detail.precision }}%{{/global_detail.precision }}
+                            </span>
+                        </span>
+                        {{/attacks.level}}
+
+                        <p>-- CT / CS --</p>
+                        {{#attacks.cs}}
+                        <span class="attack" title="{{#global_detail.title }}{{ global_detail.title }}{{/global_detail.title }}">
+                            <span class="type">
+                                <img src="{{ global_detail.type_icon }}" class="type" alt="">
+                            </span>
+                            <span class="name">{{ global_detail.name }}</span>
+                            <span class="power">
+                                {{^global_detail.power }}—{{/global_detail.power }}{{#global_detail.power }}{{ global_detail.power }}{{/global_detail.power }},
+                                {{^global_detail.precision }}—{{/global_detail.precision }}{{#global_detail.precision }}{{ global_detail.precision }}%{{/global_detail.precision }}
+                            </span>
+                        </span>
+                        {{/attacks.cs}}
+                        {{#attacks.ct}}
+                        <span class="attack" title="{{#global_detail.title }}{{ global_detail.title }}{{/global_detail.title }}">
+                            <span class="type">
+                                <img src="{{ global_detail.type_icon }}" class="type" alt="">
+                            </span>
+                            <span class="name">{{ global_detail.name }}</span>
+                            <span class="power">
+                                {{^global_detail.power }}—{{/global_detail.power }}{{#global_detail.power }}{{ global_detail.power }}{{/global_detail.power }},
+                                {{^global_detail.precision }}—{{/global_detail.precision }}{{#global_detail.precision }}{{ global_detail.precision }}%{{/global_detail.precision }}
+                            </span>
+                        </span>
+                        {{/attacks.ct}}
+
+                        <p>-- Reproduction --</p>
+                        {{#attacks.gm}}
+                        <span class="attack" title="{{#global_detail.title }}{{ global_detail.title }}{{/global_detail.title }}">
+                            <span class="type">
+                                <img src="{{ global_detail.type_icon }}" class="type" alt="">
+                            </span>
+                            <span class="name">{{ global_detail.name }}</span>
+                            <span class="power">
+                                {{^global_detail.power }}—{{/global_detail.power }}{{#global_detail.power }}{{ global_detail.power }}{{/global_detail.power }},
+                                {{^global_detail.precision }}—{{/global_detail.precision }}{{#global_detail.precision }}{{ global_detail.precision }}%{{/global_detail.precision }}
+                            </span>
+                        </span>
+                        {{/attacks.gm}}
+
+                        <p>-- CM --</p>
+                        {{#attacks.cm}}
+                        <span class="attack" title="{{#global_detail.title }}{{ global_detail.title }}{{/global_detail.title }}">
+                            <span class="type">
+                                <img src="{{ global_detail.type_icon }}" class="type" alt="">
+                            </span>
+                            <span class="name">{{ global_detail.name }}</span>
+                            <span class="power">
+                                {{^global_detail.power }}—{{/global_detail.power }}{{#global_detail.power }}{{ global_detail.power }}{{/global_detail.power }},
+                                {{^global_detail.precision }}—{{/global_detail.precision }}{{#global_detail.precision }}{{ global_detail.precision }}%{{/global_detail.precision }}
+                            </span>
+                        </span>
+                        {{/attacks.cm}}
+
+                    </div>
+                </div>
+            {{/pokemon}}
+        {{/all_pokemon}}
+    </div>
+
+    <!--	Objectifs -->
+    <div id="goals-bloc" class="bloc listing scroll">
+        <div>
+            <p>Global</p>
+{{#globale_goals}}
+			<i class="fa-solid {{#done}}fa-check{{/done}}{{^done}}fa-xmark{{/done}}"></i> {{ description }}<br>
+{{/globale_goals}}
+        </div>
+
+        <!--		pokemon recherches-->
+        <div>
+            <p>Pokémon recherchés</p>
+{{#pokemon_goals}}
+			<span>{{ description }}</span>
+{{/pokemon_goals}}
+        </div>
+    </div>
+
+    <!--	Parcours -->
+    <div id="journey-bloc" class="bloc listing scroll">
+        <div>
+            {{#chapters}}
+                <p>{{ name }}</p>
+                {{#journeys}}
+                    <a href="{{ link }}" target="_blank">
+                        <i class="fa-solid {{ icon }}"></i>
+                    </a>
+                    {{name}} ! ♦
+                    {{ feat }}
+                    <br>
+                {{/journeys}}
+            {{/chapters}}
+        </div>
+    </div>
+
+    <!--	Sbire -->
+    <div id="sbire-bloc" class="bloc">
+        Rien. Nada. Il faudrait se bouger le fion pour avancer et demander le rang !
+
+        <div class="mp-tcard hidden">
+            <img src="https://i.servimg.com/u/f81/18/65/55/39/tcard_34.png">
+        </div>
+
+        <!--cookies-->
+        <div id="cookies-bloc" class="inv-bloc hidden scroll">
+            <div class="hidden">XX/24 ▶ Stocké</div>
+        </div>
+
+        <!-- historique sbire -->
+        <div id="history-sbire-bloc" class="inv-bloc history hidden scroll">
+            <div>
+                18/01/24<br>
+                <i class="fa-solid fa-arrow-right-long"></i> 10 Pokéballs, 2 potions ✭
+                <a href="" target="_blank">Validation personnage</a>
+            </div>
+            <div>
+                18/01/24 <br>
+                <i class="fa-solid fa-arrow-right-long"></i> 10 Pokéballs, 2 potions ✭
+                <a href="" target="_blank">Validation personnage</a><br>
+                <i class="fa-solid fa-arrow-left-long"></i> 10 Pokéballs, 2 potions ✭
+                <a href="" target="_blank">Validation personnage</a><br>
+                <i class="fa-solid fa-arrow-right-arrow-left"></i> 10 Pokéballs, 2 potions ✭
+                <a href="" target="_blank">Validation personnage</a><br>
+            </div>
+        </div>
+
+        <!--objets sbire-->
+        <div id="sbire-object-bloc" class="inv-bloc hidden scroll">
+				<span class="item">
+					<span><img src="https://i.servimg.com/u/f11/11/86/51/24/stimul10.png" class="notown"></span>
+					<span>Stimulateur neuronal</span>
+					<span>x00</span>
+				</span>
+            <span class="item">
+					<span><img src="https://i.servimg.com/u/f11/11/86/51/24/bacele10.png" class="notown"></span>
+					<span>Bracelet de force</span>
+					<span>x00</span>
+				</span>
+            <span class="item">
+					<span><img src="https://i.servimg.com/u/f11/11/86/51/24/fouet10.png" class="notown"></span>
+					<span>Fouet</span>
+					<span>x00</span>
+				</span>
+            <span class="item">
+					<span><img src="https://i.imgur.com/ofIPQ8X.png" class="notown"></span>
+					<span>CT de contrebande</span>
+					<span>x00</span>
+				</span>
+            <span class="item">
+					<span><img src="https://www.pokepedia.fr/images/d/d3/Miniature_Baie_Pommo_DP.png" class="notown"></span>
+					<span>Baie étrange </span>
+					<span>x00</span>
+				</span>
+        </div>
+    </div>
+
+    <!--	Sbire Pokemon -->
+    <div id="sbire-team-bloc" class="bloc">
+        Rien. Nada. Il faudrait se bouger le fion pour avancer et demander le rang !
+        <input id="sbire1" type="radio" name="team-sbire">
+        <input id="sbire2" type="radio" name="team-sbire">
+        <input id="sbire3" type="radio" name="team-sbire">
+        <input id="sbire4" type="radio" name="team-sbire">
+        <input id="sbire5" type="radio" name="team-sbire">
+        <input id="sbire6" type="radio" name="team-sbire">
+
+        <!--		navigation-->
+        <div class="poke-nav hidden">
+            <label for="sbire1">
+                <img src="https://www.pokepedia.fr/images/0/07/Miniature_Pok%C3%A9_Ball_HOME.png?20220601171615">
+            </label>
+            <label for="sbire2">
+                <img src="https://www.pokepedia.fr/images/0/07/Miniature_Pok%C3%A9_Ball_HOME.png?20220601171615">
+            </label>
+            <label for="sbire3">
+                <img src="https://www.pokepedia.fr/images/0/07/Miniature_Pok%C3%A9_Ball_HOME.png?20220601171615">
+            </label>
+            <label for="sbire4">
+                <img src="https://www.pokepedia.fr/images/0/07/Miniature_Pok%C3%A9_Ball_HOME.png?20220601171615">
+            </label>
+            <label for="sbire5">
+                <img src="https://www.pokepedia.fr/images/0/07/Miniature_Pok%C3%A9_Ball_HOME.png?20220601171615">
+            </label>
+            <label for="sbire6">
+                <img src="https://www.pokepedia.fr/images/0/07/Miniature_Pok%C3%A9_Ball_HOME.png?20220601171615">
+            </label>
+        </div>
+
+        <!--		sbire 1 -->
+        <div id="sbire1-bloc" class="poke-bloc">
+
+            <!--			top-info-->
+            <div class="top-info info-bloc">
+                <div>
+                    <span>Surnom</span>
+                    <img src="https://www.pokepedia.fr/images/f/f7/Sprite_%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F_RS.png?20101227223443">
+                    <img class="type" src="https://www.pokepedia.fr/images/thumb/4/4b/Ic%C3%B4ne_Type_Stellaire_EV.png/30px-Ic%C3%B4ne_Type_Stellaire_EV.png">
+                </div>
+                <div>
+				<span class="info">
+					<span>Espèce</span>
+					<span>Blabla</span>
+				</span>
+                    <span class="info">
+					<span>Niveau</span>
+					<span>15 (0/1)</span>
+				</span>
+                    <span class="info">
+					<span>Obtention</span>
+					<span>Recrue</span>
+				</span>
+                    <span class="info">
+					<span>Nature</span>
+					<span>Blabla</span>
+				</span>
+                    <span class="info hidden">
+					<span>Sprite</span>
+					<span></span>
+				</span>
+                    <span class="info">
+					<span>Fond</span>
+					<span>
+						<a href="https://www.deviantart.com/carchagui" target="_blank">Carchagui</a>
+					</span>
+				</span>
+                </div>
+            </div>
+
+            <!--			stats-->
+            <div class="stat-info info-bloc">
+			<span class="stats">
+				<span>PV</span>
+				<span>00 + 00 + 00</span>
+				<span>00</span>
+			</span>
+                <span class="stats">
+				<span>ATQ</span>
+				<span>00 + 00 + 00</span>
+				<span>00</span>
+			</span>
+                <span class="stats">
+				<span>Déf</span>
+				<span>00 + 00 + 00</span>
+				<span>00</span>
+			</span>
+                <span class="stats">
+				<span>ATQ Spé</span>
+				<span>00 + 00 + 00</span>
+				<span>00</span>
+			</span>
+                <span class="stats">
+				<span>Déf Spé</span>
+				<span>00 + 00 + 00</span>
+				<span>00</span>
+			</span>
+                <span class="stats">
+				<span>Vit</span>
+				<span>00 + 00 + 00</span>
+				<span>00</span>
+			</span>
+                <span class="stats">
+				<span>Total</span>
+				<span>8 * 0</span>
+				<span>0</span>
+			</span>
+                <span class="stats">
+				<span>Boost</span>
+				<span>Aucun</span>
+				<span>0</span>
+			</span>
+            </div>
+
+            <!--			attaques-->
+            <div class="attack-info info-bloc scroll">
+                <p>-- Niveaux --</p>
+                <p>-- CT / CS --</p>
+                <p>-- Reproduction --</p>
+                <p>-- CM --</p>
+            </div>
+        </div>
+
+        <!--		sbire 2-->
+        <div id="sbire2-bloc" class="poke-bloc">
+
+            <!--			top-info-->
+            <div class="top-info info-bloc">
+                <div>
+                    <span>Surnom</span>
+                    <img src="https://www.pokepedia.fr/images/f/f7/Sprite_%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F_RS.png?20101227223443">
+                    <img class="type" src="https://www.pokepedia.fr/images/thumb/4/4b/Ic%C3%B4ne_Type_Stellaire_EV.png/30px-Ic%C3%B4ne_Type_Stellaire_EV.png">
+                </div>
+                <div>
+				<span class="info">
+					<span>Espèce</span>
+					<span>Blabla</span>
+				</span>
+                    <span class="info">
+					<span>Niveau</span>
+					<span>25 (0/2)</span>
+				</span>
+                    <span class="info">
+					<span>Obtention</span>
+					<span>Initié</span>
+				</span>
+                    <span class="info">
+					<span>Nature</span>
+					<span>Blabla</span>
+				</span>
+                    <span class="info hidden">
+					<span>Sprite</span>
+					<span></span>
+				</span>
+                    <span class="info">
+					<span>Fond</span>
+					<span><a href="https://www.deviantart.com/carchagui" target="_blank">Carchagui</a></span>
+				</span>
+                </div>
+            </div>
+
+            <!--			stats-->
+            <div class="stat-info info-bloc">
+			<span class="stats">
+				<span>PV</span>
+				<span>00 + 00 + 00</span>
+				<span>00</span>
+			</span>
+                <span class="stats">
+				<span>ATQ</span>
+				<span>00 + 00 + 00</span>
+				<span>00</span>
+			</span>
+                <span class="stats">
+				<span>Déf</span>
+				<span>00 + 00 + 00</span>
+				<span>00</span>
+			</span>
+                <span class="stats">
+				<span>ATQ Spé</span>
+				<span>00 + 00 + 00</span>
+				<span>00</span>
+			</span>
+                <span class="stats">
+				<span>Déf Spé</span>
+				<span>00 + 00 + 00</span>
+				<span>00</span>
+			</span>
+                <span class="stats">
+				<span>Vit</span>
+				<span>00 + 00 + 00</span>
+				<span>00</span>
+			</span>
+                <span class="stats">
+				<span>Total</span>
+				<span>8 * 0</span>
+				<span>0</span>
+			</span>
+                <span class="stats">
+				<span>Boost</span>
+				<span>Aucun</span>
+				<span>0</span>
+			</span>
+            </div>
+
+            <!--			attaques-->
+            <div class="attack-info info-bloc scroll">
+                <p>-- Niveaux --</p>
+
+                <p>-- CT / CS --</p>
+
+                <p>-- Reproduction --</p>
+
+                <p>-- CM --</p>
+
+            </div>
+        </div>
+
+        <!--		sbire 3 -->
+        <div id="sbire3-bloc" class="poke-bloc">
+
+            <!--			top-info-->
+            <div class="top-info info-bloc">
+                <div>
+                    <span>Surnom</span>
+                    <img src="https://www.pokepedia.fr/images/f/f7/Sprite_%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F_RS.png?20101227223443">
+                    <img class="type" src="https://www.pokepedia.fr/images/thumb/4/4b/Ic%C3%B4ne_Type_Stellaire_EV.png/30px-Ic%C3%B4ne_Type_Stellaire_EV.png">
+                </div>
+                <div>
+				<span class="info">
+					<span>Espèce</span>
+					<span>Blabla</span>
+				</span>
+                    <span class="info">
+					<span>Niveau</span>
+					<span>35 (0/3)</span>
+				</span>
+                    <span class="info">
+					<span>Obtention</span>
+					<span>Lieutenant</span>
+				</span>
+                    <span class="info">
+					<span>Nature</span>
+					<span>Blabla</span>
+				</span>
+                    <span class="info hidden">
+					<span>Sprite</span>
+					<span></span>
+				</span>
+                    <span class="info">
+					<span>Fond</span>
+					<span><a href="https://www.deviantart.com/carchagui" target="_blank">Carchagui</a></span>
+				</span>
+                </div>
+            </div>
+
+            <!--			stats-->
+            <div class="stat-info info-bloc">
+			<span class="stats">
+				<span>PV</span>
+				<span>00 + 00 + 00</span>
+				<span>00</span>
+			</span>
+                <span class="stats">
+				<span>ATQ</span>
+				<span>00 + 00 + 00</span>
+				<span>00</span>
+			</span>
+                <span class="stats">
+				<span>Déf</span>
+				<span>00 + 00 + 00</span>
+				<span>00</span>
+			</span>
+                <span class="stats">
+				<span>ATQ Spé</span>
+				<span>00 + 00 + 00</span>
+				<span>00</span>
+			</span>
+                <span class="stats">
+				<span>Déf Spé</span>
+				<span>00 + 00 + 00</span>
+				<span>00</span>
+			</span>
+                <span class="stats">
+				<span>Vit</span>
+				<span>00 + 00 + 00</span>
+				<span>00</span>
+			</span>
+                <span class="stats">
+				<span>Total</span>
+				<span>8 * 0</span>
+				<span>0</span>
+			</span>
+                <span class="stats">
+				<span>Boost</span>
+				<span>Aucun</span>
+				<span>0</span>
+			</span>
+            </div>
+
+            <!--			attaques-->
+            <div class="attack-info info-bloc scroll">
+                <p>-- Niveaux --</p>
+
+                <p>-- CT / CS --</p>
+
+                <p>-- Reproduction --</p>
+
+                <p>-- CM --</p>
+
+            </div>
+        </div>
+
+        <!--		sbire 4 -->
+        <div id="sbire4-bloc" class="poke-bloc">
+
+            <!--			top-info-->
+            <div class="top-info info-bloc">
+                <div>
+                    <span>Surnom</span>
+                    <img src="https://www.pokepedia.fr/images/f/f7/Sprite_%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F_RS.png?20101227223443">
+                    <img class="type" src="https://www.pokepedia.fr/images/thumb/4/4b/Ic%C3%B4ne_Type_Stellaire_EV.png/30px-Ic%C3%B4ne_Type_Stellaire_EV.png">
+                </div>
+                <div>
+				<span class="info">
+					<span>Espèce</span>
+					<span>Blabla</span>
+				</span>
+                    <span class="info">
+					<span>Niveau</span>
+					<span>??</span>
+				</span>
+                    <span class="info">
+					<span>Obtention</span>
+					<span><a href="" target=""></a></span>
+				</span>
+                    <span class="info">
+					<span>Nature</span>
+					<span>Blabla</span>
+				</span>
+                    <span class="info hidden">
+					<span>Sprite</span>
+					<span></span>
+				</span>
+                    <span class="info">
+					<span>Fond</span>
+					<span><a href="https://www.deviantart.com/carchagui" target="_blank">Carchagui</a></span>
+				</span>
+                </div>
+            </div>
+
+            <!--			stats-->
+            <div class="stat-info info-bloc">
+			<span class="stats">
+				<span>PV</span>
+				<span>00 + 00 + 00</span>
+				<span>00</span>
+			</span>
+                <span class="stats">
+				<span>ATQ</span>
+				<span>00 + 00 + 00</span>
+				<span>00</span>
+			</span>
+                <span class="stats">
+				<span>Déf</span>
+				<span>00 + 00 + 00</span>
+				<span>00</span>
+			</span>
+                <span class="stats">
+				<span>ATQ Spé</span>
+				<span>00 + 00 + 00</span>
+				<span>00</span>
+			</span>
+                <span class="stats">
+				<span>Déf Spé</span>
+				<span>00 + 00 + 00</span>
+				<span>00</span>
+			</span>
+                <span class="stats">
+				<span>Vit</span>
+				<span>00 + 00 + 00</span>
+				<span>00</span>
+			</span>
+                <span class="stats">
+				<span>Total</span>
+				<span>8 * 0</span>
+				<span>0</span>
+			</span>
+                <span class="stats">
+				<span>Boost</span>
+				<span>Aucun</span>
+				<span>0</span>
+			</span>
+            </div>
+
+            <!--			attaques-->
+            <div class="attack-info info-bloc scroll">
+                <p>-- Niveaux --</p>
+
+                <p>-- CT / CS --</p>
+
+                <p>-- Reproduction --</p>
+
+                <p>-- CM --</p>
+
+            </div>
+        </div>
+
+        <!--		sbire 5 -->
+        <div id="sbire5-bloc" class="poke-bloc">
+
+            <!--			top-info-->
+            <div class="top-info info-bloc">
+                <div>
+                    <span>Surnom</span>
+                    <img src="https://www.pokepedia.fr/images/f/f7/Sprite_%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F_RS.png?20101227223443">
+                    <img class="type" src="https://www.pokepedia.fr/images/thumb/4/4b/Ic%C3%B4ne_Type_Stellaire_EV.png/30px-Ic%C3%B4ne_Type_Stellaire_EV.png">
+                </div>
+                <div>
+				<span class="info">
+					<span>Espèce</span>
+					<span>Blabla</span>
+				</span>
+                    <span class="info">
+					<span>Niveau</span>
+					<span>45 (0/4)</span>
+				</span>
+                    <span class="info">
+					<span>Obtention</span>
+					<span>Bras droit</span>
+				</span>
+                    <span class="info">
+					<span>Nature</span>
+					<span>Blabla</span>
+				</span>
+                    <span class="info hidden">
+					<span>Sprite</span>
+					<span></span>
+				</span>
+                    <span class="info">
+					<span>Fond</span>
+					<span><a href="https://www.deviantart.com/carchagui" target="_blank">Carchagui</a></span>
+				</span>
+                </div>
+            </div>
+
+            <!--			stats-->
+            <div class="stat-info info-bloc">
+			<span class="stats">
+				<span>PV</span>
+				<span>00 + 00 + 00</span>
+				<span>00</span>
+			</span>
+                <span class="stats">
+				<span>ATQ</span>
+				<span>00 + 00 + 00</span>
+				<span>00</span>
+			</span>
+                <span class="stats">
+				<span>Déf</span>
+				<span>00 + 00 + 00</span>
+				<span>00</span>
+			</span>
+                <span class="stats">
+				<span>ATQ Spé</span>
+				<span>00 + 00 + 00</span>
+				<span>00</span>
+			</span>
+                <span class="stats">
+				<span>Déf Spé</span>
+				<span>00 + 00 + 00</span>
+				<span>00</span>
+			</span>
+                <span class="stats">
+				<span>Vit</span>
+				<span>00 + 00 + 00</span>
+				<span>00</span>
+			</span>
+                <span class="stats">
+				<span>Total</span>
+				<span>8 * 0</span>
+				<span>0</span>
+			</span>
+                <span class="stats">
+				<span>Boost</span>
+				<span>Aucun</span>
+				<span>0</span>
+			</span>
+            </div>
+
+            <!--			attaques-->
+            <div class="attack-info info-bloc scroll">
+                <p>-- Niveaux --</p>
+
+                <p>-- CT / CS --</p>
+
+                <p>-- Reproduction --</p>
+
+                <p>-- CM --</p>
+
+            </div>
+        </div>
+
+        <!--		sbire 6 -->
+        <div id="sbire6-bloc" class="poke-bloc">
+
+            <!--			top-info-->
+            <div class="top-info info-bloc">
+                <div>
+                    <span>Surnom</span>
+                    <img src="https://www.pokepedia.fr/images/f/f7/Sprite_%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F_RS.png?20101227223443">
+                    <img class="type" src="https://www.pokepedia.fr/images/thumb/4/4b/Ic%C3%B4ne_Type_Stellaire_EV.png/30px-Ic%C3%B4ne_Type_Stellaire_EV.png">
+                </div>
+                <div>
+					<span class="info">
+						<span>Espèce</span>
+						<span>Blabla</span>
+					</span>
+                    <span class="info">
+						<span>Niveau</span>
+						<span>Blabla</span>
+					</span>
+                    <span class="info">
+						<span>Obtention</span>
+						<span><a href="" target="_blank"></a></span>
+					</span>
+                    <span class="info">
+						<span>Nature</span>
+						<span>Blabla</span>
+					</span>
+                    <span class="info hidden">
+						<span>Sprite</span>
+						<span></span>
+					</span>
+                    <span class="info">
+						<span>Fond</span>
+						<span><a href="https://www.deviantart.com/carchagui" target="_blank">Carchagui</a></span>
+					</span>
+                </div>
+            </div>
+
+            <!--			stats-->
+            <div class="stat-info info-bloc">
+				<span class="stats">
+					<span>PV</span>
+					<span>00 + 00 + 00</span>
+					<span>00</span>
+				</span>
+                <span class="stats">
+					<span>ATQ</span>
+					<span>00 + 00 + 00</span>
+					<span>00</span>
+				</span>
+                <span class="stats">
+					<span>Déf</span>
+					<span>00 + 00 + 00</span>
+					<span>00</span>
+				</span>
+                <span class="stats">
+					<span>ATQ Spé</span>
+					<span>00 + 00 + 00</span>
+					<span>00</span>
+				</span>
+                <span class="stats">
+					<span>Déf Spé</span>
+					<span>00 + 00 + 00</span>
+					<span>00</span>
+				</span>
+                <span class="stats">
+					<span>Vit</span>
+					<span>00 + 00 + 00</span>
+					<span>00</span>
+				</span>
+                <span class="stats">
+					<span>Total</span>
+					<span>8 * 0</span>
+					<span>0</span>
+				</span>
+                <span class="stats">
+					<span>Boost</span>
+					<span>Aucun</span>
+					<span>0</span>
+				</span>
+            </div>
+
+            <!--			attaques-->
+            <div class="attack-info info-bloc scroll">
+                <p>-- Niveaux --</p>
+
+                <p>-- CT / CS --</p>
+
+                <p>-- Reproduction --</p>
+
+                <p>-- CM --</p>
+
+            </div>
+        </div>
+    </div>
+
+    <!--	mission -->
+    <div id="mission-bloc" class="bloc listing scroll">
+        Rien. Nada. Il faudrait se bouger le fion pour avancer et demander le rang !
+        <div class="hidden">
+            <p>Rang 0</p>
+            <a href="XXX" target="_blank"><i class="fa-solid fa-circle-minus"></i></a> BLABLABLA <br>
+        </div>
+    </div>
+
+    <!--	people -->
+    <div id="people-bloc" class="bloc listing scroll">
+        <p>PNJ</p>
+
+        <div>
+            {{#socials_pnj}}
+            <!--			Cassonade-->
+            <div class="social">
+                <img src="../images/connaissances/{{ slug_full_name }}.jpg" alt="{{ full_name }}"/>
+                <span class="name">{{ full_name }} <br> {{ bond }}</span>
+                <div class="description scroll">
+                    {{#hexa_text}}
+                    <ins style="color:{{ hexa_text }}">{{ hexa_text }}</ins><br>
+                    {{/hexa_text}}
+                    {{ description }}
+                    <p>Pokémon</p>
+                    {{#pokemon}}
+                    <img src="../images/pokemon/icon/{{ slug_pokemon }}.png" title="{{ pokemon_name }}" alt="{{ pokemon_name }}"/>
+                    {{/pokemon}}
+                    {{^pokemon}}
+                    Aucun
+                    {{/pokemon}}
+                    <p>Sujets</p>
+                    {{#subjects}}
+                    <a href="{{ link }}" target="_blank">♦</a>
+                    {{/subjects}}
+                    {{^subjects}}
+                    Aucun
+                    {{/subjects}}
+                </div>
+            </div>
+            {{/socials_pnj}}
+        </div>
+    </div>
+
+    <!--	gallery -->
+    <div id="gallery-bloc" class="bloc listing scroll">
+        <div class="avatar">
+            <p>Avatar</p>{{#avatar}}
+            <details>
+                <summary>Par {{ name }}</summary>
+                {{#image}}
+                <img src="{{ . }}"/>
+                {{/image}}
+            </details>
+            {{/avatar}}
+        </div>
+
+        <div class="signature">
+            <p>Signature</p>
+            {{#signature}}
+            <details>
+                <summary>Par {{ name }}</summary>
+                {{#image}}
+                <img src="{{ . }}"/>
+                {{/image}}
+            </details>
+            {{/signature}}
+        </div>
+
+        <div class="various">
+            <p>Autres</p>
+            {{#autre}}
+            <details>
+                <summary>Par {{ name }}</summary>
+                {{#image}}
+                <img src="{{ . }}"/>
+                {{/image}}
+            </details>
+            {{/autre}}
+        </div>
+
+        <div class="stamps">
+            <p>Stamps</p>
+            {{#stamp}}
+            <details>
+                <summary>Par {{ name }}</summary>
+                {{#image}}
+                <img src="{{ . }}"/>
+                {{/image}}
+            </details>
+            {{/stamp}}
+        </div>
+    </div>
+</div>
+
+<script src="https://kit.fontawesome.com/ba830d090b.js" crossorigin="anonymous"></script>
+<script>
+    function displayPokemon(id) {
+        const div = document.getElementById(`${id}-bloc`);
+        div.style.display = 'block';
+    }
+    const radios = document.querySelectorAll('input[name="team"]');
+    const radioChecked = document.querySelector('input[name="team"]:checked');
+    const radiosSbire = document.querySelectorAll('input[name="team-sbire"]');
+    const radioSbireChecked = document.querySelector('input[name="team-sbire"]:checked');
+    const pokeBloc = document.querySelectorAll('.poke-bloc');
+
+    displayPokemon(radioChecked.id)
+    // displayPokemon(radioSbireChecked.id)
+
+    radios.forEach(radio => {
+        radio.addEventListener('change', () => {
+            pokeBloc.forEach(bloc => {
+                bloc.style.display = 'none';
+            });
+            if (radio.checked) {
+                displayPokemon(radio.id)
+            }
+        });
+    });
+    radiosSbire.forEach(radio => {
+        radio.addEventListener('change', () => {
+            pokeBloc.forEach(bloc => {
+                bloc.style.display = 'none';
+            });
+            if (radio.checked) {
+                displayPokemon(radio.id)
+            }
+        });
+    });
+</script>

@@ -1,0 +1,367 @@
+<link rel="stylesheet" href="tcard.css"/>
+<meta charset="UTF-8"/>
+
+<div class="card">
+	<div class="title">
+		<img src="../images/luna/pokemon.png" alt="pokemon" />
+		<div><span>Pokémon</span></div>
+	</div>
+
+	<div class="content">
+		<div class="category">
+			<span>Équipe principale</span>
+		</div>
+
+        <div class="pokeballs">
+            {{#pokemon.equipe_principale}}
+                <label for="p{{ id }}"><img src="{{ icon }}"/></label>
+            {{/pokemon.equipe_principale}}
+        </div>
+
+        {{#pokemon.equipe_principale}}
+            <input id="p{{ id }}" type="radio" name="team" />
+            <div id="content-p{{ id }}" class="pokemons">
+                <div class="banner">
+                    <img src="{{ full }}"/>
+                    <span>{{ name }}</span>
+                    {{#banner_credit}}
+                    <span class="banner-credit">© {{ banner_credit }}</span>
+                    {{/banner_credit}}
+                </div>
+
+                <div class="sprite {{ background }}">
+                    <img src="{{ sprite }}" alt="{{ species }}" />
+                </div>
+                <div class="descriptions col-3">
+                    <div class="description">
+                        <span>Espèce</span><br/>
+                        {{#egg}}Oeuf de{{/egg}}
+                        {{ species.species }}
+                        {{#shiny}}S{{/shiny}}
+                        {{ sex }}
+                    </div>
+                    <div class="description">
+                        <span>Type</span><br/>
+                        {{#types_full}}
+                            <span class="type"><img src="{{ . }}" alt=""/></span>
+                        {{/types_full}}
+
+                    </div>
+                    <div class="description">
+                        <span>Niveau</span><br/>
+                        <span class="">{{ level }} ({{ exp_point }}/{{ exp_point_per_level }})</span>
+                    </div>
+                    <div class="description">
+                        <span>Obtention</span><br/>
+                        <a href="{{ obtention_link }}" target="_blank">{{ obtention_name }}</a>
+                    </div>
+                    <div class="description">
+                        <span>Nature</span><br/>
+                        {{ nature }}
+                    </div>
+                    {{#sprite_credits}}
+                        <div class="description">
+                            <span>Crédit sprite</span><br/>
+                            {{ sprite_credits }}
+                        </div>
+                    {{/sprite_credits}}
+                </div>
+
+                <div class="descriptions col-2">
+                    <div class="statistiques">
+                        <div class="description">
+                            <span>Statistiques</span>
+                        </div>
+                        <div class="descriptions col-2">
+                            <div class="description">
+                                <span>PV</span><br/>
+                                <b>{{ sum_hp }}</b><br/>
+                                <span class="stats">{{ species.pv }} + {{ pv }} + {{ hp_up }}</span>
+                            </div>
+                            <div class="description">
+                                <span>ATK</span><br/>
+                                <b>{{ sum_atk }}</b><br/>
+                                <span class="stats">{{ species.atk }} + {{ atk }} + {{ protein }}</span>
+                            </div>
+                            <div class="description">
+                                <span>Déf</span><br/>
+                                <b>{{ sum_def }}</b><br/>
+                                <span class="stats">{{ species.defense }} + {{ defense }} + {{ iron }}</span>
+                            </div>
+                            <div class="description">
+                                <span>ATK spé</span><br/>
+                                <b>{{ sum_atk_spe }}</b><br/>
+                                <span class="stats">{{ species.atk_special }} + {{ atk_special }} + {{ calcium }}</span>
+                            </div>
+                            <div class="description">
+                                <span>Déf spé</span><br/>
+                                <b>{{ sum_def_spe }}</b><br/>
+                                <span class="stats">{{ species.defense_special }} + {{ def_special }} + {{ zinc }}</span>
+                            </div>
+                            <div class="description">
+                                <span>Vit</span><br/>
+                                <b>{{ sum_speed }}</b><br/>
+                                <span class="stats">{{ species.speed }} + {{ speed }} + {{ carbos }}</span>
+                            </div>
+                            <div class="description">
+                                <span>Total</span><br/>
+                                <span class="">{{ point_per_level }} * {{ level_point }} = <b>{{ point_to_spend }}</b></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="attacks">
+                        <div class="description">
+                            <span>Attaques</span>
+                        </div>
+                        <div class="scroll">
+                            <div class="descriptions">
+                                <div class="attaque">
+                                    {{#attacks.level}}
+                                        <p>
+                                            <span class="type"><img src="{{ global_detail.type_full }}" alt=""/></span>
+                                            {{#global_detail.useless }}<span title="Inutile">{{/global_detail.useless }}
+                                            {{#global_detail.informations }}<span title="{{ global_detail.informations }}">{{/global_detail.informations }}
+                                                {{ global_detail.name }}
+                                                ({{^global_detail.power }}—{{/global_detail.power }}{{#global_detail.power }}{{ global_detail.power }}{{/global_detail.power }},
+                                                {{^global_detail.precision }}—{{/global_detail.precision }}{{#global_detail.precision }}{{ global_detail.precision }}%{{/global_detail.precision }}{{#global_detail.burn_percentage }},
+                                                <span class="burn">{{ global_detail.burn_percentage }}%</span>{{/global_detail.burn_percentage }}{{#global_detail.freeze_percentage }},
+                                                <span class="freeze">{{ global_detail.freeze_percentage }}%</span>{{/global_detail.freeze_percentage }}{{#global_detail.paralyse_percentage }},
+                                                <span class="paralyze">{{ global_detail.paralyse_percentage }}%</span>{{/global_detail.paralyse_percentage }}{{#global_detail.scare_percentage }},
+                                                <span class="flinch">{{ global_detail.scare_percentage }}%</span>{{/global_detail.scare_percentage }}{{#global_detail.poison_percentage }},
+                                                <span class="poison">{{ global_detail.poison_percentage }}%</span>{{/global_detail.poison_percentage }}{{#global_detail.sleep_percentage }},
+                                                <span class="sleep">{{ global_detail.sleep_percentage }}%</span>{{/global_detail.sleep_percentage }}{{#global_detail.boost }},
+                                                {{ global_detail.boost }}{{/global_detail.boost }}{{#global_detail.critique_attack }},
+                                                <span class="attack">Crit</span>{{/global_detail.critique_attack }})
+                                            </span>
+                                        </p>
+                                    {{/attacks.level}}
+                                    {{#attacks.cs}}
+                                        <p>
+                                            <span class="type"><img src="{{ global_detail.type_full }}" alt=""/></span>
+                                            {{#global_detail.useless }}<span title="Inutile">{{/global_detail.useless }}
+                                            {{#global_detail.informations }}<span title="{{ global_detail.informations }}">{{/global_detail.informations }}
+                                                {{ global_detail.name }}
+                                                ({{^global_detail.power }}—{{/global_detail.power }}{{#global_detail.power }}{{ global_detail.power }}{{/global_detail.power }},
+                                                {{^global_detail.precision }}—{{/global_detail.precision }}{{#global_detail.precision }}{{ global_detail.precision }}%{{/global_detail.precision }}{{#global_detail.burn_percentage }},
+                                                <span class="burn">{{ global_detail.burn_percentage }}%</span>{{/global_detail.burn_percentage }}{{#global_detail.freeze_percentage }},
+                                                <span class="freeze">{{ global_detail.freeze_percentage }}%</span>{{/global_detail.freeze_percentage }}{{#global_detail.paralyse_percentage }},
+                                                <span class="paralyze">{{ global_detail.paralyse_percentage }}%</span>{{/global_detail.paralyse_percentage }}{{#global_detail.scare_percentage }},
+                                                <span class="flinch">{{ global_detail.scare_percentage }}%</span>{{/global_detail.scare_percentage }}{{#global_detail.poison_percentage }},
+                                                <span class="poison">{{ global_detail.poison_percentage }}%</span>{{/global_detail.poison_percentage }}{{#global_detail.sleep_percentage }},
+                                                <span class="sleep">{{ global_detail.sleep_percentage }}%</span>{{/global_detail.sleep_percentage }}{{#global_detail.boost }},
+                                                {{ global_detail.boost }}{{/global_detail.boost }}{{#global_detail.critique_attack }},
+                                                <span class="attack">Crit</span>{{/global_detail.critique_attack }})
+                                                <span class="cs">CS</span>
+                                            </span>
+                                        </p>
+                                    {{/attacks.cs}}
+                                    {{#attacks.ct}}
+                                        <p>
+                                            <span class="type"><img src="{{ global_detail.type_full }}" alt=""/></span>
+                                            {{#global_detail.useless }}<span title="Inutile">{{/global_detail.useless }}
+                                            {{#global_detail.informations }}<span title="{{ global_detail.informations }}">{{/global_detail.informations }}
+                                                {{ global_detail.name }}
+                                                ({{^global_detail.power }}—{{/global_detail.power }}{{#global_detail.power }}{{ global_detail.power }}{{/global_detail.power }},
+                                                {{^global_detail.precision }}—{{/global_detail.precision }}{{#global_detail.precision }}{{ global_detail.precision }}%{{/global_detail.precision }}{{#global_detail.burn_percentage }},
+                                                <span class="burn">{{ global_detail.burn_percentage }}%</span>{{/global_detail.burn_percentage }}{{#global_detail.freeze_percentage }},
+                                                <span class="freeze">{{ global_detail.freeze_percentage }}%</span>{{/global_detail.freeze_percentage }}{{#global_detail.paralyse_percentage }},
+                                                <span class="paralyze">{{ global_detail.paralyse_percentage }}%</span>{{/global_detail.paralyse_percentage }}{{#global_detail.scare_percentage }},
+                                                <span class="flinch">{{ global_detail.scare_percentage }}%</span>{{/global_detail.scare_percentage }}{{#global_detail.poison_percentage }},
+                                                <span class="poison">{{ global_detail.poison_percentage }}%</span>{{/global_detail.poison_percentage }}{{#global_detail.sleep_percentage }},
+                                                <span class="sleep">{{ global_detail.sleep_percentage }}%</span>{{/global_detail.sleep_percentage }}{{#global_detail.boost }},
+                                                {{ global_detail.boost }}{{/global_detail.boost }}{{#global_detail.critique_attack }},
+                                                <span class="attack">Crit</span>{{/global_detail.critique_attack }})
+                                                <span class="ct">CT</span>
+                                            </span>
+                                        </p>
+                                    {{/attacks.ct}}
+                                    {{#attacks.gm}}
+                                        <p>
+                                            <span class="type"><img src="{{ global_detail.type_full }}" alt=""/></span>
+                                            {{#global_detail.useless }}<span title="Inutile">{{/global_detail.useless }}
+                                            {{#global_detail.informations }}<span title="{{ global_detail.informations }}">{{/global_detail.informations }}
+                                                {{ global_detail.name }}
+                                                ({{^global_detail.power }}—{{/global_detail.power }}{{#global_detail.power }}{{ global_detail.power }}{{/global_detail.power }},
+                                                {{^global_detail.precision }}—{{/global_detail.precision }}{{#global_detail.precision }}{{ global_detail.precision }}%{{/global_detail.precision }}{{#global_detail.burn_percentage }},
+                                                <span class="burn">{{ global_detail.burn_percentage }}%</span>{{/global_detail.burn_percentage }}{{#global_detail.freeze_percentage }},
+                                                <span class="freeze">{{ global_detail.freeze_percentage }}%</span>{{/global_detail.freeze_percentage }}{{#global_detail.paralyse_percentage }},
+                                                <span class="paralyze">{{ global_detail.paralyse_percentage }}%</span>{{/global_detail.paralyse_percentage }}{{#global_detail.scare_percentage }},
+                                                <span class="flinch">{{ global_detail.scare_percentage }}%</span>{{/global_detail.scare_percentage }}{{#global_detail.poison_percentage }},
+                                                <span class="poison">{{ global_detail.poison_percentage }}%</span>{{/global_detail.poison_percentage }}{{#global_detail.sleep_percentage }},
+                                                <span class="sleep">{{ global_detail.sleep_percentage }}%</span>{{/global_detail.sleep_percentage }}{{#global_detail.boost }},
+                                                {{ global_detail.boost }}{{/global_detail.boost }}{{#global_detail.critique_attack }},
+                                                <span class="attack">Crit</span>{{/global_detail.critique_attack }})
+                                                <span class="gm">CR/GM</span>
+                                            </span>
+                                        </p>
+                                    {{/attacks.gm}}
+                                    {{#attacks.cm}}
+                                        <p>
+                                            <span class="type"><img src="{{ global_detail.type_full }}" alt=""/></span>
+                                            {{#global_detail.useless }}<span title="Inutile">{{/global_detail.useless }}
+                                            {{#global_detail.informations }}<span title="{{ global_detail.informations }}">{{/global_detail.informations }}
+                                                {{ global_detail.name }}
+                                                ({{^global_detail.power }}—{{/global_detail.power }}{{#global_detail.power }}{{ global_detail.power }}{{/global_detail.power }},
+                                                {{^global_detail.precision }}—{{/global_detail.precision }}{{#global_detail.precision }}{{ global_detail.precision }}%{{/global_detail.precision }}{{#global_detail.burn_percentage }},
+                                                <span class="burn">{{ global_detail.burn_percentage }}%</span>{{/global_detail.burn_percentage }}{{#global_detail.freeze_percentage }},
+                                                <span class="freeze">{{ global_detail.freeze_percentage }}%</span>{{/global_detail.freeze_percentage }}{{#global_detail.paralyse_percentage }},
+                                                <span class="paralyze">{{ global_detail.paralyse_percentage }}%</span>{{/global_detail.paralyse_percentage }}{{#global_detail.scare_percentage }},
+                                                <span class="flinch">{{ global_detail.scare_percentage }}%</span>{{/global_detail.scare_percentage }}{{#global_detail.poison_percentage }},
+                                                <span class="poison">{{ global_detail.poison_percentage }}%</span>{{/global_detail.poison_percentage }}{{#global_detail.sleep_percentage }},
+                                                <span class="sleep">{{ global_detail.sleep_percentage }}%</span>{{/global_detail.sleep_percentage }}{{#global_detail.boost }},
+                                                {{ global_detail.boost }}{{/global_detail.boost }}{{#global_detail.critique_attack }},
+                                                <span class="attack">Crit</span>{{/global_detail.critique_attack }})
+                                                <span class="cm">CM</span>
+                                            </span>
+                                        </p>
+                                    {{/attacks.cm}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {{/pokemon.equipe_principale}}
+
+		<div class="category">
+			<span>Autres Pokémon</span>
+		</div>
+
+        <div class="pokeballs">
+            {{#pokemon.autres_pokemon}}
+            <label for="p{{ id }}"><img src="{{ icon }}"/></label>
+            {{/pokemon.autres_pokemon}}
+        </div>
+
+        {{#pokemon.autres_pokemon}}
+        <input id="p{{ id }}" type="radio" name="team" />
+        <div id="content-p{{ id }}" class="pokemons">
+            <div class="banner">
+                <img src="{{ full }}"/>
+                <span>{{ name }}</span>
+                {{#banner_credit}}
+                <span class="banner-credit">© {{ banner_credit }}</span>
+                {{/banner_credit}}
+            </div>
+
+            <div class="sprite {{ background }}">
+                <img src="{{ sprite }}" alt="{{ species }}" />
+            </div>
+            <div class="descriptions col-3">
+                <div class="description">
+                    <span>Espèce</span><br/>
+                    {{#egg}}Oeuf de{{/egg}}
+                    {{ species.species }}
+                    {{#shiny}}S{{/shiny}}
+                    {{ sex }}
+                </div>
+                <div class="description">
+                    <span>Type</span><br/>
+                    {{#types_full}}
+                    <span class="type"><img src="{{ . }}" alt=""/></span>
+                    {{/types_full}}
+
+                </div>
+                <div class="description">
+                    <span>Niveau</span><br/>
+                    <span class="">{{ level }} ({{ exp_point }}/{{ exp_point_per_level }})</span>
+                </div>
+                <div class="description">
+                    <span>Obtention</span><br/>
+                    <a href="{{ obtention_link }}" target="_blank">{{ obtention_name }}</a>
+                </div>
+                <div class="description">
+                    <span>Nature</span><br/>
+                    {{ nature }}
+                </div>
+                {{#sprite_credits}}
+                <div class="description">
+                    <span>Crédit sprite</span><br/>
+                    {{ sprite_credits }}
+                </div>
+                {{/sprite_credits}}
+            </div>
+
+            <div class="descriptions col-2">
+                <div class="statistiques">
+                    <div class="description">
+                        <span>Statistiques</span>
+                    </div>
+                    <div class="descriptions col-2">
+                        <div class="description">
+                            <span>PV</span><br/>
+                            <b>{{ sum_hp }}</b><br/>
+                            <span class="stats">{{ species.pv }} + {{ pv }} + {{ hp_up }}</span>
+                        </div>
+                        <div class="description">
+                            <span>ATK</span><br/>
+                            <b>{{ sum_atk }}</b><br/>
+                            <span class="stats">{{ species.atk }} + {{ atk }} + {{ protein }}</span>
+                        </div>
+                        <div class="description">
+                            <span>Déf</span><br/>
+                            <b>{{ sum_def }}</b><br/>
+                            <span class="stats">{{ species.defense }} + {{ defense }} + {{ iron }}</span>
+                        </div>
+                        <div class="description">
+                            <span>ATK spé</span><br/>
+                            <b>{{ sum_atk_spe }}</b><br/>
+                            <span class="stats">{{ species.atk_special }} + {{ atk_special }} + {{ calcium }}</span>
+                        </div>
+                        <div class="description">
+                            <span>Déf spé</span><br/>
+                            <b>{{ sum_def_spe }}</b><br/>
+                            <span class="stats">{{ species.defense_special }} + {{ def_special }} + {{ zinc }}</span>
+                        </div>
+                        <div class="description">
+                            <span>Vit</span><br/>
+                            <b>{{ sum_speed }}</b><br/>
+                            <span class="stats">{{ species.speed }} + {{ speed }} + {{ carbos }}</span>
+                        </div>
+                        <div class="description">
+                            <span>Total</span><br/>
+                            <span class="">{{ point_per_level }} * {{ level_point }} = <b>{{ point_to_spend }}</b></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="attacks">
+                    <div class="description">
+                        <span>Attaques</span>
+                    </div>
+                    <div class="scroll">
+                        <div class="descriptions">
+                            <div class="attaque">
+                                {{^attacks.level}}
+                                Aucune
+                                {{/attacks.level}}
+                                {{#attacks.level}}
+                                <p>
+                                    <span class="type"><img src="{{ global_detail.type_full }}" alt=""/></span>
+                                    {{#global_detail.useless }}<span title="Inutile">{{/global_detail.useless }}
+                                            {{#global_detail.informations }}<span title="{{ global_detail.informations }}">{{/global_detail.informations }}
+                                                {{ global_detail.name }}
+                                                ({{^global_detail.power }}—{{/global_detail.power }}{{#global_detail.power }}{{ global_detail.power }}{{/global_detail.power }},
+                                                {{^global_detail.precision }}—{{/global_detail.precision }}{{#global_detail.precision }}{{ global_detail.precision }}%{{/global_detail.precision }}{{#global_detail.burn_percentage }},
+                                                <span class="burn">{{ global_detail.burn_percentage }}%</span>{{/global_detail.burn_percentage }}{{#global_detail.freeze_percentage }},
+                                                <span class="freeze">{{ global_detail.freeze_percentage }}%</span>{{/global_detail.freeze_percentage }}{{#global_detail.paralyse_percentage }},
+                                                <span class="paralyze">{{ global_detail.paralyse_percentage }}%</span>{{/global_detail.paralyse_percentage }}{{#global_detail.scare_percentage }},
+                                                <span class="flinch">{{ global_detail.scare_percentage }}%</span>{{/global_detail.scare_percentage }}{{#global_detail.poison_percentage }},
+                                                <span class="poison">{{ global_detail.poison_percentage }}%</span>{{/global_detail.poison_percentage }}{{#global_detail.sleep_percentage }},
+                                                <span class="sleep">{{ global_detail.sleep_percentage }}%</span>{{/global_detail.sleep_percentage }}{{#global_detail.boost }},
+                                                {{ global_detail.boost }}{{/global_detail.boost }}{{#global_detail.critique_attack }},
+                                                <span class="attack">Crit</span>{{/global_detail.critique_attack }})
+                                            </span>
+                                </p>
+                                {{/attacks.level}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/pokemon.autres_pokemon}}
+
+	</div>
+</div>
