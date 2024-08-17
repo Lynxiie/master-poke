@@ -333,36 +333,11 @@ a:hover {
 	left: 6%;
 }
 
-input[type=radio],
-#content-t1p1, #content-t1p2, #content-t1p3, #content-t1p4, #content-t1p5, #content-t1p6,
-#content-t2p1, #content-t2p2, #content-t2p3, #content-t2p4, #content-t2p5, #content-t2p6,
-#content-t2p7, #content-t2p8, #content-t2p9, #content-t2p10, #content-t2p11, #content-t2p12,
-#content-t2p13, #content-t2p14, #content-t2p15, #content-t2p16 {
+input[type=radio], .pokemons {
 	display: none;
 }
 
-#t1p1:checked ~ #content-t1p1,
-#t1p2:checked ~ #content-t1p2,
-#t1p3:checked ~ #content-t1p3,
-#t1p4:checked ~ #content-t1p4,
-#t1p5:checked ~ #content-t1p5,
-#t1p6:checked ~ #content-t1p6,
-#t2p1:checked ~ #content-t2p1,
-#t2p2:checked ~ #content-t2p2,
-#t2p3:checked ~ #content-t2p3,
-#t2p4:checked ~ #content-t2p4,
-#t2p5:checked ~ #content-t2p5,
-#t2p6:checked ~ #content-t2p6,
-#t2p7:checked ~ #content-t2p7,
-#t2p8:checked ~ #content-t2p8,
-#t2p9:checked ~ #content-t2p9,
-#t2p10:checked ~ #content-t2p10,
-#t2p11:checked ~ #content-t2p11,
-#t2p12:checked ~ #content-t2p12,
-#t2p13:checked ~ #content-t2p13,
-#t2p14:checked ~ #content-t2p14,
-#t2p15:checked ~ #content-t2p15,
-#t2p16:checked ~ #content-t2p16 {
+[type="radio"]:checked + .pokemons {
 	display: block;
 }
 

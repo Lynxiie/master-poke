@@ -956,83 +956,84 @@
 
 	<!--	Pokémon -->
 	<div id="poke-bloc" class="bloc">
-		<input id="dark1" type="radio" name="team" checked>
-		<input id="dark2" type="radio" name="team">
-		<input id="dark3" type="radio" name="team">
-		<input id="dark4" type="radio" name="team">
-		<input id="dark5" type="radio" name="team">
-		<input id="dark6" type="radio" name="team">
-		<input id="dragon1" type="radio" name="team">
-		<input id="dragon2" type="radio" name="team">
-		<input id="dragon3" type="radio" name="team">
-		<input id="dragon4" type="radio" name="team">
-		<input id="dragon5" type="radio" name="team">
-		<input id="dragon6" type="radio" name="team">
-		<input id="other1" type="radio" name="team">
-		<input id="other2" type="radio" name="team">
-		<input id="other3" type="radio" name="team">
-		<input id="other4" type="radio" name="team">
-		<input id="other5" type="radio" name="team">
-		<input id="other6" type="radio" name="team">
 
 <!--		navigation-->
 		<div class="poke-nav scroll">
 			<div class="cat">#SoDark</div>
+
+			<input id="dark1" type="radio" name="team" checked="checked">
 			<label for="dark1">
 				<img src="https://i.imgur.com/9hWb2vk.png">
 			</label>
+			<input id="dark2" type="radio" name="team">
 			<label for="dark2">
 				<img src="https://www.pokepedia.fr/images/d/db/Miniature_0674_XY.png">
 			</label>
+			<input id="dark3" type="radio" name="team">
 			<label for="dark3">
 				<img src="https://www.pokepedia.fr/images/0/07/Miniature_Pok%C3%A9_Ball_HOME.png?20220601171615">
 			</label>
+			<input id="dark4" type="radio" name="team">
 			<label for="dark4">
 				<img src="https://www.pokepedia.fr/images/0/07/Miniature_Pok%C3%A9_Ball_HOME.png?20220601171615">
 			</label>
+			<input id="dark5" type="radio" name="team">
 			<label for="dark5">
 				<img src="https://www.pokepedia.fr/images/0/07/Miniature_Pok%C3%A9_Ball_HOME.png?20220601171615">
 			</label>
+			<input id="dark6" type="radio" name="team">
 			<label for="dark6">
 				<img src="https://www.pokepedia.fr/images/0/07/Miniature_Pok%C3%A9_Ball_HOME.png?20220601171615">
 			</label>
 
 			<div class="cat">#Dragons</div>
+			<input id="dragon1" type="radio" name="team">
 			<label for="dragon1">
 				<img src="https://www.pokepedia.fr/images/0/07/Miniature_Pok%C3%A9_Ball_HOME.png?20220601171615">
 			</label>
+			<input id="dragon2" type="radio" name="team">
 			<label for="dragon2">
 				<img src="https://www.pokepedia.fr/images/0/07/Miniature_Pok%C3%A9_Ball_HOME.png?20220601171615">
 			</label>
+			<input id="dragon3" type="radio" name="team">
 			<label for="dragon3">
 				<img src="https://www.pokepedia.fr/images/0/07/Miniature_Pok%C3%A9_Ball_HOME.png?20220601171615">
 			</label>
+			<input id="dragon4" type="radio" name="team">
 			<label for="dragon4">
 				<img src="https://www.pokepedia.fr/images/0/07/Miniature_Pok%C3%A9_Ball_HOME.png?20220601171615">
 			</label>
+			<input id="dragon5" type="radio" name="team">
 			<label for="dragon5">
 				<img src="https://www.pokepedia.fr/images/0/07/Miniature_Pok%C3%A9_Ball_HOME.png?20220601171615">
 			</label>
+			<input id="dragon6" type="radio" name="team">
 			<label for="dragon6">
 				<img src="https://www.pokepedia.fr/images/0/07/Miniature_Pok%C3%A9_Ball_HOME.png?20220601171615">
 			</label>
 
 			<div class="cat">Déchets</div>
+			<input id="other1" type="radio" name="team">
 			<label for="other1">
 				<img src="https://www.pokepedia.fr/images/0/07/Miniature_Pok%C3%A9_Ball_HOME.png?20220601171615">
 			</label>
+			<input id="other2" type="radio" name="team">
 			<label for="other2">
 				<img src="https://www.pokepedia.fr/images/0/07/Miniature_Pok%C3%A9_Ball_HOME.png?20220601171615">
 			</label>
+			<input id="other3" type="radio" name="team">
 			<label for="other3">
 				<img src="https://www.pokepedia.fr/images/0/07/Miniature_Pok%C3%A9_Ball_HOME.png?20220601171615">
 			</label>
+			<input id="other4" type="radio" name="team">
 			<label for="other4">
 				<img src="https://www.pokepedia.fr/images/0/07/Miniature_Pok%C3%A9_Ball_HOME.png?20220601171615">
 			</label>
+			<input id="other5" type="radio" name="team">
 			<label for="other5">
 				<img src="https://www.pokepedia.fr/images/0/07/Miniature_Pok%C3%A9_Ball_HOME.png?20220601171615">
 			</label>
+			<input id="other6" type="radio" name="team">
 			<label for="other6">
 				<img src="https://www.pokepedia.fr/images/0/07/Miniature_Pok%C3%A9_Ball_HOME.png?20220601171615">
 			</label>
@@ -3470,3 +3471,38 @@
 </div>
 
 <script src="https://kit.fontawesome.com/ba830d090b.js" crossorigin="anonymous"></script>
+<script>
+	function displayPokemon(id) {
+		const div = document.getElementById(`${id}-bloc`);
+		div.style.display = 'block';
+	}
+	const radios = document.querySelectorAll('input[name="team"]');
+	const radioChecked = document.querySelector('input[name="team"]:checked');
+	const radiosSbire = document.querySelectorAll('input[name="team-sbire"]');
+	const radioSbireChecked = document.querySelector('input[name="team-sbire"]:checked');
+	const pokeBloc = document.querySelectorAll('.poke-bloc');
+
+	displayPokemon(radioChecked.id)
+	// displayPokemon(radioSbireChecked.id)
+
+	radios.forEach(radio => {
+		radio.addEventListener('change', () => {
+			pokeBloc.forEach(bloc => {
+				bloc.style.display = 'none';
+			});
+			if (radio.checked) {
+				displayPokemon(radio.id)
+			}
+		});
+	});
+	radiosSbire.forEach(radio => {
+		radio.addEventListener('change', () => {
+			pokeBloc.forEach(bloc => {
+				bloc.style.display = 'none';
+			});
+			if (radio.checked) {
+				displayPokemon(radio.id)
+			}
+		});
+	});
+</script>
