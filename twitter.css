@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* Global */
+html {
+    font-family: "Montserrat", system-ui;
+}
+
+p, h1, h2 {
+    margin: 0;
+}
+
+.tweets {
+    width: 400px;
+    margin: 10px auto;
+    background: white;
+    border-radius: 15px;
+}
+
+/* Tweet */
+.tweet {
+    padding: 10px;
+}
+
+.tweet > div {
+    display: flex;
+}
+
+.tweet .informations {
+    margin: 0 10px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.tweet img {
+    max-height: 45px;
+    border-radius: 50%;
+}
+
+.tweet h1 {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.tweet h2 {
+    font-size: 14px;
+    font-weight: 300;
+    color: gray;
+}
+
+.tweet .text {
+    font-weight: 400;
+    margin: 10px 0;
+}
+
+.tweet .date {
+    font-weight: 300;
+    color: gray;
+    font-size: 14px;
+}
+
+/* Thread */
+.tweets > .thread {
+    border-top: 1px solid gray;
+    margin: 10px 15px;
+    padding: 15px 0 0 0;
+}
+
+.tweets > .thread ~ .thread {
+    border-top: none;
+    padding: 0;
+}
+
+.thread img {
+    max-width: 40px;
+}
+
+.thread h1 {
+    font-size: 18px;
+}
+
+.thread h2 {
+    font-size: 12px;
+}
+
+.thread h2, .thread .date {
+    font-size: 12px;
+}
+
+.thread .text {
+    margin-top: 5px;
+}
+
+.thread .informations {
+    flex-direction: row;
+    align-items: center;
+    margin: 0;
+}
+
+.thread div:nth-child(2) {
+    width: 100%;
+    margin: 0 10px;
+}
