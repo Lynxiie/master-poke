@@ -408,12 +408,12 @@ input[type=radio], .pokemons {
 }
 
 #content-t2p2 .banner img {
-	/* object-position: -50px -524px; */
+	 object-position: -371px -262px;
 }
 
 #content-t2p2 .sprite {
-	/* background: url('https://i.ibb.co/PZzzG09/endless-plains-background-by-princess-phoenix-ddin9tc-414w-2x.jpg');
-	background-position: 742px 1344px; */
+	background: url('https://i.ibb.co/PZzzG09/endless-plains-background-by-princess-phoenix-ddin9tc-414w-2x.jpg');
+	background-position: -393px -20px;
 }
 
 #content-t2p3 .banner img {
