@@ -329,8 +329,10 @@ a:hover {
 .banner .banner-credit {
 	font-weight: 400;
 	font-size: 8px;
-	top: 90%;
-	left: 6%;
+	top: 110%;
+	color: #299aee;
+	width: 100%;
+	text-align: right;
 }
 
 input[type=radio], .pokemons {
