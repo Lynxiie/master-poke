@@ -1,0 +1,145 @@
+{% include 'templates_part/header.html' %}
+{% from "templates_part/form_template.html" import render_field %}
+
+<h1>
+  {{ character.get_full_name() }} - Echange d'objets
+</h1>
+
+<form method="POST">
+  <div class="row">
+    <div class="col-md-3">
+      {{ render_field(form.exchange_date) }}
+    </div>
+
+    <div class="col-md-3">
+      {{ render_field(form.link_name) }}
+    </div>
+
+    <div class="col-md-6">
+      {{ render_field(form.link) }}
+    </div>
+
+    <h2>Mes objets échangés</h2>
+    <!-- Mes objets -->
+    <div class="col-md-4">
+      <div>
+        <label for="objects_out">Objets</label><br>
+        <select name="objects_out" id="objects_out">
+          {% for inv in inventory %}
+            <option value="{{ inv.id }}">{{ inv.object.name }}</option>
+          {% endfor %}
+        </select>
+
+        {{ form.add_object_out }}
+      </div>
+
+      <div class="row">
+        {% for object in form.objects_out %}
+          <div class="col-md-6">{{ render_field(object.object_name, readonly=true) }}</div>
+          <div class="col-md-6">{{ render_field(object.delta) }}</div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Anciennes CT -->
+    <div class="col-md-4">
+      <div>
+        <label for="ct_out">CT</label><br>
+        <select name="ct_out" id="ct_out">
+          {% for ct in ct_list %}
+            <option value="{{ ct.id }}">{{ ct.name }}</option>
+          {% endfor %}
+        </select>
+
+        {{ form.add_ct_out }}
+      </div>
+
+      <div class="row">
+        {% for ct in form.ct_out %}
+          <div class="col-md-4">{{ render_field(ct.ct_type, readonly=true) }}</div>
+          <div class="col-md-4">{{ render_field(ct.object_name, readonly=true) }}</div>
+          <div class="col-md-4">{{ render_field(ct.delta) }}</div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <h2>Les objets récupérés</h2>
+    <div class="col-md-4">
+      <div>
+        <label for="objects_in">Objets</label><br>
+        <select name="objects_in" id="objects_in">
+          {% for object in objects_list %}
+            <option value="{{ object.id }}">{{ object.object.name }}</option>
+          {% endfor %}
+        </select>
+
+        {{ form.add_object_in }}
+      </div>
+
+      <div class="row">
+        {% for object in form.objects_in %}
+          <div class="col-md-6">{{ render_field(object.object_name, readonly=true) }}</div>
+          <div class="col-md-6">{{ render_field(object.delta) }}</div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div>
+        <label for="ct_in">CT</label><br>
+        <select name="ct_in" id="ct_in">
+          {% for ct in ct_list %}
+            <option value="{{ ct.id }}">{{ ct.name }}</option>
+          {% endfor %}
+        </select>
+
+        {{ form.add_ct_in }}
+      </div>
+
+      <div class="row">
+        {% for ct in form.ct_in %}
+          <div class="col-md-3">{{ render_field(ct.ct_type, readonly=true) }}</div>
+          <div class="col-md-3">{{ render_field(ct.object_name, readonly=true) }}</div>
+          <div class="col-md-3">{{ render_field(ct.delta) }}</div>
+         <div class="col-md-3">{{ render_field(ct.reserved) }}</div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- nouvelles CT -->
+    <div class="col-md-4">
+      <div>
+        <label for="new_ct_in">Nouvelle CT</label><br>
+        <select name="new_ct_in" id="new_ct_in">
+          {% for ct in new_ct_list %}
+            <option value="{{ ct.id }}">{{ ct.name }}</option>
+          {% endfor %}
+        </select>
+
+        {{ form.add_new_ct_in }}
+      </div>
+
+      <div class="row">
+        {% for ct in form.new_ct_in %}
+          <div class="col-md-3">{{ render_field(ct.ct_type, readonly=true) }}</div>
+          <div class="col-md-3">{{ render_field(ct.object_name) }}</div>
+          <div class="col-md-3">{{ render_field(ct.delta) }}</div>
+          <div class="col-md-3">{{ render_field(ct.reserved) }}</div>
+        {% endfor %}
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <input type="submit" class="btn" value="Sauvegarder">
+    </div>
+  </div>
+</form>
+
+<div class="float-end">
+  <a href="{{ url_for('inventory', character_id=character.id) }}" class="btn">Retour</a>
+</div>
+
+{% include 'templates_part/footer.html' %}

@@ -1,0 +1,59 @@
+<link href="https://lynxiie.github.io/master-poke/luna/tcard.css" rel="stylesheet" />
+<meta charset="UTF-8"/>
+
+<div class="card">
+	<div class="title">
+		<img src="../images/luna/ressources.jpg" alt="ressources" />
+		<div><span>Ressources</span></div>
+	</div>
+
+	<div class="content ressources scroll">
+		<div class="category"><span>Avatar</span></div>
+		<div class="avatar">
+{{#avatar}}
+			<details>
+				<summary>Par {{ name }}</summary>
+{{#image}}
+				<img src="{{ . }}"/>
+{{/image}}
+			</details>
+{{/avatar}}
+		</div>
+
+		<div class="category"><span>Signature</span></div>
+		<div class="signature">
+{{#signature}}
+			<details>
+				<summary>Par {{ name }}</summary>
+{{#image}}
+				<img src="{{ . }}"/>
+{{/image}}
+			</details>
+{{/signature}}
+		</div>
+
+		<div class="category"><span>Divers carré</span></div>
+		<div class="various">
+{{#autre}}
+			<details>
+				<summary>Par {{ name }}</summary>
+{{#image}}
+				<img src="{{ . }}"/>
+{{/image}}
+			</details>
+{{/autre}}
+		</div>
+
+		<div class="category"><span>Stamps</span></div>
+		<div class="stamps">
+{{#stamp}}
+			<details>
+				<summary>Par {{ name }}</summary>
+{{#image}}
+				<img src="{{ . }}"/>
+{{/image}}
+			</details>
+{{/stamp}}
+		</div>
+	</div>
+</div>

@@ -1,0 +1,135 @@
+<link href="https://lynxiie.github.io/master-poke/luna/tcard.css" rel="stylesheet" />
+<meta charset="UTF-8"/>
+
+<div class="card">
+	<div class="title">
+		<img src="../images/luna/inventaire.png" alt="inventaire" />
+		<div id="inventaire">
+			<span>Inventaire</span>
+		</div>
+	</div>
+
+	<div class="content">
+		<div class="category">
+			<span>Objets</span>
+		</div>
+		<div class="descriptions col-3 inventaire">
+			<div class="description">
+				<span>Balls</span>
+				<div class="scroll">
+{{#ballsCat}}
+					[{{ quantity_string }}] <!-- {{ object.name }} --><img src="../images/objets/{{ slug_name }}.png" alt="{{ object.name }}" class="{{^quantity}}notown{{/quantity}}" /> {{ object.name }}<br/>
+{{/ballsCat}}
+				</div>
+			</div>
+
+			<div class="description">
+				<span>Soins</span>
+				<div class="scroll">
+{{#healsCat}}
+					[{{ quantity_string }}] <!-- {{ object.name }} --><img src="../images/objets/{{ slug_name }}.png" alt="{{ object.name }}" class="{{^quantity}}notown{{/quantity}}" /> {{ object.name }}<br/>
+{{/healsCat}}
+				</div>
+			</div>
+
+			<div class="description">
+				<span>Évolutions</span>
+				<div class="scroll">
+{{#evolCat}}
+					[{{ quantity_string }}] <!-- {{ object.name }} --><img src="../images/objets/{{ slug_name }}.png" alt="{{ object.name }}" class="{{^quantity}}notown{{/quantity}}" /> {{ object.name }}<br/>
+{{/evolCat}}
+				</div>
+			</div>
+
+			<div class="description">
+				<span>CT</span>
+				<div class="scroll">
+{{#ct}}
+					{{#quantity}}
+					[{{ quantity_string }}] <!-- {{ object.name }} --><img src="../images/objets/{{ type }}.png" alt="{{ object.name }}" title="{{ reserved }}"/> {{ name }}<br/>
+					{{/quantity}}
+{{/ct}}
+{{^ct}}
+					Aucune
+{{/ct}}
+				</div>
+			</div>
+
+			<div class="description">
+				<span>Autres</span>
+				<div class="scroll">
+{{#otherCat}}
+					[{{ quantity_string }}] <!-- {{ object.name }} --><img src="../images/objets/{{ slug_name }}.png" alt="{{ object.name }}" class="{{^quantity}}notown{{/quantity}}" /> {{ object.name }}<br/>
+{{/otherCat}}
+{{#berriesCat}}
+					[{{ quantity_string }}] <!-- {{ object.name }} --><img src="../images/objets/{{ slug_name }}.png" alt="{{ object.name }}" class="{{^quantity}}notown{{/quantity}}" /> {{ object.name }}<br/>
+{{/berriesCat}}
+				</div>
+			</div>
+
+			<div class="description">
+				<span>Rare</span>
+				<div class="scroll">
+{{#raresCat}}
+					[{{ quantity_string }}] <!-- {{ object.name }} --><img src="../images/objets/{{ slug_name }}.png" alt="{{ object.name }}" class="{{^quantity}}notown{{/quantity}}"/>
+					{{ object.name }}
+{{#links}}
+					<a href="{{ link }}" target="_blank">♦</a>
+{{/links}}
+					<br/>
+{{/raresCat}}
+				</div>
+			</div>
+
+			<div class="description">
+				<span>Argent</span><br/>
+				{{ money.amount }} <img src="../images/objets/or.png" title="p$" alt="p$"/> le {{ money.statement_date }}
+			</div>
+		</div>
+
+		<div>
+			<div class="category">
+				<span>Utilisations des CS</span>
+			</div>
+			<div class="descriptions col-3">
+{{#csHistory}}
+				<div class="description">
+					<span>{{ object.name }}</span> <span class="help">({{ frequency }})</span><br/>
+{{#last_used}}
+					<a href="{{ link }}" target="_blank">{{ last_used }}</a>
+{{/last_used}}
+{{^last_used}}
+					Non utilisée
+{{/last_used}}
+				</div>
+{{/csHistory}}
+			</div>
+
+			<div class="descriptions col-2">
+{{#fluteHistory}}
+				<div class="description">
+					<span>{{ object.name }}</span> <span class="help">({{ frequency }})</span><br/>
+{{#last_used}}
+					<a href="{{ link }}" target="_blank">{{ last_used }}</a>
+{{/last_used}}
+{{^last_used}}
+					Non utilisée
+{{/last_used}}
+				</div>
+{{/fluteHistory}}
+			</div>
+
+			<div class="category"><span>Historique</span></div>
+			<div class="scroll">
+{{#histories}}
+{{#objects_in_exchange}}
+				<span class="out">◄</span><span class="in">►</span>Le {{ movement_date }} : <span class="out">{{{ objects_out_exchange }}}</span> vs <span class="in">{{{ objects_in_exchange }}}</span> <span class="help"><a href="{{ link }}" target="_blank">{{ link_title }}</a></span><br/>
+{{/objects_in_exchange}}
+{{^objects_in_exchange}}
+				<span class="{{ movement }}">{{ icon }}</span>Le {{ movement_date }} : {{{ objects }}} <span class="help"><a href="{{ link }}" target="_blank">{{ link_title }}</a></span><br/>
+{{/objects_in_exchange}}
+{{/histories}}
+			</div>
+		</div>
+	</div>
+</div>

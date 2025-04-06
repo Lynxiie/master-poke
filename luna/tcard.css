@@ -343,6 +343,10 @@ input[type=radio], .pokemons {
 	display: block;
 }
 
+.beach_afternoon {
+	background: url('../images/background/beach_afternoon.jpg');
+}
+
 #content-t1p1 .banner img {
 	object-position: 0 -398px;
 }

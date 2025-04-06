@@ -1,0 +1,41 @@
+{% include 'templates_part/header.html' %}
+{% from "templates_part/form_template.html" import render_field %}
+
+<h1>
+  {{ character.get_full_name() }} - Gain de niveau
+</h1>
+
+<form method="POST">
+  <div class="row">
+    <p>
+      Pokémon : {{ pokemon.name }}
+    </p>
+    <p>
+      Niveau actuel : {{ pokemon.level }} ({{ pokemon.exp_point }}/{{ pokemon.exp_point_per_level }})
+    </p>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+      {{ render_field(form.level) }}
+    </div>
+
+    <div class="col-md-3">
+      {{ render_field(form.point) }}
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <input type="submit" class="btn" value="Sauvegarder">
+    </div>
+  </div>
+</form>
+
+<div class="float-end">
+  <a href="{{ url_for('pokemon', character_id=character.id) }}" class="btn">Retour</a>
+</div>
+
+
+
+{% include 'templates_part/footer.html' %}

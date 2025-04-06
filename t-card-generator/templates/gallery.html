@@ -1,0 +1,16 @@
+{% include 'templates_part/header.html' %}
+{% from "templates_part/form_template.html" import render_field %}
+
+<h1>
+  {{ character.get_full_name() }} - Galerie
+</h1>
+
+<form method="POST">
+  <div class="row">
+    <div class="col-md-12">
+      <input type="submit" class="btn" value="Générer">
+    </div>
+  </div>
+</form>
+
+{% include 'templates_part/footer.html' %}

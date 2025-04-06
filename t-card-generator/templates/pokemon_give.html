@@ -1,0 +1,37 @@
+{% include 'templates_part/header.html' %}
+{% from "templates_part/form_template.html" import render_field %}
+
+<h1>
+  {{ character.get_full_name() }} - Donner un Pokémon
+</h1>
+
+<form method="POST">
+  <div class="row">
+    <div class="col-md-2">
+      {{ render_field(form.pokemon_id) }}
+    </div>
+    <div class="col-md-2">
+      {{ render_field(form.new_owner) }}
+    </div>
+    <div class="col-md-2">
+      {{ render_field(form.history_name) }}
+    </div>
+    <div class="col-md-6">
+      {{ render_field(form.history_link) }}
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <input type="submit" class="btn" value="Sauvegarder">
+    </div>
+  </div>
+</form>
+
+<div class="float-end">
+  <a href="{{ url_for('pokemon', character_id=character.id) }}" class="btn">Retour</a>
+</div>
+
+
+
+{% include 'templates_part/footer.html' %}

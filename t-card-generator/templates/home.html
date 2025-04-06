@@ -1,0 +1,24 @@
+{% include 'templates_part/header.html' %}
+
+<div class="home">
+    {% for chara in characters %}
+        <div class="card">
+            <h2>{{ chara.firstname }} {{ chara.lastname }}</h2>
+            <ul>
+                <li><a href="{{ url_for('informations', character_id=chara.id) }}">Informations</a></li>
+                <li><a href="{{ url_for('inventory', character_id=chara.id) }}">Inventaire</a></li>
+                <li><a href="{{ url_for('pokemon', character_id=chara.id) }}">Pokémon</a></li>
+                <li><a href="{{ url_for('goals', character_id=chara.id) }}">Objectifs</a></li>
+                <li><a href="{{ url_for('journey', character_id=chara.id) }}">Parcours</a></li>
+                <li><a href="{{ url_for('job_informations', character_id=chara.id) }}">Rang (informations) </a></li>
+                <li><a href="{{ url_for('job_pokemon', character_id=chara.id) }}">Rang (Pokémon)</a></li>
+                <li><a href="{{ url_for('job_missions', character_id=chara.id) }}">Rang (missions)</a></li>
+                <li><a href="{{ url_for('social_relation', character_id=chara.id) }}">Connaissances</a></li>
+                <li><a href="{{ url_for('gallery', character_id=chara.id) }}">Gallery</a></li>
+                <li><a href="{{ url_for('dex', character_id=chara.id) }}">Dex</a></li>
+            </ul>
+        </div>
+    {% endfor %}
+</div>
+
+{% include 'templates_part/footer.html' %}

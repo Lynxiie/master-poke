@@ -1,0 +1,103 @@
+{% include 'templates_part/header.html' %}
+{% from "templates_part/form_template.html" import render_field %}
+
+<h1>
+  {% if character %}
+    {{ character.get_full_name() }}
+  {% else %}
+    Nouveau personnage
+  {% endif %}
+</h1>
+
+<form method="POST">
+  <div class="row">
+
+    <div class="col-md-4">
+      {{ render_field(form.firstname, readonly=true if character else false) }}
+    </div>
+
+    <div class="col-md-4">
+      {{ render_field(form.lastname, readonly=true if character else false) }}
+    </div>
+
+    <div class="col-md-4">
+      {{ render_field(form.original_char_name, readonly=true if character else false) }}
+    </div>
+
+    <div class="col-md-4">
+      {{ render_field(form.original_game, readonly=true if character else false) }}
+    </div>
+
+    <div class="col-md-4">
+      {{ render_field(form.age) }}
+    </div>
+
+    <div class="col-md-4">
+      {{ render_field(form.status) }}
+    </div>
+
+    <div class="col-md-4">
+      <div class="toggle-radio">
+        {% if not character %}
+          {{ render_field(form.sex) }}
+        {% else %}
+          <dt>
+            <label>Sexe</label>
+          </dt>
+          {{ form.sex.data }}
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      {% if not character %}
+        {{ render_field(form.region) }}
+      {% else %}
+        <dt>
+          <label>Région</label>
+        </dt>
+        {{ form.region.data }}
+      {% endif %}
+    </div>
+
+    <div class="col-md-4">
+      {{ render_field(form.starter, readonly=true if character else false) }}
+    </div>
+
+    <div class="col-md-4">
+      {{ render_field(form.id_number, readonly=true if character else false) }}
+    </div>
+
+    <div class="col-md-4">
+      {{ render_field(form.presentation, readonly=true if character else false) }}
+    </div>
+  </div>
+
+  <h2>Mental {{ mental_form.add_description_mental }}</h2>
+  <div class="row mentals">
+
+    {% for description in mental_form.descriptions_mental %}
+      <div class="col-md-3">
+        {{ description['description'] }}
+      </div>
+    {% endfor %}
+  </div>
+
+  <h2>Physique {{ physical_form.add_description_physical }}</h2>
+  <div class="row mentals">
+
+    {% for description in physical_form.descriptions_physical %}
+      <div class="col-md-3">
+        {{ description['description'] }}
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <input type="submit" class="btn" value="Sauvegarder">
+    </div>
+  </div>
+</form>
+
+{% include 'templates_part/footer.html' %}

@@ -1,0 +1,111 @@
+{% include 'templates_part/header.html' %}
+{% from "templates_part/form_template.html" import render_field %}
+
+<h1>
+  {{ character.get_full_name() }} - Echanger des Pokémon
+</h1>
+
+<form method="POST">
+  <div class="row">
+    <div class="col-md-2">
+      {{ render_field(form.pokemon_ids) }}
+    </div>
+    <div class="col-md-2">
+      {{ render_field(form.new_owner) }}
+    </div>
+    <div class="col-md-2">
+      {{ render_field(form.history_name) }}
+    </div>
+    <div class="col-md-6">
+      {{ render_field(form.history_link) }}
+    </div>
+  </div>
+
+  <h2>Nouveau Pokémon {{ form.add_new_pokemon }}</h2>
+  <div class="row">
+
+    {% for pokemon in form.new_pokemon %}
+      <div class="col-md-2">
+        {{ render_field(pokemon['name'])}}
+      </div>
+
+      <div class="col-md-2">
+        {{ render_field(pokemon['species_id'])}}
+      </div>
+
+      <div class="col-md-2">
+        {{ render_field(pokemon['category_id'])}}
+      </div>
+
+      <div class="col-md-1">
+        {{ render_field(pokemon['sex'])}}
+      </div>
+
+      <div class="col-md-1">
+        {{ render_field(pokemon['level'])}}
+      </div>
+
+      <div class="col-md-1">
+        {{ render_field(pokemon['nature'])}}
+      </div>
+
+      <div class="col-md-1">
+        {{ render_field(pokemon['shiny'])}}
+      </div>
+
+      <div class="col-md-1">
+        {{ render_field(pokemon['egg'])}}
+      </div>
+
+      <div class="col-md-2">
+        {{ render_field(pokemon['hp_up'])}}
+      </div>
+
+      <div class="col-md-2">
+        {{ render_field(pokemon['zinc'])}}
+      </div>
+
+      <div class="col-md-2">
+        {{ render_field(pokemon['calcium'])}}
+      </div>
+
+      <div class="col-md-2">
+        {{ render_field(pokemon['carbos'])}}
+      </div>
+
+      <div class="col-md-2">
+        {{ render_field(pokemon['iron'])}}
+      </div>
+
+      <div class="col-md-2">
+        {{ render_field(pokemon['protein'])}}
+      </div>
+
+      <div class="col-md-4 full">
+        {{ render_field(pokemon['sprite_credits'])}}
+      </div>
+
+        <div class="col-md-4">
+            {{ render_field(pokemon['background'])}}
+        </div>
+
+        <div class="col-md-4">
+            {{ render_field(pokemon['banner_credit'])}}
+        </div>
+    {% endfor %}
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <input type="submit" class="btn" value="Sauvegarder">
+    </div>
+  </div>
+</form>
+
+<div class="float-end">
+  <a href="{{ url_for('pokemon', character_id=character.id) }}" class="btn">Retour</a>
+</div>
+
+
+
+{% include 'templates_part/footer.html' %}

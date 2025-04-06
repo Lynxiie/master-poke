@@ -1,0 +1,84 @@
+{% include 'templates_part/header.html' %}
+{% from "templates_part/form_template.html" import render_field %}
+
+<h1>
+  Nouvelle attaque
+</h1>
+
+<form method="POST">
+  {% for attack in form.attacks %}
+    <h2>Attaque {{ form.add_attack }}</h2>
+
+    <div class="row">
+      <div class="col-md-3">
+        {{ render_field(attack['name']) }}
+      </div>
+
+      <div class="col-md-3">
+        {{ render_field(attack['type_id']) }}
+      </div>
+
+      <div class="col-md-6 full">
+        {{ render_field(attack['informations']) }}
+      </div>
+
+      <div class="col-md-2">
+        {{ render_field(attack['power']) }}
+      </div>
+
+      <div class="col-md-2">
+        {{ render_field(attack['precision']) }}
+      </div>
+
+      <div class="col-md-2">
+        {{ render_field(attack['useless']) }}
+      </div>
+
+      <div class="col-md-2">
+        {{ render_field(attack['boost']) }}
+      </div>
+
+      <div class="col-md-3">
+        {{ render_field(attack['critique_attack']) }}
+      </div>
+
+      <div class="col-md-2">
+        {{ render_field(attack['burn_percentage']) }}
+      </div>
+
+      <div class="col-md-2">
+        {{ render_field(attack['freeze_percentage']) }}
+      </div>
+
+      <div class="col-md-2">
+        {{ render_field(attack['paralyse_percentage']) }}
+      </div>
+
+      <div class="col-md-2">
+        {{ render_field(attack['scare_percentage']) }}
+      </div>
+
+      <div class="col-md-2">
+        {{ render_field(attack['poison_percentage']) }}
+      </div>
+
+      <div class="col-md-2">
+        {{ render_field(attack['sleep_percentage']) }}
+      </div>
+    </div>
+  {% endfor %}
+
+  <div class="row">
+    <div class="col-md-12">
+      <input type="submit" class="btn" value="Sauvegarder">
+    </div>
+  </div>
+</form>
+
+<div class="float-end">
+  <a href="{{ url_for('pokemon', character_id=character.id) }}" class="btn">Retour</a>
+</div>
+
+
+
+{% include 'templates_part/footer.html' %}

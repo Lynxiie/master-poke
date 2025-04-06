@@ -1,0 +1,30 @@
+<link href="https://lynxiie.github.io/master-poke/luna/tcard.css" rel="stylesheet" />
+<meta charset="UTF-8"/>
+
+<div class="card">
+	<div class="title">
+		<img src="../images/luna/parcours.jpg" alt="route"/>
+		<div><span>The Road So Far</span></div>
+	</div>
+
+	<div class="content history scroll">
+
+{{#chapters}}
+		<div class="category">
+			<span>{{ name }}</span>
+		</div>
+
+		<div class="descriptions col-1">
+{{#journeys}}
+			<span>
+				<a href="{{link}}" target="_blank">♥♦♣♠</a>
+				{{ name }} ♦
+				{{ feat }} ♦
+				<span class="{{ status_class }}">{{ status }}</span>
+			</span>
+{{/journeys}}
+		</div>
+{{/chapters}}
+
+	</div>
+</div>

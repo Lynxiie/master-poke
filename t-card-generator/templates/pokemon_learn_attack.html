@@ -1,0 +1,36 @@
+{% include 'templates_part/header.html' %}
+{% from "templates_part/form_template.html" import render_field %}
+
+<h1>
+    {{ character.get_full_name() }} - Apprentissage de capacités pour {{ pokemon.name }}
+</h1>
+
+<form method="POST">
+  {% for attack in form.attacks %}
+    <div class="row">
+    {{ render_field(attack['attack_id']) }}
+
+    <div class="col-md-3">
+        {{ render_field(attack['attack_name']) }}
+      </div>
+
+      <div class="col-md-3">
+        {{ render_field(attack['learned']) }}
+      </div>
+    </div>
+  {% endfor %}
+
+  <div class="row">
+    <div class="col-md-12">
+      <input type="submit" class="btn" value="Sauvegarder">
+    </div>
+  </div>
+</form>
+
+<div class="float-end">
+  <a href="{{ url_for('pokemon', character_id=character.id) }}" class="btn">Retour</a>
+</div>
+
+
+
+{% include 'templates_part/footer.html' %}

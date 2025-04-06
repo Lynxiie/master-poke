@@ -1,0 +1,100 @@
+<link href="https://lynxiie.github.io/master-poke/luna/tcard.css" rel="stylesheet" />
+<meta charset="UTF-8"/>
+
+<div class="card relations">
+	<div class="title">
+		<img src="../images/luna/connaissances.png" alt="motismart" />
+		<div><span>Connaissances</span></div>
+	</div>
+
+	<div class="content scroll">
+		<div class="category">
+			<span>PNJ</span>
+		</div>
+
+{{#socials_pnj}}
+		<div class="social-name">
+			<span>{{ full_name }}</span>
+		</div>
+		<div class="descriptions col-3">
+			<div class="social">
+				<img src="../images/connaissances/{{ slug_full_name }}.jpg" alt="{{ full_name }}"/>
+			</div>
+			<div>
+				<div class="description">
+					<span>Nature du lien</span><br/>
+					{{ bond }}
+				</div>
+				<div class="description"><span>Sujets</span><br/>
+{{#subjects}}
+					<a href="{{ link }}" target="_blank">■</a>
+{{/subjects}}
+				</div>
+				<div class="description"><span>Pokémon connus</span><br/>
+{{#pokemon}}
+					<img src="../images/pokemon/icon/{{ slug_pokemon }}.png" title="{{ pokemon_name }}"/>
+{{/pokemon}}
+{{^pokemon}}
+					Aucun
+{{/pokemon}}
+				</div>
+			</div>
+			<div>
+				<div class="description">
+					<span>Plus d'informations</span>
+				</div>
+				<div class="scroll">
+					{{#hexa_text}}
+					<span style="color:{{ hexa_text }}">{{ hexa_text }}</span><br>
+					{{/hexa_text}}
+					{{ description }}
+				</div>
+			</div>
+		</div>
+{{/socials_pnj}}
+
+		<div class="category">
+			<span>PJ</span>
+		</div>
+{{#socials_pj}}
+		<div class="social-name">
+			<span>{{ full_name }}</span>
+		</div>
+		<div class="descriptions col-3">
+			<div class="social">
+				<img src="../images/connaissances/{{ slug_full_name }}.jpg" alt="{{ full_name }}"/>
+			</div>
+			<div>
+				<div class="description">
+					<span>Nature du lien</span><br/>
+					{{ bond }}
+				</div>
+				<div class="description"><span>Sujets</span><br/>
+					{{#subjects}}
+					<a href="{{ link }}" target="_blank">■</a>
+					{{/subjects}}
+				</div>
+				<div class="description"><span>Pokémon connus</span><br/>
+					{{#pokemon}}
+					<img src="../images/pokemon/icon/{{ slug_pokemon }}.png" title="{{ pokemon_name }}"/>
+					{{/pokemon}}
+					{{^pokemon}}
+					Aucun
+					{{/pokemon}}
+				</div>
+			</div>
+			<div>
+				<div class="description">
+					<span>Plus d'informations</span>
+				</div>
+				<div class="scroll">
+					{{#hexa_text}}
+					<span style="color:{{ hexa_text }}">{{ hexa_text }}</span><br>
+					{{/hexa_text}}
+					{{ description }}
+				</div>
+			</div>
+		</div>
+{{/socials_pj}}
+	</div>
+</div>
