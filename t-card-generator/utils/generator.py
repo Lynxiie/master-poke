@@ -372,7 +372,7 @@ def get_inventory_data(character: MpCharacter, character_id: int, data: dict[str
         """
         return datetime.strptime(objet.movement_date, DATE_FORMAT)
 
-    histories = sorted(histories, key=_get_date, reverse=True)
+    histories = sorted(histories, key=lambda history: (-_get_date(history).timestamp(), -history.id))
 
     for ct in cts:
         ct.quantity_string = convert_int_to_prefixed_string(int(ct.quantity))

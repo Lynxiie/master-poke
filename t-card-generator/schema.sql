@@ -124,11 +124,11 @@ INSERT INTO object VALUES
     (NULL, 'Appât rustique', 'other'),
     (NULL, 'Appât sophistiqué', 'other'),
     (NULL, 'Appât 5 étoiles', 'other'),
-    (NULL, 'PokéFlûte', 'rare'),
-    (NULL, 'PokéFlûte bleue', 'rare'),
-    (NULL, 'PokéFlûte rouge', 'rare'),
+    (NULL, 'Pokéflûte', 'rare'),
+    (NULL, 'Pokéflûte bleue', 'rare'),
+    (NULL, 'Pokéflûte rouge', 'rare'),
     (NULL, 'Pokéflûte noire', 'rare'),
-    (NULL, 'PokéFlûte violette', 'rare'),
+    (NULL, 'Pokéflûte violette', 'rare'),
     (NULL, 'Canne', 'rare'),
     (NULL, 'Super-canne', 'rare'),
     (NULL, 'Méga-canne', 'rare'),
@@ -323,7 +323,7 @@ CREATE TABLE pokemon_attacks (
 DROP TABLE IF EXISTS pokemon_species_attacks;
 CREATE TABLE pokemon_species_attacks (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    species_id VARCHAR(50) NOT NULL,
+    species_id INTEGER UNSIGNED NOT NULL,
     attack_id INTEGER UNSIGNED NOT NULL,
     level INTEGER UNSIGNED NULL,
     ct BOOLEAN NOT NULL DEFAULT false,
@@ -340,6 +340,8 @@ CREATE TABLE pokemon_category (
     character_id INTEGER UNSIGNED NOT NULL,
     name VARCHAR(50) NOT NULL
 );
+
+INSERT INTO pokemon_category (character_id, name) VALUES (0, 'Stockage');
 
 DROP TABLE IF EXISTS pokemon_owned;
 CREATE TABLE pokemon_owned (

@@ -183,6 +183,7 @@ class EvolutionWay(CustomEnum):
     GRASS_STONE = 7, 'Pierre Plante'
     ICE_STONE = 8, 'Pierre Glace'
     EXCHANGE = 9, 'Echange'
+    SERUM = 10, 'Sérum M'
 
 
 class SpriteBackground(CustomEnum):

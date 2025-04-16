@@ -263,6 +263,8 @@ def add_character():
             db.session.add_all(flute_histories)
             db.session.commit()
 
+            generate_tcard_part(character_id, 'informations')
+
             flash('Personnage ajouté avec succès', 'success')
             return redirect(url_for('home'))
 
@@ -1063,6 +1065,9 @@ def pokemon_add_one_xp(character_id: int, pokemon_id: int):
     level_up_pokemon(pokemon, 0, 1, db.session)
     db.session.commit()
 
+    generate_tcard_part(character_id, 'stockage')
+    generate_tcard_part(character_id, 'pokemon')
+
     return redirect(url_for('pokemon', character_id=character_id))
 
 
@@ -1099,6 +1104,9 @@ def pokemon_add_xp(character_id: int, pokemon_id: int):
 
             level_up_pokemon(pokemon, level, point, db.session)
             db.session.commit()
+
+            generate_tcard_part(character.id, 'stockage')
+            generate_tcard_part(character.id, 'pokemon')
 
             flash('Expérience ajoutée avec succès', 'success')
             return redirect(url_for('pokemon', character_id=character_id))
@@ -1497,6 +1505,9 @@ def pokemon_evolution(character_id: int, pokemon_id: int):
     if evolution_way in {EvolutionWay.EXCHANGE, EvolutionWay.LEVEL}:
         evol_pokemon(pokemon, character_id, db.session)
 
+        generate_tcard_part(character_id, 'stockage')
+        generate_tcard_part(character_id, 'pokemon')
+
         flash(f'{pokemon.name} a évolué en {pokemon.species.species} avec succès', 'success')
         return redirect(url_for('pokemon', character_id=character_id))
 
@@ -1831,7 +1842,7 @@ def link_species_attacks(character_id: int):
     form.species_id.choices = [(species.id, species.species) for species in PokemonSpecies.query.all()]
 
     if request.method == 'GET':
-        attacks = PokemonAttacks.query.all()
+        attacks = PokemonAttacks.query.order_by(PokemonAttacks.name).all()
 
         for attack in attacks:
             atk = PokemonSpeciesAttackForm()

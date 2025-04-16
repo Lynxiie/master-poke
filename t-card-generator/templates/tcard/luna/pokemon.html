@@ -62,7 +62,7 @@
                     {{#sprite_credits}}
                         <div class="description">
                             <span>Crédit sprite</span><br/>
-                            {{ sprite_credits }}
+                            {{{ sprite_credits }}}
                         </div>
                     {{/sprite_credits}}
                 </div>
@@ -278,7 +278,7 @@
                 {{#sprite_credits}}
                 <div class="description">
                     <span>Crédit sprite</span><br/>
-                    {{ sprite_credits }}
+                    {{{ sprite_credits }}}
                 </div>
                 {{/sprite_credits}}
             </div>
@@ -355,6 +355,86 @@
                                             </span>
                                 </p>
                                 {{/attacks.level}}
+                                {{#attacks.cs}}
+                                <p>
+                                    <span class="type"><img src="{{ global_detail.type_full }}" alt=""/></span>
+                                    {{#global_detail.useless }}<span title="Inutile">{{/global_detail.useless }}
+                                            {{#global_detail.informations }}<span title="{{ global_detail.informations }}">{{/global_detail.informations }}
+                                                {{ global_detail.name }}
+                                                ({{^global_detail.power }}—{{/global_detail.power }}{{#global_detail.power }}{{ global_detail.power }}{{/global_detail.power }},
+                                                {{^global_detail.precision }}—{{/global_detail.precision }}{{#global_detail.precision }}{{ global_detail.precision }}%{{/global_detail.precision }}{{#global_detail.burn_percentage }},
+                                                <span class="burn">{{ global_detail.burn_percentage }}%</span>{{/global_detail.burn_percentage }}{{#global_detail.freeze_percentage }},
+                                                <span class="freeze">{{ global_detail.freeze_percentage }}%</span>{{/global_detail.freeze_percentage }}{{#global_detail.paralyse_percentage }},
+                                                <span class="paralyze">{{ global_detail.paralyse_percentage }}%</span>{{/global_detail.paralyse_percentage }}{{#global_detail.scare_percentage }},
+                                                <span class="flinch">{{ global_detail.scare_percentage }}%</span>{{/global_detail.scare_percentage }}{{#global_detail.poison_percentage }},
+                                                <span class="poison">{{ global_detail.poison_percentage }}%</span>{{/global_detail.poison_percentage }}{{#global_detail.sleep_percentage }},
+                                                <span class="sleep">{{ global_detail.sleep_percentage }}%</span>{{/global_detail.sleep_percentage }}{{#global_detail.boost }},
+                                                {{ global_detail.boost }}{{/global_detail.boost }}{{#global_detail.critique_attack }},
+                                                <span class="attack">Crit</span>{{/global_detail.critique_attack }})
+                                                <span class="cs">CS</span>
+                                            </span>
+                                </p>
+                                {{/attacks.cs}}
+                                {{#attacks.ct}}
+                                <p>
+                                    <span class="type"><img src="{{ global_detail.type_full }}" alt=""/></span>
+                                    {{#global_detail.useless }}<span title="Inutile">{{/global_detail.useless }}
+                                            {{#global_detail.informations }}<span title="{{ global_detail.informations }}">{{/global_detail.informations }}
+                                                {{ global_detail.name }}
+                                                ({{^global_detail.power }}—{{/global_detail.power }}{{#global_detail.power }}{{ global_detail.power }}{{/global_detail.power }},
+                                                {{^global_detail.precision }}—{{/global_detail.precision }}{{#global_detail.precision }}{{ global_detail.precision }}%{{/global_detail.precision }}{{#global_detail.burn_percentage }},
+                                                <span class="burn">{{ global_detail.burn_percentage }}%</span>{{/global_detail.burn_percentage }}{{#global_detail.freeze_percentage }},
+                                                <span class="freeze">{{ global_detail.freeze_percentage }}%</span>{{/global_detail.freeze_percentage }}{{#global_detail.paralyse_percentage }},
+                                                <span class="paralyze">{{ global_detail.paralyse_percentage }}%</span>{{/global_detail.paralyse_percentage }}{{#global_detail.scare_percentage }},
+                                                <span class="flinch">{{ global_detail.scare_percentage }}%</span>{{/global_detail.scare_percentage }}{{#global_detail.poison_percentage }},
+                                                <span class="poison">{{ global_detail.poison_percentage }}%</span>{{/global_detail.poison_percentage }}{{#global_detail.sleep_percentage }},
+                                                <span class="sleep">{{ global_detail.sleep_percentage }}%</span>{{/global_detail.sleep_percentage }}{{#global_detail.boost }},
+                                                {{ global_detail.boost }}{{/global_detail.boost }}{{#global_detail.critique_attack }},
+                                                <span class="attack">Crit</span>{{/global_detail.critique_attack }})
+                                                <span class="ct">CT</span>
+                                            </span>
+                                </p>
+                                {{/attacks.ct}}
+                                {{#attacks.gm}}
+                                <p>
+                                    <span class="type"><img src="{{ global_detail.type_full }}" alt=""/></span>
+                                    {{#global_detail.useless }}<span title="Inutile">{{/global_detail.useless }}
+                                            {{#global_detail.informations }}<span title="{{ global_detail.informations }}">{{/global_detail.informations }}
+                                                {{ global_detail.name }}
+                                                ({{^global_detail.power }}—{{/global_detail.power }}{{#global_detail.power }}{{ global_detail.power }}{{/global_detail.power }},
+                                                {{^global_detail.precision }}—{{/global_detail.precision }}{{#global_detail.precision }}{{ global_detail.precision }}%{{/global_detail.precision }}{{#global_detail.burn_percentage }},
+                                                <span class="burn">{{ global_detail.burn_percentage }}%</span>{{/global_detail.burn_percentage }}{{#global_detail.freeze_percentage }},
+                                                <span class="freeze">{{ global_detail.freeze_percentage }}%</span>{{/global_detail.freeze_percentage }}{{#global_detail.paralyse_percentage }},
+                                                <span class="paralyze">{{ global_detail.paralyse_percentage }}%</span>{{/global_detail.paralyse_percentage }}{{#global_detail.scare_percentage }},
+                                                <span class="flinch">{{ global_detail.scare_percentage }}%</span>{{/global_detail.scare_percentage }}{{#global_detail.poison_percentage }},
+                                                <span class="poison">{{ global_detail.poison_percentage }}%</span>{{/global_detail.poison_percentage }}{{#global_detail.sleep_percentage }},
+                                                <span class="sleep">{{ global_detail.sleep_percentage }}%</span>{{/global_detail.sleep_percentage }}{{#global_detail.boost }},
+                                                {{ global_detail.boost }}{{/global_detail.boost }}{{#global_detail.critique_attack }},
+                                                <span class="attack">Crit</span>{{/global_detail.critique_attack }})
+                                                <span class="gm">CR/GM</span>
+                                            </span>
+                                </p>
+                                {{/attacks.gm}}
+                                {{#attacks.cm}}
+                                <p>
+                                    <span class="type"><img src="{{ global_detail.type_full }}" alt=""/></span>
+                                    {{#global_detail.useless }}<span title="Inutile">{{/global_detail.useless }}
+                                            {{#global_detail.informations }}<span title="{{ global_detail.informations }}">{{/global_detail.informations }}
+                                                {{ global_detail.name }}
+                                                ({{^global_detail.power }}—{{/global_detail.power }}{{#global_detail.power }}{{ global_detail.power }}{{/global_detail.power }},
+                                                {{^global_detail.precision }}—{{/global_detail.precision }}{{#global_detail.precision }}{{ global_detail.precision }}%{{/global_detail.precision }}{{#global_detail.burn_percentage }},
+                                                <span class="burn">{{ global_detail.burn_percentage }}%</span>{{/global_detail.burn_percentage }}{{#global_detail.freeze_percentage }},
+                                                <span class="freeze">{{ global_detail.freeze_percentage }}%</span>{{/global_detail.freeze_percentage }}{{#global_detail.paralyse_percentage }},
+                                                <span class="paralyze">{{ global_detail.paralyse_percentage }}%</span>{{/global_detail.paralyse_percentage }}{{#global_detail.scare_percentage }},
+                                                <span class="flinch">{{ global_detail.scare_percentage }}%</span>{{/global_detail.scare_percentage }}{{#global_detail.poison_percentage }},
+                                                <span class="poison">{{ global_detail.poison_percentage }}%</span>{{/global_detail.poison_percentage }}{{#global_detail.sleep_percentage }},
+                                                <span class="sleep">{{ global_detail.sleep_percentage }}%</span>{{/global_detail.sleep_percentage }}{{#global_detail.boost }},
+                                                {{ global_detail.boost }}{{/global_detail.boost }}{{#global_detail.critique_attack }},
+                                                <span class="attack">Crit</span>{{/global_detail.critique_attack }})
+                                                <span class="cm">CM</span>
+                                            </span>
+                                </p>
+                                {{/attacks.cm}}
                             </div>
                         </div>
                     </div>

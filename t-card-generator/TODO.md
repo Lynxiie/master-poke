@@ -24,7 +24,8 @@
   - On doit toujours pouvoir ajouter une CT à un Pokémon sans dépenser de CT (échange avec un Pokémon connaissant la CT)
 - [ ] Edition des attaques d'une espèce
   - [ ] Retrait
-  - [ ] Modification du niveau
+  - [ ] Modification du niveau ou de l'apprentissage
+  - [ ] Trier alphanumériquement (résoudre pb accent et caractères spéciaux)
 - [ ] Pouvoir retirer une attaque apprise
   - exemple : cas d'échange d'un Pokémon non shiny pour un shiny qui ne connait pas les mêmes attaques
 - [ ] Edition d'une espèce
