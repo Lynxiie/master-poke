@@ -70,7 +70,24 @@
               Aucune
             {% else %}
               {% for attack in poke.no_evol_attack %}
-                {{ attack.attack.name }} (lvl {{ attack.level }})<br>
+                {{ attack.attack.name }}
+                  (
+                  {% if attack.level %}
+                    lvl {{ attack.level }}
+                  {% endif %}
+                  {% if attack.ct %}
+                      CT
+                  {% endif %}
+                  {% if attack.cs %}
+                      CS
+                  {% endif %}
+                  {% if attack.cm %}
+                      CM
+                  {% endif %}
+                  {% if attack.gm %}
+                     GM
+                  {% endif %}
+                  )<br>
               {% endfor %}
             {% endif %}
           </td>
