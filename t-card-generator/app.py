@@ -1318,8 +1318,11 @@ def edit_pokemon(character_id: int, pokemon_id: int):
         for category
         in PokemonCategory.query.filter(PokemonCategory.character_id == character_id).all()
     ]
+    background_options = SpriteBackground.get_background(character_id)
+
     form.species_id.choices = species_options
     form.category_id.choices = categories_options
+    form.background.choices = background_options
 
     if request.method == 'POST' and form.validate():
         pokemon.name = form.name.data
