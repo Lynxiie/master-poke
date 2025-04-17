@@ -569,127 +569,127 @@ input[type="radio"][name="team"]:checked + label img {
 }
 
 .poke-bloc .sea_morning {
-    background: url("../images/background/sea_morning.png");
+    background-image: url("../images/background/sea_morning.png");
 }
 
 .poke-bloc .sea_afternoon {
-    background: url("../images/background/sea_afternoon.png");
+    background-image: url("../images/background/sea_afternoon.png");
 }
 
 .poke-bloc .sea_night {
-    background: url("../images/background/sea_night.png");
+    background-image: url("../images/background/sea_night.png");
 }
 
 .poke-bloc .wood_afternoon {
-    background: url("../images/background/wood_afternoon.png");
+    background-image: url("../images/background/wood_afternoon.png");
 }
 
 .poke-bloc .wood_morning {
-    background: url("../images/background/wood_morning.png");
+    background-image: url("../images/background/wood_morning.png");
 }
 
 .poke-bloc .wood_night {
-    background: url("../images/background/wood_night.png");
+    background-image: url("../images/background/wood_night.png");
 }
 
 .poke-bloc .mountains_spring_morning {
-    background: url("../images/background/mountains_spring_morning.png");
+    background-image: url("../images/background/mountains_spring_morning.png");
 }
 
 .poke-bloc .mountains_spring_afternoon {
-    background: url("../images/background/mountains_spring_afternoon.png");
+    background-image: url("../images/background/mountains_spring_afternoon.png");
 }
 
 .poke-bloc .mountains_spring_night {
-    background: url("../images/background/mountains_spring_night.png");
+    background-image: url("../images/background/mountains_spring_night.png");
 }
 
 .poke-bloc .mountains_summer_morning {
-    background: url("../images/background/mountains_summer_morning.png");
+    background-image: url("../images/background/mountains_summer_morning.png");
 }
 
 .poke-bloc .mountains_summer_afternoon {
-    background: url("../images/background/mountains_summer_afternoon.png");
+    background-image: url("../images/background/mountains_summer_afternoon.png");
 }
 
 .poke-bloc .mountains_summer_night {
-    background: url("../images/background/mountains_summer_night.png");
+    background-image: url("../images/background/mountains_summer_night.png");
 }
 
 .poke-bloc .mountains_autumn_morning {
-    background: url("../images/background/mountains_autumn_morning.png");
+    background-image: url("../images/background/mountains_autumn_morning.png");
 }
 
 .poke-bloc .mountains_autumn_afternoon {
-    background: url("../images/background/mountains_autumn_afternoon.png");
+    background-image: url("../images/background/mountains_autumn_afternoon.png");
 }
 
 .poke-bloc .mountains_autumn_night {
-    background: url("../images/background/mountains_autumn_night.png");
+    background-image: url("../images/background/mountains_autumn_night.png");
 }
 
 .poke-bloc .mountains_winter_morning {
-    background: url("../images/background/mountains_winter_morning.png");
+    background-image: url("../images/background/mountains_winter_morning.png");
 }
 
 .poke-bloc .mountains_winter_afternoon {
-    background: url("../images/background/mountains_winter_afternoon.png");
+    background-image: url("../images/background/mountains_winter_afternoon.png");
 }
 
 .poke-bloc .mountains_winter_night {
-    background: url("../images/background/mountains_winter_night.png");
+    background-image: url("../images/background/mountains_winter_night.png");
 }
 
 .poke-bloc .cave_snow {
-    background: url("../images/background/cave_snow.png");
+    background-image: url("../images/background/cave_snow.png");
 }
 
 .poke-bloc .cave_hot {
-    background: url("../images/background/cave_hot.png");
+    background-image: url("../images/background/cave_hot.png");
 }
 
 .poke-bloc .cave_dark {
-    background: url("../images/background/cave_dark.png");
+    background-image: url("../images/background/cave_dark.png");
 }
 
 .poke-bloc .cave {
-    background: url("../images/background/cave.png");
+    background-image: url("../images/background/cave.png");
 }
 
 .poke-bloc .plain_morning {
-    background: url("../images/background/plain_morning.png");
+    background-image: url("../images/background/plain_morning.png");
 }
 
 .poke-bloc .plain_afternoon {
-    background: url("../images/background/plain_afternoon.png");
+    background-image: url("../images/background/plain_afternoon.png");
 }
 
 .poke-bloc .plain_night {
-    background: url("../images/background/plain_night.png");
+    background-image: url("../images/background/plain_night.png");
 }
 
 .poke-bloc .dune_afternoon {
-    background: url("../images/background/dune_afternoon.png");
+    background-image: url("../images/background/dune_afternoon.png");
 }
 
 .poke-bloc .dune_morning {
-    background: url("../images/background/dune_morning.png");
+    background-image: url("../images/background/dune_morning.png");
 }
 
 .poke-bloc .dune_night {
-    background: url("../images/background/dune_night.png");
+    background-image: url("../images/background/dune_night.png");
 }
 
 .poke-bloc .lake_afternoon {
-    background: url("../images/background/lake_afternoon.png");
+    background-image: url("../images/background/lake_afternoon.png");
 }
 
 .poke-bloc .lake_morning {
-    background: url("../images/background/lake_morning.png");
+    background-image: url("../images/background/lake_morning.png");
 }
 
 .poke-bloc .lake_night {
-    background: url("../images/background/lake_night.png");
+    background-image: url("../images/background/lake_night.png");
 }
 
 .top-info {
