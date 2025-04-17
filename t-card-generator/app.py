@@ -4,7 +4,7 @@ from flask import render_template, redirect, url_for, flash, request
 from wtforms.validators import NumberRange
 
 from database import app, db
-from enums import Object as ObjectType, HistoryMouvment, Assortment, GoalCategory, EvolutionWay
+from enums import Object as ObjectType, HistoryMouvment, Assortment, GoalCategory, EvolutionWay, SpriteBackground
 from forms import MoneyForm, CsHistoryForm, FluteHistoryForm, SocialForm, \
     JourneyChapterForm, JourneyForm, InventoryForm, ObjectForm, CtForm, JustificatifLinkForm, AssortmentForm, \
     CtReservationListForm, GoalsListForm, GoalsForm, InventoryExchangeForm, PokemonSpeciesForm, \
@@ -1257,8 +1257,11 @@ def new_pokemon(character_id: int):
         in PokemonCategory.query.filter(PokemonCategory.character_id.in_([character_id, 0]))
         .all()
     ]
+    background = SpriteBackground.get_background(character_id)
+
     form.species_id.choices = species_options
     form.category_id.choices = categories_options
+    form.background.choices = background
 
     if request.method == 'POST' and form.validate():
         pokemon_owned = PokemonOwned(character_id=character_id)
@@ -1409,10 +1412,12 @@ def exchange_pokemon(character_id: int):
 
     species = [(species.id, species.species) for species in PokemonSpecies.query.all()]
     categories = [(category.id, category.name) for category in PokemonCategory.query.all()]
+    background = SpriteBackground.get_background(character_id)
 
     for pokemon_form in form.new_pokemon:
         pokemon_form.species_id.choices = species
         pokemon_form.category_id.choices = categories
+        pokemon_form.background.choices = background
 
     if request.method == 'POST':
 
@@ -1437,6 +1442,7 @@ def exchange_pokemon(character_id: int):
             for pokemon_form in form.new_pokemon:
                 pokemon_form.species_id.choices = species
                 pokemon_form.category_id.choices = categories
+                pokemon_form.background.choices = background
 
             return _render()
 

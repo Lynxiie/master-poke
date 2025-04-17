@@ -15,7 +15,7 @@
 - [ ] Gestions des rangs
 - [ ] Gestion des catégories par personnages
 - [ ] Meilleure gestion des logs internes
-
+- [ ] Prévoir le cas des Pokémon assexués
 
 ## Non priorisé
 - [ ] Utiliser une CT depuis l'inventaire marque l'attaque comme apprise

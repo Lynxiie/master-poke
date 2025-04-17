@@ -190,34 +190,42 @@ class SpriteBackground(CustomEnum):
     """
     Listes des backgrounds possibles pour les sprites
     """
-    BEACH_AFTERNOON = 'beach_afternoon', 'Plage (après-midi)'
-    BEACH_MORNING = 'beach_morning', 'Plage (matin)'
-    BEACH_NIGHT = 'beach_night', 'Plage (nuit)'
-    WOOD_AFTERNOON = 'wood_afternoon', 'Bois (après-midi)'
-    WOOD_MORNING = 'wood_morning', 'Bois (matin)'
-    WOOD_NIGHT = 'wood_night', 'Bois (nuit)'
-    LABO = 'labo', 'Labo'
-    BRIGDE_AFTERNOON = 'brigde_afternoon', 'Pont (après-midi)'
-    BRIGDE_DAWN = 'brigde_dusk', 'Pont (crépuscule)'
-    BRIGDE_MOON_LIGHT = 'brigde_moon_light', 'Pont (clair de lune)'
-    BRIGDE_MORNING = 'brigde_morning', 'Pont (matin)'
-    BRIGDE_NIGHT = 'brigde_night', 'Pont (nuit)'
-    PLAINS_AFTERNOON = 'plains_afternoon', 'Plaines (après-midi)'
-    PLAINS_MORNING = 'plains_morning', 'Plaines (matin)'
-    PLAINS_NIGHT = 'plains_night', 'Plaines (nuit)'
-    SEA_NIGHT = 'sea_night', 'Mer (nuit)'
-    SEA_AFTERNOON = 'sea_afternoon', 'Mer (après-midi)'
-    SEA_MORNING = 'sea_morning', 'Mer (matin)'
-    MOUNTAIN_FIELD = 'mountain_field', 'Montagnes'
-    MOUNTAIN_MORNING = 'mountain_morning', 'Montagnes (matin)'
-    MOUNTAIN_AFTERNOON = 'mountain_afternoon', 'Montagnes (après-midi)'
-    MOUNTAIN_NIGHT = 'mountain_night', 'Montagnes (nuit)'
-    BATTLE_MORNING = 'battle_morning', 'Battlefield (matin)'
-    BATTLE_AFTERNOON = 'battle_afternoon', 'Battlefield (après-midi)'
-    BATTLE_NIGHT = 'battle_night', 'Battlefield (nuit)'
-    ROCK_BRIDGE_MORNING = 'rock_bridge_morning', 'Pont de pierre (matin)'
-    ROCK_BRIDGE_AFTERNOON = 'rock_bridge_afternoon', 'Pont de pierre (après-midi)'
-    ROCK_BRIDGE_NIGHT = 'rock_bridge_night', 'Pont de pierre (nuit)'
-    WALL_MORNING = 'wall_morning', 'Mur (matin)'
-    WALL_AFTERNOON = 'wall_afternoon', 'Mur (après-midi)'
-    WALL_NIGHT = 'wall_night', 'Mur (nuit)'
+    BEACH_AFTERNOON = 'beach_afternoon', 'Plage (après-midi)', 1
+    BEACH_MORNING = 'beach_morning', 'Plage (matin)', 1
+    BEACH_NIGHT = 'beach_night', 'Plage (nuit)', 1
+    WOOD_AFTERNOON = 'wood_afternoon', 'Bois (après-midi)', 2
+    WOOD_MORNING = 'wood_morning', 'Bois (matin)', 2
+    WOOD_NIGHT = 'wood_night', 'Bois (nuit)', 2
+    LABO = 'labo', 'Labo', 1
+    BRIGDE_AFTERNOON = 'brigde_afternoon', 'Pont (après-midi)', 1
+    BRIGDE_DAWN = 'brigde_dusk', 'Pont (crépuscule)', 1
+    BRIGDE_MOON_LIGHT = 'brigde_moon_light', 'Pont (clair de lune)', 1
+    BRIGDE_MORNING = 'brigde_morning', 'Pont (matin)', 1
+    BRIGDE_NIGHT = 'brigde_night', 'Pont (nuit)', 1
+    PLAINS_AFTERNOON = 'plains_afternoon', 'Plaines (après-midi)', 1
+    PLAINS_MORNING = 'plains_morning', 'Plaines (matin)', 1
+    PLAINS_NIGHT = 'plains_night', 'Plaines (nuit)', 1
+    SEA_NIGHT = 'sea_night', 'Mer (nuit)', 2
+    SEA_AFTERNOON = 'sea_afternoon', 'Mer (après-midi)', 2
+    SEA_MORNING = 'sea_morning', 'Mer (matin)', 2
+    MOUNTAIN_FIELD = 'mountain_field', 'Montagnes', 1
+    MOUNTAIN_MORNING = 'mountain_morning', 'Montagnes (matin)', 1
+    MOUNTAIN_AFTERNOON = 'mountain_afternoon', 'Montagnes (après-midi)', 1
+    MOUNTAIN_NIGHT = 'mountain_night', 'Montagnes (nuit)', 1
+    BATTLE_MORNING = 'battle_morning', 'Battlefield (matin)', 1
+    BATTLE_AFTERNOON = 'battle_afternoon', 'Battlefield (après-midi)', 1
+    BATTLE_NIGHT = 'battle_night', 'Battlefield (nuit)', 1
+    ROCK_BRIDGE_MORNING = 'rock_bridge_morning', 'Pont de pierre (matin)', 1
+    ROCK_BRIDGE_AFTERNOON = 'rock_bridge_afternoon', 'Pont de pierre (après-midi)', 1
+    ROCK_BRIDGE_NIGHT = 'rock_bridge_night', 'Pont de pierre (nuit)', 1
+    WALL_MORNING = 'wall_morning', 'Mur (matin)', 1
+    WALL_AFTERNOON = 'wall_afternoon', 'Mur (après-midi)', 1
+    WALL_NIGHT = 'wall_night', 'Mur (nuit)', 1
+
+    @classmethod
+    def get_background(cls, character_id: int) -> List[tuple[str, str]]:
+        return [
+            (member.value[0], member.value[1])
+            for _, member in cls.__members__.items()
+            if member.value[2] == character_id
+        ]

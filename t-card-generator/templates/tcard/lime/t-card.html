@@ -262,14 +262,17 @@
                 {{#histories}}
                 <div>
                     {{ date }}<br>
-                    {{#history.objects_in_exchange}}
-                    <i class="fa-solid {{ history.icon }}"></i>
-                    <span class="out">{{{ history.objects_out_exchange }}}</span> vs <span class="in">{{{ history.objects_in_exchange }}}</span>
-                    {{/history.objects_in_exchange}}
-                    {{^history.objects_in_exchange}}
-                    <i class="fa-solid {{ history.icon }}"></i> {{{ history.objects }}}
-                    {{/history.objects_in_exchange}}
-                    ✭ <a href="{{ history.link }}" target="_blank">{{ history.link_title }}</a>
+                    {{#history}}
+                        {{#objects_in_exchange}}
+                        <i class="fa-solid {{ icon }}"></i>
+                        <span class="out">{{{ objects_out_exchange }}}</span> vs <span class="in">{{{ objects_in_exchange }}}</span>
+                        {{/objects_in_exchange}}
+                        {{^objects_in_exchange}}
+                        <i class="fa-solid {{ icon }}"></i> {{{ objects }}}
+                        {{/objects_in_exchange}}
+                        ✭ <a href="{{ link }}" target="_blank">{{ link_title }}</a>
+                        <br>
+                    {{/history}}
                 </div>
                 {{/histories}}
             </div>
@@ -287,6 +290,17 @@
                     {{/last_used}}
                 </div>
 {{/csHistory}}
+{{#fluteHistory}}
+                <div>
+                    <span>{{ object.name }} ✭ {{ frequency }}</span>
+                    {{#last_used}}
+                    <span><a href="{{ link }}" target="_blank">{{ last_used }}</a></span>
+                    {{/last_used}}
+                    {{^last_used}}
+                    <span>Non utilisée</span>
+                    {{/last_used}}
+                </div>
+{{/fluteHistory}}
             </div>
 
             <!-- argent -->
@@ -545,6 +559,7 @@
                             {{#types_icon}}
                                 <img class="type" src="{{ . }}" alt=""/>
                             {{/types_icon}}
+                            {{#shiny}}<img class="type" src="../images/icons/shiny.png" alt=""/>{{/shiny}}
                         </div>
                         <div>
                             <span class="info">
@@ -725,7 +740,7 @@
                     <a href="{{ link }}" target="_blank">
                         <i class="fa-solid {{ icon }}"></i>
                     </a>
-                    {{name}} ! ♦
+                    {{name}} ♦
                     {{ feat }}
                     <br>
                 {{/journeys}}
@@ -1502,7 +1517,10 @@
     const radioSbireChecked = document.querySelector('input[name="team-sbire"]:checked');
     const pokeBloc = document.querySelectorAll('.poke-bloc');
 
-    displayPokemon(radioChecked.id)
+    if (radioChecked) {
+        displayPokemon(radioChecked.id)
+    }
+
     // displayPokemon(radioSbireChecked.id)
 
     radios.forEach(radio => {

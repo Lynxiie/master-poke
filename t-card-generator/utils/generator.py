@@ -382,18 +382,21 @@ def get_inventory_data(character: MpCharacter, character_id: int, data: dict[str
         for history in histories:
             history.icon = '►' if history.movement == 'in' else '◄' if history.movement == 'out' else '◄►'
     elif character.firstname == 'Lime':
-        temp_history = []
+        grouped_history = defaultdict(list)
+
         for history in histories:
             history.icon = (
                 'fa-arrow-right-long ' if history.movement == 'in'
                 else 'fa-arrow-left-long' if history.movement == 'out'
                 else 'fa-arrow-right-arrow-left'
             )
-            temp_history.append({
-                'date': history.movement_date,
-                'history': history
-            })
-        histories = temp_history
+
+            grouped_history[history.movement_date].append(history)
+
+        histories = [
+            {'date': date, 'history': items}
+            for date, items in grouped_history.items()
+        ]
 
     data['ballsCat'] = convert_object_for_ihm(balls, character_id)
     data['healsCat'] = convert_object_for_ihm(heals, character_id)

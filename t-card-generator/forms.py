@@ -7,7 +7,7 @@ from wtforms.fields.numeric import IntegerField
 from wtforms.fields.simple import SubmitField, URLField, BooleanField, HiddenField
 from wtforms.validators import Length, DataRequired, NumberRange, InputRequired, Optional
 
-from enums import Status, Region, Sex, JourneyStatus, TypePokemon, SpriteBackground
+from enums import Status, Region, Sex, JourneyStatus, TypePokemon
 
 
 class InformationsForm(Form):
@@ -347,7 +347,7 @@ class PokemonOwnedForm(Form):
     sprite_credits = StringField('Sprite Credits', validators=[Length(max=255)])
     category_id = SelectField('Catégorie', coerce=int, validators=[DataRequired()])
     egg = BooleanField('Oeuf')
-    background = SelectField('Sprite background', choices=SpriteBackground.to_tuple_str(), validators=[DataRequired()])
+    background = SelectField('Sprite background', validators=[DataRequired()])
     banner_credit = StringField('Crédit bannière')
 
 
@@ -417,7 +417,7 @@ class ExchangePokemonNewForm(Form):
     sprite_credits = StringField('Sprite Credits', validators=[Length(max=255)])
     category_id = SelectField('Catégorie', coerce=int, validators=[DataRequired()])
     egg = BooleanField('Oeuf')
-    background = SelectField('Sprite background', choices=SpriteBackground.to_tuple_str(), validators=[DataRequired()])
+    background = SelectField('Sprite background', validators=[DataRequired()])
     banner_credit = StringField('Crédit bannière')
 
 

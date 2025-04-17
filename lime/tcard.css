@@ -519,6 +519,9 @@ input[type="radio"][name="team"]:checked + label img {
     background: var(--ter-color);
     border: 1px var(--border-color) solid;
     border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    object-fit: none;
 }
 
 .poke-bloc {
