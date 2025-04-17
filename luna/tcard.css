@@ -79,7 +79,7 @@ a:hover {
 }
 
 .card li {
-	list-style-image: url('https://i.ibb.co/XxTYJvV/Pokeball-liste.png');
+	list-style-image: url('../images/icons/pokeball-liste.png');
 }
 
 .title img {
@@ -235,39 +235,39 @@ a:hover {
 }
 
 .flinch::after {
-	background-image: url("https://i.ibb.co/rwKDyp7/peur.png");
+	background-image: url("../images/icons/peur.png");
 }
 
 .burn::after {
-	background-image: url("https://i.ibb.co/RN80WWh/feu.png");
+	background-image: url("../images/icons/feu.png");
 }
 
 .paralyze::after{
-	background-image: url("https://i.ibb.co/0YhDQTd/foudre.png");
+	background-image: url("../images/icons/foudre.png");
 }
 
 .sleep::after {
-	background-image: url("https://i.ibb.co/hYZ6DNb/dodo.png");
+	background-image: url("../images/icons/dodo.png");
 }
 
 .poison::after {
-	background-image: url("https://i.ibb.co/bzq7qDz/poison.png");
+	background-image: url("../images/icons/poison.png");
 }
 
 .attack::after {
-	background-image: url("https://i.ibb.co/xszYStJ/epee.png");
+	background-image: url("../images/icons/epee.png");
 }
 
 .freeze::after {
-	background-image: url("https://i.ibb.co/86nM25g/gele.png");
+	background-image: url("../images/icons/gele.png");
 }
 
 .recoil::after {
-	background-image: url("https://i.ibb.co/RcH3jqv/revenir.png");
+	background-image: url("../images/icons/revenir.png");
 }
 
 .rest::after {
-	background-image: url("https://i.ibb.co/4j1qhgH/du-repos.png");
+	background-image: url("../images/icons/du-repos.png");
 }
 
 .flinch::after, .burn::after, .paralyze::after, .sleep::after, .poison::after, .attack::after, .freeze::after, .recoil::after, .rest::after {
@@ -343,8 +343,128 @@ input[type=radio], .pokemons {
 	display: block;
 }
 
+.beach_afternoon,
+.battle_afternoon,
+.battle_morning,
+.battle_night,
+.beach_morning,
+.beach_night,
+.brigde_afternoon,
+.brigde_dusk,
+.brigde_moon_light,
+.brigde_morning,
+.brigde_night,
+.labo,
+.mountain_afternoon,
+.mountain_field,
+.mountain_morning,
+.mountain_night,
+.plains_afternoon,
+.plains_morning,
+.plains_night,
+.rock_bridge_afternoon,
+.rock_bridge_morning,
+.rock_bridge_night,
+.wall_afternoon,
+.wall_morning,
+.wall_night {
+	background-size: cover;
+}
+
+.wall_night {
+	background-image: url('../images/background/wall_night.jpg');
+}
+
+.wall_morning {
+	background-image: url('../images/background/wall_morning.jpg');
+}
+
+.wall_afternoon {
+	background-image: url('../images/background/wall_afternoon.jpg');
+}
+
+.rock_bridge_night {
+	background-image: url('../images/background/rock_bridge_night.jpg');
+}
+
+.rock_bridge_morning {
+	background-image: url('../images/background/rock_bridge_morning.jpg');
+}
+
+.rock_bridge_afternoon {
+	background-image: url('../images/background/rock_bridge_afternoon.jpg');
+}
+
+.plains_night {
+	background-image: url('../images/background/plains_night.jpg');
+}
+
+.plains_morning {
+	background-image: url('../images/background/plains_morning.jpg');
+}
+
+.plains_afternoon {
+	background-image: url('../images/background/plains_afternoon.jpg');
+}
+
+.mountain_night {
+	background-image: url('../images/background/mountain_night.jpg');
+}
+
+.mountain_morning {
+	background-image: url('../images/background/mountain_morning.jpg');
+}
+
+.mountain_field {
+	background-image: url('../images/background/mountain_field.jpg');
+}
+
+.mountain_afternoon {
+	background-image: url('../images/background/mountain_afternoon.jpg');
+}
+
+.labo {
+	background-image: url('../images/background/labo.jpg');
+}
+
+.brigde_night {
+	background-image: url('../images/background/brigde_night.png');
+}
+
+.brigde_morning {
+	background-image: url('../images/background/brigde_morning.png');
+}
+
+.brigde_afternoon {
+	background-image: url('../images/background/brigde_afternoon.png');
+}
+
+.brigde_dusk {
+	background-image: url('../images/background/brigde_dusk.png');
+}
+
+.beach_night {
+	background-image: url('../images/background/beach_night.jpg');
+}
+
+.beach_morning {
+	background-image: url('../images/background/beach_morning.jpg');
+}
+
 .beach_afternoon {
-	background: url('../images/background/beach_afternoon.jpg');
+	background-image: url('../images/background/beach_afternoon.jpg');
+}
+
+.battle_afternoon {
+	background-image: url('../images/background/battle_afternoon.jpg');
+}
+
+.battle_morning {
+	background-image: url('../images/background/battle_morning.jpg');
+}
+
+.battle_night {
+	background-image: url('../images/background/battle_night.jpg');
 }
 
 #content-p1 .banner img {
