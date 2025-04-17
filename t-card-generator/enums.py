@@ -221,6 +221,31 @@ class SpriteBackground(CustomEnum):
     WALL_MORNING = 'wall_morning', 'Mur (matin)', 1
     WALL_AFTERNOON = 'wall_afternoon', 'Mur (après-midi)', 1
     WALL_NIGHT = 'wall_night', 'Mur (nuit)', 1
+    MOUNTAINS_SPRING_MORNING = 'mountains_spring_morning', 'Montagne (printemps, matin)', 2
+    MOUNTAINS_SPRING_AFTERNOON = 'mountains_spring_afternoon', 'Montagne (printemps, après-midi)', 2
+    MOUNTAINS_SPRING_NIGHT = 'mountains_spring_night', 'Montagne (printemps, nuit)', 2
+    MOUNTAINS_SUMMER_MORNING = 'mountains_summer_morning', 'Montagne (été, matin)', 2
+    MOUNTAINS_SUMMER_AFTERNOON = 'mountains_summer_afternoon', 'Montagne (été, après-midi)', 2
+    MOUNTAINS_SUMMER_NIGHT = 'mountains_summer_night', 'Montagne (été, nuit)', 2
+    MOUNTAINS_AUTUMN_MORNING = 'mountains_autumn_morning', 'Montagne (automne, matin)', 2
+    MOUNTAINS_AUTUMN_AFTERNOON = 'mountains_autumn_afternoon', 'Montagne (automne, après-midi)', 2
+    MOUNTAINS_AUTUMN_NIGHT = 'mountains_autumn_night', 'Montagne (automne, nuit)', 2
+    MOUNTAINS_WINTER_MORNING = 'mountains_winter_morning', 'Montagne (hiver, matin)', 2
+    MOUNTAINS_WINTER_AFTERNOON = 'mountains_winter_afternoon', 'Montagne (hiver, après-midi)', 2
+    MOUNTAINS_WINTER_NIGHT = 'mountains_winter_night', 'Montagne (hiver, nuit)', 2
+    CAVE_SNOW = 'cave_snow', 'Cave (neige)', 2
+    CAVE_HOT = 'cave_hot', 'Cave (volcan)', 2
+    CAVE_DARK = 'cave_dark', 'Cave (sombre)', 2
+    CAVE = 'cave', 'Cave', 2
+    PLAIN_MORNING = 'plain_morning', 'Plaines (matin)', 2
+    PLAIN_AFTERNOON = 'plain_afternoon', 'Plaines (après-midi)', 2
+    PLAIN_NIGHT = 'plain_night', 'Plaines (nuit)', 2
+    DUNE_AFTERNOON = 'dune_afternoon', 'Dune (après-midi)', 2
+    DUNE_MORNING = 'dune_morning', 'Dune (matin)', 2
+    DUNE_NIGHT = 'dune_night', 'Dune (nuit)', 2
+    LAKE_AFTERNOON = 'lake_afternoon', 'Lac (après-midi)', 2
+    LAKE_MORNING = 'lake_morning', 'Lac (matin)', 2
+    LAKE_NIGHT = 'lake_night', 'Lac (nuit)', 2
 
     @classmethod
     def get_background(cls, character_id: int) -> List[tuple[str, str]]:
