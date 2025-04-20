@@ -1425,7 +1425,6 @@
 
         <div>
             {{#socials_pnj}}
-            <!--			Cassonade-->
             <div class="social">
                 <img src="../images/connaissances/{{ slug_full_name }}.jpg" alt="{{ full_name }}"/>
                 <span class="name">{{ full_name }} <br> {{ bond }}</span>
@@ -1451,6 +1450,37 @@
                 </div>
             </div>
             {{/socials_pnj}}
+        </div>
+
+        <p>PJ</p>
+
+        <div>
+            {{#socials_pj}}
+            <div class="social">
+                <img src="../images/connaissances/{{ slug_full_name }}.jpg" alt="{{ full_name }}"/>
+                <span class="name">{{ full_name }} <br> {{ bond }}</span>
+                <div class="description scroll">
+                    {{#hexa_text}}
+                    <ins style="color:{{ hexa_text }}">{{ hexa_text }}</ins><br>
+                    {{/hexa_text}}
+                    {{ description }}
+                    <p>Pokémon</p>
+                    {{#pokemon}}
+                    <img src="../images/pokemon/icon/{{ slug_pokemon }}.png" title="{{ pokemon_name }}" alt="{{ pokemon_name }}"/>
+                    {{/pokemon}}
+                    {{^pokemon}}
+                    Aucun
+                    {{/pokemon}}
+                    <p>Sujets</p>
+                    {{#subjects}}
+                    <a href="{{ link }}" target="_blank">♦</a>
+                    {{/subjects}}
+                    {{^subjects}}
+                    Aucun
+                    {{/subjects}}
+                </div>
+            </div>
+            {{/socials_pj}}
         </div>
     </div>
 
