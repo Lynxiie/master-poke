@@ -1,3 +1,4 @@
 /t-card-generator/.venv/
 /t-card-generator/.idea/
+/t-card-generator/database.py
 /.idea/
