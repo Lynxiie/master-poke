@@ -1,4 +1,7 @@
 /t-card-generator/.venv/
 /t-card-generator/.idea/
+/t-card-generator/__pycache__/
+/t-card-generator/_tests/__pycache__/
+/t-card-generator/utils/__pycache__/
 /t-card-generator/database.py
 /.idea/
