@@ -157,7 +157,7 @@ a:hover {
 }
 
 .inventaire img {
-	width: 24px;	
+	width: 24px;
 	height: 24px;
 	object-fit: none;
 }
@@ -443,6 +443,10 @@ input[type=radio], .pokemons {
 	background-image: url('../images/background/brigde_dusk.png');
 }
 
+.brigde_moon_light {
+	background-image: url('../images/background/brigde_moon_light.png');
+}
+
 .beach_night {
 	background-image: url('../images/background/beach_night.jpg');
 }
@@ -553,6 +557,10 @@ input[type=radio], .pokemons {
 
 #content-p32 .banner img {
 	object-position: 0 -80px;
+	object-fit: cover;
+}
+
+#content-p33 .banner img {
 	object-fit: cover;
 }
 
