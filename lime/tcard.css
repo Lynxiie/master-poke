@@ -566,6 +566,7 @@ input[type="radio"][name="team"]:checked + label img {
 .poke-bloc .lake_morning,
 .poke-bloc .lake_night {
     background-size: cover;
+    background-position-y: center;
 }
 
 .poke-bloc .sea_morning {
@@ -708,6 +709,14 @@ input[type="radio"][name="team"]:checked + label img {
     height: 100px;
     width: 100px;
     align-items: center;
+}
+
+.top-info div:first-child span {
+    background: var(--ter-color);
+    border: var(--border-color) 1px solid;
+    color: var(--main-text-color);
+    padding: 2px 3px;
+    margin-top: 2px;
 }
 
 .top-info img {
