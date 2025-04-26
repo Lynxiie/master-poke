@@ -1,3 +1,5 @@
+import locale
+
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import DeclarativeBase
@@ -12,3 +14,5 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///C:/Users/ordid/Documents/mast
 app.secret_key = b'GXa3Kjm4FWJuWtN05Qk8oA'
 
 db = SQLAlchemy(model_class=Base, app=app)
+
+locale.setlocale(locale.LC_ALL, 'fr_FR')

@@ -1,0 +1,48 @@
+:root {
+    --neutral-color: #7b22d7;
+    --darker-color: #4b009a;
+    --lighter-color: #e3c9ff;
+}
+
+h1, h2 {
+    color: var(--neutral-color);
+}
+
+.content {
+    border-color: var(--darker-color);
+}
+
+.nav {
+    background: var(--neutral-color);
+    color: var(--lighter-color);
+}
+
+.scroll {
+    scrollbar-color: var(--neutral-color) var(--lighter-color);
+}
+
+summary::before,
+summary::after {
+    content: '☆';
+}
+
+details[open] summary::before,
+details[open] summary::after {
+    content: '☆☆';
+}
+
+.result span {
+    color: var(--neutral-color);
+}
+
+a, a:visited {
+    color: var(--neutral-color);
+}
+
+a:hover {
+    color: var(--darker-color);
+}
+
+.recap {
+    border-left-color: var(--darker-color);
+}

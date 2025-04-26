@@ -1,4 +1,4 @@
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 
 from flask import render_template, redirect, url_for, flash, request
 from wtforms.validators import NumberRange
@@ -10,10 +10,12 @@ from forms import MoneyForm, CsHistoryForm, FluteHistoryForm, SocialForm, \
     CtReservationListForm, GoalsListForm, GoalsForm, InventoryExchangeForm, PokemonSpeciesForm, \
     PokemonAttacksForm, PokemonAttackForm, PokemonSpeciesAttacksForm, PokemonSpeciesAttackForm, PokemonCategoryForm, \
     PokemonOwnedForm, PokemonXpForm, PokemonEvolutionForm, GivePokemonForm, ExchangePokemonForm, \
-    ExchangePokemonNewForm, LearnAttacksForm, LearnAttackForm, ToPensionForm, LeavePensionForm, PokemonStatsForm
+    ExchangePokemonNewForm, LearnAttacksForm, LearnAttackForm, ToPensionForm, LeavePensionForm, PokemonStatsForm, \
+    NewPostForm, NewNdmSubjectForm, SubjectForm, NdmRewardForm
 from models import CsHistory, Ct, Money, FluteHistory, Social, Object, \
     History, JustificatifLink, SocialPokemon, SocialSubject, JourneyChapter, Journey, Goals, PokemonSpecies, \
-    PokemonAttacks, PokemonSpeciesAttacks, PokemonCategory, PokemonOwned, PokemonOwnedAttacks
+    PokemonAttacks, PokemonSpeciesAttacks, PokemonCategory, PokemonOwned, PokemonOwnedAttacks, NdmMonths, NdmSubjects, \
+    NdmPosts, NdmRewards
 from utils.generator import modify_cs_flute_data, generate_tcard_part, generate_physique_or_mental
 from utils.levels import level_up_pokemon, get_xp_per_level
 from utils.lists import change_order
@@ -2331,3 +2333,177 @@ def job_missions(character_id: int):
             'home.html',
         )
     return _render()
+
+
+@app.route("/ndm/<int:character_id>", methods=('GET', 'POST'))
+def ndm(character_id: int):
+    """
+    Gestion des NDM
+    :param character_id: l'id du personnage
+    :return: le template
+    """
+    def _render():
+        return render_template(
+            'ndm.html',
+            character=character,
+            add_post_form=add_post_form,
+            add_subject_form=add_subject_form,
+            ndm_reward_form=ndm_reward_form,
+            month_year=f'{current_month.title()} {current_year}',
+            past_month=past_month,
+            subjects=all_subjects,
+        )
+
+    character = MpCharacter.query.filter(MpCharacter.id == character_id).one_or_404()
+
+    current_month = datetime.now().strftime('%B')
+    current_year = datetime.now().strftime('%Y')
+
+    month = (
+        NdmMonths
+        .query
+        .filter(NdmMonths.month == current_month, NdmMonths.year == current_year)
+        .first()
+    )
+
+    if not month:
+        month = NdmMonths(month=current_month, year=current_year)
+        db.session.add(month)
+        db.session.commit()
+        db.session.refresh(month)
+
+    p_month = (date.today().replace(day=1) - timedelta(days=1)).strftime('%B')
+    p_year = (date.today().replace(day=1) - timedelta(days=1)).strftime('%Y')
+
+    past_month = (
+        NdmMonths
+        .query
+        .filter(NdmMonths.month == p_month, NdmMonths.year == p_year)
+        .first()
+    )
+
+    add_post_form = NewPostForm(formdata=request.form)
+    add_subject_form = NewNdmSubjectForm(formdata=request.form)
+    ndm_reward_form = NdmRewardForm(formdata=request.form)
+
+    all_subjects = NdmSubjects.query.filter(NdmSubjects.character_id == character_id, ~NdmSubjects.closed).all()
+
+    if request.method == 'GET':
+        for subject in all_subjects:
+            ndm_posts = NdmPosts.query.filter(NdmPosts.month_id == month.id, NdmPosts.subject_id == subject.id).all()
+
+            subject_form = SubjectForm()
+            subject_form.subject_id = subject.id
+            subject_form.subject_name = subject.name
+            subject_form.actual_words = ' / '.join([str(ndm_post.words) for ndm_post in ndm_posts])
+
+            add_post_form.subjects.append_entry(subject_form)
+
+        if past_month:
+            reward = NdmRewards.query.filter(
+                NdmRewards.month_id == past_month.id,
+                NdmRewards.character_id == character_id
+            ).first()
+            if reward:
+                ndm_reward_form.level_winned.data = reward.level_winned
+                ndm_reward_form.level_winned_justif.data = reward.level_winned_justif
+                ndm_reward_form.distribution.data = reward.distribution
+
+    if request.method == 'POST':
+        if "addPost" in request.form and add_post_form.validate():
+            new_posts = []
+
+            for subject in add_post_form.subjects.data:
+                if subject['words']:
+                    new_posts.append(
+                        NdmPosts(
+                            character_id=character_id,
+                            month_id=month.id,
+                            subject_id=subject['subject_id'],
+                            words=subject['words']
+                        )
+                    )
+
+            db.session.add_all(new_posts)
+            db.session.commit()
+
+            generate_tcard_part(character.id, 'ndm')
+
+            flash(f'Nombre de mots ajoutés dans {len(new_posts)} post(s) avec succès', 'success')
+            return redirect(url_for('ndm', character_id=character_id))
+
+        if "addSubject" in request.form and add_subject_form.validate():
+            ndm_subject = NdmSubjects(
+                character_id=character_id,
+                name=add_subject_form.name.data,
+                url=add_subject_form.url.data,
+                info=add_subject_form.info.data,
+                closed=False
+            )
+            db.session.add(ndm_subject)
+            db.session.commit()
+
+            flash(f'Sujet {ndm_subject.name} ajouté avec succès', 'success')
+            return redirect(url_for('ndm', character_id=character_id))
+
+        if "addReward" in request.form and ndm_reward_form.validate():
+            if not past_month:
+                flash('Pas de mois précédent trouvé', 'danger')
+                return redirect(url_for('ndm', character_id=character_id))
+
+            past_month_id = past_month.id
+
+            reward = NdmRewards.query.filter(
+                NdmRewards.month_id == past_month_id,
+                NdmRewards.character_id == character_id
+            ).first()
+
+            distribution = None
+            if ndm_reward_form.level_winned.data and ndm_reward_form.distribution.data:
+                distribution = (
+                    f'Argent ({ndm_reward_form.level_winned.data * 250}p$)'
+                    if ndm_reward_form.money.data
+                    else ndm_reward_form.distribution.data
+                )
+
+            if reward:
+                reward.level_winned = ndm_reward_form.level_winned.data
+                reward.level_winned_justif = ndm_reward_form.level_winned_justif.data
+                reward.distribution = distribution
+                db.session.commit()
+
+            else:
+                reward = NdmRewards(
+                    character_id=character_id,
+                    month_id=past_month_id,
+                    level_winned=ndm_reward_form.level_winned.data,
+                    level_winned_justif=ndm_reward_form.level_winned_justif.data,
+                    distribution=distribution
+                )
+                db.session.add(reward)
+                db.session.commit()
+
+            generate_tcard_part(character.id, 'ndm')
+
+            flash('Récompenses ajoutées avec succès', 'success')
+            return redirect(url_for('ndm', character_id=character_id))
+        else:
+            flash('Erreur dans le formulaire', 'danger')
+
+    return _render()
+
+
+@app.route("/ndm/subject/closed/<int:subject_id>", methods=['GET'])
+def ndm_close_subject(subject_id: int):
+    """
+    Ferme un sujet
+    :param subject_id: l'id du sujet
+    :return: le template
+    """
+    subject = NdmSubjects.query.filter(NdmSubjects.id == subject_id).one_or_404()
+    subject.closed = True
+    db.session.commit()
+
+    flash(f'Sujet {subject.name} clos avec succès', 'success')
+
+    return redirect(url_for('ndm', character_id=subject.character_id))

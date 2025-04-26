@@ -1,0 +1,26 @@
+<form method="POST">
+    <div class="row">
+        <h2 class="col-md-12 center">
+            {{ month_year }}
+        </h2>
+
+        {% for subject in add_post_form.subjects %}
+            {{ render_field(subject.subject_id) }}
+            <div class="col-md-3">
+                {{ render_field(subject.subject_name) }}
+            </div>
+            <div class="col-md-4">
+                {{ render_field(subject.actual_words) }}
+            </div>
+            <div class="col-md-4">
+                {{ render_field(subject.words) }}
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <input type="submit" class="btn" value="Sauvegarder" name="addPost">
+        </div>
+    </div>
+</form>

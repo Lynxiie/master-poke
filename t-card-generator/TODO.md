@@ -8,10 +8,7 @@
   - Génération auto des mois
   - Case à cocher "niveau demandé"
   - Valider la demande donne les niveaux au Pokémon
-- [ ] Gestion des NDM
-  - Faire un template par personnage
-  - Gestion des archives
-  - Gestion des récompenses
+- [X] Gestion des NDM
 - [ ] Gestions des rangs
 - [ ] Gestion des catégories par personnages
 - [ ] Meilleure gestion des logs internes

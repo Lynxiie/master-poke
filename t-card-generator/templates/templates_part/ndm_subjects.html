@@ -1,0 +1,28 @@
+<ul>
+    {% for subject in subjects %}
+        <li>
+            {{ subject.name }} - {{ subject.info }}
+            <a href="{{ url_for('ndm_close_subject', subject_id=subject.id) }}"><i data-feather="x"></i></a>
+        </li>
+    {% endfor %}
+</ul>
+
+<form method="POST">
+    <div class="row">
+        <div class="col-md-4">
+            {{ render_field(add_subject_form.name) }}
+        </div>
+        <div class="col-md-4">
+            {{ render_field(add_subject_form.url) }}
+        </div>
+        <div class="col-md-4">
+            {{ render_field(add_subject_form.info) }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <input type="submit" class="btn" value="Sauvegarder" name="addSubject">
+        </div>
+    </div>
+</form>

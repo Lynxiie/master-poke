@@ -1,0 +1,68 @@
+<link rel="stylesheet" href="../ndm.css">
+<link rel="stylesheet" href="ndm.css">
+
+<div class="ndm">
+    <h1>Niveaux du mois</h1>
+
+    <div class="content">
+        <div class="nav">
+            <h3>Archives</h3>
+            <nav class="scroll">
+                <label for="current">Mois en cours</label>
+                <br>
+                {{#archives}}
+                    <details>
+                        <summary>
+                            {{ year }}
+                        </summary>
+                        <ul>
+                            {{#months}}
+                                <li><label for="{{ month_slug }}">{{ month }}</label></li>
+                            {{/months}}
+                        </ul>
+                    </details>
+                {{/archives}}
+            </nav>
+        </div>
+
+
+        <input type="radio" name="month" id="current" checked>
+        <div class="recap">
+            <h2>Mois en cours - {{ current_month.name }}</h2>
+            <div class="scroll">
+                {{#current_month.subjects}}
+                    <a href="{{ url }}">{{ name }}</a> ▬ {{ info }} ☆ {{ total_posts }} posts ☆ {{ total_words }} mots
+                    <br>
+                {{/current_month.subjects}}
+                <div class="result">
+                    <span>Total de posts</span> : {{ current_month.total_posts }} posts <br>
+                    <span>Total de mots</span> : {{ current_month.total_words }} mots<br>
+                    <span>Ratio</span> : {{ current_month.avg_words }} mots par post<br>
+                    <span>Niveaux gagnés</span> : ...<br>
+                    <span>Distribution</span> : ...<br>
+                </div>
+            </div>
+        </div>
+
+        {{#past_month}}
+            <input type="radio" name="month" id="{{ slug }}">
+            <div class="recap">
+                <h2>{{ name }}</h2>
+                <div class="scroll">
+                    {{#subjects}}
+                    <a href="{{ url }}">{{ name }}</a> ▬ {{ info }} ☆ {{ total_posts }} posts ☆ {{ total_words }} mots
+                    <br>
+                    {{/subjects}}
+                    <div class="result">
+                        <span>Total de posts</span> : {{ total_posts }} posts <br>
+                        <span>Total de mots</span> : {{ total_words }} mots<br>
+                        <span>Ratio</span> : {{ avg_words }} mots par post<br>
+                        <span>Niveaux gagnés</span> : {{ level_winned }}<br>
+                        <span>Distribution</span> : {{ distribution }}<br>
+                    </div>
+                </div>
+            </div>
+        {{/past_month}}
+    </div>
+
+</div>

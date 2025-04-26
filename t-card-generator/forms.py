@@ -480,3 +480,39 @@ class PokemonStatsForm(Form):
     zinc = IntegerField('', validators=[InputRequired(), NumberRange(max=10)])
     speed = IntegerField('', validators=[InputRequired(), NumberRange(min=0)])
     carbos = IntegerField('', validators=[InputRequired(), NumberRange(max=10)])
+
+
+class SubjectForm(Form):
+    """
+    Formulaire pour ajouter un post à un sujet pour les ndm
+    """
+    subject_id = HiddenField('', validators=[DataRequired()])
+    subject_name = StringField('Sujet', render_kw={'readonly': True})
+    words = IntegerField('Nombre de mots', validators=[Optional(), NumberRange(min=0)])
+    actual_words = StringField('Mots actuels', render_kw={'readonly': True})
+
+
+class NewPostForm(Form):
+    """
+    Formulaire listant les sujets des ndm
+    """
+    subjects = FieldList(FormField(SubjectForm))
+
+
+class NewNdmSubjectForm(Form):
+    """
+    Formulaire pour un sujet de ndm
+    """
+    name = StringField('Nom', validators=[DataRequired()])
+    url = URLField('Lien', validators=[DataRequired()])
+    info = StringField('Information', validators=[DataRequired()])
+
+
+class NdmRewardForm(Form):
+    """
+    Formulaire pour les récompenses des NDM
+    """
+    level_winned = IntegerField('Niveaux gagnés', validators=[DataRequired(), NumberRange(min=0)])
+    level_winned_justif = StringField('Justification', validators=[DataRequired()])
+    distribution = StringField('Distribution')
+    money = BooleanField('Convertir en argent')

@@ -1,0 +1,135 @@
+@import url(https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500;700&display=swap);
+
+:root {
+    --scroll-height: 350px;
+    --border-radius: 10px;
+    --font-main: 'Quicksand', sans-serif;
+    --border-style: solid;
+    --border-width: 1px;
+}
+
+/* Surcharge */
+body {
+    font-family: var(--font-main), sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3 {
+    text-align: center;
+}
+
+h2 {
+    padding: 10px 0;
+}
+
+h2, h3 {
+    margin: 0;
+    font-weight: 200;
+}
+
+.nav h3 {
+    padding: 5px 0;
+    font-size: 15px;
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    font-variant: all-petite-caps;
+}
+
+/* Container */
+.ndm {
+    max-width: 580px;
+    margin: auto;
+}
+
+/* Content */
+.content {
+    display: flex;
+    height: var(--scroll-height);
+    border-radius: var(--border-radius);
+    font-weight: 200;
+    background: white;
+    border-style: var(--border-style);
+    border-width: var(--border-width);
+}
+
+.scroll {
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    padding: 5px;
+}
+
+/* Navigation */
+.nav {
+    width: 100px;
+    flex: 0 0 auto;
+    font-size: 12px;
+    border-radius: var(--border-radius) 0 0 var(--border-radius);
+}
+
+.nav .scroll {
+    height: calc(var(--scroll-height) - 39px);
+}
+
+nav label,
+nav details {
+    padding-top: 5px;
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+    cursor: pointer;
+}
+
+/* Radio input */
+input[type="radio"],
+.recap,
+input {
+    display: none;
+}
+
+input[type="radio"]:checked + .recap {
+    display: block;
+}
+
+/* Recap */
+.recap {
+    width: 100%;
+    border-left-style: var(--border-style);
+    border-left-width: var(--border-width);
+}
+
+.recap .scroll {
+    height: calc(var(--scroll-height) - 60px);
+}
+
+/* Details */
+details > summary {
+    list-style: none;
+    cursor: pointer;
+}
+
+summary::-webkit-details-marker {
+    display: none;
+}
+
+/* Result section */
+.result {
+    margin-top: 20px;
+}
+
+.result span {
+    font-variant: small-caps;
+    font-weight: 400;
+}

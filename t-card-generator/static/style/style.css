@@ -42,6 +42,11 @@ nav {
     color: var(--primary-color) !important;
 }
 
+.nav-pills .nav-link.active {
+    background-color: var(--primary-color) !important;
+    color: white !important;
+}
+
 img {
     max-width: 50px;
 }

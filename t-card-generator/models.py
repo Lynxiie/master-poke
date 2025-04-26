@@ -373,3 +373,47 @@ class PokemonOwnedAttacks(db.Model):
         )
 
         return attacks
+
+
+class NdmMonths(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    month = db.Column(db.String, nullable=False)
+    year = db.Column(db.Integer, nullable=False)
+
+    posts = db.relationship('NdmPosts', back_populates='month', cascade="all, delete-orphan")
+    rewards = db.relationship('NdmRewards', back_populates='month', cascade="all, delete-orphan")
+
+
+class NdmSubjects(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    character_id = db.Column(db.Integer, db.ForeignKey('mp_character.id'), nullable=False)
+    name = db.Column(db.String(255), nullable=False)
+    url = db.Column(db.String(255), nullable=False)
+    info = db.Column(db.String(255), nullable=False)
+    closed = db.Column(db.Boolean, default=False, nullable=False)
+
+    posts = db.relationship('NdmPosts', back_populates='subject', cascade="all, delete-orphan")
+
+
+class NdmPosts(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    character_id = db.Column(db.Integer, db.ForeignKey('mp_character.id'), nullable=False)
+    month_id = db.Column(db.Integer, db.ForeignKey('ndm_months.id'), nullable=False)
+    subject_id = db.Column(db.Integer, db.ForeignKey('ndm_subjects.id'), nullable=False)
+    words = db.Column(db.Integer, nullable=False)
+
+    month = db.relationship('NdmMonths', back_populates='posts')
+    subject = db.relationship('NdmSubjects', back_populates='posts')
+    character = db.relationship('MpCharacter', backref='ndm_posts')
+
+
+class NdmRewards(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    character_id = db.Column(db.Integer, db.ForeignKey('mp_character.id'), nullable=False)
+    month_id = db.Column(db.Integer, db.ForeignKey('ndm_months.id'), nullable=False)
+    level_winned = db.Column(db.Integer, nullable=False)
+    level_winned_justif = db.Column(db.String(255), nullable=False)
+    distribution = db.Column(db.String(255), nullable=False)
+
+    month = db.relationship('NdmMonths', back_populates='rewards')
+    character = db.relationship('MpCharacter', backref='ndm_rewards')

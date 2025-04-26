@@ -389,6 +389,48 @@ CREATE TABLE pokemon_owned_attacks (
     FOREIGN KEY(species_attack_id) REFERENCES pokemon_species_attacks(id)
 );
 
+DROP TABLE IF EXISTS ndm_months;
+CREATE TABLE ndm_months (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    month VARCHAR NOT NULL,
+    year INTEGER UNSIGNED NOT NULL
+);
+
+DROP TABLE IF EXISTS ndm_subjects;
+CREATE TABLE ndm_subjects (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    character_id INTEGER UNSIGNED NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    url VARCHAR(255) NOT NULL,
+    info VARCHAR(255) NOT NULL,
+    closed BOOLEAN NOT NULL DEFAULT false,
+    FOREIGN KEY(character_id) REFERENCES mp_character(id)
+);
+
+DROP TABLE IF EXISTS ndm_posts;
+CREATE TABLE ndm_posts (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    character_id INTEGER UNSIGNED NOT NULL,
+    month_id INTEGER UNSIGNED NOT NULL,
+    subject_id INTEGER UNSIGNED NOT NULL,
+    words INTEGER UNSIGNED NOT NULL,
+    FOREIGN KEY(character_id) REFERENCES mp_character(id),
+    FOREIGN KEY(month_id) REFERENCES ndm_months(id),
+    FOREIGN KEY(subject_id) REFERENCES ndm_subjects(id)
+);
+
+DROP TABLE IF EXISTS ndm_rewards;
+CREATE TABLE ndm_rewards (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    character_id INTEGER UNSIGNED NOT NULL,
+    month_id INTEGER UNSIGNED NOT NULL,
+    level_winned INTEGER UNSIGNED NOT NULL,
+    level_winned_justif VARCHAR(255) NOT NULL,
+    distribution VARCHAR(255) NULL,
+    FOREIGN KEY(character_id) REFERENCES mp_character(id),
+    FOREIGN KEY(month_id) REFERENCES ndm_months(id)
+);
+
 -- DROP TABLE IF EXISTS dex;
 -- CREATE TABLE dex (
 --     id INTEGER PRIMARY KEY AUTOINCREMENT,

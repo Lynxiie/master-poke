@@ -2,16 +2,17 @@ import os
 import re
 from collections import defaultdict
 from datetime import datetime
+from math import floor
 
 import chevron
-from sqlalchemy import false, asc
+from sqlalchemy import false, asc, func
 from sqlalchemy.orm import joinedload
 from wtforms.fields.core import Field
 from wtforms.fields.list import FieldList
 
 from models import Mental, Physical, Inventory, Object, Money, Ct, CsHistory, FluteHistory, History, \
     Social, SocialPokemon, SocialSubject, JourneyChapter, JustificatifLink, Goals, PokemonOwned, PokemonCategory, \
-    PokemonOwnedAttacks, PokemonSpeciesAttacks, PokemonAttacks
+    PokemonOwnedAttacks, PokemonSpeciesAttacks, PokemonAttacks, NdmPosts, NdmMonths, NdmSubjects, NdmRewards
 from enums import Object as ObjectEnum, JourneyStatus, GoalCategory, TypePokemon
 
 from models import MpCharacter
@@ -31,7 +32,7 @@ def generate_tcard_part(character_id: int, tcard_part: str):
 
     character_name = character.firstname.lower()
 
-    if character.id in MpCharacter.get_one_tcard_ids():
+    if character.id in MpCharacter.get_one_tcard_ids() and tcard_part != 'ndm':
         tcard_part = 't-card'
 
     with open(f'templates/tcard/{character_name}/{tcard_part}.html', 'r', encoding='utf-8') as f:
@@ -63,6 +64,9 @@ def generate_tcard_part(character_id: int, tcard_part: str):
 
     if tcard_part in {'stockage', 't-card'}:
         get_pokemon_data(character_id, data, True)
+
+    if tcard_part in {'ndm'}:
+        get_ndm_data(character_id, data)
 
     text = chevron.render(file, data)
     filename = os.path.join('..', character_name, tcard_part + '.html')
@@ -458,6 +462,131 @@ def get_goals_data(character_id: int, data: dict[str, any]):
     data['pokemon_goals'] = [vars(poke) for poke in pokemon]
 
 
+def get_ndm_data(character_id: int, data: dict[str, any]):
+    """
+    Ajoute les informations sur les NDM
+    :param character_id: l'id du personnage
+    :param data: le dictionnaire des informations
+    """
+    current_month = datetime.now().strftime('%B')
+    current_year = datetime.now().strftime('%Y')
+
+    actual_month = (
+        NdmMonths
+        .query
+        .filter(NdmMonths.month == current_month, NdmMonths.year == current_year)
+        .first()
+    )
+
+    ndms = NdmPosts.query.filter(NdmPosts.character_id == character_id).all()
+    small_month_id = min([ndm.id for ndm in ndms]) if ndms else 1
+
+    months = NdmMonths.query.filter(NdmMonths.id >= small_month_id, NdmMonths.id != actual_month.id).all()
+
+    grouped = defaultdict(list)
+    for month in months:
+        grouped[month.year].append({
+            "month": month_convert(month.month),
+            "month_slug": f"{month.month}{month.year}"
+        })
+
+    archives = [{"year": year, "months": mois} for year, mois in grouped.items()]
+    data['archives'] = archives
+
+    ndm_current_month = (
+        NdmPosts
+        .query
+        .join(NdmSubjects, NdmPosts.subject_id == NdmSubjects.id)
+        .filter(
+            NdmPosts.month_id == actual_month.id,
+            NdmPosts.character_id == character_id
+        )
+        .with_entities(
+            NdmSubjects.name.label("subject_name"),
+            NdmSubjects.info.label("subject_info"),
+            NdmSubjects.url.label("subject_link"),
+            func.count(NdmPosts.id).label("total_posts"),
+            func.sum(NdmPosts.words).label("total_words")
+        )
+        .group_by(NdmPosts.subject_id)
+        .order_by(NdmPosts.subject_id.asc())
+        .all()
+    )
+
+    subjects = []
+    for ndm in ndm_current_month:
+        subjects.append({
+            "name": ndm.subject_name,
+            "info": ndm.subject_info,
+            "url": ndm.subject_link,
+            "total_words": ndm.total_words,
+            "total_posts": ndm.total_posts,
+        })
+
+    global_total_words = sum([subject["total_words"] for subject in subjects])
+    global_total_posts = sum([subject["total_posts"] for subject in subjects])
+
+    current_month_data = {
+        'name': f"{month_convert(actual_month.month)} {actual_month.year}",
+        'subjects': subjects,
+        'total_words': global_total_words,
+        'total_posts': global_total_posts,
+        'avg_words': floor(global_total_words / global_total_posts) if global_total_posts else 0,
+    }
+    data['current_month'] = current_month_data
+
+    past_month = []
+    for p_month in months:
+        m = (
+            NdmPosts
+            .query
+            .join(NdmSubjects, NdmPosts.subject_id == NdmSubjects.id)
+            .filter(
+                NdmPosts.month_id == p_month.id,
+                NdmPosts.character_id == character_id
+            )
+            .with_entities(
+                NdmSubjects.name.label("subject_name"),
+                NdmSubjects.info.label("subject_info"),
+                NdmSubjects.url.label("subject_link"),
+                func.count(NdmPosts.id).label("total_posts"),
+                func.sum(NdmPosts.words).label("total_words")
+            )
+            .group_by(NdmPosts.subject_id)
+            .order_by(NdmPosts.subject_id.asc())
+            .all()
+        )
+
+        subjects = []
+        for ndm in m:
+            subjects.append({
+                "name": ndm.subject_name,
+                "info": ndm.subject_info,
+                "url": ndm.subject_link,
+                "total_words": ndm.total_words,
+                "total_posts": ndm.total_posts,
+            })
+
+        global_total_words = sum([subject["total_words"] for subject in subjects])
+        global_total_posts = sum([subject["total_posts"] for subject in subjects])
+
+        reward = NdmRewards.query.filter(NdmRewards.month_id == p_month.id).first()
+
+        past_month_data = {
+            'name': f"{month_convert(p_month.month)} {p_month.year}",
+            'slug': f"{p_month.month}{p_month.year}",
+            'subjects': subjects,
+            'total_words': global_total_words,
+            'total_posts': global_total_posts,
+            'avg_words': floor(global_total_words / global_total_posts) if global_total_posts else 0,
+            'level_winned': f"{reward.level_winned} ({reward.level_winned_justif})" if reward else '/',
+            'distribution': reward.distribution if reward else '/',
+        }
+        past_month.append(past_month_data)
+
+    data['past_month'] = past_month
+
+
 def generate_physique_or_mental(
         field: Field, character_id: int, clazz: type[Mental] | type[Physical]
 ) -> list[Mental | Physical]:
@@ -524,3 +653,22 @@ def convert_social_for_ihm(items: list[Social]) -> list[Social]:
             pokemon.slug_pokemon = slugify(pokemon.pokemon)
 
     return items
+
+
+def month_convert(month: str) -> str:
+    months = {
+        'janvier': 'Janvier',
+        'fevrier': 'Février',
+        'mars': 'Mars',
+        'avril': 'Avril',
+        'mai': 'Mai',
+        'juin': 'Juin',
+        'juillet': 'Juillet',
+        'aout': 'Août',
+        'septembre': 'Septembre',
+        'octobre': 'Octobre',
+        'novembre': 'Novembre',
+        'decembre': 'Décembre',
+    }
+
+    return months.get(month)
