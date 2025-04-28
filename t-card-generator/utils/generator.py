@@ -479,8 +479,7 @@ def get_ndm_data(character_id: int, data: dict[str, any]):
     )
 
     ndms = NdmPosts.query.filter(NdmPosts.character_id == character_id).all()
-    small_month_id = min([ndm.id for ndm in ndms]) if ndms else 1
-
+    small_month_id = min([ndm.month_id for ndm in ndms]) if ndms else 1
     months = NdmMonths.query.filter(NdmMonths.id >= small_month_id, NdmMonths.id != actual_month.id).all()
 
     grouped = defaultdict(list)
@@ -519,19 +518,21 @@ def get_ndm_data(character_id: int, data: dict[str, any]):
             "name": ndm.subject_name,
             "info": ndm.subject_info,
             "url": ndm.subject_link,
-            "total_words": ndm.total_words,
+            "total_words": f'{ndm.total_words:,}'.replace(",", "\xa0"),
             "total_posts": ndm.total_posts,
         })
 
-    global_total_words = sum([subject["total_words"] for subject in subjects])
+    global_total_words = sum([ndm.total_words for ndm in ndm_current_month])
     global_total_posts = sum([subject["total_posts"] for subject in subjects])
 
     current_month_data = {
         'name': f"{month_convert(actual_month.month)} {actual_month.year}",
         'subjects': subjects,
-        'total_words': global_total_words,
+        'total_words': f'{global_total_words:,}'.replace(",", "\xa0"),
         'total_posts': global_total_posts,
-        'avg_words': floor(global_total_words / global_total_posts) if global_total_posts else 0,
+        'avg_words':
+            f'{floor(global_total_words / global_total_posts):,}'.replace(",", "\xa0")
+            if global_total_posts else 0,
     }
     data['current_month'] = current_month_data
 
@@ -563,22 +564,27 @@ def get_ndm_data(character_id: int, data: dict[str, any]):
                 "name": ndm.subject_name,
                 "info": ndm.subject_info,
                 "url": ndm.subject_link,
-                "total_words": ndm.total_words,
+                "total_words": f'{ndm.total_words:,}'.replace(",", "\xa0"),
                 "total_posts": ndm.total_posts,
             })
 
-        global_total_words = sum([subject["total_words"] for subject in subjects])
+        global_total_words = sum([ndm.total_words for ndm in m])
         global_total_posts = sum([subject["total_posts"] for subject in subjects])
 
-        reward = NdmRewards.query.filter(NdmRewards.month_id == p_month.id).first()
+        reward = NdmRewards.query.filter(
+            NdmRewards.month_id == p_month.id,
+            NdmRewards.character_id == character_id,
+        ).first()
 
         past_month_data = {
             'name': f"{month_convert(p_month.month)} {p_month.year}",
             'slug': f"{p_month.month}{p_month.year}",
             'subjects': subjects,
-            'total_words': global_total_words,
+            'total_words': f'{global_total_words:,}'.replace(",", "\xa0"),
             'total_posts': global_total_posts,
-            'avg_words': floor(global_total_words / global_total_posts) if global_total_posts else 0,
+            'avg_words':
+                f'{floor(global_total_words / global_total_posts):,}'.replace(",", "\xa0")
+                if global_total_posts else 0,
             'level_winned': f"{reward.level_winned} ({reward.level_winned_justif})" if reward else '/',
             'distribution': reward.distribution if reward else '/',
         }
