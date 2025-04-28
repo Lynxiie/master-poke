@@ -23,12 +23,12 @@ h1, h2 {
 
 summary::before,
 summary::after {
-    content: '☆';
+    content: '✭';
 }
 
 details[open] summary::before,
 details[open] summary::after {
-    content: '☆☆';
+    content: '✭✭';
 }
 
 .result span {
