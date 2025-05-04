@@ -66,6 +66,17 @@
           </td>
           <td>{{ poke.category.name }}</td>
           <td>
+              <span>Apprentissage par niveau perdu</span><br>
+              {% if not poke.no_evol_attack_level %}
+                  Aucun<br>
+              {% else %}
+                {% for attack in poke.no_evol_attack_level %}
+                  {{ attack.attack.name }} (lvl {{ attack.level }})
+                    <br>
+                {% endfor %}
+              {% endif %}
+              <br>
+              <span>Apprentissage perdu</span><br>
             {% if not poke.no_evol_attack %}
               Aucune
             {% else %}

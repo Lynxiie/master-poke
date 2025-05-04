@@ -5,14 +5,14 @@ from sqlalchemy.orm import sessionmaker
 
 from database import Base
 from models import PokemonOwned
-from utils.pokemon import get_non_evol_attack
+from utils.pokemon import get_non_evol_attacks, get_non_evol_attack_by_level
 
 
 class TestNoEvolAttacks(unittest.TestCase):
 
     def test_get_non_evol_attack(self):
         pokemon = self.session.query(PokemonOwned).filter(PokemonOwned.id == 1).one()
-        no_evol_attack = get_non_evol_attack(pokemon, self.session)
+        no_evol_attack = get_non_evol_attacks(pokemon, self.session)
         self.assertEqual(5, len(no_evol_attack))
         self.assertEqual('ATTAQUE 4', no_evol_attack[0].attack.name)
         self.assertEqual('ATTAQUE 5', no_evol_attack[1].attack.name)
@@ -21,17 +21,38 @@ class TestNoEvolAttacks(unittest.TestCase):
         self.assertEqual('ATTAQUE 8', no_evol_attack[4].attack.name)
 
         pokemon = self.session.query(PokemonOwned).filter(PokemonOwned.id == 2).one()
-        no_evol_attack = get_non_evol_attack(pokemon, self.session)
+        no_evol_attack = get_non_evol_attacks(pokemon, self.session)
         self.assertEqual(2, len(no_evol_attack))
         self.assertEqual('ATTAQUE 2', no_evol_attack[0].attack.name)
         self.assertEqual('ATTAQUE 9', no_evol_attack[1].attack.name)
 
         pokemon = self.session.query(PokemonOwned).filter(PokemonOwned.id == 3).one()
-        no_evol_attack = get_non_evol_attack(pokemon, self.session)
+        no_evol_attack = get_non_evol_attacks(pokemon, self.session)
         self.assertEqual(0, len(no_evol_attack))
 
         pokemon = self.session.query(PokemonOwned).filter(PokemonOwned.id == 4).one()
-        no_evol_attack = get_non_evol_attack(pokemon, self.session)
+        no_evol_attack = get_non_evol_attacks(pokemon, self.session)
+        self.assertEqual(0, len(no_evol_attack))
+
+    def test_get_non_evol_attack_by_level(self):
+        pokemon = self.session.query(PokemonOwned).filter(PokemonOwned.id == 1).one()
+        no_evol_attack = get_non_evol_attack_by_level(pokemon, self.session)
+        self.assertEqual(2, len(no_evol_attack))
+        self.assertEqual('ATTAQUE 4', no_evol_attack[0].attack.name)
+        self.assertEqual('ATTAQUE 11', no_evol_attack[1].attack.name)
+
+        pokemon = self.session.query(PokemonOwned).filter(PokemonOwned.id == 2).one()
+        no_evol_attack = get_non_evol_attack_by_level(pokemon, self.session)
+        self.assertEqual(2, len(no_evol_attack))
+        self.assertEqual('ATTAQUE 2', no_evol_attack[0].attack.name)
+        self.assertEqual('ATTAQUE 9', no_evol_attack[1].attack.name)
+
+        pokemon = self.session.query(PokemonOwned).filter(PokemonOwned.id == 3).one()
+        no_evol_attack = get_non_evol_attack_by_level(pokemon, self.session)
+        self.assertEqual(0, len(no_evol_attack))
+
+        pokemon = self.session.query(PokemonOwned).filter(PokemonOwned.id == 4).one()
+        no_evol_attack = get_non_evol_attack_by_level(pokemon, self.session)
         self.assertEqual(0, len(no_evol_attack))
 
     @classmethod

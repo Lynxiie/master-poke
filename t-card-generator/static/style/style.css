@@ -220,3 +220,7 @@ input[type="submit"].plus-btn {
 select[multiple] option {
     background-color: var(--secondary-color);
 }
+
+tbody span {
+    color: var(--primary-color);
+}

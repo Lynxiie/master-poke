@@ -20,7 +20,8 @@ INSERT INTO pokemon_attacks VALUES
     (7, 'ATTAQUE 7', 1, null, null, null, null, null, null, null, null, null, null, null, false),
     (8, 'ATTAQUE 8', 1, null, null, null, null, null, null, null, null, null, null, null, false),
     (9, 'ATTAQUE 9', 1, null, null, null, null, null, null, null, null, null, null, null, false),
-    (10, 'ATTAQUE 10', 1, null, null, null, null, null, null, null, null, null, null, null, false);
+    (10, 'ATTAQUE 10', 1, null, null, null, null, null, null, null, null, null, null, null, false),
+    (11, 'ATTAQUE 11', 1, null, null, null, null, null, null, null, null, null, null, null, false);
 
 
 INSERT INTO pokemon_species_attacks VALUES
@@ -36,4 +37,7 @@ INSERT INTO pokemon_species_attacks VALUES
     (10, 2, 9, 20, false, false, false, false),
     (11, 4, 9, 30, false, false, false, false),
     (12, 2, 10, 15, false, false, false, false),
-    (13, 3, 10, 20, false, false, false, false);
+    (13, 3, 10, 20, false, false, false, false),
+    (14, 1, 11, 50, false, false, false, false),
+    (15, 2, 11, null, true, false, false, false),
+    (16, 3, 11, null, true, false, false, false);

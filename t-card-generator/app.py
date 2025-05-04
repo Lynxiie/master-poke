@@ -23,7 +23,7 @@ from utils.lists import change_order
 from forms import InformationsForm, MentalForm, PhysicalForm
 from models import MpCharacter, Mental, Physical, Inventory
 from utils.pokemon import evol_pokemon, can_evol, give_pokemon as give_pkmn, exchange_pokemon as exchange_pkmn, \
-    get_non_evol_attack, learn_auto_attacks, leave_pension
+    get_non_evol_attacks, learn_auto_attacks, leave_pension, get_non_evol_attack_by_level
 from utils.strings import DATE_FORMAT
 
 
@@ -1045,7 +1045,8 @@ def pokemon(character_id: int):
 
     for pok in pokemon:
         pok.can_evol = can_evol(pok, character_id, db.session)
-        pok.no_evol_attack = get_non_evol_attack(pok, db.session)
+        pok.no_evol_attack = get_non_evol_attacks(pok, db.session)
+        pok.no_evol_attack_level = get_non_evol_attack_by_level(pok, db.session)
 
     return _render()
 

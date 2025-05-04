@@ -190,10 +190,11 @@ def exchange_pokemon(character_id: int, form: ExchangePokemonForm, session: Sess
         learn_auto_attacks(new_pokemon, session)
 
 
-def get_non_evol_attack(pokemon: PokemonOwned, session: Session) -> list[PokemonSpeciesAttacks]:
+def __get_non_evol_attacks(pokemon: PokemonOwned, only_level: bool, session: Session) -> list[PokemonSpeciesAttacks]:
     """
     Récupère les attaques non apprises par l'évolution
     :param pokemon: le Pokémon
+    :param only_level: si on veut juste les attaques perdues par l'apprentissage par niveau
     :param session: la session BDD
     :return: la liste des attaques non apprises par l'évolution
     """
@@ -203,24 +204,31 @@ def get_non_evol_attack(pokemon: PokemonOwned, session: Session) -> list[Pokemon
         return []
 
     actual_attacks = (
-        session
-        .query(PokemonSpeciesAttacks)
-        .filter(PokemonSpeciesAttacks.species_id == pokemon.species_id)
-        .filter(
+        session.query(PokemonSpeciesAttacks).filter(PokemonSpeciesAttacks.species_id == pokemon.species_id)
+    )
+    if only_level:
+        actual_attacks = actual_attacks.filter(PokemonSpeciesAttacks.level > pokemon.level)
+    else:
+        actual_attacks = actual_attacks.filter(
             (PokemonSpeciesAttacks.level > pokemon.level)
             | PokemonSpeciesAttacks.cm
             | PokemonSpeciesAttacks.ct
             | PokemonSpeciesAttacks.cs
             | PokemonSpeciesAttacks.gm
         )
-        .all()
-    )
+
+    actual_attacks = actual_attacks.all()
+
     evolution_attacks = (
         session
         .query(PokemonSpeciesAttacks)
         .filter(PokemonSpeciesAttacks.species_id == species.evolution_id)
-        .all()
     )
+
+    if only_level:
+        evolution_attacks = evolution_attacks.filter(PokemonSpeciesAttacks.level != None)
+
+    evolution_attacks = evolution_attacks.all()
 
     actual_attack_ids = set(attack.attack_id for attack in actual_attacks)
     evol_attack_ids = set(attack.attack_id for attack in evolution_attacks)
@@ -228,6 +236,26 @@ def get_non_evol_attack(pokemon: PokemonOwned, session: Session) -> list[Pokemon
     disappear_ids = actual_attack_ids - evol_attack_ids
 
     return [attack for attack in actual_attacks if attack.attack_id in disappear_ids]
+
+
+def get_non_evol_attacks(pokemon: PokemonOwned, session: Session) -> list[PokemonSpeciesAttacks]:
+    """
+    Récupère les attaques non apprises par l'évolution
+    :param pokemon: le Pokémon
+    :param session: la session BDD
+    :return: la liste des attaques non apprises par l'évolution
+    """
+    return __get_non_evol_attacks(pokemon, False, session)
+
+
+def get_non_evol_attack_by_level(pokemon: PokemonOwned, session: Session) -> list[PokemonSpeciesAttacks]:
+    """
+    Récupère les attaques non apprises par l'évolution
+    :param pokemon: le Pokémon
+    :param session: la session BDD
+    :return: la liste des attaques non apprises par l'évolution
+    """
+    return __get_non_evol_attacks(pokemon, True, session)
 
 
 def learn_auto_attacks(pokemon: PokemonOwned, session: Session):
