@@ -1,19 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 /* Global */
-html {
-    font-family: "Montserrat", system-ui;
-}
-
-p, h1, h2 {
-    margin: 0;
-}
-
 .tweets {
     width: 400px;
     margin: 10px auto;
     background: white;
     border-radius: 15px;
+    font-family: "Montserrat", system-ui;
+}
+
+.tweets p, .tweets h1, .tweets h2 {
+    margin: 0;
 }
 
 /* Tweet */
