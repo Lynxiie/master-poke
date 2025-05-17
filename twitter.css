@@ -3,7 +3,7 @@
 /* Global */
 .tweets {
     width: 400px;
-    margin: 10px auto;
+    margin: 0 auto;
     background: white;
     border-radius: 15px;
     font-family: "Montserrat", system-ui;
