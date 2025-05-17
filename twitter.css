@@ -69,19 +69,19 @@
 }
 
 .thread img {
-    max-width: 40px;
+    max-width: 35px;
 }
 
 .thread h1 {
-    font-size: 18px;
+    font-size: 14px;
 }
 
 .thread h2 {
-    font-size: 12px;
+    font-size: 10px;
 }
 
 .thread h2, .thread .date {
-    font-size: 12px;
+    font-size: 10px;
 }
 
 .thread .text {
