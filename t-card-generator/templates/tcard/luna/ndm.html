@@ -31,7 +31,7 @@
             <h2>Mois en cours - {{ current_month.name }}</h2>
             <div class="scroll">
                 {{#current_month.subjects}}
-                    <a href="{{ url }}">{{ name }}</a> ▬ {{ info }} ☆ {{ total_posts }} posts ☆ {{ total_words }} mots
+                    <a href="{{ url }}" target="_blank">{{ name }}</a> ▬ {{ info }} ☆ {{ total_posts }} posts ☆ {{ total_words }} mots
                     <br>
                 {{/current_month.subjects}}
                 <div class="result">
@@ -50,7 +50,7 @@
                 <h2>{{ name }}</h2>
                 <div class="scroll">
                     {{#subjects}}
-                    <a href="{{ url }}">{{ name }}</a> ▬ {{ info }} ☆ {{ total_posts }} posts ☆ {{ total_words }} mots
+                    <a href="{{ url }}" target="_blank">{{ name }}</a> ▬ {{ info }} ☆ {{ total_posts }} posts ☆ {{ total_words }} mots
                     <br>
                     {{/subjects}}
                     <div class="result">
