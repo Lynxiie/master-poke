@@ -1519,6 +1519,7 @@ def pokemon_evolution(character_id: int, pokemon_id: int):
 
         generate_tcard_part(character_id, 'stockage')
         generate_tcard_part(character_id, 'pokemon')
+        generate_tcard_part(character_id, 'inventaire')
 
         flash(f'{pokemon.name} a évolué en {pokemon.species.species} avec succès', 'success')
         return redirect(url_for('pokemon', character_id=character_id))
@@ -1530,6 +1531,7 @@ def pokemon_evolution(character_id: int, pokemon_id: int):
 
         generate_tcard_part(character_id, 'stockage')
         generate_tcard_part(character_id, 'pokemon')
+        generate_tcard_part(character_id, 'inventaire')
 
         flash(f'{pokemon.name} a évolué en {pokemon.species.species} avec succès', 'success')
         return redirect(url_for('pokemon', character_id=character_id))
