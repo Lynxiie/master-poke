@@ -565,12 +565,12 @@ input[type=radio], .pokemons {
 }
 
 #content-p66 .banner img {
-	object-position: 0 -100px;
+	object-position: 0 -260px;
 	object-fit: cover;
 }
 
 #content-p68 .banner img {
-	object-position: 0 -30px;
+	object-position: 0 -100px;
 	object-fit: cover;
 }
 
