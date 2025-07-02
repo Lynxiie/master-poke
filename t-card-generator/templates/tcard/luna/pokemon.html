@@ -122,6 +122,7 @@
                                             <span class="type"><img src="{{ global_detail.type_full }}" alt=""/></span>
                                             {{#global_detail.useless }}<span title="Inutile">{{/global_detail.useless }}
                                             {{#global_detail.informations }}<span title="{{ global_detail.informations }}">{{/global_detail.informations }}
+                                            {{^global_detail.useless }}{{^global_detail.informations }}<span>{{/global_detail.informations }}{{/global_detail.useless }}
                                                 {{ global_detail.name }}
                                                 ({{^global_detail.power }}—{{/global_detail.power }}{{#global_detail.power }}{{ global_detail.power }}{{/global_detail.power }},
                                                 {{^global_detail.precision }}—{{/global_detail.precision }}{{#global_detail.precision }}{{ global_detail.precision }}%{{/global_detail.precision }}{{#global_detail.burn_percentage }},
@@ -141,6 +142,7 @@
                                             <span class="type"><img src="{{ global_detail.type_full }}" alt=""/></span>
                                             {{#global_detail.useless }}<span title="Inutile">{{/global_detail.useless }}
                                             {{#global_detail.informations }}<span title="{{ global_detail.informations }}">{{/global_detail.informations }}
+                                            {{^global_detail.useless }}{{^global_detail.informations }}<span>{{/global_detail.informations }}{{/global_detail.useless }}
                                                 {{ global_detail.name }}
                                                 ({{^global_detail.power }}—{{/global_detail.power }}{{#global_detail.power }}{{ global_detail.power }}{{/global_detail.power }},
                                                 {{^global_detail.precision }}—{{/global_detail.precision }}{{#global_detail.precision }}{{ global_detail.precision }}%{{/global_detail.precision }}{{#global_detail.burn_percentage }},
@@ -161,6 +163,7 @@
                                             <span class="type"><img src="{{ global_detail.type_full }}" alt=""/></span>
                                             {{#global_detail.useless }}<span title="Inutile">{{/global_detail.useless }}
                                             {{#global_detail.informations }}<span title="{{ global_detail.informations }}">{{/global_detail.informations }}
+                                            {{^global_detail.useless }}{{^global_detail.informations }}<span>{{/global_detail.informations }}{{/global_detail.useless }}
                                                 {{ global_detail.name }}
                                                 ({{^global_detail.power }}—{{/global_detail.power }}{{#global_detail.power }}{{ global_detail.power }}{{/global_detail.power }},
                                                 {{^global_detail.precision }}—{{/global_detail.precision }}{{#global_detail.precision }}{{ global_detail.precision }}%{{/global_detail.precision }}{{#global_detail.burn_percentage }},
@@ -181,6 +184,7 @@
                                             <span class="type"><img src="{{ global_detail.type_full }}" alt=""/></span>
                                             {{#global_detail.useless }}<span title="Inutile">{{/global_detail.useless }}
                                             {{#global_detail.informations }}<span title="{{ global_detail.informations }}">{{/global_detail.informations }}
+                                            {{^global_detail.useless }}{{^global_detail.informations }}<span>{{/global_detail.informations }}{{/global_detail.useless }}
                                                 {{ global_detail.name }}
                                                 ({{^global_detail.power }}—{{/global_detail.power }}{{#global_detail.power }}{{ global_detail.power }}{{/global_detail.power }},
                                                 {{^global_detail.precision }}—{{/global_detail.precision }}{{#global_detail.precision }}{{ global_detail.precision }}%{{/global_detail.precision }}{{#global_detail.burn_percentage }},
@@ -201,6 +205,7 @@
                                             <span class="type"><img src="{{ global_detail.type_full }}" alt=""/></span>
                                             {{#global_detail.useless }}<span title="Inutile">{{/global_detail.useless }}
                                             {{#global_detail.informations }}<span title="{{ global_detail.informations }}">{{/global_detail.informations }}
+                                            {{^global_detail.useless }}{{^global_detail.informations }}<span>{{/global_detail.informations }}{{/global_detail.useless }}
                                                 {{ global_detail.name }}
                                                 ({{^global_detail.power }}—{{/global_detail.power }}{{#global_detail.power }}{{ global_detail.power }}{{/global_detail.power }},
                                                 {{^global_detail.precision }}—{{/global_detail.precision }}{{#global_detail.precision }}{{ global_detail.precision }}%{{/global_detail.precision }}{{#global_detail.burn_percentage }},
@@ -340,7 +345,8 @@
                                 <p>
                                     <span class="type"><img src="{{ global_detail.type_full }}" alt=""/></span>
                                     {{#global_detail.useless }}<span title="Inutile">{{/global_detail.useless }}
-                                            {{#global_detail.informations }}<span title="{{ global_detail.informations }}">{{/global_detail.informations }}
+                                    {{#global_detail.informations }}<span title="{{ global_detail.informations }}">{{/global_detail.informations }}
+                                    {{^global_detail.useless }}{{^global_detail.informations }}<span>{{/global_detail.informations }}{{/global_detail.useless }}
                                                 {{ global_detail.name }}
                                                 ({{^global_detail.power }}—{{/global_detail.power }}{{#global_detail.power }}{{ global_detail.power }}{{/global_detail.power }},
                                                 {{^global_detail.precision }}—{{/global_detail.precision }}{{#global_detail.precision }}{{ global_detail.precision }}%{{/global_detail.precision }}{{#global_detail.burn_percentage }},
@@ -359,8 +365,9 @@
                                 <p>
                                     <span class="type"><img src="{{ global_detail.type_full }}" alt=""/></span>
                                     {{#global_detail.useless }}<span title="Inutile">{{/global_detail.useless }}
-                                            {{#global_detail.informations }}<span title="{{ global_detail.informations }}">{{/global_detail.informations }}
-                                                {{ global_detail.name }}
+                                    {{#global_detail.informations }}<span title="{{ global_detail.informations }}">{{/global_detail.informations }}
+                                    {{^global_detail.useless }}{{^global_detail.informations }}<span>{{/global_detail.informations }}{{/global_detail.useless }}
+                                        {{ global_detail.name }}
                                                 ({{^global_detail.power }}—{{/global_detail.power }}{{#global_detail.power }}{{ global_detail.power }}{{/global_detail.power }},
                                                 {{^global_detail.precision }}—{{/global_detail.precision }}{{#global_detail.precision }}{{ global_detail.precision }}%{{/global_detail.precision }}{{#global_detail.burn_percentage }},
                                                 <span class="burn">{{ global_detail.burn_percentage }}%</span>{{/global_detail.burn_percentage }}{{#global_detail.freeze_percentage }},
@@ -379,7 +386,8 @@
                                 <p>
                                     <span class="type"><img src="{{ global_detail.type_full }}" alt=""/></span>
                                     {{#global_detail.useless }}<span title="Inutile">{{/global_detail.useless }}
-                                            {{#global_detail.informations }}<span title="{{ global_detail.informations }}">{{/global_detail.informations }}
+                                    {{#global_detail.informations }}<span title="{{ global_detail.informations }}">{{/global_detail.informations }}
+                                    {{^global_detail.useless }}{{^global_detail.informations }}<span>{{/global_detail.informations }}{{/global_detail.useless }}
                                                 {{ global_detail.name }}
                                                 ({{^global_detail.power }}—{{/global_detail.power }}{{#global_detail.power }}{{ global_detail.power }}{{/global_detail.power }},
                                                 {{^global_detail.precision }}—{{/global_detail.precision }}{{#global_detail.precision }}{{ global_detail.precision }}%{{/global_detail.precision }}{{#global_detail.burn_percentage }},
@@ -399,7 +407,8 @@
                                 <p>
                                     <span class="type"><img src="{{ global_detail.type_full }}" alt=""/></span>
                                     {{#global_detail.useless }}<span title="Inutile">{{/global_detail.useless }}
-                                            {{#global_detail.informations }}<span title="{{ global_detail.informations }}">{{/global_detail.informations }}
+                                    {{#global_detail.informations }}<span title="{{ global_detail.informations }}">{{/global_detail.informations }}
+                                    {{^global_detail.useless }}{{^global_detail.informations }}<span>{{/global_detail.informations }}{{/global_detail.useless }}
                                                 {{ global_detail.name }}
                                                 ({{^global_detail.power }}—{{/global_detail.power }}{{#global_detail.power }}{{ global_detail.power }}{{/global_detail.power }},
                                                 {{^global_detail.precision }}—{{/global_detail.precision }}{{#global_detail.precision }}{{ global_detail.precision }}%{{/global_detail.precision }}{{#global_detail.burn_percentage }},
@@ -419,7 +428,8 @@
                                 <p>
                                     <span class="type"><img src="{{ global_detail.type_full }}" alt=""/></span>
                                     {{#global_detail.useless }}<span title="Inutile">{{/global_detail.useless }}
-                                            {{#global_detail.informations }}<span title="{{ global_detail.informations }}">{{/global_detail.informations }}
+                                    {{#global_detail.informations }}<span title="{{ global_detail.informations }}">{{/global_detail.informations }}
+                                    {{^global_detail.useless }}{{^global_detail.informations }}<span>{{/global_detail.informations }}{{/global_detail.useless }}
                                                 {{ global_detail.name }}
                                                 ({{^global_detail.power }}—{{/global_detail.power }}{{#global_detail.power }}{{ global_detail.power }}{{/global_detail.power }},
                                                 {{^global_detail.precision }}—{{/global_detail.precision }}{{#global_detail.precision }}{{ global_detail.precision }}%{{/global_detail.precision }}{{#global_detail.burn_percentage }},

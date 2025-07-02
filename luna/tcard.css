@@ -574,6 +574,11 @@ input[type=radio], .pokemons {
 	object-fit: cover;
 }
 
+#content-p70 .banner img {
+	object-position: 0 -120px;
+	object-fit: cover;
+}
+
 /* Social */
 .social img {
 	width: 150px;
