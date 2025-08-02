@@ -671,6 +671,7 @@ def month_convert(month: str) -> str:
         'juin': 'Juin',
         'juillet': 'Juillet',
         'aout': 'Août',
+        'août': 'Août',
         'septembre': 'Septembre',
         'octobre': 'Octobre',
         'novembre': 'Novembre',
