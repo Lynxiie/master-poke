@@ -4,14 +4,15 @@ from flask import render_template, redirect, url_for, flash, request
 from wtforms.validators import NumberRange
 
 from database import app, db
-from enums import Object as ObjectType, HistoryMouvment, Assortment, GoalCategory, EvolutionWay, SpriteBackground
+from enums import Object as ObjectType, HistoryMouvment, Assortment, GoalCategory, EvolutionWay, SpriteBackground, \
+    Status
 from forms import MoneyForm, CsHistoryForm, FluteHistoryForm, SocialForm, \
     JourneyChapterForm, JourneyForm, InventoryForm, ObjectForm, CtForm, JustificatifLinkForm, AssortmentForm, \
     CtReservationListForm, GoalsListForm, GoalsForm, InventoryExchangeForm, PokemonSpeciesForm, \
     PokemonAttacksForm, PokemonAttackForm, PokemonSpeciesAttacksForm, PokemonSpeciesAttackForm, PokemonCategoryForm, \
     PokemonOwnedForm, PokemonXpForm, PokemonEvolutionForm, GivePokemonForm, ExchangePokemonForm, \
     ExchangePokemonNewForm, LearnAttacksForm, LearnAttackForm, ToPensionForm, LeavePensionForm, PokemonStatsForm, \
-    NewPostForm, NewNdmSubjectForm, SubjectForm, NdmRewardForm
+    NewPostForm, NewNdmSubjectForm, SubjectForm, NdmRewardForm, InventoryRankForm
 from models import CsHistory, Ct, Money, FluteHistory, Social, Object, \
     History, JustificatifLink, SocialPokemon, SocialSubject, JourneyChapter, Journey, Goals, PokemonSpecies, \
     PokemonAttacks, PokemonSpeciesAttacks, PokemonCategory, PokemonOwned, PokemonOwnedAttacks, NdmMonths, NdmSubjects, \
@@ -83,6 +84,32 @@ def informations(character_id: int):
 
             mentals = generate_physique_or_mental(mental_form.descriptions_mental, character_id, Mental)
             physicals = generate_physique_or_mental(physical_form.descriptions_physical, character_id, Physical)
+
+            rank = form.status.data
+
+            if rank == Status.SBIRE.value[1]:
+                already_in_db = Inventory.query.filter(Inventory.character_id == character_id, Inventory.object_id == 106).first()
+                if not already_in_db:
+                    inventory = [
+                        Inventory(character_id=character_id, object_id=106, quantity=0),
+                        Inventory(character_id=character_id, object_id=107, quantity=0),
+                        Inventory(character_id=character_id, object_id=108, quantity=0),
+                        Inventory(character_id=character_id, object_id=109, quantity=0),
+                        Inventory(character_id=character_id, object_id=110, quantity=0),
+                    ]
+                    db.session.bulk_save_objects(inventory)
+
+            elif rank == Status.RANGER.value[1]:
+                already_in_db = Inventory.query.filter(Inventory.character_id == character_id, Inventory.object_id == 111).first()
+                if not already_in_db:
+                    inventory = [
+                        Inventory(character_id=character_id, object_id=111, quantity=0),
+                        Inventory(character_id=character_id, object_id=112, quantity=0),
+                        Inventory(character_id=character_id, object_id=113, quantity=0),
+                        Inventory(character_id=character_id, object_id=114, quantity=0),
+                        Inventory(character_id=character_id, object_id=115, quantity=0),
+                    ]
+                    db.session.bulk_save_objects(inventory)
 
             db.session.bulk_save_objects(mentals)
             db.session.bulk_save_objects(physicals)
@@ -551,7 +578,7 @@ def edit_pass_almia(character_id: int):
         )
 
     character = MpCharacter.query.filter(MpCharacter.id == character_id).one_or_404()
-    links = JustificatifLink.query.filter(JustificatifLink.character_id == character_id).all()
+    links = JustificatifLink.query.filter(JustificatifLink.character_id == character_id, JustificatifLink.rank_link == False).all()
 
     if not links:
         form = JustificatifLinkForm()
@@ -2305,8 +2332,216 @@ def job_informations(character_id: int):
     """
     def _render():
         return render_template(
-            'home.html',
+            'rank_info.html',
+            character=character,
+            rank=rank,
         )
+
+    character = MpCharacter.query.filter(MpCharacter.id == character_id).one_or_404()
+    rank = character.status
+
+    return _render()
+
+
+@app.route("/rank_inventory/<int:character_id>", methods=('GET', 'POST'))
+def rank_inventory(character_id: int):
+    """
+    Affichage des informations de rang
+    :param character_id: l'id du personnage
+    :return: le template
+    """
+    def _render():
+        return render_template(
+            'rank_inventory.html',
+            character=character,
+            rank=rank,
+            form=form,
+            inventory=inventory,
+        )
+
+    character = MpCharacter.query.filter(MpCharacter.id == character_id).one_or_404()
+    rank = character.status
+
+    inventory = Inventory.query.join(Object).filter(Inventory.character_id == character_id, Object.category == rank.lower()).all()
+
+    form = InventoryRankForm(formdata=request.form)
+    if request.method == 'GET':
+        form.movement_date.data = date.today()
+
+    if request.method == 'POST':
+        if form.add_object.data:
+            object_id = int(request.form.get('objects'))
+
+            object_form = ObjectForm()
+            object_form.object_name = next(obj for obj in inventory if obj.id == object_id).object.name
+            form.objects.append_entry(object_form)
+
+            return _render()
+
+        if form.validate():
+            objects_list = form.objects.data
+
+            if not objects_list:
+                flash('Aucun objet ajouter ou supprimer !', 'danger')
+                return _render()
+
+            if objects_list:
+                objects_history = (
+                    f'{" ; ".join([str(obj["delta"]) + " " + obj["object_name"] for obj in objects_list])}'
+                )
+            else:
+                objects_history = ''
+
+            history = History(
+                character_id=character_id,
+                movement=form.movement.data,
+                movement_date=form.movement_date.data.strftime(DATE_FORMAT),
+                objects=None,
+                link=form.link.data,
+                link_title=form.link_name.data,
+                rank_history=True
+            )
+
+            justificatif_links = []
+            for obj in form.objects.data:
+                actual_object = next(inv for inv in inventory if obj['object_name'] == inv.object.name)
+
+                if actual_object.object_id in Object.get_objects_id_with_justificatif():
+                    if form.movement.data == "out":
+                        flash('Impossible de supprimer un objet avec justification via cette IHM', 'danger')
+                        return _render()
+
+                    for _ in range(obj['delta']):
+                        justificatif_links.append(JustificatifLink(
+                            character_id=character_id,
+                            object_id=actual_object.object_id,
+                            link=form.link.data,
+                            link_title=form.link_name.data
+                        ))
+
+                if form.movement.data == "in":
+                    actual_object.quantity += obj['delta']
+                if form.movement.data == "out":
+                    if actual_object.quantity < obj['delta']:
+                        flash(
+                            f'Impossible d\'avoir un solde négatif de {actual_object.object.name} '
+                            f'(possédé : {actual_object.quantity})',
+                            'danger'
+                        )
+                        return _render()
+                    actual_object.quantity -= obj['delta']
+
+            history.objects = objects_history
+            db.session.bulk_save_objects(justificatif_links)
+            db.session.add(history)
+            db.session.commit()
+
+            flash(f'Inventaire de rang de {character.firstname} modifié avec succès', 'success')
+            generate_tcard_part(character.id, 'inventaire')
+            return redirect(url_for('job_informations', character_id=character_id))
+        else:
+            flash('Erreur dans le formulaire', 'danger')
+
+    return _render()
+
+
+@app.route("/rank_inventory_justify/<int:character_id>", methods=('GET', 'POST'))
+def rank_inventory_justify(character_id: int):
+    """
+    Utilisation d'objet de rang avec justificatif
+    :param character_id: l'id du personnage
+    :return: le template
+    """
+    """
+    Utilisation d'un passe Almia
+    :param character_id: l'id du personnage
+    :return: le template
+    """
+
+    def _render():
+        return render_template(
+            'rank_inventory_justify.html',
+            character=character,
+            links=links,
+            form=form,
+        )
+
+    character = MpCharacter.query.filter(MpCharacter.id == character_id).one_or_404()
+    links = JustificatifLink.query.filter(
+        JustificatifLink.character_id == character_id, JustificatifLink.rank_link == True
+    ).all()
+
+    if not links:
+        form = JustificatifLinkForm()
+        return _render()
+
+    form = JustificatifLinkForm(formdata=request.form, justificatif_links=links)
+
+    for justif_link in form.justificatif_links:
+        for link in links:
+            if justif_link.form.id.data == link.id:
+                justif_link.object_name.data = link.object.name
+                break
+
+    if request.method == 'POST':
+        if form.validate():
+            used_id = set()
+            removed_link = None
+            object_name = None
+            for link in form.justificatif_links:
+                if link.removed_link.data:
+                    used_id.add(link.form.id.data)
+                    removed_link = link.removed_link.data
+                    object_name = link.object_name.data
+
+            if not used_id:
+                return _render()
+
+            JustificatifLink.query.filter(JustificatifLink.id.in_(used_id)).delete()
+            object_ = Inventory.query.join(Object).filter(
+                Inventory.character_id == character_id,
+                Object.name == object_name
+            ).first()
+
+            object_.quantity -= len(used_id)
+
+            history = History(
+                character_id=character_id,
+                movement=HistoryMouvment.OUT.value,
+                movement_date=date.today().strftime(DATE_FORMAT),
+                objects=f'{len(used_id)} {object_name}',
+                link=removed_link,
+                link_title=f'Utilisation {object_name}',
+                rank_history=True
+            )
+
+            db.session.add(history)
+            db.session.commit()
+
+            generate_tcard_part(character.id, 'inventaire')
+            return redirect(url_for('job_informations', character_id=character_id))
+        else:
+            flash('Erreur dans le formulaire', 'danger')
+
+    return _render()
+
+@app.route("/rank_cookies/<int:character_id>", methods=('GET', 'POST'))
+def rank_cookies(character_id: int):
+    """
+    Affichage des informations de rang
+    :param character_id: l'id du personnage
+    :return: le template
+    """
+    def _render():
+        return render_template(
+            'rank_cookies.html',
+            character=character,
+            rank=rank,
+        )
+
+    character = MpCharacter.query.filter(MpCharacter.id == character_id).one_or_404()
+    rank = character.status
+
     return _render()
 
 

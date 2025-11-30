@@ -255,7 +255,8 @@ def get_pokemon_data(character_id: int, data: dict[str, any], is_stockage: bool)
         .query
         .join(PokemonCategory)
         .options(joinedload(PokemonOwned.species))
-        .filter(PokemonOwned.character_id == character_id)
+        .filter(PokemonOwned.character_id == character_id, PokemonCategory.name != 'Sbire', PokemonCategory.name != 'Ranger')
+        .order_by(PokemonCategory.id)
     )
 
     if is_stockage:
@@ -366,7 +367,7 @@ def get_inventory_data(character: MpCharacter, character_id: int, data: dict[str
     cts = Ct.query.filter(Ct.character_id == character_id).join(Object).all()
     cs_history = CsHistory.query.filter(CsHistory.character_id == character_id).join(Object).all()
     flute_history = FluteHistory.query.filter(FluteHistory.character_id == character_id).join(Object).all()
-    histories = History.query.filter(History.character_id == character_id).all()
+    histories = History.query.filter(History.character_id == character_id, History.rank_history == False).all()
 
     def _get_date(objet: History):
         """

@@ -1,0 +1,46 @@
+{% include 'templates_part/header.html' %}
+{% from "templates_part/form_template.html" import render_field %}
+
+<h1>
+    {{ character.get_full_name() }} - Utilisation d'objet avec justificatif
+</h1>
+
+{% if not links %}
+    <div>
+        Pas d'objet
+    </div>
+{% else %}
+    <form method="POST">
+        {% for link in form.justificatif_links %}
+            <div class="row">
+                <div class="col-md-2">
+                    {{ render_field(link.object_name, readonly=true) }}
+                </div>
+
+                <div class="col-md-4">
+                    {{ render_field(link.link, readonly=true) }}
+                </div>
+
+                <div class="col-md-2">
+                    {{ render_field(link.link_title, readonly=true) }}
+                </div>
+
+                <div class="col-md-4">
+                    {{ render_field(link.removed_link) }}
+                </div>
+            </div>
+        {% endfor %}
+
+        <div class="row">
+            <div class="col-md-12">
+                <input type="submit" class="btn" value="Sauvegarder">
+            </div>
+        </div>
+    </form>
+{% endif %}
+
+<div class="float-end">
+    <a href="{{ url_for('inventory', character_id=character.id) }}" class="btn">Retour</a>
+</div>
+
+{% include 'templates_part/footer.html' %}

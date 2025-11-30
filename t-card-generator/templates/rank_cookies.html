@@ -1,0 +1,63 @@
+{% include 'templates_part/header.html' %}
+{% from "templates_part/form_template.html" import render_field %}
+
+<h1>
+  {{ character.get_full_name() }} - {{ rank }} - Cookies
+</h1>
+
+<ul class="nav nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active"
+            id="current-month-tab"
+            data-bs-toggle="pill"
+            data-bs-target="#current-month"
+            type="button"
+            role="tab"
+            aria-controls="current-month"
+            aria-selected="true">
+      Mois en cours
+    </button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link"
+            id="past-month-tab"
+            data-bs-toggle="pill"
+            data-bs-target="#past-month"
+            type="button"
+            role="tab"
+            aria-controls="past-month"
+            aria-selected="true">
+      Mois passé
+    </button>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link"
+            id="subjects-tab"
+            data-bs-toggle="pill"
+            data-bs-target="#subjects"
+            type="button"
+            role="tab"
+            aria-controls="subjects"
+            aria-selected="true">
+      Gestion des sujets
+    </button>
+  </li>
+</ul>
+
+<div class="tab-content" id="pills-tabContent">
+  <div class="tab-pane fade show active" id="current-month" role="tabpanel" aria-labelledby="current-month-tab" tabindex="0">
+    {% include 'templates_part/ndm_current_month.html' %}
+  </div>
+  <div class="tab-pane fade" id="past-month" role="tabpanel" aria-labelledby="past-month-tab" tabindex="0">
+    {% include 'templates_part/ndm_past_month.html' %}
+  </div>
+  <div class="tab-pane fade" id="subjects" role="tabpanel" aria-labelledby="subjects-tab" tabindex="0">
+    {% include 'templates_part/ndm_subjects.html' %}
+  </div>
+</div>
+
+
+<div class="float-end">
+  <a href="{{ url_for('pokemon', character_id=character.id) }}" class="btn">Retour</a>
+</div>
+
+{% include 'templates_part/footer.html' %}

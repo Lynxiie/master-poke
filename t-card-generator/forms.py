@@ -194,6 +194,17 @@ class InventoryForm(Form):
     link_name = StringField('Nom lien', [Length(max=100), DataRequired()])
 
 
+class InventoryRankForm(Form):
+    """
+    Formulaire pour l'inventaire de rang
+    """
+    objects = FieldList(FormField(ObjectForm))
+    add_object = SubmitField("+")
+    movement = RadioField('Ajout', choices=[('in', 'Oui'), ('out', 'Non')], validators=[DataRequired()])
+    movement_date = DateField('Date', [DataRequired()])
+    link = URLField('Lien', [Length(max=255), DataRequired()])
+    link_name = StringField('Nom lien', [Length(max=100), DataRequired()])
+
 class InventoryExchangeForm(Form):
     """
     Formulaire pour les échanges

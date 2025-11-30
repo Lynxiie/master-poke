@@ -101,6 +101,8 @@ class Object(CustomEnum):
     BERRY = 'berry'
     OTHER = 'other'
     RARE = 'rare'
+    SBIRE = 'sbire'
+    RANGER = 'ranger'
 
 
 class JourneyStatus(CustomEnum):

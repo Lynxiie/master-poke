@@ -1,0 +1,59 @@
+{% include 'templates_part/header.html' %}
+{% from "templates_part/form_template.html" import render_field %}
+
+<h1>
+  {{ character.get_full_name() }} - {{ rank }} - Inventaire
+</h1>
+
+<form method="POST">
+  <div class="row">
+    <div class="col-md-4">
+      {{ render_field(form.movement) }}
+    </div>
+
+    <div class="col-md-4">
+      {{ render_field(form.movement_date) }}
+    </div>
+
+    <div class="col-md-4">
+      {{ render_field(form.link_name) }}
+    </div>
+
+    <div class="col-md-12">
+      {{ render_field(form.link) }}
+    </div>
+
+    <!-- objects -->
+    <div class="col-md-3">
+      <div>
+        <label for="objects">Objet</label><br>
+        <select name="objects" id="objects">
+          {% for inv in inventory %}
+          <option value="{{ inv.id }}">{{ inv.object.name }}</option>
+          {% endfor %}
+        </select>
+
+        {{ form.add_object }}
+      </div>
+
+      <div class="row">
+        {% for object in form.objects %}
+        <div class="col-md-6">{{ render_field(object.object_name, readonly=true) }}</div>
+        <div class="col-md-6">{{ render_field(object.delta) }}</div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <input type="submit" class="btn" value="Sauvegarder">
+    </div>
+  </div>
+</form>
+
+<div class="float-end">
+  <a href="{{ url_for('job_informations', character_id=character.id) }}" class="btn">Retour</a>
+</div>
+
+{% include 'templates_part/footer.html' %}

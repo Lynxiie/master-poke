@@ -431,6 +431,26 @@ CREATE TABLE ndm_rewards (
     FOREIGN KEY(month_id) REFERENCES ndm_months(id)
 );
 
+DROP TABLE IF EXISTS cookies_months;
+CREATE TABLE cookies_months (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    character_id INTEGER UNSIGNED NOT NULL,
+    month VARCHAR(5) NOT NULL,
+    win_cookies INTEGER UNSIGNED NOT NULL,
+    FOREIGN KEY(character_id) REFERENCES mp_character(id)
+);
+
+DROP TABLE IF EXISTS cookies_used;
+CREATE TABLE cookies_used (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    cookies_months_id INTEGER UNSIGNED NOT NULL,
+    pokemon_id INTEGER NULL,
+    before_lvl VARCHAR(15) NULL,
+    after_lvl VARCHAR(15) NULL,
+    FOREIGN KEY(cookies_months_id) REFERENCES cookies_months(id),
+    FOREIGN KEY(pokemon_id) REFERENCES pokemon_owned(id)
+);
+
 -- DROP TABLE IF EXISTS dex;
 -- CREATE TABLE dex (
 --     id INTEGER PRIMARY KEY AUTOINCREMENT,

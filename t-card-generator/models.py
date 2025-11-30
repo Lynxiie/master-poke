@@ -60,7 +60,7 @@ class Object(db.Model):
         Récupère les id des objets avec justificatifs
         :return: set d'id
         """
-        return {103}
+        return {103, 109}
 
     @staticmethod
     def get_objects_id_no_exchangeable() -> set[int]:
@@ -132,6 +132,7 @@ class History(db.Model):
     objects_out_exchange = db.Column(String)
     link = db.Column(String, nullable=False)
     link_title = db.Column(String, nullable=False)
+    rank_history = db.Column(Boolean, nullable=False, default=False)
 
 
 class JustificatifLink(db.Model):
@@ -142,6 +143,7 @@ class JustificatifLink(db.Model):
     object = relationship(Object, backref="justificatif_link_object")
     link = db.Column(String, nullable=False)
     link_title = db.Column(String, nullable=False)
+    rank_link = db.Column(Boolean, nullable=False, default=False)
 
 
 class Social(db.Model):
