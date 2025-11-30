@@ -210,6 +210,7 @@ CREATE TABLE history (
     objects_out_exchange VARCHAR(255) NULL,
     link VARCHAR(255) NOT NULL,
     link_title VARCHAR(100) NOT NULL,
+    rank_history INTEGER DEFAULT 0 NOT NULL,
     FOREIGN KEY(character_id) REFERENCES mp_character(id)
 );
 
@@ -220,6 +221,7 @@ CREATE TABLE justificatif_link (
     object_id INTEGER UNSIGNED NOT NULL,
     link VARCHAR(255) NOT NULL,
     link_title VARCHAR(100) NOT NULL,
+    rank_title INTEGER DEFAULT 0 NOT NULL,
     FOREIGN KEY(character_id) REFERENCES mp_character(id),
     FOREIGN KEY(object_id) REFERENCES object(id)
 );
