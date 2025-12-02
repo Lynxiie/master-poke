@@ -676,6 +676,7 @@ def month_convert(month: str) -> str:
         'octobre': 'Octobre',
         'novembre': 'Novembre',
         'decembre': 'Décembre',
+        'décembre': 'Décembre',
     }
 
     return months.get(month)
