@@ -2447,7 +2447,7 @@ def rank_inventory(character_id: int):
             db.session.commit()
 
             flash(f'Inventaire de rang de {character.firstname} modifié avec succès', 'success')
-            generate_tcard_part(character.id, 'inventaire')
+            generate_tcard_part(character.id, 'rank-inventaire')
             return redirect(url_for('job_informations', character_id=character_id))
         else:
             flash('Erreur dans le formulaire', 'danger')
@@ -2528,7 +2528,7 @@ def rank_inventory_justify(character_id: int):
             db.session.add(history)
             db.session.commit()
 
-            generate_tcard_part(character.id, 'inventaire')
+            generate_tcard_part(character.id, 'rank-inventaire')
             return redirect(url_for('job_informations', character_id=character_id))
         else:
             flash('Erreur dans le formulaire', 'danger')

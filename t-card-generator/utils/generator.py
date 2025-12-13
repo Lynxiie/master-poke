@@ -65,6 +65,15 @@ def generate_tcard_part(character_id: int, tcard_part: str):
     if tcard_part in {'stockage', 't-card'}:
         get_pokemon_data(character_id, data, True)
 
+    if tcard_part in {'rank-inventaire', 't-card'}:
+        get_rank_inventory_date(character_id, data)
+
+    if tcard_part in {'rank-cookies', 't-card'}:
+        get_rank_inventory_date(character_id, data)
+
+    if tcard_part in {'rank-pokemon', 't-card'}:
+        get_pokemon_data(character_id, data, False, True)
+
     if tcard_part in {'ndm'}:
         get_ndm_data(character_id, data)
 
@@ -75,12 +84,13 @@ def generate_tcard_part(character_id: int, tcard_part: str):
         file.write(text)
 
 
-def get_pokemon_data(character_id: int, data: dict[str, any], is_stockage: bool):
+def get_pokemon_data(character_id: int, data: dict[str, any], is_stockage: bool, is_rank: bool = False):
     """
     Récupère les informations des Pokémon
     :param character_id: l'id du personnage
     :param data: le dictionnaire des informations
     :param is_stockage: si on veut les Pokémon du stockage
+    :param is_rank: si on veut les Pokémon de rang
     """
     def _get_icon_filename(search_term: str, category: str) -> str | None:
         """
@@ -257,14 +267,18 @@ def get_pokemon_data(character_id: int, data: dict[str, any], is_stockage: bool)
         .options(joinedload(PokemonOwned.species))
         .filter(
             PokemonOwned.character_id == character_id,
-            PokemonCategory.name != 'Sbire',
-            PokemonCategory.name != 'Ranger'
         )
         .order_by(PokemonCategory.id)
     )
 
     if is_stockage:
         pokemon = pokemon.filter(PokemonCategory.name == 'Stockage')
+
+    categories = ['Sbire', 'Ranger']
+    if is_rank:
+        pokemon = pokemon.filter(PokemonCategory.name.in_(categories))
+    else:
+        pokemon = pokemon.filter(~PokemonCategory.name.in_(categories))
 
     pokemon = pokemon.all()
 
@@ -282,10 +296,13 @@ def get_pokemon_data(character_id: int, data: dict[str, any], is_stockage: bool)
             _set_total_stats(poke)
 
     if character_id == 2:
-        data['all_pokemon'] = [{
-            "category": pokemon[0]['category'].name,
-            "pokemon": pokemon
-        } for _, pokemon in data['pokemon'].items()]
+        if not is_rank:
+            data['all_pokemon'] = [{
+                "category": pokemon[0]['category'].name,
+                "pokemon": pokemon
+            } for _, pokemon in data['pokemon'].items()]
+        if is_rank:
+            data['rank_pokemon'] = data['pokemon']["sbire"]
 
 
 def get_ressources_data(character: MpCharacter, data: dict[str, any]):
