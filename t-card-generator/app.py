@@ -12,11 +12,12 @@ from forms import MoneyForm, CsHistoryForm, FluteHistoryForm, SocialForm, \
     PokemonAttacksForm, PokemonAttackForm, PokemonSpeciesAttacksForm, PokemonSpeciesAttackForm, PokemonCategoryForm, \
     PokemonOwnedForm, PokemonXpForm, PokemonEvolutionForm, GivePokemonForm, ExchangePokemonForm, \
     ExchangePokemonNewForm, LearnAttacksForm, LearnAttackForm, ToPensionForm, LeavePensionForm, PokemonStatsForm, \
-    NewPostForm, NewNdmSubjectForm, SubjectForm, NdmRewardForm, InventoryRankForm
+    NewPostForm, NewNdmSubjectForm, SubjectForm, NdmRewardForm, InventoryRankForm, NewCookiesForm, \
+    UsedCookiesListForm
 from models import CsHistory, Ct, Money, FluteHistory, Social, Object, \
     History, JustificatifLink, SocialPokemon, SocialSubject, JourneyChapter, Journey, Goals, PokemonSpecies, \
     PokemonAttacks, PokemonSpeciesAttacks, PokemonCategory, PokemonOwned, PokemonOwnedAttacks, NdmMonths, NdmSubjects, \
-    NdmPosts, NdmRewards
+    NdmPosts, NdmRewards, CookiesMonths, CookiesUsed
 from utils.generator import modify_cs_flute_data, generate_tcard_part, generate_physique_or_mental
 from utils.levels import level_up_pokemon, get_xp_per_level
 from utils.lists import change_order
@@ -25,6 +26,7 @@ from forms import InformationsForm, MentalForm, PhysicalForm
 from models import MpCharacter, Mental, Physical, Inventory
 from utils.pokemon import evol_pokemon, can_evol, give_pokemon as give_pkmn, exchange_pokemon as exchange_pkmn, \
     get_non_evol_attacks, learn_auto_attacks, leave_pension, get_non_evol_attack_by_level
+from utils.rank import new_cookies, give_cookies
 from utils.strings import DATE_FORMAT
 
 
@@ -88,7 +90,9 @@ def informations(character_id: int):
             rank = form.status.data
 
             if rank == Status.SBIRE.value[1]:
-                already_in_db = Inventory.query.filter(Inventory.character_id == character_id, Inventory.object_id == 106).first()
+                already_in_db = Inventory.query.filter(
+                    Inventory.character_id == character_id, Inventory.object_id == 106
+                ).first()
                 if not already_in_db:
                     inventory = [
                         Inventory(character_id=character_id, object_id=106, quantity=0),
@@ -100,7 +104,9 @@ def informations(character_id: int):
                     db.session.bulk_save_objects(inventory)
 
             elif rank == Status.RANGER.value[1]:
-                already_in_db = Inventory.query.filter(Inventory.character_id == character_id, Inventory.object_id == 111).first()
+                already_in_db = Inventory.query.filter(
+                    Inventory.character_id == character_id, Inventory.object_id == 111
+                ).first()
                 if not already_in_db:
                     inventory = [
                         Inventory(character_id=character_id, object_id=111, quantity=0),
@@ -578,7 +584,9 @@ def edit_pass_almia(character_id: int):
         )
 
     character = MpCharacter.query.filter(MpCharacter.id == character_id).one_or_404()
-    links = JustificatifLink.query.filter(JustificatifLink.character_id == character_id, JustificatifLink.rank_link == False).all()
+    links = JustificatifLink.query.filter(
+        JustificatifLink.character_id == character_id, not JustificatifLink.rank_link
+    ).all()
 
     if not links:
         form = JustificatifLinkForm()
@@ -2362,7 +2370,9 @@ def rank_inventory(character_id: int):
     character = MpCharacter.query.filter(MpCharacter.id == character_id).one_or_404()
     rank = character.status
 
-    inventory = Inventory.query.join(Object).filter(Inventory.character_id == character_id, Object.category == rank.lower()).all()
+    inventory = Inventory.query.join(Object).filter(
+        Inventory.character_id == character_id, Object.category == rank.lower()
+    ).all()
 
     form = InventoryRankForm(formdata=request.form)
     if request.method == 'GET':
@@ -2468,7 +2478,7 @@ def rank_inventory_justify(character_id: int):
 
     character = MpCharacter.query.filter(MpCharacter.id == character_id).one_or_404()
     links = JustificatifLink.query.filter(
-        JustificatifLink.character_id == character_id, JustificatifLink.rank_link == True
+        JustificatifLink.character_id == character_id, JustificatifLink.rank_link
     ).all()
 
     if not links:
@@ -2525,6 +2535,7 @@ def rank_inventory_justify(character_id: int):
 
     return _render()
 
+
 @app.route("/rank_cookies/<int:character_id>", methods=('GET', 'POST'))
 def rank_cookies(character_id: int):
     """
@@ -2537,10 +2548,73 @@ def rank_cookies(character_id: int):
             'rank_cookies.html',
             character=character,
             rank=rank,
+            win_form=win_form,
+            used_form=used_form,
         )
 
     character = MpCharacter.query.filter(MpCharacter.id == character_id).one_or_404()
     rank = character.status
+
+    win_form = NewCookiesForm(formdata=request.form)
+    used_form = UsedCookiesListForm(formdata=request.form)
+
+    all_pokemon = db.session.query(PokemonOwned).join(PokemonCategory).filter(
+        PokemonOwned.level != 100,
+        PokemonOwned.character_id == character_id,
+        PokemonCategory.name.in_(['Sbire', 'Ranger'])
+    ).all()
+    all_pokemon_for_name = db.session.query(PokemonOwned).join(PokemonCategory).filter(
+        PokemonOwned.character_id == character_id,
+        PokemonCategory.name.in_(['Sbire', 'Ranger'])
+    ).all()
+
+    if request.method == 'GET':
+        all_cookies = db.session.query(CookiesUsed).filter(CookiesMonths.character_id == character_id).all()
+
+        liste_cookies_data = []
+        for cookie in all_cookies:
+            liste_cookies_data.append({
+                'used_cookies_id': cookie.id,
+                'cookies_months_id': cookie.cookies_months_id,
+                'pokemon_id': cookie.pokemon_id,
+                'before_lvl': cookie.before_lvl,
+                'after_lvl': cookie.after_lvl,
+                'month': cookie.cookies_months.month,
+                'pokemon_name': next(
+                    (pokemon.name for pokemon in all_pokemon_for_name if cookie.pokemon_id == pokemon.id),
+                    None
+                ),
+            })
+
+        used_form = UsedCookiesListForm(data={'cookies_forms': liste_cookies_data})
+
+    pokemon_options = [(0, 'Aucun')]
+    pokemon_options.extend(
+        (pokemon.id, f'{pokemon.species.species} - {pokemon.name} ({pokemon.level})') for pokemon in all_pokemon
+    )
+
+    for subform in used_form.cookies_forms:
+        subform.pokemon_id.choices = pokemon_options
+
+    if request.method == 'POST':
+        if "addCookies" in request.form and win_form.validate():
+            new_cookies(win_form, character_id, db.session)
+
+            generate_tcard_part(character.id, 'rank-cookies')
+
+            flash('Cookies ajouté avec succès', 'success')
+            return redirect(url_for('job_informations', character_id=character_id))
+
+        if "useCookies" in request.form and used_form.validate():
+            give_cookies(used_form, db.session)
+
+            generate_tcard_part(character.id, 'rank-cookies')
+            generate_tcard_part(character.id, 'rank-pokemon')
+
+            flash('Cookies utilisés avec succès', 'success')
+            return redirect(url_for('job_informations', character_id=character_id))
+        else:
+            flash('Erreur dans le formulaire', 'danger')
 
     return _render()
 

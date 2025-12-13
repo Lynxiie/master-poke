@@ -255,7 +255,11 @@ def get_pokemon_data(character_id: int, data: dict[str, any], is_stockage: bool)
         .query
         .join(PokemonCategory)
         .options(joinedload(PokemonOwned.species))
-        .filter(PokemonOwned.character_id == character_id, PokemonCategory.name != 'Sbire', PokemonCategory.name != 'Ranger')
+        .filter(
+            PokemonOwned.character_id == character_id,
+            PokemonCategory.name != 'Sbire',
+            PokemonCategory.name != 'Ranger'
+        )
         .order_by(PokemonCategory.id)
     )
 

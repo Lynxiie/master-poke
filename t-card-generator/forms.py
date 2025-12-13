@@ -205,6 +205,7 @@ class InventoryRankForm(Form):
     link = URLField('Lien', [Length(max=255), DataRequired()])
     link_name = StringField('Nom lien', [Length(max=100), DataRequired()])
 
+
 class InventoryExchangeForm(Form):
     """
     Formulaire pour les échanges
@@ -527,3 +528,31 @@ class NdmRewardForm(Form):
     level_winned_justif = StringField('Justification', validators=[DataRequired()])
     distribution = StringField('Distribution')
     money = BooleanField('Convertir en argent')
+
+
+class NewCookiesForm(Form):
+    """
+    Formulaire pour les nouveaux cookies
+    """
+    month = StringField('Mois', validators=[DataRequired()])
+    win_cookies = IntegerField('Cookies gagnés', validators=[DataRequired(), NumberRange(min=0)])
+
+
+class UsedCookiesForm(Form):
+    """
+    Formulaire pour les cookies utilisés
+    """
+    used_cookies_id = HiddenField('')
+    cookies_months_id = HiddenField('')
+    pokemon_id = SelectField('Pokémon', coerce=int, validators=[Optional()])
+    before_lvl = StringField('Level avant', render_kw={'readonly': True}, validators=[Optional()])
+    after_lvl = StringField('Level avant', render_kw={'readonly': True}, validators=[Optional()])
+    month = StringField('Mois', render_kw={'readonly': True})
+    pokemon_name = StringField('Pokémon', render_kw={'readonly': True})
+
+
+class UsedCookiesListForm(Form):
+    """
+    Formulaire pour les cookies utilisés (tous)
+    """
+    cookies_forms = FieldList(FormField(UsedCookiesForm))

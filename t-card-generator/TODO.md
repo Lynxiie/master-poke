@@ -10,7 +10,7 @@
   - Valider la demande donne les niveaux au Pokémon
 - [X] Gestion des NDM
 - [ ] Gestions des rangs
-- [ ] Gestion des catégories par personnages
+- [x] Gestion des catégories par personnages
 - [ ] Meilleure gestion des logs internes
 - [ ] Prévoir le cas des Pokémon assexués
 
@@ -29,5 +29,3 @@
 - [ ] Meilleure gestion des badges
   - Ne pas modifier le template pour les marquer comme "eu"
 - [ ] ID du personnage pas nécessaire pour la gestion de ce qui est globale (Pokémon, attaques)
-
-

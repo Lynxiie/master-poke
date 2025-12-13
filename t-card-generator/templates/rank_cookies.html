@@ -5,59 +5,75 @@
   {{ character.get_full_name() }} - {{ rank }} - Cookies
 </h1>
 
-<ul class="nav nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist">
-  <li class="nav-item" role="presentation">
-    <button class="nav-link active"
-            id="current-month-tab"
-            data-bs-toggle="pill"
-            data-bs-target="#current-month"
-            type="button"
-            role="tab"
-            aria-controls="current-month"
-            aria-selected="true">
-      Mois en cours
-    </button>
-  </li>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link"
-            id="past-month-tab"
-            data-bs-toggle="pill"
-            data-bs-target="#past-month"
-            type="button"
-            role="tab"
-            aria-controls="past-month"
-            aria-selected="true">
-      Mois passé
-    </button>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link"
-            id="subjects-tab"
-            data-bs-toggle="pill"
-            data-bs-target="#subjects"
-            type="button"
-            role="tab"
-            aria-controls="subjects"
-            aria-selected="true">
-      Gestion des sujets
-    </button>
-  </li>
-</ul>
+<form method="POST">
+  <h2>Nouveaux Cookies</h2>
+  <div class="row">
+    <div class="col-md-4">
+      {{ render_field(win_form.month) }}
+    </div>
 
-<div class="tab-content" id="pills-tabContent">
-  <div class="tab-pane fade show active" id="current-month" role="tabpanel" aria-labelledby="current-month-tab" tabindex="0">
-    {% include 'templates_part/ndm_current_month.html' %}
+    <div class="col-md-4">
+      {{ render_field(win_form.win_cookies) }}
+    </div>
   </div>
-  <div class="tab-pane fade" id="past-month" role="tabpanel" aria-labelledby="past-month-tab" tabindex="0">
-    {% include 'templates_part/ndm_past_month.html' %}
+
+  <div class="row">
+    <div class="col-md-12">
+      <input type="submit" class="btn" value="Sauvegarder" name="addCookies">
+    </div>
   </div>
-  <div class="tab-pane fade" id="subjects" role="tabpanel" aria-labelledby="subjects-tab" tabindex="0">
-    {% include 'templates_part/ndm_subjects.html' %}
+</form>
+
+<form method="POST">
+  <h2>Utilisation Cookies</h2>
+
+  <div class="row">
+
+    {% for cookies_form in used_form.cookies_forms %}
+      <div class="col-md-1">
+        {{ render_field(cookies_form.month, readonly=true) }}
+      </div>
+
+      <div class="col-md-2">
+        {% if cookies_form.pokemon_name.data %}
+          {{ render_field(cookies_form.pokemon_name, readonly=true) }}
+        {% else %}
+          {{ render_field(cookies_form.pokemon_id) }}
+        {% endif %}
+      </div>
+
+      <div class="col-md-1">
+        {% if cookies_form.pokemon_name.data %}
+          {{ render_field(cookies_form.before_lvl) }}
+        {% endif %}
+      </div>
+
+      <div class="col-md-1">
+        {% if cookies_form.pokemon_name.data %}
+          {{ render_field(cookies_form.after_lvl) }}
+        {% endif %}
+      </div>
+
+      <div class="col-md-1">
+        {{ render_field(cookies_form.used_cookies_id) }}
+        {{ render_field(cookies_form.cookies_months_id) }}
+      </div>
+
+    {% endfor %}
+
   </div>
-</div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <input type="submit" class="btn" value="Sauvegarder" name="useCookies">
+    </div>
+  </div>
+
+</form>
 
 
 <div class="float-end">
-  <a href="{{ url_for('pokemon', character_id=character.id) }}" class="btn">Retour</a>
+  <a href="{{ url_for('job_informations', character_id=character.id) }}" class="btn">Retour</a>
 </div>
 
 {% include 'templates_part/footer.html' %}
