@@ -276,6 +276,27 @@ CREATE TABLE journey (
     FOREIGN KEY(journey_chapter_id) REFERENCES journey_chapter(id)
 );
 
+DROP TABLE IF EXISTS missions_chapter;
+CREATE TABLE missions_chapter (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    character_id INTEGER UNSIGNED NOT NULL,
+    name VARCHAR(25) NOT NULL,
+    after INTEGER UNSIGNED NOT NULL,
+    FOREIGN KEY(character_id) REFERENCES mp_character(id)
+);
+
+DROP TABLE IF EXISTS missions;
+CREATE TABLE missions (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    missions_chapter_id INTEGER UNSIGNED NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    link VARCHAR(255) NULL,
+    after INTEGER UNSIGNED NOT NULL,
+    status VARCHAR(20) NOT NULL,
+    feat VARCHAR(100) NOT NULL,
+    FOREIGN KEY(missions_chapter_id) REFERENCES missions_chapter(id)
+);
+
 DROP TABLE IF EXISTS goals;
 CREATE TABLE goals (
      id INTEGER PRIMARY KEY AUTOINCREMENT,

@@ -44,6 +44,10 @@ a:hover {
     color: gray;
 }
 
+.fa-skull-crossbones {
+    color: red;
+}
+
 .fa-circle-check {
     color: green;
 }

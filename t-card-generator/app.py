@@ -17,7 +17,7 @@ from forms import MoneyForm, CsHistoryForm, FluteHistoryForm, SocialForm, \
 from models import CsHistory, Ct, Money, FluteHistory, Social, Object, \
     History, JustificatifLink, SocialPokemon, SocialSubject, JourneyChapter, Journey, Goals, PokemonSpecies, \
     PokemonAttacks, PokemonSpeciesAttacks, PokemonCategory, PokemonOwned, PokemonOwnedAttacks, NdmMonths, NdmSubjects, \
-    NdmPosts, NdmRewards, CookiesMonths, CookiesUsed
+    NdmPosts, NdmRewards, CookiesMonths, CookiesUsed, MissionsChapter, Missions
 from utils.generator import modify_cs_flute_data, generate_tcard_part, generate_physique_or_mental
 from utils.levels import level_up_pokemon, get_xp_per_level
 from utils.lists import change_order
@@ -2619,31 +2619,230 @@ def rank_cookies(character_id: int):
     return _render()
 
 
-@app.route("/job_pokemon/<int:character_id>", methods=('GET', 'POST'))
-def job_pokemon(character_id: int):
-    """
-    Affichage des Pokémon de rangs
-    :param character_id: l'id du personnage
-    :return: le template
-    """
-    def _render():
-        return render_template(
-            'home.html',
-        )
-    return _render()
-
-
 @app.route("/job_missions/<int:character_id>", methods=('GET', 'POST'))
 def job_missions(character_id: int):
     """
-    Affichage des missions réalisées
-    :param character_id: l'id du personnage
+    Missions d'un personnage
+    :param character_id: id du personnage
     :return: le template
     """
     def _render():
         return render_template(
-            'home.html',
+            'rank_journey.html',
+            character=character,
+            missions_chapters=missions_chapters
         )
+
+    character = MpCharacter.query.filter(MpCharacter.id == character_id).one_or_404()
+
+    missions_chapters = MissionsChapter.get_ordered_chapter(character_id=character_id, with_missions=True)
+
+    return _render()
+
+
+@app.route("/job_missions/<int:character_id>/newChapter", methods=('GET', 'POST'))
+def new_mission_chapter(character_id: int):
+    """
+    Nouveau chapitre dans le parcours d'un personnage
+    :param character_id: id du personnage
+    :return: le template
+    """
+    def _render():
+        return render_template(
+            'mission_chapter_edit.html',
+            character=character,
+            form=form,
+        )
+
+    character = MpCharacter.query.filter(MpCharacter.id == character_id).one_or_404()
+
+    mission_chapters = [(0, 'Début')]
+
+    all_mission_chapters = MissionsChapter.get_ordered_chapter(character_id=character_id)
+    if all_mission_chapters:
+        mission_chapters += [(mission_chapter.id, mission_chapter.name) for mission_chapter in all_mission_chapters]
+
+    form = JourneyChapterForm(formdata=request.form)
+    form.after.choices = mission_chapters
+
+    if request.method == 'POST':
+        if form.validate():
+
+            new_mission_chapter = MissionsChapter(character_id=character_id)
+            form.populate_obj(new_mission_chapter)
+            db.session.add(new_mission_chapter)
+            db.session.commit()
+            db.session.refresh(new_mission_chapter)
+
+            chapter = next((chap for chap in all_mission_chapters if chap.after == new_mission_chapter.after), None)
+            if chapter:
+                chapter.after = new_mission_chapter.id
+                db.session.commit()
+
+            flash(f'Chapitre {new_mission_chapter.name} ajouté avec succès', 'success')
+            generate_tcard_part(character.id, 'missions')
+            return redirect(url_for('job_missions', character_id=character_id))
+        else:
+            flash('Erreur dans le formulaire', 'danger')
+
+    return _render()
+
+
+@app.route("/job_missions/<int:character_id>/editChapter/<int:chapter_id>", methods=('GET', 'POST'))
+def edit_mission_chapter(character_id: int, chapter_id: int):
+    """
+    Edition d'un chapitre
+    :param character_id: id du personnage
+    :param chapter_id: id du chapitre
+    :return: le template
+    """
+    def _render():
+        return render_template(
+            'journey_chapter_edit.html',
+            character=character,
+            chapter=chapter,
+            form=form,
+        )
+
+    character = MpCharacter.query.filter(MpCharacter.id == character_id).one_or_404()
+    chapter = MissionsChapter.query.filter(MissionsChapter.id == chapter_id).one_or_404()
+
+    if chapter.character_id != character_id:
+        flash(f'Pas chapitre de chapitre n°{chapter_id} avec l\'id {character_id}', 'danger')
+        return redirect(url_for('home'))
+
+    mission_chapters = [(0, 'Début')]
+
+    all_mission_chapters = MissionsChapter.get_ordered_chapter(character_id=character_id)
+    if all_mission_chapters:
+        mission_chapters += [(mission_chapter.id, mission_chapter.name) for mission_chapter in all_mission_chapters]
+
+    form = JourneyChapterForm(formdata=request.form, obj=chapter)
+    form.after.choices = mission_chapters
+
+    if request.method == 'POST':
+        if form.validate():
+
+            change_order(all_mission_chapters, chapter, form.after.data)
+            chapter.name = form.name.data
+
+            db.session.commit()
+
+            flash(f'Chapitre {chapter.name} édité avec succès', 'success')
+            generate_tcard_part(character.id, 'missions')
+            return redirect(url_for('job_missions', character_id=character_id))
+        else:
+            flash('Erreur dans le formulaire', 'danger')
+
+    return _render()
+
+
+@app.route("/job_missions/<int:character_id>/chapter/<int:chapter_id>/new", methods=('GET', 'POST'))
+def new_mission(character_id: int, chapter_id: int):
+    """
+    Nouvelle mission
+    :param character_id: id du personnage
+    :param chapter_id: id du chapitre auquel est rattaché la mission
+    :return: le template
+    """
+    def _render():
+        return render_template(
+            'mission_edit.html',
+            character=character,
+            chapter=chapter,
+            form=form,
+        )
+
+    character = MpCharacter.query.filter(MpCharacter.id == character_id).one_or_404()
+    chapter = MissionsChapter.query.filter(MissionsChapter.id == chapter_id).one_or_404()
+
+    if chapter.character_id != character_id:
+        flash(f'Pas chapitre de parcours n°{chapter_id} avec l\'id {character_id}', 'danger')
+        return redirect(url_for('home'))
+
+    missions = [(0, 'Début')]
+
+    all_mission = Missions.get_ordered_missions(chapter_id=chapter_id)
+    if all_mission:
+        missions += [(mission.id, mission.name) for mission in all_mission]
+
+    form = JourneyForm(formdata=request.form)
+    form.after.choices = missions
+
+    if request.method == 'POST':
+        if form.validate():
+
+            new_mission = Missions(missions_chapter_id=chapter_id)
+            form.populate_obj(new_mission)
+            db.session.add(new_mission)
+            db.session.commit()
+            db.session.refresh(new_mission)
+
+            mission = next((mission for mission in all_mission if mission.after == new_mission.after), None)
+            if mission:
+                mission.after = new_mission.id
+                db.session.commit()
+
+            flash(f'Mission {chapter.name} ajoutée avec succès', 'success')
+            generate_tcard_part(character.id, 'missions')
+            return redirect(url_for('job_missions', character_id=character_id))
+        else:
+            flash('Erreur dans le formulaire', 'danger')
+    return _render()
+
+
+@app.route("/job_missions/<int:character_id>/chapter/<int:chapter_id>/edit/<int:mission_id>", methods=('GET', 'POST'))
+def edit_mission(character_id: int, chapter_id: int, mission_id: int):
+    """
+    Edition d'une mission
+    :param character_id: id du personnage
+    :param chapter_id: id du chapitre
+    :param mission_id: id de la mission
+    :return: le template
+    """
+    def _render():
+        return render_template(
+            'journey_edit.html',
+            character=character,
+            chapter=chapter,
+            journey=mission,
+            form=form,
+        )
+
+    character = MpCharacter.query.filter(MpCharacter.id == character_id).one_or_404()
+    chapter = MissionsChapter.query.filter(MissionsChapter.id == chapter_id).one_or_404()
+    mission = Missions.query.filter(Missions.id == mission_id).one_or_404()
+
+    if chapter.character_id != character_id or mission.missions_chapter_id != chapter_id:
+        flash(f'Pas mission n°{mission_id} sur le chapitre {chapter_id}', 'danger')
+        return redirect(url_for('home'))
+
+    missions = [(0, 'Début')]
+
+    all_missions = Missions.get_ordered_missions(chapter_id)
+    if all_missions:
+        missions += [(mission.id, mission.name) for mission in all_missions]
+
+    form = JourneyForm(formdata=request.form, obj=mission)
+    form.after.choices = missions
+
+    if request.method == 'POST':
+        if form.validate():
+
+            change_order(all_missions, mission, form.after.data)
+            mission.name = form.name.data
+            mission.link = form.link.data
+            mission.status = form.status.data
+            mission.feat = form.feat.data
+
+            db.session.commit()
+
+            flash(f'Mission {mission.name} éditée avec succès', 'success')
+            generate_tcard_part(character.id, 'missions')
+            return redirect(url_for('job_missions', character_id=character_id))
+        else:
+            flash('Erreur dans le formulaire', 'danger')
+
     return _render()
 
 

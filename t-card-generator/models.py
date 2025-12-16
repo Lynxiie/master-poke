@@ -234,6 +234,65 @@ class Journey(db.Model):
         return journeys
 
 
+class MissionsChapter(db.Model):
+    """Modèle des missions du personnage"""
+    id = db.Column(Integer, primary_key=True)
+    character_id = db.Column(Integer, ForeignKey(MpCharacter.id))
+    name = db.Column(String, nullable=False)
+    after = db.Column(Integer, nullable=False)
+
+    missions: Mapped[list["Missions"]] = relationship(backref="missions")
+
+    @classmethod
+    def get_ordered_chapter(cls, character_id: int, with_missions: bool = False) -> list['MissionsChapter']:
+        """
+        Récupère les missions ordonnées
+        :param character_id: l'id du personnage
+        :param with_missions: si on veut les aventures en plus des missions
+        :return: une liste de missions
+        """
+        chapters = cls.query.filter(MissionsChapter.character_id == character_id)
+
+        if with_missions:
+            chapters = chapters.join(Missions, full=True)
+
+        chapters = chapters.all()
+
+        if chapters:
+            chapters = sort_by_previous_value(chapters)
+            if with_missions:
+                for chapter in chapters:
+                    if chapter.missions:
+                        chapter.missions = sort_by_previous_value(chapter.missions)
+
+        return chapters
+
+
+class Missions(db.Model):
+    """Modèle d'une mission"""
+    id = db.Column(Integer, primary_key=True)
+    missions_chapter_id = db.Column(Integer, ForeignKey(MissionsChapter.id))
+    name = db.Column(String, nullable=False)
+    link = db.Column(String, nullable=False)
+    after = db.Column(Integer, nullable=False)
+    status = db.Column(String, nullable=False)
+    feat = db.Column(String)
+
+    @classmethod
+    def get_ordered_missions(cls, chapter_id: int) -> list['Missions']:
+        """
+        Récupère les aventures ordonnées
+        :param chapter_id: l'id du chapitre auquel les aventures sont rattachés
+        :return: la liste des aventures
+        """
+        missions = cls.query.filter(Missions.missions_chapter_id == chapter_id).all()
+
+        if missions:
+            missions = sort_by_previous_value(missions)
+
+        return missions
+
+
 class Goals(db.Model):
     """Modèle des objectifs"""
     id = db.Column(Integer, primary_key=True)

@@ -993,9 +993,18 @@
     <!--	mission -->
     <div id="mission-bloc" class="bloc listing scroll">
         Rien. Nada. Il faudrait se bouger le fion pour avancer et demander le rang !
-        <div class="hidden">
-            <p>Rang 0</p>
-            <a href="XXX" target="_blank"><i class="fa-solid fa-circle-minus"></i></a> BLABLABLA <br>
+        <div>
+            {{#rank_missions}}
+            <p>{{ name }}</p>
+            {{#missions}}
+            <a href="{{ link }}" target="_blank">
+                <i class="fa-solid {{ icon }}"></i>
+            </a>
+            {{name}} ♦
+            {{ feat }}
+            <br>
+            {{/missions}}
+            {{/rank_missions}}
         </div>
     </div>
 

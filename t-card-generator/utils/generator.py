@@ -13,7 +13,7 @@ from wtforms.fields.list import FieldList
 from models import Mental, Physical, Inventory, Object, Money, Ct, CsHistory, FluteHistory, History, \
     Social, SocialPokemon, SocialSubject, JourneyChapter, JustificatifLink, Goals, PokemonOwned, PokemonCategory, \
     PokemonOwnedAttacks, PokemonSpeciesAttacks, PokemonAttacks, NdmPosts, NdmMonths, NdmSubjects, NdmRewards, \
-    CookiesMonths
+    CookiesMonths, MissionsChapter
 from enums import Object as ObjectEnum, JourneyStatus, GoalCategory, TypePokemon
 
 from models import MpCharacter
@@ -74,6 +74,9 @@ def generate_tcard_part(character_id: int, tcard_part: str):
 
     if tcard_part in {'rank-pokemon', 't-card'}:
         get_pokemon_data(character_id, data, False, True)
+
+    if tcard_part in {'missions', 't-card'}:
+        get_missions_data(character_id, data)
 
     if tcard_part in {'ndm'}:
         get_ndm_data(character_id, data)
@@ -493,6 +496,22 @@ def get_journeys_data(character_id: int, data: dict[str, any]):
             journey.icon = status.value[2]
 
     data['chapters'] = [vars(chapter) for chapter in chapters]
+
+def get_missions_data(character_id: int, data: dict[str, any]):
+    """
+    Ajoute les données sur les missions
+    :param character_id: l'id du personnage
+    :param data: le dictionnaire des informations
+    """
+    chapters = MissionsChapter.get_ordered_chapter(character_id=character_id, with_missions=True)
+
+    for chapter in chapters:
+        for mission in chapter.missions:
+            status = JourneyStatus.get_from_value(mission.status)
+            mission.status_class = status.name.lower()
+            mission.icon = status.value[2]
+
+    data['rank_missions'] = [vars(chapter) for chapter in chapters]
 
 
 def get_goals_data(character_id: int, data: dict[str, any]):

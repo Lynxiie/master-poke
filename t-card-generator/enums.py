@@ -121,6 +121,7 @@ class JourneyStatus(CustomEnum):
     ONGOING = 2, 'En cours', 'fa-circle-minus'
     ABANDONNED = 3, 'Abandonné', 'fa-circle-xmark'
     FINISHED = 4, 'Fini', 'fa-circle-check'
+    FAILED = 5, 'Echoué', 'fa-skull-crossbones'
 
 
 class HistoryMouvment(CustomEnum):
