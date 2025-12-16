@@ -348,7 +348,7 @@ input[type="radio"][name="team"]:checked + label img {
     color: var(--ter-color);
 }
 
-.history div, #hm-uses-bloc div, .dex-bloc div {
+.history div, #hm-uses-bloc div, .dex-bloc div, #cookies-bloc div {
     padding-bottom: 5px;
     margin-bottom: 5px;
     border-bottom: 1px solid var(--border-color);
