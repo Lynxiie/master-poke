@@ -1,5 +1,6 @@
 import os
 import re
+import time
 from collections import defaultdict
 from datetime import datetime
 from math import floor
@@ -43,43 +44,69 @@ def generate_tcard_part(character_id: int, tcard_part: str):
     data['pokemon'] = defaultdict(list)
 
     if tcard_part in {'informations', 't-card'}:
+        t0 = time.time()
         get_character_data(character_id, data)
+        print(f'Information took {time.time() - t0:.2f}s')
 
     if tcard_part in {'inventaire', 't-card'}:
+        t0 = time.time()
         get_inventory_data(character, character_id, data)
+        print(f'Inventory took {time.time() - t0:.2f}s')
 
     if tcard_part in {'connaissances', 't-card'}:
+        t0 = time.time()
         get_social_data(character_id, data)
+        print(f'Social took {time.time() - t0:.2f}s')
 
     if tcard_part in {'ressources', 't-card'}:
+        t0 = time.time()
         get_ressources_data(character, data)
+        print(f'Ressources took {time.time() - t0:.2f}s')
 
     if tcard_part in {'parcours', 't-card'}:
+        t0 = time.time()
         get_journeys_data(character_id, data)
+        print(f'Journeys took {time.time() - t0:.2f}s')
 
     if tcard_part in {'objectifs', 't-card'}:
+        t0 = time.time()
         get_goals_data(character_id, data)
+        print(f'Goals took {time.time() - t0:.2f}s')
 
     if tcard_part in {'pokemon', 't-card'}:
+        t0 = time.time()
         get_pokemon_data(character_id, data, False)
+        print(f'Pokemon took {time.time() - t0:.2f}s')
 
     if tcard_part in {'stockage', 't-card'}:
+        t0 = time.time()
         get_pokemon_data(character_id, data, True)
+        print(f'Stockage took {time.time() - t0:.2f}s')
 
     if tcard_part in {'rank-inventaire', 't-card'}:
+        t0 = time.time()
         get_inventory_data(character, character_id, data)
+        print(f'Rank inventory took {time.time() - t0:.2f}s')
 
     if tcard_part in {'rank-cookies', 't-card'}:
+        t0 = time.time()
         get_rank_cookies_data(character_id, data)
+        print(f'Rank cookies took {time.time() - t0:.2f}s')
 
     if tcard_part in {'rank-pokemon', 't-card'}:
+        t0 = time.time()
         get_pokemon_data(character_id, data, False, True)
+        print(f'Rank pokemon took {time.time() - t0:.2f}s')
 
     if tcard_part in {'missions', 't-card'}:
+        t0 = time.time()
         get_missions_data(character_id, data)
+        print(f'Missions took {time.time() - t0:.2f}s')
 
     if tcard_part in {'ndm'}:
+        t0 = time.time()
         get_ndm_data(character_id, data)
+        print(f'NDM took {time.time() - t0:.2f}s')
 
     text = chevron.render(file, data)
     filename = os.path.join('..', character_name, tcard_part + '.html')
