@@ -752,13 +752,13 @@
     <div id="sbire-bloc" class="bloc">
         Rien. Nada. Il faudrait se bouger le fion pour avancer et demander le rang !
 
-        <div class="mp-tcard ">
+        <div class="mp-tcard hidden">
             <img src="../images/tcard/lime-sbire.png"><br>
             Sprite par © <a href="https://master-poke.forumactif.fr/u46">Stegan Striker</a> ♥
         </div>
 
         <!--cookies-->
-        <div id="cookies-bloc" class="inv-bloc  scroll">
+        <div id="cookies-bloc" class="inv-bloc hidden scroll">
             {{#cookies}}
             <div>
                 <span>{{month}}</span> <br>
@@ -776,7 +776,7 @@
         </div>
 
         <!-- historique sbire -->
-        <div id="history-sbire-bloc" class="inv-bloc history  scroll">
+        <div id="history-sbire-bloc" class="inv-bloc history hidden scroll">
             {{#rank_histories}}
             <div>
                 {{ date }}<br>
@@ -796,7 +796,7 @@
         </div>
 
         <!--objets sbire-->
-        <div id="sbire-object-bloc" class="inv-bloc  scroll">
+        <div id="sbire-object-bloc" class="inv-bloc hidden scroll">
             {{#rank_objects}}
             <span class="item">
                     <span><img src="../images/objets/{{ slug_name }}.png" alt="{{ object.name }}" class="{{^quantity}}notown{{/quantity}}" /></span>
@@ -993,7 +993,7 @@
     <!--	mission -->
     <div id="mission-bloc" class="bloc listing scroll">
         Rien. Nada. Il faudrait se bouger le fion pour avancer et demander le rang !
-        <div>
+        <div class="hidden">
             {{#rank_missions}}
             <p>{{ name }}</p>
             {{#missions}}
