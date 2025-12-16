@@ -12,7 +12,8 @@ from wtforms.fields.list import FieldList
 
 from models import Mental, Physical, Inventory, Object, Money, Ct, CsHistory, FluteHistory, History, \
     Social, SocialPokemon, SocialSubject, JourneyChapter, JustificatifLink, Goals, PokemonOwned, PokemonCategory, \
-    PokemonOwnedAttacks, PokemonSpeciesAttacks, PokemonAttacks, NdmPosts, NdmMonths, NdmSubjects, NdmRewards
+    PokemonOwnedAttacks, PokemonSpeciesAttacks, PokemonAttacks, NdmPosts, NdmMonths, NdmSubjects, NdmRewards, \
+    CookiesMonths
 from enums import Object as ObjectEnum, JourneyStatus, GoalCategory, TypePokemon
 
 from models import MpCharacter
@@ -66,10 +67,10 @@ def generate_tcard_part(character_id: int, tcard_part: str):
         get_pokemon_data(character_id, data, True)
 
     if tcard_part in {'rank-inventaire', 't-card'}:
-        get_rank_inventory_date(character_id, data)
+        get_inventory_data(character, character_id, data)
 
     if tcard_part in {'rank-cookies', 't-card'}:
-        get_rank_inventory_date(character_id, data)
+        get_rank_cookies_data(character_id, data)
 
     if tcard_part in {'rank-pokemon', 't-card'}:
         get_pokemon_data(character_id, data, False, True)
@@ -390,6 +391,15 @@ def get_inventory_data(character: MpCharacter, character_id: int, data: dict[str
     flute_history = FluteHistory.query.filter(FluteHistory.character_id == character_id).join(Object).all()
     histories = History.query.filter(History.character_id == character_id, History.rank_history == False).all()
 
+    rank_object = (
+        Inventory.query
+        .filter(Inventory.character_id == character_id)
+        .join(Object)
+        .filter(Object.category.in_(ObjectEnum.get_rank_categories()))
+        .all()
+    )
+    rank_histories = History.query.filter(History.character_id == character_id, History.rank_history == True).all()
+
     def _get_date(objet: History):
         """
         Récupère la date de transaction
@@ -399,6 +409,7 @@ def get_inventory_data(character: MpCharacter, character_id: int, data: dict[str
         return datetime.strptime(objet.movement_date, DATE_FORMAT)
 
     histories = sorted(histories, key=lambda history: (-_get_date(history).timestamp(), -history.id))
+    rank_histories = sorted(rank_histories, key=lambda history: (-_get_date(history).timestamp(), -history.id))
 
     for ct in cts:
         ct.quantity_string = convert_int_to_prefixed_string(int(ct.quantity))
@@ -406,6 +417,8 @@ def get_inventory_data(character: MpCharacter, character_id: int, data: dict[str
 
     if character.firstname == 'Luna':
         for history in histories:
+            history.icon = '►' if history.movement == 'in' else '◄' if history.movement == 'out' else '◄►'
+        for history in rank_histories:
             history.icon = '►' if history.movement == 'in' else '◄' if history.movement == 'out' else '◄►'
     elif character.firstname == 'Lime':
         grouped_history = defaultdict(list)
@@ -419,7 +432,20 @@ def get_inventory_data(character: MpCharacter, character_id: int, data: dict[str
 
             grouped_history[history.movement_date].append(history)
 
+        for history in rank_histories:
+            history.icon = (
+                'fa-arrow-right-long ' if history.movement == 'in'
+                else 'fa-arrow-left-long' if history.movement == 'out'
+                else 'fa-arrow-right-arrow-left'
+            )
+
+            grouped_history[history.movement_date].append(history)
+
         histories = [
+            {'date': date, 'history': items}
+            for date, items in grouped_history.items()
+        ]
+        rank_histories = [
             {'date': date, 'history': items}
             for date, items in grouped_history.items()
         ]
@@ -435,6 +461,8 @@ def get_inventory_data(character: MpCharacter, character_id: int, data: dict[str
     data['histories'] = histories
     data['otherCat'] = convert_object_for_ihm(others, character_id)
     data['berriesCat'] = convert_object_for_ihm(berries, character_id)
+    data['rank_objects'] = convert_object_for_ihm(rank_object, character_id)
+    data['rank_histories'] = rank_histories
 
 
 def get_character_data(character_id: int, data: dict[str, any]):
@@ -702,3 +730,13 @@ def month_convert(month: str) -> str:
     }
 
     return months.get(month)
+
+def get_rank_cookies_data(character_id: int, data: dict[str, any]):
+    cookies = CookiesMonths.query.filter(CookiesMonths.character_id == character_id).all()
+
+    cookies_output = defaultdict(lambda: {'cookies_used': [], 'month': None})
+    for cookie in cookies:
+        cookies_output[cookie.month]['cookies_used'].extend(cookie.cookies_used)
+        cookies_output[cookie.month]['month'] = cookie.month
+
+    data['cookies'] = list(cookies_output.values())

@@ -344,7 +344,10 @@ def edit_inventory(character_id: int):
 
     character = MpCharacter.query.filter(MpCharacter.id == character_id).one_or_404()
 
-    inventory = Inventory.query.join(Object).filter(Inventory.character_id == character_id).all()
+    inventory = Inventory.query.join(Object).filter(
+        Inventory.character_id == character_id,
+        Object.category.not_in(ObjectType.get_rank_categories())
+    ).all()
     ct_list = Ct.query.join(Object).filter(Ct.character_id == character_id).all()
     new_ct_list = Object.query.filter(Object.category == ObjectType.CT.name.lower()).all()
     assortment_list = Assortment.to_tuple()
@@ -716,7 +719,11 @@ def object_exchange(character_id: int):
         Inventory
         .query
         .join(Object)
-        .filter(Inventory.character_id == character_id, Object.id.not_in(Object.get_objects_id_no_exchangeable()))
+        .filter(
+            Inventory.character_id == character_id,
+            Object.id.not_in(Object.get_objects_id_no_exchangeable()),
+            Object.category.not_in(ObjectType.get_rank_categories())
+        )
         .all()
     )
     ct_list = Ct.query.join(Object).filter(Ct.character_id == character_id, Ct.quantity > 0).all()
@@ -2426,7 +2433,8 @@ def rank_inventory(character_id: int):
                             character_id=character_id,
                             object_id=actual_object.object_id,
                             link=form.link.data,
-                            link_title=form.link_name.data
+                            link_title=form.link_name.data,
+                            rank_link=True,
                         ))
 
                 if form.movement.data == "in":
@@ -2478,7 +2486,7 @@ def rank_inventory_justify(character_id: int):
 
     character = MpCharacter.query.filter(MpCharacter.id == character_id).one_or_404()
     links = JustificatifLink.query.filter(
-        JustificatifLink.character_id == character_id, JustificatifLink.rank_link
+        JustificatifLink.character_id == character_id, JustificatifLink.rank_link == True
     ).all()
 
     if not links:
@@ -2563,10 +2571,6 @@ def rank_cookies(character_id: int):
         PokemonOwned.character_id == character_id,
         PokemonCategory.name.in_(['Sbire', 'Ranger'])
     ).all()
-    all_pokemon_for_name = db.session.query(PokemonOwned).join(PokemonCategory).filter(
-        PokemonOwned.character_id == character_id,
-        PokemonCategory.name.in_(['Sbire', 'Ranger'])
-    ).all()
 
     if request.method == 'GET':
         all_cookies = db.session.query(CookiesUsed).filter(CookiesMonths.character_id == character_id).all()
@@ -2576,25 +2580,21 @@ def rank_cookies(character_id: int):
             liste_cookies_data.append({
                 'used_cookies_id': cookie.id,
                 'cookies_months_id': cookie.cookies_months_id,
-                'pokemon_id': cookie.pokemon_id,
                 'before_lvl': cookie.before_lvl,
                 'after_lvl': cookie.after_lvl,
                 'month': cookie.cookies_months.month,
-                'pokemon_name': next(
-                    (pokemon.name for pokemon in all_pokemon_for_name if cookie.pokemon_id == pokemon.id),
-                    None
-                ),
+                'pokemon_name_display': cookie.pokemon_name,
             })
 
         used_form = UsedCookiesListForm(data={'cookies_forms': liste_cookies_data})
 
     pokemon_options = [(0, 'Aucun')]
     pokemon_options.extend(
-        (pokemon.id, f'{pokemon.species.species} - {pokemon.name} ({pokemon.level})') for pokemon in all_pokemon
+        (pokemon.name, f'{pokemon.species.species} - {pokemon.name} ({pokemon.level})') for pokemon in all_pokemon
     )
 
     for subform in used_form.cookies_forms:
-        subform.pokemon_id.choices = pokemon_options
+        subform.pokemon_name.choices = pokemon_options
 
     if request.method == 'POST':
         if "addCookies" in request.form and win_form.validate():

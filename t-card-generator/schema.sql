@@ -446,11 +446,10 @@ DROP TABLE IF EXISTS cookies_used;
 CREATE TABLE cookies_used (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     cookies_months_id INTEGER UNSIGNED NOT NULL,
-    pokemon_id INTEGER NULL,
+    pokemon_name INTEGER NULL,
     before_lvl VARCHAR(15) NULL,
     after_lvl VARCHAR(15) NULL,
-    FOREIGN KEY(cookies_months_id) REFERENCES cookies_months(id),
-    FOREIGN KEY(pokemon_id) REFERENCES pokemon_owned(id)
+    FOREIGN KEY(cookies_months_id) REFERENCES cookies_months(id)
 );
 
 -- DROP TABLE IF EXISTS dex;
@@ -468,10 +467,9 @@ CREATE TABLE cookies_used (
 --     id INTEGER PRIMARY KEY AUTOINCREMENT,
 --     dex_id INTEGER UNSIGNED NOT NULL,
 --     month VARCHAR(10) NOT NULL,
---     pokemon_id INTEGER UNSIGNED NOT NULL,
+--     pokemon_name INTEGER UNSIGNED NOT NULL,
 --     base_lvl INTEGER UNSIGNED NOT NULL,
 --     end_lvl INTEGER UNSIGNED NOT NULL,
 --     give BOOLEAN NOT NULL DEFAULT false,
---     FOREIGN KEY(dex_id) REFERENCES dex(id),
---     FOREIGN KEY(pokemon_id) REFERENCES pokemon(id)
+--     FOREIGN KEY(dex_id) REFERENCES dex(id)
 -- );

@@ -104,6 +104,14 @@ class Object(CustomEnum):
     SBIRE = 'sbire'
     RANGER = 'ranger'
 
+    @classmethod
+    def get_rank_categories(cls) -> list[str]:
+        """
+        Retourne les catégories d'objets spécifiques aux rangs
+        :return: Liste de string correspondant aux noms de rang
+        """
+        return [cls.SBIRE.value, cls.RANGER.value]
+
 
 class JourneyStatus(CustomEnum):
     """

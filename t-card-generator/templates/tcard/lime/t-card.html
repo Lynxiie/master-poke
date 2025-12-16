@@ -752,60 +752,64 @@
     <div id="sbire-bloc" class="bloc">
         Rien. Nada. Il faudrait se bouger le fion pour avancer et demander le rang !
 
-        <div class="mp-tcard hidden">
-            <img src="https://i.servimg.com/u/f81/18/65/55/39/tcard_34.png">
+        <div class="mp-tcard ">
+            <img src="../images/tcard/lime-sbire.png"><br>
+            Sprite par © <a href="https://master-poke.forumactif.fr/u46">Stegan Striker</a> ♥
         </div>
 
         <!--cookies-->
-        <div id="cookies-bloc" class="inv-bloc hidden scroll">
-            <div class="hidden">XX/24 ▶ Stocké</div>
+        <div id="cookies-bloc" class="inv-bloc  scroll">
+            {{#cookies}}
+            <div>
+                <span>{{month}}</span> <br>
+                {{#cookies_used}}
+                    {{^pokemon_name}}
+                        <i class="fa-solid fa-cookie"></i> Stocké
+                    {{/pokemon_name}}
+                    {{#pokemon_name}}
+                        <i class="fa-solid fa-cookie-bite"></i> {{pokemon_name}} (lvl {{before_lvl}} -> {{after_lvl}})
+                    {{/pokemon_name}}
+                <br>
+                {{/cookies_used}}
+            </div>
+            {{/cookies}}
         </div>
 
         <!-- historique sbire -->
-        <div id="history-sbire-bloc" class="inv-bloc history hidden scroll">
+        <div id="history-sbire-bloc" class="inv-bloc history  scroll">
+            {{#rank_histories}}
             <div>
-                18/01/24<br>
-                <i class="fa-solid fa-arrow-right-long"></i> 10 Pokéballs, 2 potions ✭
-                <a href="" target="_blank">Validation personnage</a>
+                {{ date }}<br>
+                {{#history}}
+                {{#objects_in_exchange}}
+                <i class="fa-solid {{ icon }}"></i>
+                <span class="out">{{{ objects_out_exchange }}}</span> vs <span class="in">{{{ objects_in_exchange }}}</span>
+                {{/objects_in_exchange}}
+                {{^objects_in_exchange}}
+                <i class="fa-solid {{ icon }}"></i> {{{ objects }}}
+                {{/objects_in_exchange}}
+                ✭ <a href="{{ link }}" target="_blank">{{ link_title }}</a>
+                <br>
+                {{/history}}
             </div>
-            <div>
-                18/01/24 <br>
-                <i class="fa-solid fa-arrow-right-long"></i> 10 Pokéballs, 2 potions ✭
-                <a href="" target="_blank">Validation personnage</a><br>
-                <i class="fa-solid fa-arrow-left-long"></i> 10 Pokéballs, 2 potions ✭
-                <a href="" target="_blank">Validation personnage</a><br>
-                <i class="fa-solid fa-arrow-right-arrow-left"></i> 10 Pokéballs, 2 potions ✭
-                <a href="" target="_blank">Validation personnage</a><br>
-            </div>
+            {{/rank_histories}}
         </div>
 
         <!--objets sbire-->
-        <div id="sbire-object-bloc" class="inv-bloc hidden scroll">
+        <div id="sbire-object-bloc" class="inv-bloc  scroll">
+            {{#rank_objects}}
             <span class="item">
-                <span><img src="https://i.servimg.com/u/f11/11/86/51/24/stimul10.png" class="notown"></span>
-                <span>Stimulateur neuronal</span>
-                <span>x00</span>
-            </span>
-            <span class="item">
-                <span><img src="https://i.servimg.com/u/f11/11/86/51/24/bacele10.png" class="notown"></span>
-                <span>Bracelet de force</span>
-                <span>x00</span>
-            </span>
-            <span class="item">
-                <span><img src="https://i.servimg.com/u/f11/11/86/51/24/fouet10.png" class="notown"></span>
-                <span>Fouet</span>
-                <span>x00</span>
-            </span>
-            <span class="item">
-                <span><img src="https://i.imgur.com/ofIPQ8X.png" class="notown"></span>
-                <span>CT de contrebande</span>
-                <span>x00</span>
-            </span>
-            <span class="item">
-                <span><img src="https://www.pokepedia.fr/images/d/d3/Miniature_Baie_Pommo_DP.png" class="notown"></span>
-                <span>Baie étrange </span>
-                <span>x00</span>
-            </span>
+                    <span><img src="../images/objets/{{ slug_name }}.png" alt="{{ object.name }}" class="{{^quantity}}notown{{/quantity}}" /></span>
+                    <span>
+                        {{ object.name }}
+                        {{#links}}
+                            <a href="{{ link }}" target="_blank">♦</a>
+                        {{/links}}
+                    </span>
+                    <span>x{{ quantity_string }}</span>
+
+                </span>
+            {{/rank_objects}}
         </div>
     </div>
 

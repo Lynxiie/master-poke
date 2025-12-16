@@ -39,22 +39,23 @@ def give_cookies(used_cookies_form: UsedCookiesListForm, session: Session):
     :param used_cookies_form: le formulaire d'utilisation des cookies
     :param session: la session BDD
     """
-    pokemon_id = set(cookies_forms.pokemon_id.data for cookies_forms in used_cookies_form.cookies_forms)
+    pokemon_name = set(cookies_forms.pokemon_name.data for cookies_forms in used_cookies_form.cookies_forms)
     used_cookies_id = set(cookies_forms.used_cookies_id.data for cookies_forms in used_cookies_form.cookies_forms)
 
-    all_pokemon = session.query(PokemonOwned).filter(PokemonOwned.id.in_(pokemon_id)).all()
-    all_pokemon = {pokemon.id: pokemon for pokemon in all_pokemon}
+    all_pokemon = session.query(PokemonOwned).filter(PokemonOwned.name.in_(pokemon_name)).all()
+    all_pokemon = {pokemon.name: pokemon for pokemon in all_pokemon}
 
     used_cookies = session.query(CookiesUsed).filter(CookiesUsed.id.in_(used_cookies_id)).all()
     used_cookies = {cookies.id: cookies for cookies in used_cookies}
 
     for cookies_forms in used_cookies_form.cookies_forms:
-        if not cookies_forms.pokemon_id.data:
+        pokemon_name = cookies_forms.pokemon_name.data
+        if not pokemon_name or pokemon_name == '0':
             continue
-        pokemon = all_pokemon[cookies_forms.pokemon_id.data]
+        pokemon = all_pokemon[pokemon_name]
         cookies = used_cookies[int(cookies_forms.used_cookies_id.data)]
 
-        cookies.pokemon_id = pokemon.id
+        cookies.pokemon_name = pokemon.name
         cookies.before_lvl = pokemon.level
         pokemon.level += 1
         cookies.after_lvl = pokemon.level

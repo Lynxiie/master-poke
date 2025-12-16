@@ -337,7 +337,7 @@ class PokemonOwnedForm(Form):
     """
     name = StringField('Nom', validators=[DataRequired(), Length(max=100)])
     species_id = SelectField('Espèce', coerce=int, validators=[DataRequired()])
-    sex = SelectField('Sexe', choices=[('M', 'Mâle'), ('F', 'Femelle')], validators=[DataRequired()])
+    sex = SelectField('Sexe', choices=[('M', 'Mâle'), ('F', 'Femelle'), ('A', 'Assexué')], validators=[DataRequired()])
     level = IntegerField('Level', validators=[DataRequired(), NumberRange(min=5, max=100)])
     shiny = BooleanField('Shiny')
     pv = IntegerField('HP', validators=[NumberRange(min=0)], default=0)
@@ -368,7 +368,7 @@ class PokemonOwnedEditForm(Form):
     Formulaire d'édition d'un Pokémon
     """
     name = StringField('Nom', validators=[DataRequired(), Length(max=100)])
-    sex = SelectField('Sexe', choices=[('M', 'Mâle'), ('F', 'Femelle')], validators=[DataRequired()])
+    sex = SelectField('Sexe', choices=[('M', 'Mâle'), ('F', 'Femelle'), ('A', 'Assexué')], validators=[DataRequired()])
     shiny = BooleanField('Shiny')
     obtention_link = StringField('Lien d\'obtention', validators=[DataRequired(), Length(max=255)])
     obtention_name = StringField('Nom du lien', validators=[DataRequired(), Length(max=255)])
@@ -416,7 +416,7 @@ class ExchangePokemonNewForm(Form):
     """
     name = StringField('Nom', validators=[DataRequired(), Length(max=100)])
     species_id = SelectField('Espèce', coerce=int, validators=[DataRequired()])
-    sex = SelectField('Sexe', choices=[('M', 'Mâle'), ('F', 'Femelle')], validators=[DataRequired()])
+    sex = SelectField('Sexe', choices=[('M', 'Mâle'), ('F', 'Femelle'), ('A', 'Assexué')], validators=[DataRequired()])
     level = IntegerField('Level', validators=[DataRequired(), NumberRange(min=5)])
     shiny = BooleanField('Shiny', default=False)
     hp_up = IntegerField('PV Plus', validators=[NumberRange(min=0)], default=0)
@@ -544,11 +544,11 @@ class UsedCookiesForm(Form):
     """
     used_cookies_id = HiddenField('')
     cookies_months_id = HiddenField('')
-    pokemon_id = SelectField('Pokémon', coerce=int, validators=[Optional()])
+    pokemon_name = SelectField('Pokémon', coerce=str, validators=[Optional()])
     before_lvl = StringField('Level avant', render_kw={'readonly': True}, validators=[Optional()])
     after_lvl = StringField('Level avant', render_kw={'readonly': True}, validators=[Optional()])
     month = StringField('Mois', render_kw={'readonly': True})
-    pokemon_name = StringField('Pokémon', render_kw={'readonly': True})
+    pokemon_name_display = StringField('Pokémon', render_kw={'readonly': True})
 
 
 class UsedCookiesListForm(Form):

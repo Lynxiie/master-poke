@@ -434,9 +434,8 @@ class CookiesMonths(db.Model):
 class CookiesUsed(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     cookies_months_id = db.Column(db.Integer, db.ForeignKey('cookies_months.id'), nullable=False)
-    pokemon_id = db.Column(db.Integer, db.ForeignKey('pokemon_owned.id'), nullable=True)
+    pokemon_name = db.Column(db.String, nullable=True)
     before_lvl = db.Column(db.Integer, nullable=True)
     after_lvl = db.Column(db.Integer, nullable=True)
 
     cookies_months = db.relationship('CookiesMonths', back_populates='cookies_used')
-    pokemon = db.relationship('PokemonOwned', backref='pokemon_owned')

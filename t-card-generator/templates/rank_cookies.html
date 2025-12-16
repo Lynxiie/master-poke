@@ -35,21 +35,21 @@
       </div>
 
       <div class="col-md-2">
-        {% if cookies_form.pokemon_name.data %}
-          {{ render_field(cookies_form.pokemon_name, readonly=true) }}
+        {% if cookies_form.pokemon_name_display.data %}
+          {{ render_field(cookies_form.pokemon_name_display, readonly=true) }}
         {% else %}
-          {{ render_field(cookies_form.pokemon_id) }}
+          {{ render_field(cookies_form.pokemon_name) }}
         {% endif %}
       </div>
 
       <div class="col-md-1">
-        {% if cookies_form.pokemon_name.data %}
+        {% if cookies_form.pokemon_name_display.data %}
           {{ render_field(cookies_form.before_lvl) }}
         {% endif %}
       </div>
 
       <div class="col-md-1">
-        {% if cookies_form.pokemon_name.data %}
+        {% if cookies_form.pokemon_name_display.data %}
           {{ render_field(cookies_form.after_lvl) }}
         {% endif %}
       </div>

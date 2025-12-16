@@ -28,7 +28,7 @@ class TestCookies(unittest.TestCase):
         used_cookies = self.session.query(CookiesUsed).filter(CookiesUsed.cookies_months_id == 1).all()
         self.assertEqual(1, len(used_cookies))
         self.assertEqual(1, used_cookies[0].cookies_months_id)
-        self.assertIsNone(used_cookies[0].pokemon_id)
+        self.assertIsNone(used_cookies[0].pokemon_name)
         self.assertIsNone(used_cookies[0].before_lvl)
         self.assertIsNone(used_cookies[0].after_lvl)
 
@@ -50,7 +50,7 @@ class TestCookies(unittest.TestCase):
 
         for cookie in cookies[0].cookies_used:
             self.assertEqual(1, cookie.cookies_months_id)
-            self.assertIsNone(cookie.pokemon_id)
+            self.assertIsNone(cookie.pokemon_name)
             self.assertIsNone(cookie.before_lvl)
             self.assertIsNone(cookie.after_lvl)
 
@@ -63,11 +63,11 @@ class TestCookies(unittest.TestCase):
         new_cookies(cookies, 2, self.session)
 
         form = UsedCookiesListForm()
-        form.cookies_forms.append_entry({'cookies_months_id': 1, 'used_cookies_id': 1, 'pokemon_id': 1})
-        form.cookies_forms.append_entry({'cookies_months_id': 2, 'used_cookies_id': 3, 'pokemon_id': 1})
-        form.cookies_forms.append_entry({'cookies_months_id': 2, 'used_cookies_id': 4, 'pokemon_id': 1})
-        form.cookies_forms.append_entry({'cookies_months_id': 1, 'used_cookies_id': 2, 'pokemon_id': 2})
-        form.cookies_forms.append_entry({'cookies_months_id': 2, 'used_cookies_id': 5, 'pokemon_id': 0})
+        form.cookies_forms.append_entry({'cookies_months_id': 1, 'used_cookies_id': 1, 'pokemon_name': 'POKEMON 1'})
+        form.cookies_forms.append_entry({'cookies_months_id': 2, 'used_cookies_id': 3, 'pokemon_name': 'POKEMON 1'})
+        form.cookies_forms.append_entry({'cookies_months_id': 2, 'used_cookies_id': 4, 'pokemon_name': 'POKEMON 1'})
+        form.cookies_forms.append_entry({'cookies_months_id': 1, 'used_cookies_id': 2, 'pokemon_name': 'POKEMON 2'})
+        form.cookies_forms.append_entry({'cookies_months_id': 2, 'used_cookies_id': 5, 'pokemon_name': None})
 
         give_cookies(form, self.session)
 
@@ -82,13 +82,13 @@ class TestCookies(unittest.TestCase):
 
         used_cookie = cookies.cookies_used[0]
         self.assertEqual(1, used_cookie.cookies_months_id)
-        self.assertEqual(1, used_cookie.pokemon_id)
+        self.assertEqual('POKEMON 1', used_cookie.pokemon_name)
         self.assertEqual(15, used_cookie.before_lvl)
         self.assertEqual(16, used_cookie.after_lvl)
 
         used_cookie = cookies.cookies_used[1]
         self.assertEqual(1, used_cookie.cookies_months_id)
-        self.assertEqual(2, used_cookie.pokemon_id)
+        self.assertEqual('POKEMON 2', used_cookie.pokemon_name)
         self.assertEqual(11, used_cookie.before_lvl)
         self.assertEqual(12, used_cookie.after_lvl)
 
@@ -100,13 +100,13 @@ class TestCookies(unittest.TestCase):
 
         used_cookie = cookies.cookies_used[0]
         self.assertEqual(2, used_cookie.cookies_months_id)
-        self.assertEqual(1, used_cookie.pokemon_id)
+        self.assertEqual('POKEMON 1', used_cookie.pokemon_name)
         self.assertEqual(16, used_cookie.before_lvl)
         self.assertEqual(17, used_cookie.after_lvl)
 
         used_cookie = cookies.cookies_used[1]
         self.assertEqual(2, used_cookie.cookies_months_id)
-        self.assertEqual(1, used_cookie.pokemon_id)
+        self.assertEqual('POKEMON 1', used_cookie.pokemon_name)
         self.assertEqual(17, used_cookie.before_lvl)
         self.assertEqual(18, used_cookie.after_lvl)
 
@@ -121,7 +121,7 @@ class TestCookies(unittest.TestCase):
 
         used_cookie = cookies.cookies_used[0]
         self.assertEqual(3, used_cookie.cookies_months_id)
-        self.assertIsNone(used_cookie.pokemon_id)
+        self.assertIsNone(used_cookie.pokemon_name)
         self.assertIsNone(used_cookie.before_lvl)
         self.assertIsNone(used_cookie.after_lvl)
 
