@@ -556,3 +556,32 @@ class UsedCookiesListForm(Form):
     Formulaire pour les cookies utilisés (tous)
     """
     cookies_forms = FieldList(FormField(UsedCookiesForm))
+
+
+class NewDexForm(Form):
+    """
+    Formulaire pour les nouveaux abonnements aux dex
+    """
+    dex_name = StringField('Nom dex', validators=[DataRequired()])
+
+
+class DexExperienceForm(Form):
+    """
+    Formulaire donner des niveaux de dex
+    """
+    experience_id = HiddenField('')
+    experience_dex_id = HiddenField('')
+    month = StringField('Mois', validators=[DataRequired()], render_kw={'readonly': True})
+    pokemon_name = SelectField('Pokémon', coerce=str, validators=[Optional()])
+    pokemon_name_display = StringField('Pokémon', render_kw={'readonly': True})
+    base_lvl = StringField('Level avant', render_kw={'readonly': True}, validators=[Optional()])
+    after_lvl = StringField('Level après', render_kw={'readonly': True}, validators=[Optional()])
+    give = BooleanField('Donné ?')
+    is_past_month = HiddenField()
+
+
+class DexExperiencesForm(Form):
+    """
+    Formulaire listant les niveaux de dex à donner
+    """
+    experiences = FieldList(FormField(DexExperienceForm))

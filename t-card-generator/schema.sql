@@ -473,24 +473,25 @@ CREATE TABLE cookies_used (
     FOREIGN KEY(cookies_months_id) REFERENCES cookies_months(id)
 );
 
--- DROP TABLE IF EXISTS dex;
--- CREATE TABLE dex (
---     id INTEGER PRIMARY KEY AUTOINCREMENT,
---     character_id INTEGER UNSIGNED NOT NULL,
---     name VARCHAR(25) NOT NULL,
---     start_date VARCHAR(10) NOT NULL,
---     end_date VARCHAR(10) NOT NULL,
---     FOREIGN KEY(character_id) REFERENCES mp_character(id)
--- );
---
--- DROP TABLE IF EXISTS dex_experience;
--- CREATE TABLE dex_experience (
---     id INTEGER PRIMARY KEY AUTOINCREMENT,
---     dex_id INTEGER UNSIGNED NOT NULL,
---     month VARCHAR(10) NOT NULL,
---     pokemon_name INTEGER UNSIGNED NOT NULL,
---     base_lvl INTEGER UNSIGNED NOT NULL,
---     end_lvl INTEGER UNSIGNED NOT NULL,
---     give BOOLEAN NOT NULL DEFAULT false,
---     FOREIGN KEY(dex_id) REFERENCES dex(id)
--- );
+DROP TABLE IF EXISTS dex;
+CREATE TABLE dex (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    character_id INTEGER UNSIGNED NOT NULL,
+    name VARCHAR(25) NOT NULL,
+    start_date VARCHAR(30) NOT NULL,
+    end_date VARCHAR(30) NOT NULL,
+    FOREIGN KEY(character_id) REFERENCES mp_character(id)
+);
+
+DROP TABLE IF EXISTS dex_experience;
+CREATE TABLE dex_experience (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    dex_id INTEGER UNSIGNED NOT NULL,
+    month VARCHAR(30) NOT NULL,
+    pokemon_name VARCHAR(30) NULL,
+    pokemon_species VARCHAR(30) NULL,
+    base_lvl INTEGER UNSIGNED NULL,
+    end_lvl INTEGER UNSIGNED NULL,
+    give BOOLEAN NOT NULL DEFAULT false,
+    FOREIGN KEY(dex_id) REFERENCES dex(id)
+);

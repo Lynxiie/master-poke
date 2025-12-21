@@ -14,7 +14,7 @@ from wtforms.fields.list import FieldList
 from models import Mental, Physical, Inventory, Object, Money, Ct, CsHistory, FluteHistory, History, \
     Social, SocialPokemon, SocialSubject, JourneyChapter, JustificatifLink, Goals, PokemonOwned, PokemonCategory, \
     PokemonOwnedAttacks, PokemonSpeciesAttacks, PokemonAttacks, NdmPosts, NdmMonths, NdmSubjects, NdmRewards, \
-    CookiesMonths, MissionsChapter
+    CookiesMonths, MissionsChapter, Dex, DexExperience
 from enums import Object as ObjectEnum, JourneyStatus, GoalCategory, TypePokemon
 
 from models import MpCharacter
@@ -102,6 +102,11 @@ def generate_tcard_part(character_id: int, tcard_part: str):
         t0 = time.time()
         get_missions_data(character_id, data)
         print(f'Missions took {time.time() - t0:.2f}s')
+
+    if tcard_part in {'dex', 't-card'}:
+        t0 = time.time()
+        get_dex_data(character_id, data)
+        print(f'Dex took {time.time() - t0:.2f}s')
 
     if tcard_part in {'ndm'}:
         t0 = time.time()
@@ -786,3 +791,26 @@ def get_rank_cookies_data(character_id: int, data: dict[str, any]):
         cookies_output[cookie.month]['month'] = cookie.month
 
     data['cookies'] = list(cookies_output.values())
+
+def get_dex_data(character_id: int, data: dict[str, any]):
+    all_dex = Dex.query.join(DexExperience).filter(Dex.character_id == character_id).all()
+
+    dex_output = defaultdict(lambda: {'dex_exp': [], 'dex_name': None, 'dex': None, 'dex_slug': None})
+    dynamic_css = ''
+    for dex in all_dex:
+        for exp in dex.experiences_gave:
+            exp.show_lvl = exp.base_lvl != 0
+        slug_name = slugify(dex.name)
+
+        dex.ongoing = any(experience.pokemon_name is None for experience in dex.experiences_gave)
+        dex_output[dex.id]['dex_exp'].extend(dex.experiences_gave)
+        dex_output[dex.id]['dex_name'] = dex.name
+        dex_output[dex.id]['dex_slug'] = slug_name
+        dex_output[dex.id]['dex'] = dex
+
+        dynamic_css += f"#{slug_name}-bloc " + "{ display: none; }\n"
+        dynamic_css += f"#{slug_name}:checked ~ #{slug_name}-bloc " + "{ display: block; }\n"
+        dynamic_css += f"#{slug_name}:checked ~ div label[for='{slug_name}']" + "{ color: var(--main-text-color); }\n"
+
+    data['all_dex'] = list(dex_output.values())
+    data['dynamic_css'] = dynamic_css

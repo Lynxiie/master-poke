@@ -498,3 +498,24 @@ class CookiesUsed(db.Model):
     after_lvl = db.Column(db.Integer, nullable=True)
 
     cookies_months = db.relationship('CookiesMonths', back_populates='cookies_used')
+
+
+class Dex(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    character_id = db.Column(db.Integer, db.ForeignKey('mp_character.id'), nullable=False)
+    name = db.Column(db.String, nullable=False)
+    start_date = db.Column(db.Integer, nullable=False)
+    end_date = db.Column(db.Integer, nullable=False)
+
+    character = db.relationship('MpCharacter', backref='dex_character')
+    experiences_gave = db.relationship('DexExperience')
+
+class DexExperience(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    dex_id = db.Column(db.Integer, db.ForeignKey('dex.id'), nullable=False)
+    month = db.Column(db.String, nullable=False)
+    pokemon_name = db.Column(db.String, nullable=True)
+    pokemon_species = db.Column(db.String, nullable=True)
+    base_lvl = db.Column(db.Integer, nullable=True)
+    end_lvl = db.Column(db.Integer, nullable=True)
+    give = db.Column(db.Boolean, nullable=False, default=False)

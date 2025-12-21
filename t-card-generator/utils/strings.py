@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from slugify import slugify as slug
 
 DATE_FORMAT = '%d/%m/%y'
@@ -27,3 +29,22 @@ def slugify(string: str) -> str:
     :return: la string slugifiée
     """
     return slug(string, replacements=[['-', '_']])
+
+
+def convert_month_db_to_datetime(month_db: str) -> datetime:
+    mois_fr = {
+        "janvier": 1,
+        "février": 2,
+        "mars": 3,
+        "avril": 4,
+        "mai": 5,
+        "juin": 6,
+        "juillet": 7,
+        "août": 8,
+        "septembre": 9,
+        "octobre": 10,
+        "novembre": 11,
+        "décembre": 12
+    }
+    month, year = month_db.split()
+    return datetime(int(year.strip()), mois_fr[month.strip()], 1)

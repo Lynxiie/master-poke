@@ -13,11 +13,12 @@ from forms import MoneyForm, CsHistoryForm, FluteHistoryForm, SocialForm, \
     PokemonOwnedForm, PokemonXpForm, PokemonEvolutionForm, GivePokemonForm, ExchangePokemonForm, \
     ExchangePokemonNewForm, LearnAttacksForm, LearnAttackForm, ToPensionForm, LeavePensionForm, PokemonStatsForm, \
     NewPostForm, NewNdmSubjectForm, SubjectForm, NdmRewardForm, InventoryRankForm, NewCookiesForm, \
-    UsedCookiesListForm
+    UsedCookiesListForm, NewDexForm, DexExperiencesForm
 from models import CsHistory, Ct, Money, FluteHistory, Social, Object, \
     History, JustificatifLink, SocialPokemon, SocialSubject, JourneyChapter, Journey, Goals, PokemonSpecies, \
     PokemonAttacks, PokemonSpeciesAttacks, PokemonCategory, PokemonOwned, PokemonOwnedAttacks, NdmMonths, NdmSubjects, \
-    NdmPosts, NdmRewards, CookiesMonths, CookiesUsed, MissionsChapter, Missions
+    NdmPosts, NdmRewards, CookiesMonths, CookiesUsed, MissionsChapter, Missions, Dex, DexExperience
+from utils.dex import create_new_dex, give_dex_experience
 from utils.generator import modify_cs_flute_data, generate_tcard_part, generate_physique_or_mental
 from utils.levels import level_up_pokemon, get_xp_per_level
 from utils.lists import change_order
@@ -27,7 +28,7 @@ from models import MpCharacter, Mental, Physical, Inventory
 from utils.pokemon import evol_pokemon, can_evol, give_pokemon as give_pkmn, exchange_pokemon as exchange_pkmn, \
     get_non_evol_attacks, learn_auto_attacks, leave_pension, get_non_evol_attack_by_level
 from utils.rank import new_cookies, give_cookies
-from utils.strings import DATE_FORMAT
+from utils.strings import DATE_FORMAT, convert_month_db_to_datetime
 
 
 @app.route("/")
@@ -2333,8 +2334,124 @@ def dex(character_id: int):
     """
     def _render():
         return render_template(
-            'home.html',
+            'dex.html',
+            character=character,
+            dex_list=dex_list,
         )
+
+    character = MpCharacter.query.filter(MpCharacter.id == character_id).one_or_404()
+    dex_list = Dex.query.filter(Dex.character_id == character_id).all()
+
+    for dex in dex_list:
+        dex.ongoing = any(experience.pokemon_name is None for experience in dex.experiences_gave)
+
+    return _render()
+
+
+@app.route("/dex/<int:character_id>/new", methods=('GET', 'POST'))
+def new_dex(character_id: int):
+    """
+    Créé un nouvel abonnement
+    :param character_id: l'id du personnage
+    :return: le template
+    """
+    def _render():
+        return render_template(
+            'new_dex.html',
+            character=character,
+            form=form,
+        )
+
+    character = MpCharacter.query.filter(MpCharacter.id == character_id).one_or_404()
+    form = NewDexForm(formdata=request.form)
+
+    if request.method == 'POST':
+        if form.validate():
+            create_new_dex(form, character_id, db.session)
+
+            flash(f'Dex ajouté avec succès', 'success')
+            generate_tcard_part(character.id, 'dex')
+            return redirect(url_for('dex', character_id=character_id))
+        else:
+            flash('Erreur dans le formulaire', 'danger')
+
+    return _render()
+
+
+@app.route("/dex/<int:character_id>/edit/<int:dex_id>", methods=('GET', 'POST'))
+def edit_experience(character_id: int, dex_id: int):
+    """
+    Edite un abonnement
+    :param character_id: l'id du personnage
+    :param dex_id: l'id du dex
+    :return: le template
+    """
+    def _render():
+        return render_template(
+            'edit_dex.html',
+            character=character,
+            form=form,
+            dex=dex,
+        )
+
+    character = MpCharacter.query.filter(MpCharacter.id == character_id).one_or_404()
+    dex = Dex.query.filter(Dex.id == dex_id).one_or_404()
+
+    if dex.character_id != character_id:
+        flash(f'Pas dex n°{dex_id} sur le personnage {character_id}', 'danger')
+        return redirect(url_for('home'))
+
+    form = DexExperiencesForm(formdata=request.form)
+
+    all_pokemon = db.session.query(PokemonOwned).filter(
+        PokemonOwned.level != 100,
+        PokemonOwned.character_id == character_id,
+    ).all()
+
+    if request.method == 'GET':
+        dex_experiences = db.session.query(DexExperience).filter(
+            DexExperience.dex_id == dex_id,
+            DexExperience.give == False,
+        ).all()
+        now = datetime.now()
+        dex_experiences = [experience for experience in dex_experiences if convert_month_db_to_datetime(experience.month) <= now]
+
+        list_dex_experiences = []
+        for experience in dex_experiences:
+            list_dex_experiences.append({
+                'experience_id': experience.id,
+                'experience_dex_id': experience.dex_id,
+                'month': experience.month,
+                'pokemon_name': experience.pokemon_name,
+                'base_lvl': experience.base_lvl,
+                'after_lvl': experience.end_lvl,
+                'pokemon_name_display': experience.pokemon_name,
+                'is_past_month': convert_month_db_to_datetime(experience.month).month < now.month
+            })
+
+        form = DexExperiencesForm(data={'experiences': list_dex_experiences})
+
+    pokemon_options = [('0', 'Aucun')]
+    pokemon_options.extend(
+        (pokemon.name, f'{pokemon.species.species} - {pokemon.name} ({pokemon.level})') for pokemon in all_pokemon
+    )
+
+    for subform in form.experiences:
+        subform.pokemon_name.choices = pokemon_options
+
+    if request.method == 'POST':
+        if form.validate():
+            give_dex_experience(form, db.session)
+
+            generate_tcard_part(character.id, 'dex')
+            generate_tcard_part(character.id, 'pokemon')
+            generate_tcard_part(character.id, 'stockage')
+
+            flash('Expérience donnée avec succès', 'success')
+            return redirect(url_for('dex', character_id=character_id))
+        else:
+            flash('Erreur dans le formulaire', 'danger')
+
     return _render()
 
 

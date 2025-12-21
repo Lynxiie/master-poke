@@ -1,0 +1,48 @@
+{% include 'templates_part/header.html' %}
+{% from "templates_part/form_template.html" import render_field %}
+
+<h1>
+  {{ character.get_full_name() }} - Gestion des niveaux du {{ dex.name }}
+</h1>
+
+<form method="POST">
+  <div class="row">
+    {% for exp in form.experiences %}
+    <div class="col-md-2">
+      {{ render_field(exp.month, readonly=true) }}
+    </div>
+
+    <div class="col-md-2">
+      {% if exp.pokemon_name_display.data or exp.is_past_month.data %}
+        {{ render_field(exp.pokemon_name_display, readonly=true) }}
+      {% else %}
+        {{ render_field(exp.pokemon_name) }}
+      {% endif %}
+    </div>
+
+    <div class="col-md-1">
+      {% if exp.pokemon_name_display.data %}
+        {{ render_field(exp.give) }}
+      {% endif %}
+    </div>
+
+    <div class="col-md-1">
+      {{ render_field(exp.experience_id) }}
+      {{ render_field(exp.experience_dex_id) }}
+    </div>
+
+    {% endfor %}
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <input type="submit" class="btn" value="Sauvegarder">
+    </div>
+  </div>
+</form>
+
+<div class="float-end">
+  <a href="{{ url_for('dex', character_id=character.id) }}" class="btn">Retour</a>
+</div>
+
+{% include 'templates_part/footer.html' %}

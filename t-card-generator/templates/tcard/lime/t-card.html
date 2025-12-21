@@ -1,5 +1,10 @@
 <link href="./tcard.css" rel="stylesheet" />
 
+<style>
+    {{ dynamic_css }}
+</style>
+
+
 <div class="tcard">
     <!--	input-->
     <input id="info" type="radio" name="nav" checked="">
@@ -241,20 +246,23 @@
             <input id="history" type="radio" name="inventory-2" checked="">
             <input id="hm-uses" type="radio" name="inventory-2">
             <input id="money" type="radio" name="inventory-2">
-            <input id="dex1" type="radio" name="inventory-2">
-            <input id="dex2" type="radio" name="inventory-2">
-            <input id="dex3" type="radio" name="inventory-2">
-            <input id="dex4" type="radio" name="inventory-2">
+            {{#all_dex}}
+                <input id="{{ dex_slug }}" type="radio" name="inventory-2">
+            {{/all_dex}}
 
             <!--		navigation -->
             <div class="inv-nav">
                 <label for="history">Historique</label>
                 <label for="hm-uses">Utilisation CS</label>
                 <label for="money">Argent</label>
-                <label for="dex1" class="hidden">Dex 1</label>
-                <label for="dex2" class="hidden">Dex 2</label>
-                <label for="dex3" class="hidden">Dex 3</label>
-                <label for="dex4" class="hidden">Dex 4</label>
+                {{#all_dex}}
+                    <label for="{{ dex_slug }}">
+                        {{ dex_name }}
+                        {{#dex.ongoing}}
+                            <i class="fa-solid fa-star-half"></i>
+                        {{/dex.ongoing}}
+                    </label>
+                {{/all_dex}}
             </div>
 
             <!-- historique -->
@@ -308,226 +316,35 @@
                 {{ money.amount }} <img src="../images/objets/or.png" title="p$" alt="p$"/> le {{ money.statement_date }}
             </div>
 
-            <!-- Dex 1 -->
-            <div id="dex1-bloc" class="inv-bloc scroll dex-bloc">
-                <div>
-                    <span>Abonnement de XX 2024 à XX 2023</span>
-                </div>
-                <div>
-                    <span>XX 2024</span>
-                    <span>...</span>
-                </div>
-                <div>
-                    <span>XX 2024</span>
-                    <span>...</span>
-                </div>
-                <div>
-                    <span>XX 2024</span>
-                    <span>...</span>
-                </div>
-                <div>
-                    <span>XX 2024</span>
-                    <span>...</span>
-                </div>
-                <div>
-                    <span>XX 2024</span>
-                    <span>...</span>
-                </div>
-                <div>
-                    <span>XX 2024</span>
-                    <span>...</span>
-                </div>
-                <div>
-                    <span>XX 2024</span>
-                    <span>...</span>
-                </div>
-                <div>
-                    <span>XX 2024</span>
-                    <span>...</span>
-                </div>
-                <div>
-                    <span>XX 2024</span>
-                    <span>...</span>
-                </div>
-                <div>
-                    <span>XX 2024</span>
-                    <span>...</span>
-                </div>
-                <div>
-                    <span>XX 2024</span>
-                    <span>...</span>
-                </div>
-                <div>
-                    <span>XX 2024</span>
-                    <span>...</span>
-                </div>
-            </div>
+            <!-- Dex -->
+            {{#all_dex}}
+                <div id="{{ dex_slug }}-bloc" class="inv-bloc scroll dex-bloc">
+                    <div>
+                        <span>Abonnement de {{ dex.start_date }} à {{ dex.end_date }} </span>
+                    </div>
 
-            <!-- Dex 2 -->
-            <div id="dex2-bloc" class="inv-bloc scroll dex-bloc">
-                <div>
-                    <span>Abonnement de XX 2024 à XX 2023 (2)</span>
+                    {{#dex_exp}}
+                        <div>
+                            <span>{{ month }}</span>
+                            {{#pokemon_name}}
+                                <span>
+                                    {{ pokemon_name }}
+                                    {{#pokemon_species}}
+                                        { {{ pokemon_species }} }
+                                    {{/pokemon_species}}
+                                    {{#base_lvl}}
+                                        ({{ base_lvl }} ~> {{ end_lvl }})
+                                    {{/base_lvl}}
+                                    {{^give}} [Demandé] {{/give}}
+                                </span>
+                            {{/pokemon_name}}
+                            {{^pokemon_name}}
+                            <span>...</span>
+                            {{/pokemon_name}}
+                        </div>
+                    {{/dex_exp}}
                 </div>
-                <div>
-                    <span>XX 2024</span>
-                    <span>...</span>
-                </div>
-                <div>
-                    <span>XX 2024</span>
-                    <span>...</span>
-                </div>
-                <div>
-                    <span>XX 2024</span>
-                    <span>...</span>
-                </div>
-                <div>
-                    <span>XX 2024</span>
-                    <span>...</span>
-                </div>
-                <div>
-                    <span>XX 2024</span>
-                    <span>...</span>
-                </div>
-                <div>
-                    <span>XX 2024</span>
-                    <span>...</span>
-                </div>
-                <div>
-                    <span>XX 2024</span>
-                    <span>...</span>
-                </div>
-                <div>
-                    <span>XX 2024</span>
-                    <span>...</span>
-                </div>
-                <div>
-                    <span>XX 2024</span>
-                    <span>...</span>
-                </div>
-                <div>
-                    <span>XX 2024</span>
-                    <span>...</span>
-                </div>
-                <div>
-                    <span>XX 2024</span>
-                    <span>...</span>
-                </div>
-                <div>
-                    <span>XX 2024</span>
-                    <span>...</span>
-                </div>
-            </div>
-
-            <!-- Dex 3 -->
-            <div id="dex3-bloc" class="inv-bloc scroll dex-bloc">
-                <div>
-                    <span>Abonnement de XX 2024 à XX 2023(3)</span>
-                </div>
-                <div>
-                    <span>XX 2024</span>
-                    <span>...</span>
-                </div>
-                <div>
-                    <span>XX 2024</span>
-                    <span>...</span>
-                </div>
-                <div>
-                    <span>XX 2024</span>
-                    <span>...</span>
-                </div>
-                <div>
-                    <span>XX 2024</span>
-                    <span>...</span>
-                </div>
-                <div>
-                    <span>XX 2024</span>
-                    <span>...</span>
-                </div>
-                <div>
-                    <span>XX 2024</span>
-                    <span>...</span>
-                </div>
-                <div>
-                    <span>XX 2024</span>
-                    <span>...</span>
-                </div>
-                <div>
-                    <span>XX 2024</span>
-                    <span>...</span>
-                </div>
-                <div>
-                    <span>XX 2024</span>
-                    <span>...</span>
-                </div>
-                <div>
-                    <span>XX 2024</span>
-                    <span>...</span>
-                </div>
-                <div>
-                    <span>XX 2024</span>
-                    <span>...</span>
-                </div>
-                <div>
-                    <span>XX 2024</span>
-                    <span>...</span>
-                </div>
-            </div>
-
-            <!-- Dex 4 -->
-            <div id="dex4-bloc" class="inv-bloc scroll dex-bloc">
-                <div>
-                    <span>Abonnement de XX 2024 à XX 2023 (4)</span>
-                </div>
-                <div>
-                    <span>XX 2024</span>
-                    <span>...</span>
-                </div>
-                <div>
-                    <span>XX 2024</span>
-                    <span>...</span>
-                </div>
-                <div>
-                    <span>XX 2024</span>
-                    <span>...</span>
-                </div>
-                <div>
-                    <span>XX 2024</span>
-                    <span>...</span>
-                </div>
-                <div>
-                    <span>XX 2024</span>
-                    <span>...</span>
-                </div>
-                <div>
-                    <span>XX 2024</span>
-                    <span>...</span>
-                </div>
-                <div>
-                    <span>XX 2024</span>
-                    <span>...</span>
-                </div>
-                <div>
-                    <span>XX 2024</span>
-                    <span>...</span>
-                </div>
-                <div>
-                    <span>XX 2024</span>
-                    <span>...</span>
-                </div>
-                <div>
-                    <span>XX 2024</span>
-                    <span>...</span>
-                </div>
-                <div>
-                    <span>XX 2024</span>
-                    <span>...</span>
-                </div>
-                <div>
-                    <span>XX 2024</span>
-                    <span>...</span>
-                </div>
-            </div>
-
+            {{/all_dex}}
         </div>
     </div>
 

@@ -96,7 +96,7 @@ input[type="radio"],
 #sbire-bloc, #sbire-team-bloc, #mission-bloc, #people-bloc, #gallery-bloc,
 #ball-bloc, #care-bloc, #evol-bloc, #ct-bloc, #berries-bloc, #other-bloc, #rare-bloc,
 #history-bloc, #hm-uses-bloc, #money-bloc,
-.poke-bloc, #dex1-bloc, #dex2-bloc, #dex3-bloc, #dex4-bloc {
+.poke-bloc {
     display: none;
 }
 
@@ -119,11 +119,7 @@ input[type="radio"],
 #rare:checked ~ div label[for="rare"],
 #history:checked ~ div label[for="history"],
 #hm-uses:checked ~ div label[for="hm-uses"],
-#money:checked ~ div label[for="money"],
-#dex1:checked ~ div label[for="dex1"],
-#dex2:checked ~ div label[for="dex2"],
-#dex3:checked ~ div label[for="dex3"],
-#dex4:checked ~ div label[for="dex4"] {
+#money:checked ~ div label[for="money"] {
     color: var(--main-text-color);
 }
 
@@ -139,11 +135,7 @@ input[type="radio"][name="team"]:checked + label img {
 #gallery:checked ~ #gallery-bloc,
 #history:checked ~ #history-bloc,
 #hm-uses:checked ~ #hm-uses-bloc,
-#money:checked ~ #money-bloc,
-#dex1:checked ~ #dex1-bloc,
-#dex2:checked ~ #dex2-bloc,
-#dex3:checked ~ #dex3-bloc,
-#dex4:checked ~ #dex4-bloc {
+#money:checked ~ #money-bloc {
     display: block;
 }
 
