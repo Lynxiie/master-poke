@@ -221,7 +221,7 @@ CREATE TABLE justificatif_link (
     object_id INTEGER UNSIGNED NOT NULL,
     link VARCHAR(255) NOT NULL,
     link_title VARCHAR(100) NOT NULL,
-    rank_title INTEGER DEFAULT 0 NOT NULL,
+    rank_link INTEGER DEFAULT 0 NOT NULL,
     FOREIGN KEY(character_id) REFERENCES mp_character(id),
     FOREIGN KEY(object_id) REFERENCES object(id)
 );

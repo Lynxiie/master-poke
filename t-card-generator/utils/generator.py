@@ -457,6 +457,7 @@ def get_inventory_data(character: MpCharacter, character_id: int, data: dict[str
             history.icon = '►' if history.movement == 'in' else '◄' if history.movement == 'out' else '◄►'
     elif character.firstname == 'Lime':
         grouped_history = defaultdict(list)
+        grouped_rank_history = defaultdict(list)
 
         for history in histories:
             history.icon = (
@@ -474,7 +475,7 @@ def get_inventory_data(character: MpCharacter, character_id: int, data: dict[str
                 else 'fa-arrow-right-arrow-left'
             )
 
-            grouped_history[history.movement_date].append(history)
+            grouped_rank_history[history.movement_date].append(history)
 
         histories = [
             {'date': date, 'history': items}
@@ -482,7 +483,7 @@ def get_inventory_data(character: MpCharacter, character_id: int, data: dict[str
         ]
         rank_histories = [
             {'date': date, 'history': items}
-            for date, items in grouped_history.items()
+            for date, items in grouped_rank_history.items()
         ]
 
     data['ballsCat'] = convert_object_for_ihm(balls, character_id)
