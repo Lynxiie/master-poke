@@ -2343,7 +2343,7 @@ def dex(character_id: int):
     dex_list = Dex.query.filter(Dex.character_id == character_id).all()
 
     for dex in dex_list:
-        dex.ongoing = any(experience.pokemon_name is None for experience in dex.experiences_gave)
+        dex.ongoing = any(not experience.give for experience in dex.experiences_gave)
 
     return _render()
 

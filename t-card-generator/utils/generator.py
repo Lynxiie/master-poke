@@ -8,6 +8,7 @@ from math import floor
 import chevron
 from sqlalchemy import false, asc, func
 from sqlalchemy.orm import joinedload
+from sqlalchemy.sql.expression import desc
 from wtforms.fields.core import Field
 from wtforms.fields.list import FieldList
 
@@ -794,7 +795,9 @@ def get_rank_cookies_data(character_id: int, data: dict[str, any]):
     data['cookies'] = list(cookies_output.values())
 
 def get_dex_data(character_id: int, data: dict[str, any]):
-    all_dex = Dex.query.join(DexExperience).filter(Dex.character_id == character_id).all()
+    all_dex = Dex.query.join(DexExperience).filter(
+        Dex.character_id == character_id
+    ).order_by(desc(Dex.id)).all()
 
     dex_output = defaultdict(lambda: {'dex_exp': [], 'dex_name': None, 'dex': None, 'dex_slug': None})
     dynamic_css = ''
