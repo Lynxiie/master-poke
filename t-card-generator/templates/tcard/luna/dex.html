@@ -1,0 +1,46 @@
+<link href="https://lynxiie.github.io/master-poke/luna/tcard.css" rel="stylesheet" />
+<meta charset="UTF-8"/>
+
+<div class="card">
+	<div class="title">
+		<img src="../images/luna/dex.jpg" alt="dex"/>
+		<div><span>Dex</span>
+		</div>
+	</div>
+
+	<div class="content scroll history">
+		{{#all_dex}}
+			<div class="category">
+				<span>
+					{{ dex_name }} ♦
+					{{ dex.start_date }} à {{ dex.end_date }}
+					{{^dex.ongoing}}
+						♦ Fini
+					{{/dex.ongoing}}
+				</span>
+			</div>
+
+			<div class="description">
+				{{#dex_exp}}
+				{{ month }}
+				{{#pokemon_name}}
+				♦ {{ pokemon_name }}
+				{{#pokemon_species}}
+				♦ {{ pokemon_species }}
+				{{/pokemon_species}}
+				{{#base_lvl}}
+				♦ {{ base_lvl }} ~> {{ end_lvl }}
+				{{/base_lvl}}
+				{{^give}} ♦ Demandé {{/give}}
+				{{/pokemon_name}}
+				{{^pokemon_name}}
+				♦ ...
+				{{/pokemon_name}}
+				<br>
+				{{/dex_exp}}
+			</div>
+		{{/all_dex}}
+	</div>
+</div>
+
+{{ pokemon.Stockage }}
