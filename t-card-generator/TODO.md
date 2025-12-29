@@ -7,12 +7,12 @@
   - Génération auto des mois
   - Case à cocher "niveau demandé"
   - Valider la demande donne les niveaux au Pokémon
-- [ ] Dex : Faire template Luna
+- [x] Dex : Faire template Luna
 - [X] Gestion des NDM
 - [X] Gestions des rangs
 - [x] Gestion des catégories par personnages
 - [ ] Meilleure gestion des logs internes
-- [X] Prévoir le cas des Pokémon assexués
+- [X] Prévoir le cas des Pokémon asexués
 
 ## Non priorisé
 - [ ] Utiliser une CT depuis l'inventaire marque l'attaque comme apprise
