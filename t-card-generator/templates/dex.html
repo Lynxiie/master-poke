@@ -1,0 +1,29 @@
+{% include 'templates_part/header.html' %}
+{% from "templates_part/form_template.html" import render_field %}
+
+<h1>
+  {{ character.get_full_name() }} - Dex
+</h1>
+
+<div class="float-end">
+  <a href="{{ url_for('new_dex', character_id=character.id) }}" class="btn">Nouvel abonnement</a>
+</div>
+
+<div class="row">
+  <ul>
+    {% for dex in dex_list %}
+      <li>
+        {{ dex.name }} -
+        {{ dex.start_date }} /
+        {{ dex.end_date }}
+        {% if dex.ongoing %}
+          <a href="{{ url_for('edit_experience', character_id=character.id, dex_id=dex.id) }}">
+          <i data-feather="edit"></i>
+          {% endif %}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+
+{% include 'templates_part/footer.html' %}

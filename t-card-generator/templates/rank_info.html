@@ -1,0 +1,18 @@
+{% include 'templates_part/header.html' %}
+{% from "templates_part/form_template.html" import render_field %}
+
+<h1>
+  {{ character.get_full_name() }} - {{ rank }}
+</h1>
+
+<div class="row">
+  <ul>
+    {% if rank == 'Sbire' %}
+      <li><a href="{{ url_for('rank_cookies', character_id=character.id) }}">Gestion Cookies</a></li>
+      <li><a href="{{ url_for('rank_inventory', character_id=character.id) }}">Gestion Inventaire</a></li>
+      <li><a href="{{ url_for('rank_inventory_justify', character_id=character.id) }}">Utilisation d'objets avec justificatif</a></li>
+    {% endif %}
+  </ul>
+</div>
+
+{% include 'templates_part/footer.html' %}

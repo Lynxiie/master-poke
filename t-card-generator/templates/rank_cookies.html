@@ -1,0 +1,79 @@
+{% include 'templates_part/header.html' %}
+{% from "templates_part/form_template.html" import render_field %}
+
+<h1>
+  {{ character.get_full_name() }} - {{ rank }} - Cookies
+</h1>
+
+<form method="POST">
+  <h2>Nouveaux Cookies</h2>
+  <div class="row">
+    <div class="col-md-4">
+      {{ render_field(win_form.month) }}
+    </div>
+
+    <div class="col-md-4">
+      {{ render_field(win_form.win_cookies) }}
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <input type="submit" class="btn" value="Sauvegarder" name="addCookies">
+    </div>
+  </div>
+</form>
+
+<form method="POST">
+  <h2>Utilisation Cookies</h2>
+
+  <div class="row">
+
+    {% for cookies_form in used_form.cookies_forms %}
+      <div class="col-md-1">
+        {{ render_field(cookies_form.month, readonly=true) }}
+      </div>
+
+      <div class="col-md-2">
+        {% if cookies_form.pokemon_name_display.data %}
+          {{ render_field(cookies_form.pokemon_name_display, readonly=true) }}
+        {% else %}
+          {{ render_field(cookies_form.pokemon_name) }}
+        {% endif %}
+      </div>
+
+      <div class="col-md-1">
+        {% if cookies_form.pokemon_name_display.data %}
+          {{ render_field(cookies_form.before_lvl) }}
+        {% endif %}
+      </div>
+
+      <div class="col-md-1">
+        {% if cookies_form.pokemon_name_display.data %}
+          {{ render_field(cookies_form.after_lvl) }}
+        {% endif %}
+      </div>
+
+      <div class="col-md-1">
+        {{ render_field(cookies_form.used_cookies_id) }}
+        {{ render_field(cookies_form.cookies_months_id) }}
+      </div>
+
+    {% endfor %}
+
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <input type="submit" class="btn" value="Sauvegarder" name="useCookies">
+    </div>
+  </div>
+
+</form>
+
+
+<div class="float-end">
+  <a href="{{ url_for('job_informations', character_id=character.id) }}" class="btn">Retour</a>
+</div>
+
+{% include 'templates_part/footer.html' %}

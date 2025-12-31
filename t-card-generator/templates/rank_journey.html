@@ -1,0 +1,40 @@
+{% include 'templates_part/header.html' %}
+{% from "templates_part/form_template.html" import render_field %}
+
+<h1>
+  {{ character.get_full_name() }} - Missions
+</h1>
+
+<div class="float-end">
+  <a href="{{ url_for('new_mission_chapter', character_id=character.id) }}" class="btn">Nouveau chapitre</a>
+</div>
+
+<div class="row">
+  <ul>
+    {% for mission_chapter in missions_chapters %}
+      <li>
+        {{ mission_chapter.name }}
+        <a href="{{ url_for('new_mission', character_id=character.id, chapter_id=mission_chapter.id) }}">
+          <i data-feather="plus"></i>
+        </a>
+        <a href="{{ url_for('edit_mission_chapter', character_id=character.id, chapter_id=mission_chapter.id) }}">
+          <i data-feather="edit"></i>
+        </a>
+        <ul>
+          {% for mission in mission_chapter.missions %}
+            <li>
+              {{ mission.name }} -
+              {{ mission.status }} -
+              {{ mission.feat if mission.feat else 'Solo' }} -
+              <a href="{{ url_for('edit_mission', character_id=character.id, chapter_id=mission_chapter.id, mission_id=mission.id) }}">
+                <i data-feather="edit"></i>
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+
+{% include 'templates_part/footer.html' %}
