@@ -194,6 +194,18 @@ class InventoryForm(Form):
     link_name = StringField('Nom lien', [Length(max=100), DataRequired()])
 
 
+class InventoryRankForm(Form):
+    """
+    Formulaire pour l'inventaire de rang
+    """
+    objects = FieldList(FormField(ObjectForm))
+    add_object = SubmitField("+")
+    movement = RadioField('Ajout', choices=[('in', 'Oui'), ('out', 'Non')], validators=[DataRequired()])
+    movement_date = DateField('Date', [DataRequired()])
+    link = URLField('Lien', [Length(max=255), DataRequired()])
+    link_name = StringField('Nom lien', [Length(max=100), DataRequired()])
+
+
 class InventoryExchangeForm(Form):
     """
     Formulaire pour les échanges
@@ -325,7 +337,7 @@ class PokemonOwnedForm(Form):
     """
     name = StringField('Nom', validators=[DataRequired(), Length(max=100)])
     species_id = SelectField('Espèce', coerce=int, validators=[DataRequired()])
-    sex = SelectField('Sexe', choices=[('M', 'Mâle'), ('F', 'Femelle')], validators=[DataRequired()])
+    sex = SelectField('Sexe', choices=[('M', 'Mâle'), ('F', 'Femelle'), ('A', 'Assexué')], validators=[DataRequired()])
     level = IntegerField('Level', validators=[DataRequired(), NumberRange(min=5, max=100)])
     shiny = BooleanField('Shiny')
     pv = IntegerField('HP', validators=[NumberRange(min=0)], default=0)
@@ -356,7 +368,7 @@ class PokemonOwnedEditForm(Form):
     Formulaire d'édition d'un Pokémon
     """
     name = StringField('Nom', validators=[DataRequired(), Length(max=100)])
-    sex = SelectField('Sexe', choices=[('M', 'Mâle'), ('F', 'Femelle')], validators=[DataRequired()])
+    sex = SelectField('Sexe', choices=[('M', 'Mâle'), ('F', 'Femelle'), ('A', 'Assexué')], validators=[DataRequired()])
     shiny = BooleanField('Shiny')
     obtention_link = StringField('Lien d\'obtention', validators=[DataRequired(), Length(max=255)])
     obtention_name = StringField('Nom du lien', validators=[DataRequired(), Length(max=255)])
@@ -404,7 +416,7 @@ class ExchangePokemonNewForm(Form):
     """
     name = StringField('Nom', validators=[DataRequired(), Length(max=100)])
     species_id = SelectField('Espèce', coerce=int, validators=[DataRequired()])
-    sex = SelectField('Sexe', choices=[('M', 'Mâle'), ('F', 'Femelle')], validators=[DataRequired()])
+    sex = SelectField('Sexe', choices=[('M', 'Mâle'), ('F', 'Femelle'), ('A', 'Assexué')], validators=[DataRequired()])
     level = IntegerField('Level', validators=[DataRequired(), NumberRange(min=5)])
     shiny = BooleanField('Shiny', default=False)
     hp_up = IntegerField('PV Plus', validators=[NumberRange(min=0)], default=0)
@@ -516,3 +528,60 @@ class NdmRewardForm(Form):
     level_winned_justif = StringField('Justification', validators=[DataRequired()])
     distribution = StringField('Distribution')
     money = BooleanField('Convertir en argent')
+
+
+class NewCookiesForm(Form):
+    """
+    Formulaire pour les nouveaux cookies
+    """
+    month = StringField('Mois', validators=[DataRequired()])
+    win_cookies = IntegerField('Cookies gagnés', validators=[DataRequired(), NumberRange(min=0)])
+
+
+class UsedCookiesForm(Form):
+    """
+    Formulaire pour les cookies utilisés
+    """
+    used_cookies_id = HiddenField('')
+    cookies_months_id = HiddenField('')
+    pokemon_name = SelectField('Pokémon', coerce=str, validators=[Optional()])
+    before_lvl = StringField('Level avant', render_kw={'readonly': True}, validators=[Optional()])
+    after_lvl = StringField('Level avant', render_kw={'readonly': True}, validators=[Optional()])
+    month = StringField('Mois', render_kw={'readonly': True})
+    pokemon_name_display = StringField('Pokémon', render_kw={'readonly': True})
+
+
+class UsedCookiesListForm(Form):
+    """
+    Formulaire pour les cookies utilisés (tous)
+    """
+    cookies_forms = FieldList(FormField(UsedCookiesForm))
+
+
+class NewDexForm(Form):
+    """
+    Formulaire pour les nouveaux abonnements aux dex
+    """
+    dex_name = StringField('Nom dex', validators=[DataRequired()])
+
+
+class DexExperienceForm(Form):
+    """
+    Formulaire donner des niveaux de dex
+    """
+    experience_id = HiddenField('')
+    experience_dex_id = HiddenField('')
+    month = StringField('Mois', validators=[DataRequired()], render_kw={'readonly': True})
+    pokemon_name = SelectField('Pokémon', coerce=str, validators=[Optional()])
+    pokemon_name_display = StringField('Pokémon', render_kw={'readonly': True})
+    base_lvl = StringField('Level avant', render_kw={'readonly': True}, validators=[Optional()])
+    after_lvl = StringField('Level après', render_kw={'readonly': True}, validators=[Optional()])
+    give = BooleanField('Donné ?')
+    is_past_month = HiddenField()
+
+
+class DexExperiencesForm(Form):
+    """
+    Formulaire listant les niveaux de dex à donner
+    """
+    experiences = FieldList(FormField(DexExperienceForm))

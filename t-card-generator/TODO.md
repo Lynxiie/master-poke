@@ -2,17 +2,17 @@
 - [ ] Gros réfactor
 - [ ] Gestions des pierres stases
 - [ ] Ajout de tests
-- [ ] Gestion des dex
-  - Faire template Luna
+- [X] Gestion la base des dex
   - FK Pokémon
   - Génération auto des mois
   - Case à cocher "niveau demandé"
   - Valider la demande donne les niveaux au Pokémon
+- [x] Dex : Faire template Luna
 - [X] Gestion des NDM
-- [ ] Gestions des rangs
-- [ ] Gestion des catégories par personnages
+- [X] Gestions des rangs
+- [x] Gestion des catégories par personnages
 - [ ] Meilleure gestion des logs internes
-- [ ] Prévoir le cas des Pokémon assexués
+- [X] Prévoir le cas des Pokémon asexués
 
 ## Non priorisé
 - [ ] Utiliser une CT depuis l'inventaire marque l'attaque comme apprise
@@ -23,11 +23,12 @@
   - [ ] Retrait
   - [ ] Modification du niveau ou de l'apprentissage
   - [ ] Trier alphanumériquement (résoudre pb accent et caractères spéciaux)
-- [ ] Pouvoir retirer une attaque apprise
-  - exemple : cas d'échange d'un Pokémon non shiny pour un shiny qui ne connait pas les mêmes attaques
 - [ ] Edition d'une espèce
 - [ ] Meilleure gestion des badges
   - Ne pas modifier le template pour les marquer comme "eu"
 - [ ] ID du personnage pas nécessaire pour la gestion de ce qui est globale (Pokémon, attaques)
 
-
+## Abandonné
+- Pouvoir retirer une attaque apprise
+  - exemple : cas d'échange d'un Pokémon non shiny pour un shiny qui ne connait pas les mêmes attaques
+    - Cas plus nécessaire -> Si échange, nouveau Pokémon

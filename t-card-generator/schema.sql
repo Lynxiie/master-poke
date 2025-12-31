@@ -210,6 +210,7 @@ CREATE TABLE history (
     objects_out_exchange VARCHAR(255) NULL,
     link VARCHAR(255) NOT NULL,
     link_title VARCHAR(100) NOT NULL,
+    rank_history INTEGER DEFAULT 0 NOT NULL,
     FOREIGN KEY(character_id) REFERENCES mp_character(id)
 );
 
@@ -220,6 +221,7 @@ CREATE TABLE justificatif_link (
     object_id INTEGER UNSIGNED NOT NULL,
     link VARCHAR(255) NOT NULL,
     link_title VARCHAR(100) NOT NULL,
+    rank_link INTEGER DEFAULT 0 NOT NULL,
     FOREIGN KEY(character_id) REFERENCES mp_character(id),
     FOREIGN KEY(object_id) REFERENCES object(id)
 );
@@ -272,6 +274,27 @@ CREATE TABLE journey (
     status VARCHAR(20) NOT NULL,
     feat VARCHAR(100) NOT NULL,
     FOREIGN KEY(journey_chapter_id) REFERENCES journey_chapter(id)
+);
+
+DROP TABLE IF EXISTS missions_chapter;
+CREATE TABLE missions_chapter (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    character_id INTEGER UNSIGNED NOT NULL,
+    name VARCHAR(25) NOT NULL,
+    after INTEGER UNSIGNED NOT NULL,
+    FOREIGN KEY(character_id) REFERENCES mp_character(id)
+);
+
+DROP TABLE IF EXISTS missions;
+CREATE TABLE missions (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    missions_chapter_id INTEGER UNSIGNED NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    link VARCHAR(255) NULL,
+    after INTEGER UNSIGNED NOT NULL,
+    status VARCHAR(20) NOT NULL,
+    feat VARCHAR(100) NOT NULL,
+    FOREIGN KEY(missions_chapter_id) REFERENCES missions_chapter(id)
 );
 
 DROP TABLE IF EXISTS goals;
@@ -431,25 +454,44 @@ CREATE TABLE ndm_rewards (
     FOREIGN KEY(month_id) REFERENCES ndm_months(id)
 );
 
--- DROP TABLE IF EXISTS dex;
--- CREATE TABLE dex (
---     id INTEGER PRIMARY KEY AUTOINCREMENT,
---     character_id INTEGER UNSIGNED NOT NULL,
---     name VARCHAR(25) NOT NULL,
---     start_date VARCHAR(10) NOT NULL,
---     end_date VARCHAR(10) NOT NULL,
---     FOREIGN KEY(character_id) REFERENCES mp_character(id)
--- );
---
--- DROP TABLE IF EXISTS dex_experience;
--- CREATE TABLE dex_experience (
---     id INTEGER PRIMARY KEY AUTOINCREMENT,
---     dex_id INTEGER UNSIGNED NOT NULL,
---     month VARCHAR(10) NOT NULL,
---     pokemon_id INTEGER UNSIGNED NOT NULL,
---     base_lvl INTEGER UNSIGNED NOT NULL,
---     end_lvl INTEGER UNSIGNED NOT NULL,
---     give BOOLEAN NOT NULL DEFAULT false,
---     FOREIGN KEY(dex_id) REFERENCES dex(id),
---     FOREIGN KEY(pokemon_id) REFERENCES pokemon(id)
--- );
+DROP TABLE IF EXISTS cookies_months;
+CREATE TABLE cookies_months (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    character_id INTEGER UNSIGNED NOT NULL,
+    month VARCHAR(5) NOT NULL,
+    win_cookies INTEGER UNSIGNED NOT NULL,
+    FOREIGN KEY(character_id) REFERENCES mp_character(id)
+);
+
+DROP TABLE IF EXISTS cookies_used;
+CREATE TABLE cookies_used (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    cookies_months_id INTEGER UNSIGNED NOT NULL,
+    pokemon_name INTEGER NULL,
+    before_lvl VARCHAR(15) NULL,
+    after_lvl VARCHAR(15) NULL,
+    FOREIGN KEY(cookies_months_id) REFERENCES cookies_months(id)
+);
+
+DROP TABLE IF EXISTS dex;
+CREATE TABLE dex (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    character_id INTEGER UNSIGNED NOT NULL,
+    name VARCHAR(25) NOT NULL,
+    start_date VARCHAR(30) NOT NULL,
+    end_date VARCHAR(30) NOT NULL,
+    FOREIGN KEY(character_id) REFERENCES mp_character(id)
+);
+
+DROP TABLE IF EXISTS dex_experience;
+CREATE TABLE dex_experience (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    dex_id INTEGER UNSIGNED NOT NULL,
+    month VARCHAR(30) NOT NULL,
+    pokemon_name VARCHAR(30) NULL,
+    pokemon_species VARCHAR(30) NULL,
+    base_lvl INTEGER UNSIGNED NULL,
+    end_lvl INTEGER UNSIGNED NULL,
+    give BOOLEAN NOT NULL DEFAULT false,
+    FOREIGN KEY(dex_id) REFERENCES dex(id)
+);

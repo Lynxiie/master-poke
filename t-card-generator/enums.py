@@ -101,6 +101,16 @@ class Object(CustomEnum):
     BERRY = 'berry'
     OTHER = 'other'
     RARE = 'rare'
+    SBIRE = 'sbire'
+    RANGER = 'ranger'
+
+    @classmethod
+    def get_rank_categories(cls) -> list[str]:
+        """
+        Retourne les catégories d'objets spécifiques aux rangs
+        :return: Liste de string correspondant aux noms de rang
+        """
+        return [cls.SBIRE.value, cls.RANGER.value]
 
 
 class JourneyStatus(CustomEnum):
@@ -111,6 +121,7 @@ class JourneyStatus(CustomEnum):
     ONGOING = 2, 'En cours', 'fa-circle-minus'
     ABANDONNED = 3, 'Abandonné', 'fa-circle-xmark'
     FINISHED = 4, 'Fini', 'fa-circle-check'
+    FAILED = 5, 'Echoué', 'fa-skull-crossbones'
 
 
 class HistoryMouvment(CustomEnum):

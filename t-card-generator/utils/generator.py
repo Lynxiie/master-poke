@@ -1,5 +1,6 @@
 import os
 import re
+import time
 from collections import defaultdict
 from datetime import datetime
 from math import floor
@@ -7,12 +8,14 @@ from math import floor
 import chevron
 from sqlalchemy import false, asc, func
 from sqlalchemy.orm import joinedload
+from sqlalchemy.sql.expression import desc
 from wtforms.fields.core import Field
 from wtforms.fields.list import FieldList
 
 from models import Mental, Physical, Inventory, Object, Money, Ct, CsHistory, FluteHistory, History, \
     Social, SocialPokemon, SocialSubject, JourneyChapter, JustificatifLink, Goals, PokemonOwned, PokemonCategory, \
-    PokemonOwnedAttacks, PokemonSpeciesAttacks, PokemonAttacks, NdmPosts, NdmMonths, NdmSubjects, NdmRewards
+    PokemonOwnedAttacks, PokemonSpeciesAttacks, PokemonAttacks, NdmPosts, NdmMonths, NdmSubjects, NdmRewards, \
+    CookiesMonths, MissionsChapter, Dex, DexExperience
 from enums import Object as ObjectEnum, JourneyStatus, GoalCategory, TypePokemon
 
 from models import MpCharacter
@@ -42,31 +45,74 @@ def generate_tcard_part(character_id: int, tcard_part: str):
     data['pokemon'] = defaultdict(list)
 
     if tcard_part in {'informations', 't-card'}:
+        t0 = time.time()
         get_character_data(character_id, data)
+        print(f'Information took {time.time() - t0:.2f}s')
 
     if tcard_part in {'inventaire', 't-card'}:
+        t0 = time.time()
         get_inventory_data(character, character_id, data)
+        print(f'Inventory took {time.time() - t0:.2f}s')
 
     if tcard_part in {'connaissances', 't-card'}:
+        t0 = time.time()
         get_social_data(character_id, data)
+        print(f'Social took {time.time() - t0:.2f}s')
 
     if tcard_part in {'ressources', 't-card'}:
+        t0 = time.time()
         get_ressources_data(character, data)
+        print(f'Ressources took {time.time() - t0:.2f}s')
 
     if tcard_part in {'parcours', 't-card'}:
+        t0 = time.time()
         get_journeys_data(character_id, data)
+        print(f'Journeys took {time.time() - t0:.2f}s')
 
     if tcard_part in {'objectifs', 't-card'}:
+        t0 = time.time()
         get_goals_data(character_id, data)
+        print(f'Goals took {time.time() - t0:.2f}s')
 
     if tcard_part in {'pokemon', 't-card'}:
+        t0 = time.time()
         get_pokemon_data(character_id, data, False)
+        print(f'Pokemon took {time.time() - t0:.2f}s')
 
     if tcard_part in {'stockage', 't-card'}:
+        t0 = time.time()
         get_pokemon_data(character_id, data, True)
+        print(f'Stockage took {time.time() - t0:.2f}s')
+
+    if tcard_part in {'rank-inventaire', 't-card'}:
+        t0 = time.time()
+        get_inventory_data(character, character_id, data)
+        print(f'Rank inventory took {time.time() - t0:.2f}s')
+
+    if tcard_part in {'rank-cookies', 't-card'}:
+        t0 = time.time()
+        get_rank_cookies_data(character_id, data)
+        print(f'Rank cookies took {time.time() - t0:.2f}s')
+
+    if tcard_part in {'rank-pokemon', 't-card'}:
+        t0 = time.time()
+        get_pokemon_data(character_id, data, False, True)
+        print(f'Rank pokemon took {time.time() - t0:.2f}s')
+
+    if tcard_part in {'missions', 't-card'}:
+        t0 = time.time()
+        get_missions_data(character_id, data)
+        print(f'Missions took {time.time() - t0:.2f}s')
+
+    if tcard_part in {'dex', 't-card'}:
+        t0 = time.time()
+        get_dex_data(character_id, data)
+        print(f'Dex took {time.time() - t0:.2f}s')
 
     if tcard_part in {'ndm'}:
+        t0 = time.time()
         get_ndm_data(character_id, data)
+        print(f'NDM took {time.time() - t0:.2f}s')
 
     text = chevron.render(file, data)
     filename = os.path.join('..', character_name, tcard_part + '.html')
@@ -75,12 +121,13 @@ def generate_tcard_part(character_id: int, tcard_part: str):
         file.write(text)
 
 
-def get_pokemon_data(character_id: int, data: dict[str, any], is_stockage: bool):
+def get_pokemon_data(character_id: int, data: dict[str, any], is_stockage: bool, is_rank: bool = False):
     """
     Récupère les informations des Pokémon
     :param character_id: l'id du personnage
     :param data: le dictionnaire des informations
     :param is_stockage: si on veut les Pokémon du stockage
+    :param is_rank: si on veut les Pokémon de rang
     """
     def _get_icon_filename(search_term: str, category: str) -> str | None:
         """
@@ -255,11 +302,20 @@ def get_pokemon_data(character_id: int, data: dict[str, any], is_stockage: bool)
         .query
         .join(PokemonCategory)
         .options(joinedload(PokemonOwned.species))
-        .filter(PokemonOwned.character_id == character_id)
+        .filter(
+            PokemonOwned.character_id == character_id,
+        )
+        .order_by(PokemonCategory.id)
     )
 
     if is_stockage:
         pokemon = pokemon.filter(PokemonCategory.name == 'Stockage')
+
+    categories = ['Sbire', 'Ranger']
+    if is_rank:
+        pokemon = pokemon.filter(PokemonCategory.name.in_(categories))
+    else:
+        pokemon = pokemon.filter(~PokemonCategory.name.in_(categories))
 
     pokemon = pokemon.all()
 
@@ -277,10 +333,13 @@ def get_pokemon_data(character_id: int, data: dict[str, any], is_stockage: bool)
             _set_total_stats(poke)
 
     if character_id == 2:
-        data['all_pokemon'] = [{
-            "category": pokemon[0]['category'].name,
-            "pokemon": pokemon
-        } for _, pokemon in data['pokemon'].items()]
+        if not is_rank:
+            data['all_pokemon'] = [{
+                "category": pokemon[0]['category'].name,
+                "pokemon": pokemon
+            } for _, pokemon in data['pokemon'].items()]
+        if is_rank:
+            data['rank_pokemon'] = data['pokemon']["sbire"]
 
 
 def get_ressources_data(character: MpCharacter, data: dict[str, any]):
@@ -366,7 +425,16 @@ def get_inventory_data(character: MpCharacter, character_id: int, data: dict[str
     cts = Ct.query.filter(Ct.character_id == character_id).join(Object).all()
     cs_history = CsHistory.query.filter(CsHistory.character_id == character_id).join(Object).all()
     flute_history = FluteHistory.query.filter(FluteHistory.character_id == character_id).join(Object).all()
-    histories = History.query.filter(History.character_id == character_id).all()
+    histories = History.query.filter(History.character_id == character_id, History.rank_history == False).all()
+
+    rank_object = (
+        Inventory.query
+        .filter(Inventory.character_id == character_id)
+        .join(Object)
+        .filter(Object.category.in_(ObjectEnum.get_rank_categories()))
+        .all()
+    )
+    rank_histories = History.query.filter(History.character_id == character_id, History.rank_history == True).all()
 
     def _get_date(objet: History):
         """
@@ -377,6 +445,7 @@ def get_inventory_data(character: MpCharacter, character_id: int, data: dict[str
         return datetime.strptime(objet.movement_date, DATE_FORMAT)
 
     histories = sorted(histories, key=lambda history: (-_get_date(history).timestamp(), -history.id))
+    rank_histories = sorted(rank_histories, key=lambda history: (-_get_date(history).timestamp(), -history.id))
 
     for ct in cts:
         ct.quantity_string = convert_int_to_prefixed_string(int(ct.quantity))
@@ -385,8 +454,11 @@ def get_inventory_data(character: MpCharacter, character_id: int, data: dict[str
     if character.firstname == 'Luna':
         for history in histories:
             history.icon = '►' if history.movement == 'in' else '◄' if history.movement == 'out' else '◄►'
+        for history in rank_histories:
+            history.icon = '►' if history.movement == 'in' else '◄' if history.movement == 'out' else '◄►'
     elif character.firstname == 'Lime':
         grouped_history = defaultdict(list)
+        grouped_rank_history = defaultdict(list)
 
         for history in histories:
             history.icon = (
@@ -397,9 +469,22 @@ def get_inventory_data(character: MpCharacter, character_id: int, data: dict[str
 
             grouped_history[history.movement_date].append(history)
 
+        for history in rank_histories:
+            history.icon = (
+                'fa-arrow-right-long ' if history.movement == 'in'
+                else 'fa-arrow-left-long' if history.movement == 'out'
+                else 'fa-arrow-right-arrow-left'
+            )
+
+            grouped_rank_history[history.movement_date].append(history)
+
         histories = [
             {'date': date, 'history': items}
             for date, items in grouped_history.items()
+        ]
+        rank_histories = [
+            {'date': date, 'history': items}
+            for date, items in grouped_rank_history.items()
         ]
 
     data['ballsCat'] = convert_object_for_ihm(balls, character_id)
@@ -413,6 +498,8 @@ def get_inventory_data(character: MpCharacter, character_id: int, data: dict[str
     data['histories'] = histories
     data['otherCat'] = convert_object_for_ihm(others, character_id)
     data['berriesCat'] = convert_object_for_ihm(berries, character_id)
+    data['rank_objects'] = convert_object_for_ihm(rank_object, character_id)
+    data['rank_histories'] = rank_histories
 
 
 def get_character_data(character_id: int, data: dict[str, any]):
@@ -443,6 +530,22 @@ def get_journeys_data(character_id: int, data: dict[str, any]):
             journey.icon = status.value[2]
 
     data['chapters'] = [vars(chapter) for chapter in chapters]
+
+def get_missions_data(character_id: int, data: dict[str, any]):
+    """
+    Ajoute les données sur les missions
+    :param character_id: l'id du personnage
+    :param data: le dictionnaire des informations
+    """
+    chapters = MissionsChapter.get_ordered_chapter(character_id=character_id, with_missions=True)
+
+    for chapter in chapters:
+        for mission in chapter.missions:
+            status = JourneyStatus.get_from_value(mission.status)
+            mission.status_class = status.name.lower()
+            mission.icon = status.value[2]
+
+    data['rank_missions'] = [vars(chapter) for chapter in chapters]
 
 
 def get_goals_data(character_id: int, data: dict[str, any]):
@@ -680,3 +783,38 @@ def month_convert(month: str) -> str:
     }
 
     return months.get(month)
+
+def get_rank_cookies_data(character_id: int, data: dict[str, any]):
+    cookies = CookiesMonths.query.filter(CookiesMonths.character_id == character_id).all()
+
+    cookies_output = defaultdict(lambda: {'cookies_used': [], 'month': None})
+    for cookie in cookies:
+        cookies_output[cookie.month]['cookies_used'].extend(cookie.cookies_used)
+        cookies_output[cookie.month]['month'] = cookie.month
+
+    data['cookies'] = list(cookies_output.values())
+
+def get_dex_data(character_id: int, data: dict[str, any]):
+    all_dex = Dex.query.join(DexExperience).filter(
+        Dex.character_id == character_id
+    ).order_by(desc(Dex.id)).all()
+
+    dex_output = defaultdict(lambda: {'dex_exp': [], 'dex_name': None, 'dex': None, 'dex_slug': None})
+    dynamic_css = ''
+    for dex in all_dex:
+        for exp in dex.experiences_gave:
+            exp.show_lvl = exp.base_lvl != 0
+        slug_name = slugify(dex.name)
+
+        dex.ongoing = any(experience.pokemon_name is None for experience in dex.experiences_gave)
+        dex_output[dex.id]['dex_exp'].extend(dex.experiences_gave)
+        dex_output[dex.id]['dex_name'] = dex.name
+        dex_output[dex.id]['dex_slug'] = slug_name
+        dex_output[dex.id]['dex'] = dex
+
+        dynamic_css += f"#{slug_name}-bloc " + "{ display: none; }\n"
+        dynamic_css += f"#{slug_name}:checked ~ #{slug_name}-bloc " + "{ display: block; }\n"
+        dynamic_css += f"#{slug_name}:checked ~ div label[for='{slug_name}']" + "{ color: var(--main-text-color); }\n"
+
+    data['all_dex'] = list(dex_output.values())
+    data['dynamic_css'] = dynamic_css

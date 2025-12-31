@@ -60,7 +60,7 @@ class Object(db.Model):
         Récupère les id des objets avec justificatifs
         :return: set d'id
         """
-        return {103}
+        return {103, 109}
 
     @staticmethod
     def get_objects_id_no_exchangeable() -> set[int]:
@@ -132,6 +132,7 @@ class History(db.Model):
     objects_out_exchange = db.Column(String)
     link = db.Column(String, nullable=False)
     link_title = db.Column(String, nullable=False)
+    rank_history = db.Column(Boolean, nullable=False, default=False)
 
 
 class JustificatifLink(db.Model):
@@ -142,6 +143,7 @@ class JustificatifLink(db.Model):
     object = relationship(Object, backref="justificatif_link_object")
     link = db.Column(String, nullable=False)
     link_title = db.Column(String, nullable=False)
+    rank_link = db.Column(Boolean, nullable=False, default=False)
 
 
 class Social(db.Model):
@@ -230,6 +232,65 @@ class Journey(db.Model):
             journeys = sort_by_previous_value(journeys)
 
         return journeys
+
+
+class MissionsChapter(db.Model):
+    """Modèle des missions du personnage"""
+    id = db.Column(Integer, primary_key=True)
+    character_id = db.Column(Integer, ForeignKey(MpCharacter.id))
+    name = db.Column(String, nullable=False)
+    after = db.Column(Integer, nullable=False)
+
+    missions: Mapped[list["Missions"]] = relationship(backref="missions")
+
+    @classmethod
+    def get_ordered_chapter(cls, character_id: int, with_missions: bool = False) -> list['MissionsChapter']:
+        """
+        Récupère les missions ordonnées
+        :param character_id: l'id du personnage
+        :param with_missions: si on veut les aventures en plus des missions
+        :return: une liste de missions
+        """
+        chapters = cls.query.filter(MissionsChapter.character_id == character_id)
+
+        if with_missions:
+            chapters = chapters.join(Missions, full=True)
+
+        chapters = chapters.all()
+
+        if chapters:
+            chapters = sort_by_previous_value(chapters)
+            if with_missions:
+                for chapter in chapters:
+                    if chapter.missions:
+                        chapter.missions = sort_by_previous_value(chapter.missions)
+
+        return chapters
+
+
+class Missions(db.Model):
+    """Modèle d'une mission"""
+    id = db.Column(Integer, primary_key=True)
+    missions_chapter_id = db.Column(Integer, ForeignKey(MissionsChapter.id))
+    name = db.Column(String, nullable=False)
+    link = db.Column(String, nullable=False)
+    after = db.Column(Integer, nullable=False)
+    status = db.Column(String, nullable=False)
+    feat = db.Column(String)
+
+    @classmethod
+    def get_ordered_missions(cls, chapter_id: int) -> list['Missions']:
+        """
+        Récupère les aventures ordonnées
+        :param chapter_id: l'id du chapitre auquel les aventures sont rattachés
+        :return: la liste des aventures
+        """
+        missions = cls.query.filter(Missions.missions_chapter_id == chapter_id).all()
+
+        if missions:
+            missions = sort_by_previous_value(missions)
+
+        return missions
 
 
 class Goals(db.Model):
@@ -417,3 +478,44 @@ class NdmRewards(db.Model):
 
     month = db.relationship('NdmMonths', back_populates='rewards')
     character = db.relationship('MpCharacter', backref='ndm_rewards')
+
+
+class CookiesMonths(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    character_id = db.Column(db.Integer, db.ForeignKey('mp_character.id'), nullable=False)
+    month = db.Column(db.String, nullable=False)
+    win_cookies = db.Column(db.Integer, nullable=False)
+
+    character = db.relationship('MpCharacter', backref='mp_character')
+    cookies_used = db.relationship('CookiesUsed', back_populates='cookies_months')
+
+
+class CookiesUsed(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    cookies_months_id = db.Column(db.Integer, db.ForeignKey('cookies_months.id'), nullable=False)
+    pokemon_name = db.Column(db.String, nullable=True)
+    before_lvl = db.Column(db.Integer, nullable=True)
+    after_lvl = db.Column(db.Integer, nullable=True)
+
+    cookies_months = db.relationship('CookiesMonths', back_populates='cookies_used')
+
+
+class Dex(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    character_id = db.Column(db.Integer, db.ForeignKey('mp_character.id'), nullable=False)
+    name = db.Column(db.String, nullable=False)
+    start_date = db.Column(db.Integer, nullable=False)
+    end_date = db.Column(db.Integer, nullable=False)
+
+    character = db.relationship('MpCharacter', backref='dex_character')
+    experiences_gave = db.relationship('DexExperience')
+
+class DexExperience(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    dex_id = db.Column(db.Integer, db.ForeignKey('dex.id'), nullable=False)
+    month = db.Column(db.String, nullable=False)
+    pokemon_name = db.Column(db.String, nullable=True)
+    pokemon_species = db.Column(db.String, nullable=True)
+    base_lvl = db.Column(db.Integer, nullable=True)
+    end_lvl = db.Column(db.Integer, nullable=True)
+    give = db.Column(db.Boolean, nullable=False, default=False)

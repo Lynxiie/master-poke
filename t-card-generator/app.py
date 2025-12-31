@@ -4,18 +4,21 @@ from flask import render_template, redirect, url_for, flash, request
 from wtforms.validators import NumberRange
 
 from database import app, db
-from enums import Object as ObjectType, HistoryMouvment, Assortment, GoalCategory, EvolutionWay, SpriteBackground
+from enums import Object as ObjectType, HistoryMouvment, Assortment, GoalCategory, EvolutionWay, SpriteBackground, \
+    Status
 from forms import MoneyForm, CsHistoryForm, FluteHistoryForm, SocialForm, \
     JourneyChapterForm, JourneyForm, InventoryForm, ObjectForm, CtForm, JustificatifLinkForm, AssortmentForm, \
     CtReservationListForm, GoalsListForm, GoalsForm, InventoryExchangeForm, PokemonSpeciesForm, \
     PokemonAttacksForm, PokemonAttackForm, PokemonSpeciesAttacksForm, PokemonSpeciesAttackForm, PokemonCategoryForm, \
     PokemonOwnedForm, PokemonXpForm, PokemonEvolutionForm, GivePokemonForm, ExchangePokemonForm, \
     ExchangePokemonNewForm, LearnAttacksForm, LearnAttackForm, ToPensionForm, LeavePensionForm, PokemonStatsForm, \
-    NewPostForm, NewNdmSubjectForm, SubjectForm, NdmRewardForm
+    NewPostForm, NewNdmSubjectForm, SubjectForm, NdmRewardForm, InventoryRankForm, NewCookiesForm, \
+    UsedCookiesListForm, NewDexForm, DexExperiencesForm
 from models import CsHistory, Ct, Money, FluteHistory, Social, Object, \
     History, JustificatifLink, SocialPokemon, SocialSubject, JourneyChapter, Journey, Goals, PokemonSpecies, \
     PokemonAttacks, PokemonSpeciesAttacks, PokemonCategory, PokemonOwned, PokemonOwnedAttacks, NdmMonths, NdmSubjects, \
-    NdmPosts, NdmRewards
+    NdmPosts, NdmRewards, CookiesMonths, CookiesUsed, MissionsChapter, Missions, Dex, DexExperience
+from utils.dex import create_new_dex, give_dex_experience
 from utils.generator import modify_cs_flute_data, generate_tcard_part, generate_physique_or_mental
 from utils.levels import level_up_pokemon, get_xp_per_level
 from utils.lists import change_order
@@ -24,7 +27,8 @@ from forms import InformationsForm, MentalForm, PhysicalForm
 from models import MpCharacter, Mental, Physical, Inventory
 from utils.pokemon import evol_pokemon, can_evol, give_pokemon as give_pkmn, exchange_pokemon as exchange_pkmn, \
     get_non_evol_attacks, learn_auto_attacks, leave_pension, get_non_evol_attack_by_level
-from utils.strings import DATE_FORMAT
+from utils.rank import new_cookies, give_cookies
+from utils.strings import DATE_FORMAT, convert_month_db_to_datetime
 
 
 @app.route("/")
@@ -83,6 +87,36 @@ def informations(character_id: int):
 
             mentals = generate_physique_or_mental(mental_form.descriptions_mental, character_id, Mental)
             physicals = generate_physique_or_mental(physical_form.descriptions_physical, character_id, Physical)
+
+            rank = form.status.data
+
+            if rank == Status.SBIRE.value[1]:
+                already_in_db = Inventory.query.filter(
+                    Inventory.character_id == character_id, Inventory.object_id == 106
+                ).first()
+                if not already_in_db:
+                    inventory = [
+                        Inventory(character_id=character_id, object_id=106, quantity=0),
+                        Inventory(character_id=character_id, object_id=107, quantity=0),
+                        Inventory(character_id=character_id, object_id=108, quantity=0),
+                        Inventory(character_id=character_id, object_id=109, quantity=0),
+                        Inventory(character_id=character_id, object_id=110, quantity=0),
+                    ]
+                    db.session.bulk_save_objects(inventory)
+
+            elif rank == Status.RANGER.value[1]:
+                already_in_db = Inventory.query.filter(
+                    Inventory.character_id == character_id, Inventory.object_id == 111
+                ).first()
+                if not already_in_db:
+                    inventory = [
+                        Inventory(character_id=character_id, object_id=111, quantity=0),
+                        Inventory(character_id=character_id, object_id=112, quantity=0),
+                        Inventory(character_id=character_id, object_id=113, quantity=0),
+                        Inventory(character_id=character_id, object_id=114, quantity=0),
+                        Inventory(character_id=character_id, object_id=115, quantity=0),
+                    ]
+                    db.session.bulk_save_objects(inventory)
 
             db.session.bulk_save_objects(mentals)
             db.session.bulk_save_objects(physicals)
@@ -311,7 +345,10 @@ def edit_inventory(character_id: int):
 
     character = MpCharacter.query.filter(MpCharacter.id == character_id).one_or_404()
 
-    inventory = Inventory.query.join(Object).filter(Inventory.character_id == character_id).all()
+    inventory = Inventory.query.join(Object).filter(
+        Inventory.character_id == character_id,
+        Object.category.not_in(ObjectType.get_rank_categories())
+    ).all()
     ct_list = Ct.query.join(Object).filter(Ct.character_id == character_id).all()
     new_ct_list = Object.query.filter(Object.category == ObjectType.CT.name.lower()).all()
     assortment_list = Assortment.to_tuple()
@@ -551,7 +588,9 @@ def edit_pass_almia(character_id: int):
         )
 
     character = MpCharacter.query.filter(MpCharacter.id == character_id).one_or_404()
-    links = JustificatifLink.query.filter(JustificatifLink.character_id == character_id).all()
+    links = JustificatifLink.query.filter(
+        JustificatifLink.character_id == character_id, not JustificatifLink.rank_link
+    ).all()
 
     if not links:
         form = JustificatifLinkForm()
@@ -681,7 +720,11 @@ def object_exchange(character_id: int):
         Inventory
         .query
         .join(Object)
-        .filter(Inventory.character_id == character_id, Object.id.not_in(Object.get_objects_id_no_exchangeable()))
+        .filter(
+            Inventory.character_id == character_id,
+            Object.id.not_in(Object.get_objects_id_no_exchangeable()),
+            Object.category.not_in(ObjectType.get_rank_categories())
+        )
         .all()
     )
     ct_list = Ct.query.join(Object).filter(Ct.character_id == character_id, Ct.quantity > 0).all()
@@ -2291,8 +2334,124 @@ def dex(character_id: int):
     """
     def _render():
         return render_template(
-            'home.html',
+            'dex.html',
+            character=character,
+            dex_list=dex_list,
         )
+
+    character = MpCharacter.query.filter(MpCharacter.id == character_id).one_or_404()
+    dex_list = Dex.query.filter(Dex.character_id == character_id).all()
+
+    for dex in dex_list:
+        dex.ongoing = any(not experience.give for experience in dex.experiences_gave)
+
+    return _render()
+
+
+@app.route("/dex/<int:character_id>/new", methods=('GET', 'POST'))
+def new_dex(character_id: int):
+    """
+    Créé un nouvel abonnement
+    :param character_id: l'id du personnage
+    :return: le template
+    """
+    def _render():
+        return render_template(
+            'new_dex.html',
+            character=character,
+            form=form,
+        )
+
+    character = MpCharacter.query.filter(MpCharacter.id == character_id).one_or_404()
+    form = NewDexForm(formdata=request.form)
+
+    if request.method == 'POST':
+        if form.validate():
+            create_new_dex(form, character_id, db.session)
+
+            flash(f'Dex ajouté avec succès', 'success')
+            generate_tcard_part(character.id, 'dex')
+            return redirect(url_for('dex', character_id=character_id))
+        else:
+            flash('Erreur dans le formulaire', 'danger')
+
+    return _render()
+
+
+@app.route("/dex/<int:character_id>/edit/<int:dex_id>", methods=('GET', 'POST'))
+def edit_experience(character_id: int, dex_id: int):
+    """
+    Edite un abonnement
+    :param character_id: l'id du personnage
+    :param dex_id: l'id du dex
+    :return: le template
+    """
+    def _render():
+        return render_template(
+            'edit_dex.html',
+            character=character,
+            form=form,
+            dex=dex,
+        )
+
+    character = MpCharacter.query.filter(MpCharacter.id == character_id).one_or_404()
+    dex = Dex.query.filter(Dex.id == dex_id).one_or_404()
+
+    if dex.character_id != character_id:
+        flash(f'Pas dex n°{dex_id} sur le personnage {character_id}', 'danger')
+        return redirect(url_for('home'))
+
+    form = DexExperiencesForm(formdata=request.form)
+
+    all_pokemon = db.session.query(PokemonOwned).filter(
+        PokemonOwned.level != 100,
+        PokemonOwned.character_id == character_id,
+    ).all()
+
+    if request.method == 'GET':
+        dex_experiences = db.session.query(DexExperience).filter(
+            DexExperience.dex_id == dex_id,
+            DexExperience.give == False,
+        ).all()
+        now = datetime.now()
+        dex_experiences = [experience for experience in dex_experiences if convert_month_db_to_datetime(experience.month) <= now]
+
+        list_dex_experiences = []
+        for experience in dex_experiences:
+            list_dex_experiences.append({
+                'experience_id': experience.id,
+                'experience_dex_id': experience.dex_id,
+                'month': experience.month,
+                'pokemon_name': experience.pokemon_name,
+                'base_lvl': experience.base_lvl,
+                'after_lvl': experience.end_lvl,
+                'pokemon_name_display': experience.pokemon_name,
+                'is_past_month': convert_month_db_to_datetime(experience.month).month < now.month
+            })
+
+        form = DexExperiencesForm(data={'experiences': list_dex_experiences})
+
+    pokemon_options = [('0', 'Aucun')]
+    pokemon_options.extend(
+        (pokemon.name, f'{pokemon.species.species} - {pokemon.name} ({pokemon.level})') for pokemon in all_pokemon
+    )
+
+    for subform in form.experiences:
+        subform.pokemon_name.choices = pokemon_options
+
+    if request.method == 'POST':
+        if form.validate():
+            give_dex_experience(form, db.session)
+
+            generate_tcard_part(character.id, 'dex')
+            generate_tcard_part(character.id, 'pokemon')
+            generate_tcard_part(character.id, 'stockage')
+
+            flash('Expérience donnée avec succès', 'success')
+            return redirect(url_for('dex', character_id=character_id))
+        else:
+            flash('Erreur dans le formulaire', 'danger')
+
     return _render()
 
 
@@ -2305,36 +2464,502 @@ def job_informations(character_id: int):
     """
     def _render():
         return render_template(
-            'home.html',
+            'rank_info.html',
+            character=character,
+            rank=rank,
         )
+
+    character = MpCharacter.query.filter(MpCharacter.id == character_id).one_or_404()
+    rank = character.status
+
     return _render()
 
 
-@app.route("/job_pokemon/<int:character_id>", methods=('GET', 'POST'))
-def job_pokemon(character_id: int):
+@app.route("/rank_inventory/<int:character_id>", methods=('GET', 'POST'))
+def rank_inventory(character_id: int):
     """
-    Affichage des Pokémon de rangs
+    Affichage des informations de rang
     :param character_id: l'id du personnage
     :return: le template
     """
     def _render():
         return render_template(
-            'home.html',
+            'rank_inventory.html',
+            character=character,
+            rank=rank,
+            form=form,
+            inventory=inventory,
         )
+
+    character = MpCharacter.query.filter(MpCharacter.id == character_id).one_or_404()
+    rank = character.status
+
+    inventory = Inventory.query.join(Object).filter(
+        Inventory.character_id == character_id, Object.category == rank.lower()
+    ).all()
+
+    form = InventoryRankForm(formdata=request.form)
+    if request.method == 'GET':
+        form.movement_date.data = date.today()
+
+    if request.method == 'POST':
+        if form.add_object.data:
+            object_id = int(request.form.get('objects'))
+
+            object_form = ObjectForm()
+            object_form.object_name = next(obj for obj in inventory if obj.id == object_id).object.name
+            form.objects.append_entry(object_form)
+
+            return _render()
+
+        if form.validate():
+            objects_list = form.objects.data
+
+            if not objects_list:
+                flash('Aucun objet ajouter ou supprimer !', 'danger')
+                return _render()
+
+            if objects_list:
+                objects_history = (
+                    f'{" ; ".join([str(obj["delta"]) + " " + obj["object_name"] for obj in objects_list])}'
+                )
+            else:
+                objects_history = ''
+
+            history = History(
+                character_id=character_id,
+                movement=form.movement.data,
+                movement_date=form.movement_date.data.strftime(DATE_FORMAT),
+                objects=None,
+                link=form.link.data,
+                link_title=form.link_name.data,
+                rank_history=True
+            )
+
+            justificatif_links = []
+            for obj in form.objects.data:
+                actual_object = next(inv for inv in inventory if obj['object_name'] == inv.object.name)
+
+                if actual_object.object_id in Object.get_objects_id_with_justificatif():
+                    if form.movement.data == "out":
+                        flash('Impossible de supprimer un objet avec justification via cette IHM', 'danger')
+                        return _render()
+
+                    for _ in range(obj['delta']):
+                        justificatif_links.append(JustificatifLink(
+                            character_id=character_id,
+                            object_id=actual_object.object_id,
+                            link=form.link.data,
+                            link_title=form.link_name.data,
+                            rank_link=True,
+                        ))
+
+                if form.movement.data == "in":
+                    actual_object.quantity += obj['delta']
+                if form.movement.data == "out":
+                    if actual_object.quantity < obj['delta']:
+                        flash(
+                            f'Impossible d\'avoir un solde négatif de {actual_object.object.name} '
+                            f'(possédé : {actual_object.quantity})',
+                            'danger'
+                        )
+                        return _render()
+                    actual_object.quantity -= obj['delta']
+
+            history.objects = objects_history
+            db.session.bulk_save_objects(justificatif_links)
+            db.session.add(history)
+            db.session.commit()
+
+            flash(f'Inventaire de rang de {character.firstname} modifié avec succès', 'success')
+            generate_tcard_part(character.id, 'rank-inventaire')
+            return redirect(url_for('job_informations', character_id=character_id))
+        else:
+            flash('Erreur dans le formulaire', 'danger')
+
+    return _render()
+
+
+@app.route("/rank_inventory_justify/<int:character_id>", methods=('GET', 'POST'))
+def rank_inventory_justify(character_id: int):
+    """
+    Utilisation d'objet de rang avec justificatif
+    :param character_id: l'id du personnage
+    :return: le template
+    """
+    """
+    Utilisation d'un passe Almia
+    :param character_id: l'id du personnage
+    :return: le template
+    """
+
+    def _render():
+        return render_template(
+            'rank_inventory_justify.html',
+            character=character,
+            links=links,
+            form=form,
+        )
+
+    character = MpCharacter.query.filter(MpCharacter.id == character_id).one_or_404()
+    links = JustificatifLink.query.filter(
+        JustificatifLink.character_id == character_id, JustificatifLink.rank_link == True
+    ).all()
+
+    if not links:
+        form = JustificatifLinkForm()
+        return _render()
+
+    form = JustificatifLinkForm(formdata=request.form, justificatif_links=links)
+
+    for justif_link in form.justificatif_links:
+        for link in links:
+            if justif_link.form.id.data == link.id:
+                justif_link.object_name.data = link.object.name
+                break
+
+    if request.method == 'POST':
+        if form.validate():
+            used_id = set()
+            removed_link = None
+            object_name = None
+            for link in form.justificatif_links:
+                if link.removed_link.data:
+                    used_id.add(link.form.id.data)
+                    removed_link = link.removed_link.data
+                    object_name = link.object_name.data
+
+            if not used_id:
+                return _render()
+
+            JustificatifLink.query.filter(JustificatifLink.id.in_(used_id)).delete()
+            object_ = Inventory.query.join(Object).filter(
+                Inventory.character_id == character_id,
+                Object.name == object_name
+            ).first()
+
+            object_.quantity -= len(used_id)
+
+            history = History(
+                character_id=character_id,
+                movement=HistoryMouvment.OUT.value,
+                movement_date=date.today().strftime(DATE_FORMAT),
+                objects=f'{len(used_id)} {object_name}',
+                link=removed_link,
+                link_title=f'Utilisation {object_name}',
+                rank_history=True
+            )
+
+            db.session.add(history)
+            db.session.commit()
+
+            generate_tcard_part(character.id, 'rank-inventaire')
+            return redirect(url_for('job_informations', character_id=character_id))
+        else:
+            flash('Erreur dans le formulaire', 'danger')
+
+    return _render()
+
+
+@app.route("/rank_cookies/<int:character_id>", methods=('GET', 'POST'))
+def rank_cookies(character_id: int):
+    """
+    Affichage des informations de rang
+    :param character_id: l'id du personnage
+    :return: le template
+    """
+    def _render():
+        return render_template(
+            'rank_cookies.html',
+            character=character,
+            rank=rank,
+            win_form=win_form,
+            used_form=used_form,
+        )
+
+    character = MpCharacter.query.filter(MpCharacter.id == character_id).one_or_404()
+    rank = character.status
+
+    win_form = NewCookiesForm(formdata=request.form)
+    used_form = UsedCookiesListForm(formdata=request.form)
+
+    all_pokemon = db.session.query(PokemonOwned).join(PokemonCategory).filter(
+        PokemonOwned.level != 100,
+        PokemonOwned.character_id == character_id,
+        PokemonCategory.name.in_(['Sbire', 'Ranger'])
+    ).all()
+
+    if request.method == 'GET':
+        all_cookies = db.session.query(CookiesUsed).filter(CookiesMonths.character_id == character_id).all()
+
+        liste_cookies_data = []
+        for cookie in all_cookies:
+            liste_cookies_data.append({
+                'used_cookies_id': cookie.id,
+                'cookies_months_id': cookie.cookies_months_id,
+                'before_lvl': cookie.before_lvl,
+                'after_lvl': cookie.after_lvl,
+                'month': cookie.cookies_months.month,
+                'pokemon_name_display': cookie.pokemon_name,
+            })
+
+        used_form = UsedCookiesListForm(data={'cookies_forms': liste_cookies_data})
+
+    pokemon_options = [(0, 'Aucun')]
+    pokemon_options.extend(
+        (pokemon.name, f'{pokemon.species.species} - {pokemon.name} ({pokemon.level})') for pokemon in all_pokemon
+    )
+
+    for subform in used_form.cookies_forms:
+        subform.pokemon_name.choices = pokemon_options
+
+    if request.method == 'POST':
+        if "addCookies" in request.form and win_form.validate():
+            new_cookies(win_form, character_id, db.session)
+
+            generate_tcard_part(character.id, 'rank-cookies')
+
+            flash('Cookies ajouté avec succès', 'success')
+            return redirect(url_for('job_informations', character_id=character_id))
+
+        if "useCookies" in request.form and used_form.validate():
+            give_cookies(used_form, db.session)
+
+            generate_tcard_part(character.id, 'rank-cookies')
+            generate_tcard_part(character.id, 'rank-pokemon')
+
+            flash('Cookies utilisés avec succès', 'success')
+            return redirect(url_for('job_informations', character_id=character_id))
+        else:
+            flash('Erreur dans le formulaire', 'danger')
+
     return _render()
 
 
 @app.route("/job_missions/<int:character_id>", methods=('GET', 'POST'))
 def job_missions(character_id: int):
     """
-    Affichage des missions réalisées
-    :param character_id: l'id du personnage
+    Missions d'un personnage
+    :param character_id: id du personnage
     :return: le template
     """
     def _render():
         return render_template(
-            'home.html',
+            'rank_journey.html',
+            character=character,
+            missions_chapters=missions_chapters
         )
+
+    character = MpCharacter.query.filter(MpCharacter.id == character_id).one_or_404()
+
+    missions_chapters = MissionsChapter.get_ordered_chapter(character_id=character_id, with_missions=True)
+
+    return _render()
+
+
+@app.route("/job_missions/<int:character_id>/newChapter", methods=('GET', 'POST'))
+def new_mission_chapter(character_id: int):
+    """
+    Nouveau chapitre dans le parcours d'un personnage
+    :param character_id: id du personnage
+    :return: le template
+    """
+    def _render():
+        return render_template(
+            'mission_chapter_edit.html',
+            character=character,
+            form=form,
+        )
+
+    character = MpCharacter.query.filter(MpCharacter.id == character_id).one_or_404()
+
+    mission_chapters = [(0, 'Début')]
+
+    all_mission_chapters = MissionsChapter.get_ordered_chapter(character_id=character_id)
+    if all_mission_chapters:
+        mission_chapters += [(mission_chapter.id, mission_chapter.name) for mission_chapter in all_mission_chapters]
+
+    form = JourneyChapterForm(formdata=request.form)
+    form.after.choices = mission_chapters
+
+    if request.method == 'POST':
+        if form.validate():
+
+            new_mission_chapter = MissionsChapter(character_id=character_id)
+            form.populate_obj(new_mission_chapter)
+            db.session.add(new_mission_chapter)
+            db.session.commit()
+            db.session.refresh(new_mission_chapter)
+
+            chapter = next((chap for chap in all_mission_chapters if chap.after == new_mission_chapter.after), None)
+            if chapter:
+                chapter.after = new_mission_chapter.id
+                db.session.commit()
+
+            flash(f'Chapitre {new_mission_chapter.name} ajouté avec succès', 'success')
+            generate_tcard_part(character.id, 'missions')
+            return redirect(url_for('job_missions', character_id=character_id))
+        else:
+            flash('Erreur dans le formulaire', 'danger')
+
+    return _render()
+
+
+@app.route("/job_missions/<int:character_id>/editChapter/<int:chapter_id>", methods=('GET', 'POST'))
+def edit_mission_chapter(character_id: int, chapter_id: int):
+    """
+    Edition d'un chapitre
+    :param character_id: id du personnage
+    :param chapter_id: id du chapitre
+    :return: le template
+    """
+    def _render():
+        return render_template(
+            'journey_chapter_edit.html',
+            character=character,
+            chapter=chapter,
+            form=form,
+        )
+
+    character = MpCharacter.query.filter(MpCharacter.id == character_id).one_or_404()
+    chapter = MissionsChapter.query.filter(MissionsChapter.id == chapter_id).one_or_404()
+
+    if chapter.character_id != character_id:
+        flash(f'Pas chapitre de chapitre n°{chapter_id} avec l\'id {character_id}', 'danger')
+        return redirect(url_for('home'))
+
+    mission_chapters = [(0, 'Début')]
+
+    all_mission_chapters = MissionsChapter.get_ordered_chapter(character_id=character_id)
+    if all_mission_chapters:
+        mission_chapters += [(mission_chapter.id, mission_chapter.name) for mission_chapter in all_mission_chapters]
+
+    form = JourneyChapterForm(formdata=request.form, obj=chapter)
+    form.after.choices = mission_chapters
+
+    if request.method == 'POST':
+        if form.validate():
+
+            change_order(all_mission_chapters, chapter, form.after.data)
+            chapter.name = form.name.data
+
+            db.session.commit()
+
+            flash(f'Chapitre {chapter.name} édité avec succès', 'success')
+            generate_tcard_part(character.id, 'missions')
+            return redirect(url_for('job_missions', character_id=character_id))
+        else:
+            flash('Erreur dans le formulaire', 'danger')
+
+    return _render()
+
+
+@app.route("/job_missions/<int:character_id>/chapter/<int:chapter_id>/new", methods=('GET', 'POST'))
+def new_mission(character_id: int, chapter_id: int):
+    """
+    Nouvelle mission
+    :param character_id: id du personnage
+    :param chapter_id: id du chapitre auquel est rattaché la mission
+    :return: le template
+    """
+    def _render():
+        return render_template(
+            'mission_edit.html',
+            character=character,
+            chapter=chapter,
+            form=form,
+        )
+
+    character = MpCharacter.query.filter(MpCharacter.id == character_id).one_or_404()
+    chapter = MissionsChapter.query.filter(MissionsChapter.id == chapter_id).one_or_404()
+
+    if chapter.character_id != character_id:
+        flash(f'Pas chapitre de parcours n°{chapter_id} avec l\'id {character_id}', 'danger')
+        return redirect(url_for('home'))
+
+    missions = [(0, 'Début')]
+
+    all_mission = Missions.get_ordered_missions(chapter_id=chapter_id)
+    if all_mission:
+        missions += [(mission.id, mission.name) for mission in all_mission]
+
+    form = JourneyForm(formdata=request.form)
+    form.after.choices = missions
+
+    if request.method == 'POST':
+        if form.validate():
+
+            new_mission = Missions(missions_chapter_id=chapter_id)
+            form.populate_obj(new_mission)
+            db.session.add(new_mission)
+            db.session.commit()
+            db.session.refresh(new_mission)
+
+            mission = next((mission for mission in all_mission if mission.after == new_mission.after), None)
+            if mission:
+                mission.after = new_mission.id
+                db.session.commit()
+
+            flash(f'Mission {chapter.name} ajoutée avec succès', 'success')
+            generate_tcard_part(character.id, 'missions')
+            return redirect(url_for('job_missions', character_id=character_id))
+        else:
+            flash('Erreur dans le formulaire', 'danger')
+    return _render()
+
+
+@app.route("/job_missions/<int:character_id>/chapter/<int:chapter_id>/edit/<int:mission_id>", methods=('GET', 'POST'))
+def edit_mission(character_id: int, chapter_id: int, mission_id: int):
+    """
+    Edition d'une mission
+    :param character_id: id du personnage
+    :param chapter_id: id du chapitre
+    :param mission_id: id de la mission
+    :return: le template
+    """
+    def _render():
+        return render_template(
+            'journey_edit.html',
+            character=character,
+            chapter=chapter,
+            journey=mission,
+            form=form,
+        )
+
+    character = MpCharacter.query.filter(MpCharacter.id == character_id).one_or_404()
+    chapter = MissionsChapter.query.filter(MissionsChapter.id == chapter_id).one_or_404()
+    mission = Missions.query.filter(Missions.id == mission_id).one_or_404()
+
+    if chapter.character_id != character_id or mission.missions_chapter_id != chapter_id:
+        flash(f'Pas mission n°{mission_id} sur le chapitre {chapter_id}', 'danger')
+        return redirect(url_for('home'))
+
+    missions = [(0, 'Début')]
+
+    all_missions = Missions.get_ordered_missions(chapter_id)
+    if all_missions:
+        missions += [(mission.id, mission.name) for mission in all_missions]
+
+    form = JourneyForm(formdata=request.form, obj=mission)
+    form.after.choices = missions
+
+    if request.method == 'POST':
+        if form.validate():
+
+            change_order(all_missions, mission, form.after.data)
+            mission.name = form.name.data
+            mission.link = form.link.data
+            mission.status = form.status.data
+            mission.feat = form.feat.data
+
+            db.session.commit()
+
+            flash(f'Mission {mission.name} éditée avec succès', 'success')
+            generate_tcard_part(character.id, 'missions')
+            return redirect(url_for('job_missions', character_id=character_id))
+        else:
+            flash('Erreur dans le formulaire', 'danger')
+
     return _render()
 
 
