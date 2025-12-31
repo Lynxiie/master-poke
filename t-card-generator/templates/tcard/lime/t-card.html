@@ -567,15 +567,13 @@
 
     <!--	Sbire -->
     <div id="sbire-bloc" class="bloc">
-        Rien. Nada. Il faudrait se bouger le fion pour avancer et demander le rang !
-
-        <div class="mp-tcard hidden">
+        <div class="mp-tcard">
             <img src="../images/tcard/lime-sbire.png"><br>
             Sprite par © <a href="https://master-poke.forumactif.fr/u46">Stegan Striker</a> ♥
         </div>
 
         <!--cookies-->
-        <div id="cookies-bloc" class="inv-bloc hidden scroll">
+        <div id="cookies-bloc" class="inv-bloc scroll">
             {{#cookies}}
             <div>
                 <span>{{month}}</span> <br>
@@ -593,7 +591,7 @@
         </div>
 
         <!-- historique sbire -->
-        <div id="history-sbire-bloc" class="inv-bloc history hidden scroll">
+        <div id="history-sbire-bloc" class="inv-bloc history scroll">
             {{#rank_histories}}
             <div>
                 {{ date }}<br>
@@ -613,7 +611,7 @@
         </div>
 
         <!--objets sbire-->
-        <div id="sbire-object-bloc" class="inv-bloc hidden scroll">
+        <div id="sbire-object-bloc" class="inv-bloc scroll">
             {{#rank_objects}}
             <span class="item">
                     <span><img src="../images/objets/{{ slug_name }}.png" alt="{{ object.name }}" class="{{^quantity}}notown{{/quantity}}" /></span>
@@ -632,8 +630,7 @@
 
     <!--	Sbire Pokemon -->
     <div id="sbire-team-bloc" class="bloc">
-        Rien. Nada. Il faudrait se bouger le fion pour avancer et demander le rang !
-        <div class="poke-nav scroll hidden">
+        <div class="poke-nav scroll">
             {{#rank_pokemon}}
 
             <input id="p{{ id }}" type="radio" name="team">
@@ -809,8 +806,7 @@
 
     <!--	mission -->
     <div id="mission-bloc" class="bloc listing scroll">
-        Rien. Nada. Il faudrait se bouger le fion pour avancer et demander le rang !
-        <div class="hidden">
+        <div class="">
             {{#rank_missions}}
             <p>{{ name }}</p>
             {{#missions}}
