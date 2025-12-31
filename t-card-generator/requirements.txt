@@ -1,8 +1,10 @@
 WTForms~=3.2.1
-Flask~=3.1.0
+Flask~=3.1.1
 SQLAlchemy~=2.0.40
 chevron~=0.14.0
 python-slugify~=8.0.4
 flake8~=7.2.0
 flake8-print~=5.0.0
 flake8-eradicate~=1.5.0
+
+python-dateutil~=2.9.0.post0
