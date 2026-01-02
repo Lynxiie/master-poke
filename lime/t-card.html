@@ -1,7 +1,10 @@
 <link href="./tcard.css" rel="stylesheet" />
 
 <style>
-    
+    #w_a_dex-bloc { display: none; }
+#w_a_dex:checked ~ #w_a_dex-bloc { display: block; }
+#w_a_dex:checked ~ div label[for='w_a_dex']{ color: var(--main-text-color); }
+
 </style>
 
 
@@ -733,12 +736,17 @@
             <input id="history" type="radio" name="inventory-2" checked="">
             <input id="hm-uses" type="radio" name="inventory-2">
             <input id="money" type="radio" name="inventory-2">
+                <input id="w_a_dex" type="radio" name="inventory-2">
 
             <!--		navigation -->
             <div class="inv-nav">
                 <label for="history">Historique</label>
                 <label for="hm-uses">Utilisation CS</label>
                 <label for="money">Argent</label>
+                    <label for="w_a_dex">
+                        W.A dex
+                            <i class="fa-solid fa-star-half"></i>
+                    </label>
             </div>
 
             <!-- historique -->
@@ -1283,6 +1291,65 @@
             </div>
 
             <!-- Dex -->
+                <div id="w_a_dex-bloc" class="inv-bloc scroll dex-bloc">
+                    <div>
+                        <span>Abonnement de janvier 2026 à décembre 2026 </span>
+                    </div>
+
+                        <div>
+                            <span>janvier 2026</span>
+                                <span>
+                                    Shadow
+                                        { Grenousse }
+                                        (27 ~> 29)
+                                     [Demandé] 
+                                </span>
+                        </div>
+                        <div>
+                            <span>février 2026</span>
+                            <span>...</span>
+                        </div>
+                        <div>
+                            <span>mars 2026</span>
+                            <span>...</span>
+                        </div>
+                        <div>
+                            <span>avril 2026</span>
+                            <span>...</span>
+                        </div>
+                        <div>
+                            <span>mai 2026</span>
+                            <span>...</span>
+                        </div>
+                        <div>
+                            <span>juin 2026</span>
+                            <span>...</span>
+                        </div>
+                        <div>
+                            <span>juillet 2026</span>
+                            <span>...</span>
+                        </div>
+                        <div>
+                            <span>août 2026</span>
+                            <span>...</span>
+                        </div>
+                        <div>
+                            <span>septembre 2026</span>
+                            <span>...</span>
+                        </div>
+                        <div>
+                            <span>octobre 2026</span>
+                            <span>...</span>
+                        </div>
+                        <div>
+                            <span>novembre 2026</span>
+                            <span>...</span>
+                        </div>
+                        <div>
+                            <span>décembre 2026</span>
+                            <span>...</span>
+                        </div>
+                </div>
         </div>
     </div>
 
