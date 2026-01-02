@@ -21,23 +21,26 @@
 			</div>
 
 			<div class="description">
-				{{#dex_exp}}
-				{{ month }}
-				{{#pokemon_name}}
-				♦ {{ pokemon_name }}
-				{{#pokemon_species}}
-				♦ {{ pokemon_species }}
-				{{/pokemon_species}}
-				{{#base_lvl}}
-				♦ {{ base_lvl }} ~> {{ end_lvl }}
-				{{/base_lvl}}
-				{{^give}} ♦ Demandé {{/give}}
-				{{/pokemon_name}}
-				{{^pokemon_name}}
-				♦ ...
-				{{/pokemon_name}}
-				<br>
-				{{/dex_exp}}
+				<details>
+					<summary><Détail></Détail></summary>
+					{{#dex_exp}}
+					{{ month }}
+					{{#pokemon_name}}
+					♦ {{ pokemon_name }}
+					{{#pokemon_species}}
+					♦ {{ pokemon_species }}
+					{{/pokemon_species}}
+					{{#base_lvl}}
+					♦ {{ base_lvl }} ~> {{ end_lvl }}
+					{{/base_lvl}}
+					{{^give}} ♦ Demandé {{/give}}
+					{{/pokemon_name}}
+					{{^pokemon_name}}
+					♦ ...
+					{{/pokemon_name}}
+					<br>
+					{{/dex_exp}}
+				</details>
 			</div>
 		{{/all_dex}}
 	</div>
