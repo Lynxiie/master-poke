@@ -13,6 +13,8 @@
 - [x] Gestion des catégories par personnages
 - [ ] Meilleure gestion des logs internes
 - [X] Prévoir le cas des Pokémon asexués
+- [ ] Gestion des fossiles
+- [ ] Utilité d'avoir plusieurs fois la même attaque listée avec des méthodes d'apprentissages différentes ?
 
 ## Non priorisé
 - [ ] Utiliser une CT depuis l'inventaire marque l'attaque comme apprise
