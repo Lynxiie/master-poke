@@ -153,6 +153,10 @@ input[type="radio"][name="team"]:checked + label img {
     display: flex;
 }
 
+.export {
+	cursor: pointer;
+}
+
 /* Header */
 .header {
     height: 150px;

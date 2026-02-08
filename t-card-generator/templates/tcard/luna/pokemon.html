@@ -70,7 +70,25 @@
                 <div class="descriptions col-2">
                     <div class="statistiques">
                         <div class="description">
-                            <span>Statistiques</span>
+                            <span>
+                                Statistiques&nbsp;
+                                <i class="fa-regular fa-copy export"
+                                   data-nom="{{ species.species }}"
+                                   data-niveau="{{ level }} ({{ exp_point }}/{{ exp_point_per_level }})"
+                                   data-pv="{{ sum_hp }}"
+                                   data-pvdetail="{{ species.pv }} + {{ pv }} + {{ hp_up }}"
+                                   data-atk="{{ sum_atk }}"
+                                   data-atkdetail="{{ species.atk }} + {{ atk }} + {{ protein }}"
+                                   data-def="{{ sum_def }}"
+                                   data-defdetail="{{ species.defense }} + {{ defense }} + {{ iron }}"
+                                   data-atkspe="{{ sum_atk_spe }}"
+                                   data-atkspedetail="{{ species.atk_special }} + {{ atk_special }} + {{ calcium }}"
+                                   data-defspe="{{ sum_def_spe }}"
+                                   data-defspedetail="{{ species.defense_special }} + {{ def_special }} + {{ zinc }}"
+                                   data-vit="{{ sum_speed }}"
+                                   data-vitdetail="{{ species.speed }} + {{ speed }} + {{ carbos }}">
+                                </i>
+                            </span>
                         </div>
                         <div class="descriptions col-2">
                             <div class="description">
@@ -291,7 +309,25 @@
             <div class="descriptions col-2">
                 <div class="statistiques">
                     <div class="description">
-                        <span>Statistiques</span>
+                        <span>
+                            Statistiques&nbsp;
+                            <i class="fa-regular fa-copy export"
+                               data-nom="{{ species.species }}"
+                               data-niveau="{{ level }} ({{ exp_point }}/{{ exp_point_per_level }})"
+                               data-pv="{{ sum_hp }}"
+                               data-pvdetail="{{ species.pv }} + {{ pv }} + {{ hp_up }}"
+                               data-atk="{{ sum_atk }}"
+                               data-atkdetail="{{ species.atk }} + {{ atk }} + {{ protein }}"
+                               data-def="{{ sum_def }}"
+                               data-defdetail="{{ species.defense }} + {{ defense }} + {{ iron }}"
+                               data-atkspe="{{ sum_atk_spe }}"
+                               data-atkspedetail="{{ species.atk_special }} + {{ atk_special }} + {{ calcium }}"
+                               data-defspe="{{ sum_def_spe }}"
+                               data-defspedetail="{{ species.defense_special }} + {{ def_special }} + {{ zinc }}"
+                               data-vit="{{ sum_speed }}"
+                               data-vitdetail="{{ species.speed }} + {{ speed }} + {{ carbos }}">
+                            </i>
+                        </span>
                     </div>
                     <div class="descriptions col-2">
                         <div class="description">
@@ -455,3 +491,36 @@
 
 	</div>
 </div>
+
+<script src="https://kit.fontawesome.com/ba830d090b.js" crossorigin="anonymous"></script>
+<script>
+    document.querySelectorAll(".export").forEach(item => {
+        item.addEventListener("click", () => {
+            const nom = item.dataset.nom;
+            const niveau = item.dataset.niveau;
+            const pv = item.dataset.pv;
+            const pvDetail = item.dataset.pvdetail;
+            const atk = item.dataset.atk;
+            const atkDetail = item.dataset.atkdetail;
+            const def = item.dataset.def;
+            const defDetail = item.dataset.defdetail;
+            const atkSpe = item.dataset.atkspe;
+            const atkSpeDetail = item.dataset.atkspedetail;
+            const defSpe = item.dataset.defspe;
+            const defSpeDetail = item.dataset.defspedetail;
+            const vit = item.dataset.vit;
+            const vitDetail = item.dataset.vitdetail;
+
+            const texte = `${nom} niveau ${niveau}
+PV: ${pv} [size=10](${pvDetail})[/size]
+ATK: ${atk} [size=10](${atkDetail})[/size]
+DEF: ${def} [size=10](${defDetail})[/size]
+ATK SPE: ${atkSpe} [size=10](${atkSpeDetail})[/size]
+DEF SPE: ${defSpe} [size=10](${defSpeDetail})[/size]
+VIT: ${vit} [size=10](${vitDetail})[/size]`;
+
+            navigator.clipboard.writeText(texte);
+            console.log("Copié :", texte);
+        });
+    });
+</script>

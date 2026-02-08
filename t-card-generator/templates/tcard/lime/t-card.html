@@ -444,8 +444,8 @@
                 </span>
                 <span class="stats">
                     <span>
-                        Total&nbsp;&nbsp;
-                        <i class="fa-solid fa-file-export export"
+                        Total&nbsp;
+                        <i class="fa-regular fa-copy export"
                            data-nom="{{ species.species }}"
                            data-niveau="{{ level }} ({{ exp_point }}/{{ exp_point_per_level }})"
                            data-pv="{{ sum_hp }}"
@@ -737,8 +737,8 @@
                 </span>
                 <span class="stats">
                     <span>
-                        Total&nbsp;&nbsp;
-                        <i class="fa-solid fa-file-export export"
+                        Total&nbsp;
+                        <i class="fa-regular fa-copy export"
                            data-nom="{{ species.species }}"
                            data-niveau="{{ level }} ({{ exp_point }}/{{ exp_point_per_level }})"
                            data-pv="{{ sum_hp }}"
@@ -1030,12 +1030,12 @@
             const vitDetail = item.dataset.vitdetail;
 
             const texte = `${nom} niveau ${niveau}
-PV: ${pv} [size=10]${pvDetail}[/size]
-ATK: ${atk} [size=10]${atkDetail}[/size]
-DEF: ${def} [size=10]${defDetail}[/size]
-ATK SPE: ${atkSpe} [size=10]${atkSpeDetail}[/size]
-DEF SPE: ${defSpe} [size=10]${defSpeDetail}[/size]
-VIT: ${vit} [size=10]${vitDetail}[/size]`;
+PV: ${pv} [size=10](${pvDetail})[/size]
+ATK: ${atk} [size=10](${atkDetail})[/size]
+DEF: ${def} [size=10](${defDetail})[/size]
+ATK SPE: ${atkSpe} [size=10](${atkSpeDetail})[/size]
+DEF SPE: ${defSpe} [size=10](${defSpeDetail})[/size]
+VIT: ${vit} [size=10](${vitDetail})[/size]`;
 
             navigator.clipboard.writeText(texte);
             console.log("Copié :", texte);

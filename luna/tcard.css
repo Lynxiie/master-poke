@@ -139,6 +139,10 @@ a:hover {
 	margin-top: 20px;
 }
 
+.export {
+	cursor: pointer;
+}
+
 /* Inventaire */
 .in {
 	color: green;
