@@ -768,6 +768,7 @@ def month_convert(month: str) -> str:
     months = {
         'janvier': 'Janvier',
         'fevrier': 'Février',
+        'février': 'Février',
         'mars': 'Mars',
         'avril': 'Avril',
         'mai': 'Mai',
