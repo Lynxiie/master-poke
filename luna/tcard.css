@@ -598,6 +598,16 @@ input[type=radio], .pokemons {
 	object-fit: cover;
 }
 
+#content-p106 .banner img {
+	object-position: 0 -385px;
+	object-fit: cover;
+}
+
+#content-p107 .banner img {
+	object-position: 0 -120px;
+	object-fit: cover;
+}
+
 /* Social */
 .social img {
 	width: 150px;
