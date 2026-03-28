@@ -262,12 +262,21 @@ def get_pokemon_data(character_id: int, data: dict[str, any], is_stockage: bool,
         Ajoute les informations sur les stats du Pokémon
         :param pokemon: le dictionnaire des informations du Pokémon
         """
-        pokemon["sum_hp"] = pokemon['species'].pv + pokemon['pv'] + pokemon['hp_up']
-        pokemon["sum_atk"] = pokemon['species'].atk + pokemon['atk'] + pokemon['protein']
-        pokemon["sum_def"] = pokemon['species'].defense + pokemon['defense'] + pokemon['iron']
-        pokemon["sum_atk_spe"] = pokemon['species'].atk_special + pokemon['atk_special'] + pokemon['calcium']
-        pokemon["sum_def_spe"] = pokemon['species'].defense_special + pokemon['def_special'] + pokemon['zinc']
-        pokemon["sum_speed"] = pokemon['species'].speed + pokemon['speed'] + pokemon['carbos']
+        point_per_boost = 5
+
+        pokemon["sum_hp_up"] = point_per_boost * pokemon['hp_up']
+        pokemon["sum_protein"] = point_per_boost * pokemon['protein']
+        pokemon["sum_iron"] = point_per_boost * pokemon['iron']
+        pokemon["sum_calcium"] = point_per_boost * pokemon['calcium']
+        pokemon["sum_zinc"] = point_per_boost * pokemon['zinc']
+        pokemon["sum_carbos"] = point_per_boost * pokemon['carbos']
+
+        pokemon["sum_hp"] = pokemon['species'].pv + pokemon['pv'] + pokemon['sum_hp_up']
+        pokemon["sum_atk"] = pokemon['species'].atk + pokemon['atk'] + pokemon['sum_protein']
+        pokemon["sum_def"] = pokemon['species'].defense + pokemon['defense'] + pokemon['sum_iron']
+        pokemon["sum_atk_spe"] = pokemon['species'].atk_special + pokemon['atk_special'] + pokemon['sum_calcium']
+        pokemon["sum_def_spe"] = pokemon['species'].defense_special + pokemon['def_special'] + pokemon['sum_zinc']
+        pokemon["sum_speed"] = pokemon['species'].speed + pokemon['speed'] + pokemon['sum_carbos']
 
         pokemon["point_per_level"] = 9 if pokemon['shiny'] else 8
         pokemon["level_point"] = pokemon["level"] - 5

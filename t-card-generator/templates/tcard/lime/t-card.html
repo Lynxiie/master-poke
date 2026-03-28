@@ -414,32 +414,32 @@
             <div class="stat-info info-bloc">
                 <span class="stats">
                     <span>PV</span>
-                    <span>{{ species.pv }} + {{ pv }} + {{ hp_up }}</span>
+                    <span>{{ species.pv }} + {{ pv }} + {{ sum_hp_up }}</span>
                     <span>{{ sum_hp }}</span>
                 </span>
                 <span class="stats">
                     <span>ATQ</span>
-                    <span>{{ species.atk }} + {{ atk }} + {{ protein }}</span>
+                    <span>{{ species.atk }} + {{ atk }} + {{ sum_protein }}</span>
                     <span>{{ sum_atk }}</span>
                 </span>
                 <span class="stats">
                     <span>Déf</span>
-                    <span>{{ species.defense }} + {{ defense }} + {{ iron }}</span>
+                    <span>{{ species.defense }} + {{ defense }} + {{ sum_iron }}</span>
                     <span>{{ sum_def }}</span>
                 </span>
                 <span class="stats">
                     <span>ATQ Spé</span>
-                    <span>{{ species.atk_special }} + {{ atk_special }} + {{ calcium }}</span>
+                    <span>{{ species.atk_special }} + {{ atk_special }} + {{ sum_calcium }}</span>
                     <span>{{ sum_atk_spe }}</span>
                 </span>
                 <span class="stats">
                     <span>Déf Spé</span>
-                    <span>{{ species.defense_special }} + {{ def_special }} + {{ zinc }}</span>
+                    <span>{{ species.defense_special }} + {{ def_special }} + {{ sum_zinc }}</span>
                     <span>{{ sum_def_spe }}</span>
                 </span>
                 <span class="stats">
                     <span>Vit</span>
-                    <span>{{ species.speed }} + {{ speed }} + {{ carbos }}</span>
+                    <span>{{ species.speed }} + {{ speed }} + {{ sum_carbos }}</span>
                     <span>{{ sum_speed }}</span>
                 </span>
                 <span class="stats">
@@ -449,17 +449,17 @@
                            data-nom="{{ species.species }}"
                            data-niveau="{{ level }} ({{ exp_point }}/{{ exp_point_per_level }})"
                            data-pv="{{ sum_hp }}"
-                           data-pvdetail="{{ species.pv }} + {{ pv }} + {{ hp_up }}"
+                           data-pvdetail="{{ species.pv }} + {{ pv }} + {{ sum_hp_up }}"
                            data-atk="{{ sum_atk }}"
-                           data-atkdetail="{{ species.atk }} + {{ atk }} + {{ protein }}"
+                           data-atkdetail="{{ species.atk }} + {{ atk }} + {{ sum_protein }}"
                            data-def="{{ sum_def }}"
-                           data-defdetail="{{ species.defense }} + {{ defense }} + {{ iron }}"
+                           data-defdetail="{{ species.defense }} + {{ defense }} + {{ sum_iron }}"
                            data-atkspe="{{ sum_atk_spe }}"
-                           data-atkspedetail="{{ species.atk_special }} + {{ atk_special }} + {{ calcium }}"
+                           data-atkspedetail="{{ species.atk_special }} + {{ atk_special }} + {{ sum_calcium }}"
                            data-defspe="{{ sum_def_spe }}"
-                           data-defspedetail="{{ species.defense_special }} + {{ def_special }} + {{ zinc }}"
+                           data-defspedetail="{{ species.defense_special }} + {{ def_special }} + {{ sum_zinc }}"
                            data-vit="{{ sum_speed }}"
-                           data-vitdetail="{{ species.speed }} + {{ speed }} + {{ carbos }}">
+                           data-vitdetail="{{ species.speed }} + {{ speed }} + {{ sum_carbos }}">
                         </i>
                     </span>
                     <span>{{ point_per_level }} * {{ level_point }}</span>
@@ -707,32 +707,32 @@
             <div class="stat-info info-bloc">
                 <span class="stats">
                     <span>PV</span>
-                    <span>{{ species.pv }} + {{ pv }} + {{ hp_up }}</span>
+                    <span>{{ species.pv }} + {{ pv }} + {{ sum_hp_up }}</span>
                     <span>{{ sum_hp }}</span>
                 </span>
                 <span class="stats">
                     <span>ATQ</span>
-                    <span>{{ species.atk }} + {{ atk }} + {{ protein }}</span>
+                    <span>{{ species.atk }} + {{ atk }} + {{ sum_protein }}</span>
                     <span>{{ sum_atk }}</span>
                 </span>
                 <span class="stats">
                     <span>Déf</span>
-                    <span>{{ species.defense }} + {{ defense }} + {{ iron }}</span>
+                    <span>{{ species.defense }} + {{ defense }} + {{ sum_iron }}</span>
                     <span>{{ sum_def }}</span>
                 </span>
                 <span class="stats">
                     <span>ATQ Spé</span>
-                    <span>{{ species.atk_special }} + {{ atk_special }} + {{ calcium }}</span>
+                    <span>{{ species.atk_special }} + {{ atk_special }} + {{ sum_calcium }}</span>
                     <span>{{ sum_atk_spe }}</span>
                 </span>
                 <span class="stats">
                     <span>Déf Spé</span>
-                    <span>{{ species.defense_special }} + {{ def_special }} + {{ zinc }}</span>
+                    <span>{{ species.defense_special }} + {{ def_special }} + {{ sum_zinc }}</span>
                     <span>{{ sum_def_spe }}</span>
                 </span>
                 <span class="stats">
                     <span>Vit</span>
-                    <span>{{ species.speed }} + {{ speed }} + {{ carbos }}</span>
+                    <span>{{ species.speed }} + {{ speed }} + {{ sum_carbos }}</span>
                     <span>{{ sum_speed }}</span>
                 </span>
                 <span class="stats">
@@ -742,17 +742,17 @@
                            data-nom="{{ species.species }}"
                            data-niveau="{{ level }} ({{ exp_point }}/{{ exp_point_per_level }})"
                            data-pv="{{ sum_hp }}"
-                           data-pvdetail="{{ species.pv }} + {{ pv }} + {{ hp_up }}"
+                           data-pvdetail="{{ species.pv }} + {{ pv }} + {{ sum_hp_up }}"
                            data-atk="{{ sum_atk }}"
-                           data-atkdetail="{{ species.atk }} + {{ atk }} + {{ protein }}"
+                           data-atkdetail="{{ species.atk }} + {{ atk }} + {{ sum_protein }}"
                            data-def="{{ sum_def }}"
-                           data-defdetail="{{ species.defense }} + {{ defense }} + {{ iron }}"
+                           data-defdetail="{{ species.defense }} + {{ defense }} + {{ sum_iron }}"
                            data-atkspe="{{ sum_atk_spe }}"
-                           data-atkspedetail="{{ species.atk_special }} + {{ atk_special }} + {{ calcium }}"
+                           data-atkspedetail="{{ species.atk_special }} + {{ atk_special }} + {{ sum_calcium }}"
                            data-defspe="{{ sum_def_spe }}"
-                           data-defspedetail="{{ species.defense_special }} + {{ def_special }} + {{ zinc }}"
+                           data-defspedetail="{{ species.defense_special }} + {{ def_special }} + {{ sum_zinc }}"
                            data-vit="{{ sum_speed }}"
-                           data-vitdetail="{{ species.speed }} + {{ speed }} + {{ carbos }}">
+                           data-vitdetail="{{ species.speed }} + {{ speed }} + {{ sum_carbos }}">
                         </i>
                     </span>
                     <span>{{ point_per_level }} * {{ level_point }}</span>
