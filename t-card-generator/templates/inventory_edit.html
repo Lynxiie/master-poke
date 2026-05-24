@@ -82,6 +82,7 @@
 
       <div class="row">
         {% for ct in form.ct_list %}
+        <div>{{ render_field(ct.ct_id, readonly=true) }}</div>
         <div class="col-md-3">{{ render_field(ct.ct_type, readonly=true) }}</div>
         <div class="col-md-3">{{ render_field(ct.object_name, readonly=true) }}</div>
         <div class="col-md-3">{{ render_field(ct.delta) }}</div>

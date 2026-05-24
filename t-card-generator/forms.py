@@ -146,6 +146,7 @@ class CtForm(Form):
     """
     Formulaire pour la gestion des CT
     """
+    ct_id = HiddenField("")
     ct_type = StringField('Type CT')
     object_name = StringField('Nom CT', [DataRequired(), Length(max=50)])
     delta = IntegerField('Delta', [DataRequired(), NumberRange(min=0)])

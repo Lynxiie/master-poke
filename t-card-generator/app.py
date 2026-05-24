@@ -371,6 +371,7 @@ def edit_inventory(character_id: int):
             object_id = int(request.form.get('ct_list'))
             ct = next(ct for ct in ct_list if ct.id == object_id)
             ct_form = CtForm()
+            ct_form.ct_id = ct.id
             ct_form.ct_type = ct.object.name
             ct_form.object_name = ct.name
             ct_form.reserved = ct.reserved
@@ -459,14 +460,14 @@ def edit_inventory(character_id: int):
                     actual_object.quantity -= obj['delta']
 
             for obj in form.ct_list.data:
-                actual_object = next(ct for ct in ct_list if obj['ct_type'] == ct.object.name)
+                actual_object = next(ct for ct in ct_list if int(obj['ct_id']) == ct.id)
                 actual_object.reserved = obj['reserved']
                 if form.movement.data == "in":
                     actual_object.quantity += obj['delta']
                 if form.movement.data == "out":
                     if actual_object.quantity < obj['delta']:
                         flash(
-                            f'Impossible d\'avoir un solde négatif de {actual_object.object.name} '
+                            f'Impossible d\'avoir un solde négatif de {actual_object.name} '
                             f'(possédé : {actual_object.quantity})',
                             'danger'
                         )
