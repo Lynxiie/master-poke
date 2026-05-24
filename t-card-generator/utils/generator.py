@@ -15,7 +15,7 @@ from wtforms.fields.list import FieldList
 from models import Mental, Physical, Inventory, Object, Money, Ct, CsHistory, FluteHistory, History, \
     Social, SocialPokemon, SocialSubject, JourneyChapter, JustificatifLink, Goals, PokemonOwned, PokemonCategory, \
     PokemonOwnedAttacks, PokemonSpeciesAttacks, PokemonAttacks, NdmPosts, NdmMonths, NdmSubjects, NdmRewards, \
-    CookiesMonths, MissionsChapter, Dex, DexExperience
+    CookiesMonths, MissionsChapter, Dex, DexExperience, PokemonSpecies
 from enums import Object as ObjectEnum, JourneyStatus, GoalCategory, TypePokemon
 
 from models import MpCharacter
@@ -310,12 +310,15 @@ def get_pokemon_data(character_id: int, data: dict[str, any], is_stockage: bool,
         PokemonOwned
         .query
         .join(PokemonCategory)
-        .options(joinedload(PokemonOwned.species))
+        .join(PokemonSpecies)
+    .options(joinedload(PokemonOwned.species))
         .filter(
             PokemonOwned.character_id == character_id,
         )
         .order_by(PokemonCategory.id)
     )
+    if character_id == 2 and not is_rank:
+        pokemon = pokemon.order_by(PokemonSpecies.species)
 
     if is_stockage:
         pokemon = pokemon.filter(PokemonCategory.name == 'Stockage')
