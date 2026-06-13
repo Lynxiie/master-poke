@@ -1,7 +1,13 @@
 <link href="./tcard.css" rel="stylesheet" />
 
 <style>
-    #w_a_dex-bloc { display: none; }
+    #nanako_dex-bloc { display: none; }
+#nanako_dex:checked ~ #nanako_dex-bloc { display: block; }
+#nanako_dex:checked ~ div label[for='nanako_dex']{ color: var(--main-text-color); }
+#blindex-bloc { display: none; }
+#blindex:checked ~ #blindex-bloc { display: block; }
+#blindex:checked ~ div label[for='blindex']{ color: var(--main-text-color); }
+#w_a_dex-bloc { display: none; }
 #w_a_dex:checked ~ #w_a_dex-bloc { display: block; }
 #w_a_dex:checked ~ div label[for='w_a_dex']{ color: var(--main-text-color); }
 
@@ -773,6 +779,8 @@
             <input id="history" type="radio" name="inventory-2" checked="">
             <input id="hm-uses" type="radio" name="inventory-2">
             <input id="money" type="radio" name="inventory-2">
+                <input id="nanako_dex" type="radio" name="inventory-2">
+                <input id="blindex" type="radio" name="inventory-2">
                 <input id="w_a_dex" type="radio" name="inventory-2">
 
             <!--		navigation -->
@@ -780,6 +788,14 @@
                 <label for="history">Historique</label>
                 <label for="hm-uses">Utilisation CS</label>
                 <label for="money">Argent</label>
+                    <label for="nanako_dex">
+                        Nanako Dex
+                            <i class="fa-solid fa-star-half"></i>
+                    </label>
+                    <label for="blindex">
+                        Blindex
+                            <i class="fa-solid fa-star-half"></i>
+                    </label>
                     <label for="w_a_dex">
                         W.A dex
                             <i class="fa-solid fa-star-half"></i>
@@ -1545,6 +1561,114 @@
             </div>
 
             <!-- Dex -->
+                <div id="nanako_dex-bloc" class="inv-bloc scroll dex-bloc">
+                    <div>
+                        <span>Abonnement de juin 2026 à mai 2027 </span>
+                    </div>
+
+                        <div>
+                            <span>juin 2026</span>
+                            <span>...</span>
+                        </div>
+                        <div>
+                            <span>juillet 2026</span>
+                            <span>...</span>
+                        </div>
+                        <div>
+                            <span>août 2026</span>
+                            <span>...</span>
+                        </div>
+                        <div>
+                            <span>septembre 2026</span>
+                            <span>...</span>
+                        </div>
+                        <div>
+                            <span>octobre 2026</span>
+                            <span>...</span>
+                        </div>
+                        <div>
+                            <span>novembre 2026</span>
+                            <span>...</span>
+                        </div>
+                        <div>
+                            <span>décembre 2026</span>
+                            <span>...</span>
+                        </div>
+                        <div>
+                            <span>janvier 2027</span>
+                            <span>...</span>
+                        </div>
+                        <div>
+                            <span>février 2027</span>
+                            <span>...</span>
+                        </div>
+                        <div>
+                            <span>mars 2027</span>
+                            <span>...</span>
+                        </div>
+                        <div>
+                            <span>avril 2027</span>
+                            <span>...</span>
+                        </div>
+                        <div>
+                            <span>mai 2027</span>
+                            <span>...</span>
+                        </div>
+                </div>
+                <div id="blindex-bloc" class="inv-bloc scroll dex-bloc">
+                    <div>
+                        <span>Abonnement de juin 2026 à mai 2027 </span>
+                    </div>
+
+                        <div>
+                            <span>juin 2026</span>
+                            <span>...</span>
+                        </div>
+                        <div>
+                            <span>juillet 2026</span>
+                            <span>...</span>
+                        </div>
+                        <div>
+                            <span>août 2026</span>
+                            <span>...</span>
+                        </div>
+                        <div>
+                            <span>septembre 2026</span>
+                            <span>...</span>
+                        </div>
+                        <div>
+                            <span>octobre 2026</span>
+                            <span>...</span>
+                        </div>
+                        <div>
+                            <span>novembre 2026</span>
+                            <span>...</span>
+                        </div>
+                        <div>
+                            <span>décembre 2026</span>
+                            <span>...</span>
+                        </div>
+                        <div>
+                            <span>janvier 2027</span>
+                            <span>...</span>
+                        </div>
+                        <div>
+                            <span>février 2027</span>
+                            <span>...</span>
+                        </div>
+                        <div>
+                            <span>mars 2027</span>
+                            <span>...</span>
+                        </div>
+                        <div>
+                            <span>avril 2027</span>
+                            <span>...</span>
+                        </div>
+                        <div>
+                            <span>mai 2027</span>
+                            <span>...</span>
+                        </div>
+                </div>
                 <div id="w_a_dex-bloc" class="inv-bloc scroll dex-bloc">
                     <div>
                         <span>Abonnement de janvier 2026 à décembre 2026 </span>
@@ -13651,6 +13775,10 @@ Champ Psychique : Psyko">
 
         <div class="various">
             <p>Autres</p>
+            <details>
+                <summary>Par ici</summary>
+                <img src="..\images\lime\autre\autre.png"/>
+            </details>
             <details>
                 <summary>Par Willi</summary>
                 <img src="..\images\lime\autre\willi\lime_m10.png"/>
