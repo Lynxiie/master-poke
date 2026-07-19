@@ -79,7 +79,7 @@ def generate_tcard_part(character_id: int, tcard_part: str):
         get_pokemon_data(character_id, data, False)
         print(f'Pokemon took {time.time() - t0:.2f}s')
 
-    if tcard_part in {'stockage', 't-card'}:
+    if tcard_part in {'stockage'}:
         t0 = time.time()
         get_pokemon_data(character_id, data, True)
         print(f'Stockage took {time.time() - t0:.2f}s')
