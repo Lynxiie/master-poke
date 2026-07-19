@@ -118,7 +118,7 @@ class JourneyChapterForm(Form):
     """
     Formulaire pour les aventures
     """
-    name = StringField('Nom', [Length(max=25), DataRequired()])
+    name = StringField('Nom', [Length(max=100), DataRequired()])
     after = SelectField('Positionné après', coerce=int, validators=[InputRequired()])
 
 

@@ -371,7 +371,10 @@
             <!--			top-info-->
             <div class="top-info info-bloc {{ background }}">
                 <div>
-                    <span>{{ name }}</span>
+                    <span>
+                        {{ name }}
+                        {{#pension}}({{pension}}){{/pension}}
+                    </span>
                     <img src="{{ sprite }}" alt="{{ species }}">
                     {{#types_icon}}
                     <img class="type" src="{{ . }}" alt=""/>

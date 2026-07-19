@@ -259,7 +259,7 @@ DROP TABLE IF EXISTS journey_chapter;
 CREATE TABLE journey_chapter (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     character_id INTEGER UNSIGNED NOT NULL,
-    name VARCHAR(25) NOT NULL,
+    name VARCHAR(100) NOT NULL,
     after INTEGER UNSIGNED NOT NULL,
     FOREIGN KEY(character_id) REFERENCES mp_character(id)
 );

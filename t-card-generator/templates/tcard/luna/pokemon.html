@@ -23,7 +23,10 @@
             <div id="content-p{{ id }}" class="pokemons">
                 <div class="banner">
                     <img src="{{ full }}"/>
-                    <span>{{ name }}</span>
+                    <span>
+                        {{ name }}
+                        {{#pension}}(Pension {{pension}}){{/pension}}
+                    </span>
                     {{#banner_credit}}
                     <span class="banner-credit">© {{ banner_credit }}</span>
                     {{/banner_credit}}
@@ -262,7 +265,10 @@
         <div id="content-p{{ id }}" class="pokemons">
             <div class="banner">
                 <img src="{{ full }}"/>
-                <span>{{ name }}</span>
+                <span>
+                    {{ name }}
+                    {{#pension}}({{pension}}){{/pension}}
+                </span>
                 {{#banner_credit}}
                 <span class="banner-credit">© {{ banner_credit }}</span>
                 {{/banner_credit}}
