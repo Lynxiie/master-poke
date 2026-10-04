@@ -525,7 +525,7 @@ class NdmRewardForm(Form):
     """
     Formulaire pour les récompenses des NDM
     """
-    level_winned = IntegerField('Niveaux gagnés', validators=[DataRequired(), NumberRange(min=0)])
+    level_winned = IntegerField('Niveaux gagnés', validators=[Optional(), NumberRange(min=0)])
     level_winned_justif = StringField('Justification', validators=[DataRequired()])
     distribution = StringField('Distribution')
     money = BooleanField('Convertir en argent')
