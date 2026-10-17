@@ -262,7 +262,9 @@ def add_character():
                 Inventory(character_id=character_id, object_id=102, quantity=0),
                 Inventory(character_id=character_id, object_id=103, quantity=0),
                 Inventory(character_id=character_id, object_id=104, quantity=0),
-                Inventory(character_id=character_id, object_id=105, quantity=0)
+                Inventory(character_id=character_id, object_id=105, quantity=0),
+                Inventory(character_id=character_id, object_id=116, quantity=0),
+                Inventory(character_id=character_id, object_id=117, quantity=0),
             ]
             money = Money(
                 character_id=character_id,
