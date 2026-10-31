@@ -592,7 +592,7 @@ def edit_pass_almia(character_id: int):
 
     character = MpCharacter.query.filter(MpCharacter.id == character_id).one_or_404()
     links = JustificatifLink.query.filter(
-        JustificatifLink.character_id == character_id, not JustificatifLink.rank_link
+        JustificatifLink.character_id == character_id, ~JustificatifLink.rank_link
     ).all()
 
     if not links:
