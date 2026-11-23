@@ -2,6 +2,7 @@ import os
 import re
 import time
 from collections import defaultdict
+from copy import deepcopy
 from datetime import datetime
 from math import floor
 
@@ -620,7 +621,8 @@ def get_ndm_data(character_id: int, data: dict[str, any]):
             NdmSubjects.info.label("subject_info"),
             NdmSubjects.url.label("subject_link"),
             func.count(NdmPosts.id).label("total_posts"),
-            func.sum(NdmPosts.words).label("total_words")
+            func.sum(NdmPosts.words).label("total_words"),
+            NdmSubjects.rank.label('rank'),
         )
         .group_by(NdmPosts.subject_id)
         .order_by(NdmPosts.subject_id.asc())
@@ -628,21 +630,27 @@ def get_ndm_data(character_id: int, data: dict[str, any]):
     )
 
     subjects = []
+    rank_subjects = []
     for ndm in ndm_current_month:
-        subjects.append({
+        subject = {
             "name": ndm.subject_name,
             "info": ndm.subject_info,
             "url": ndm.subject_link,
             "total_words": f'{ndm.total_words:,}'.replace(",", "\xa0"),
             "total_posts": ndm.total_posts,
-        })
+            "rank": ndm.rank,
+        }
+        subjects.append(subject) if not subject['rank'] else rank_subjects.append(subject)
 
+    all_subjects = deepcopy(subjects)
+    all_subjects.extend(rank_subjects)
     global_total_words = sum([ndm.total_words for ndm in ndm_current_month])
-    global_total_posts = sum([subject["total_posts"] for subject in subjects])
+    global_total_posts = sum([subject["total_posts"] for subject in all_subjects])
 
     current_month_data = {
         'name': f"{month_convert(actual_month.month)} {actual_month.year}",
         'subjects': subjects,
+        'rank_subjects': rank_subjects,
         'total_words': f'{global_total_words:,}'.replace(",", "\xa0"),
         'total_posts': global_total_posts,
         'avg_words':
@@ -653,7 +661,7 @@ def get_ndm_data(character_id: int, data: dict[str, any]):
 
     past_month = []
     for p_month in months:
-        m = (
+        mounth = (
             NdmPosts
             .query
             .join(NdmSubjects, NdmPosts.subject_id == NdmSubjects.id)
@@ -666,7 +674,8 @@ def get_ndm_data(character_id: int, data: dict[str, any]):
                 NdmSubjects.info.label("subject_info"),
                 NdmSubjects.url.label("subject_link"),
                 func.count(NdmPosts.id).label("total_posts"),
-                func.sum(NdmPosts.words).label("total_words")
+                func.sum(NdmPosts.words).label("total_words"),
+                NdmSubjects.rank.label('rank'),
             )
             .group_by(NdmPosts.subject_id)
             .order_by(NdmPosts.subject_id.asc())
@@ -674,17 +683,22 @@ def get_ndm_data(character_id: int, data: dict[str, any]):
         )
 
         subjects = []
-        for ndm in m:
-            subjects.append({
+        rank_subjects = []
+        for ndm in mounth:
+            subject = {
                 "name": ndm.subject_name,
                 "info": ndm.subject_info,
                 "url": ndm.subject_link,
                 "total_words": f'{ndm.total_words:,}'.replace(",", "\xa0"),
                 "total_posts": ndm.total_posts,
-            })
+                "rank": ndm.rank,
+            }
+            subjects.append(subject) if not subject['rank'] else rank_subjects.append(subject)
 
-        global_total_words = sum([ndm.total_words for ndm in m])
-        global_total_posts = sum([subject["total_posts"] for subject in subjects])
+        all_subjects = deepcopy(subjects)
+        all_subjects.extend(rank_subjects)
+        global_total_words = sum([ndm.total_words for ndm in mounth])
+        global_total_posts = sum([subject["total_posts"] for subject in all_subjects])
 
         reward = NdmRewards.query.filter(
             NdmRewards.month_id == p_month.id,
@@ -695,6 +709,7 @@ def get_ndm_data(character_id: int, data: dict[str, any]):
             'name': f"{month_convert(p_month.month)} {p_month.year}",
             'slug': f"{p_month.month}{p_month.year}",
             'subjects': subjects,
+            'rank_subjects': rank_subjects,
             'total_words': f'{global_total_words:,}'.replace(",", "\xa0"),
             'total_posts': global_total_posts,
             'avg_words':

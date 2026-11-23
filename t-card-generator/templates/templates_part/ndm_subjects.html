@@ -9,14 +9,17 @@
 
 <form method="POST">
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-3">
             {{ render_field(add_subject_form.name) }}
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             {{ render_field(add_subject_form.url) }}
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             {{ render_field(add_subject_form.info) }}
+        </div>
+        <div class="col-md-3">
+            {{ render_field(add_subject_form.rank) }}
         </div>
     </div>
 

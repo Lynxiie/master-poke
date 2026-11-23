@@ -46,3 +46,7 @@ a:hover {
 .recap {
     border-left-color: var(--darker-color);
 }
+
+.rank_subject {
+    color: var(--neutral-color);
+}

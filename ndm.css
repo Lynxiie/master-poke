@@ -124,6 +124,11 @@ summary::-webkit-details-marker {
     display: none;
 }
 
+.rank_subject {
+    font-variant: all-petite-caps;
+    font-weight: bolder;
+}
+
 /* Result section */
 .result {
     margin-top: 20px;

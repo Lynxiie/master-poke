@@ -427,6 +427,7 @@ CREATE TABLE ndm_subjects (
     url VARCHAR(255) NOT NULL,
     info VARCHAR(255) NOT NULL,
     closed BOOLEAN NOT NULL DEFAULT false,
+    rank INTEGER default 0,
     FOREIGN KEY(character_id) REFERENCES mp_character(id)
 );
 

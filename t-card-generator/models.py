@@ -452,6 +452,7 @@ class NdmSubjects(db.Model):
     url = db.Column(db.String(255), nullable=False)
     info = db.Column(db.String(255), nullable=False)
     closed = db.Column(db.Boolean, default=False, nullable=False)
+    rank = db.Column(db.Boolean, default=False, nullable=False)
 
     posts = db.relationship('NdmPosts', back_populates='subject', cascade="all, delete-orphan")
 

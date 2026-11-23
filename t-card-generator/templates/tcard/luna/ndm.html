@@ -34,6 +34,12 @@
                     <a href="{{ url }}" target="_blank">{{ name }}</a> ▬ {{ info }} ☆ {{ total_posts }} posts ☆ {{ total_words }} mots
                     <br>
                 {{/current_month.subjects}}
+                <br>
+                {{#current_month.rank_subjects}}
+                <span class="rank_subject">[RANG]</span>
+                <a href="{{ url }}" target="_blank">{{ name }}</a> ▬ {{ info }} ☆ {{ total_posts }} posts ☆ {{ total_words }} mots
+                <br>
+                {{/current_month.rank_subjects}}
                 <div class="result">
                     <span>Total de posts</span> : {{ current_month.total_posts }} posts <br>
                     <span>Total de mots</span> : {{ current_month.total_words }} mots<br>
@@ -53,6 +59,12 @@
                     <a href="{{ url }}" target="_blank">{{ name }}</a> ▬ {{ info }} ☆ {{ total_posts }} posts ☆ {{ total_words }} mots
                     <br>
                     {{/subjects}}
+                    <br>
+                    {{#rank_subjects}}
+                    <span class="rank_subject">[RANG]</span>
+                    <a href="{{ url }}" target="_blank">{{ name }}</a> ▬ {{ info }} ☆ {{ total_posts }} posts ☆ {{ total_words }} mots
+                    <br>
+                    {{/rank_subjects}}
                     <div class="result">
                         <span>Total de posts</span> : {{ total_posts }} posts <br>
                         <span>Total de mots</span> : {{ total_words }} mots<br>

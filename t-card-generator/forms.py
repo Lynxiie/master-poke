@@ -519,6 +519,7 @@ class NewNdmSubjectForm(Form):
     name = StringField('Nom', validators=[DataRequired()])
     url = URLField('Lien', validators=[DataRequired()])
     info = StringField('Information', validators=[DataRequired()])
+    rank = BooleanField('Sujet de rang')
 
 
 class NdmRewardForm(Form):

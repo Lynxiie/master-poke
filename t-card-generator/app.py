@@ -3069,7 +3069,8 @@ def ndm(character_id: int):
                 name=add_subject_form.name.data,
                 url=add_subject_form.url.data,
                 info=add_subject_form.info.data,
-                closed=False
+                closed=False,
+                rank=add_subject_form.rank.data,
             )
             db.session.add(ndm_subject)
             db.session.commit()
